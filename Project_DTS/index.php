@@ -28,8 +28,7 @@
 		
 		<div class="login">
 			<div class="container">
-				<h1>LOGIN TO YOUR ACCOUNT TEST<br> <img src="./assets/img/wmsu_logo.png" alt="logo" width="55px" height="55px"> WMSU|DTS</h1>
-		
+				<h1>LOGIN TO YOUR ACCOUNT<br> <img src="./assets/img/wmsu_logo.png" alt="logo" width="55px" height="55px"> WMSU|DTS</h1>
 				<div class="login-form">
 					<img src="./assets/img/login_logo_un1.svg" alt="logo">
 					<form action="?login" method="POST">
