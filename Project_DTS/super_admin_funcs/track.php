@@ -11,7 +11,7 @@
             foreach ($db->query($sql) as $row) {
                 $no++;
     ?>
-    <tr class="table-danger">
+    <tr>
         <td>
             <?php echo $no; ?>
         </td>

@@ -88,12 +88,38 @@ if(!isset($_SESSION["sa_username"])) {
                 <div class="menu">
                     <h3><?php echo $_SESSION["sa_username"]; ?> <span>Super admin</span></h3> 
                     <ul>
-                        <li> <span class="las la-user-tie"></span> <a href="#">Edit Profile</a> </li>
+                        <?php
+                            //include our connection
+                            include_once('../include/database.php');
+
+                            $database = new Connection();
+                            $db = $database->open();
+                            try{	
+                                $sql = "SELECT * FROM users WHERE username = '".$_SESSION['sa_username']."'";
+                    
+                                foreach ($db->query($sql) as $row) {
+                                ?>
+                                    <li> <span class="las la-user-tie"></span> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
+                                <?php
+                                
+                                }
+                            }
+                            catch(PDOException $e){
+                                echo "There is some problem in connection: " . $e->getMessage();
+                            }
+
+                            //close connection
+                            $database->close();
+                        ?>
+                        
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
-                    </ul>                
+                    </ul>
+                               
                 </div>
             </div>
         </header>
+
+        <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
 
         <main>
         <?php 
@@ -165,6 +191,10 @@ if(!isset($_SESSION["sa_username"])) {
                                 </th>
 
                                 <th>
+                                  
+                                </th>
+
+                                <th>
 
                                 </th>
                             </tr>
@@ -185,7 +215,7 @@ if(!isset($_SESSION["sa_username"])) {
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
                             ?>
-                            <tr class="table-danger">
+                            <tr>
                                 <td>
                                     <?php echo $no ;?>
                                 </td>
@@ -256,9 +286,11 @@ if(!isset($_SESSION["sa_username"])) {
                                     </form>
                                 </td>
 
-                                <td style="display:flex;justify-content:center;">
-                                    <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_docs<?php echo $row['id']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_docs<?php echo $row['id']; ?>">Delete</a>
+                                <td>
+                                    <a class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_docs<?php echo $row['id']; ?>">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_docs<?php echo $row['id']; ?>">Delete</a>
                                 </td>
                                 <?php include('../super_admin_funcs/view_delete_doc.php'); ?>
                                 <?php include('../super_admin_funcs/view_edit_doc.php'); ?>

@@ -248,6 +248,7 @@ header label span {
     display: inline-block;
     font-weight: 500;
     transition: 0.5s;
+    cursor: pointer;
 
     
 }
@@ -381,6 +382,7 @@ td {
     padding: .5rem 1rem;
     font-size: .9rem;
     color: #222;
+   
 }
 
 td .status {

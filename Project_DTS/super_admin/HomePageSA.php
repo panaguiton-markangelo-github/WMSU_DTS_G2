@@ -95,6 +95,25 @@ catch(PDOException $e) {
             
         </div>
     </div>
+
+    <?php 
+        if(isset($_SESSION['message'])){
+            ?>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful!!',
+                    html: '<h4><?php echo $_SESSION['message']?></h4>',
+                    showConfirmButton: true,
+                    allowOutsideClick: false,
+                    confirmButtonText: 'OKAY!'
+                });
+            </script>
+            <?php
+
+            unset($_SESSION['message']);
+        }
+    ?>
     
     <div class="main-content">
         <header>
@@ -110,16 +129,40 @@ catch(PDOException $e) {
                     <img src="../assets/img/wmsu_logo.png" alt="user">
                 </div>   
                 <div class="menu">
-                    <h3><?php echo $_SESSION["sa_username"]; ?> <span>Super admin</span></h3> 
+                    <h3><?php echo $_SESSION["sa_username"];?> <span>Super admin</span></h3> 
                     <ul>
-                        <li> <span class="las la-user-tie"></span> <a href="#">Edit Profile</a> </li>
+                        <?php
+                            //include our connection
+                            include_once('../include/database.php');
+
+                            $database = new Connection();
+                            $db = $database->open();
+                            try{	
+                                $sql = "SELECT * FROM users WHERE username = '".$_SESSION['sa_username']."'";
+                    
+                                foreach ($db->query($sql) as $row) {
+                                ?>
+                                    <li> <span class="las la-user-tie"></span> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
+                                <?php
+                                
+                                }
+                            }
+                            catch(PDOException $e){
+                                echo "There is some problem in connection: " . $e->getMessage();
+                            }
+
+                            //close connection
+                            $database->close();
+                        ?>
+                        
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
-                    </ul>                
+                    </ul>
+                               
                 </div>
             </div>
         </header>
-
-       
+        
+        <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
 
         <main>
         <?php 

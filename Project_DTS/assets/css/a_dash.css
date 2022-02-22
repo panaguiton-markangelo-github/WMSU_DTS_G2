@@ -248,8 +248,7 @@ header label span {
     display: inline-block;
     font-weight: 500;
     transition: 0.5s;
-
-    
+    cursor: pointer;    
 }
 
 .user-wrapper .menu ul li:hover a {

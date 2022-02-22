@@ -92,14 +92,40 @@ if(!isset($_SESSION["c_username"])) {
                     <img src="../assets/img/wmsu_logo.png" alt="user">
                 </div>   
                 <div class="menu">
-                <h3><?php echo $_SESSION["c_username"]; ?>(<?php echo $_SESSION["c_officeName"];?>) <span>clerk</span></h3>  
+                    <h3><?php echo $_SESSION["c_username"]; ?> (<?php echo $_SESSION['c_officeName']; ?>) <span>clerk</span></h3> 
                     <ul>
-                        <li> <span class="las la-user-tie"></span> <a href="#">Edit Profile</a> </li>
+                        <?php
+                            //include our connection
+                            include_once('../include/database.php');
+
+                            $database = new Connection();
+                            $db = $database->open();
+                            try{	
+                                $sql = "SELECT * FROM users WHERE username = '".$_SESSION['c_username']."'";
+                    
+                                foreach ($db->query($sql) as $row) {
+                                ?>
+                                    <li> <span class="las la-user-tie"></span> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
+                                <?php
+                                
+                                }
+                            }
+                            catch(PDOException $e){
+                                echo "There is some problem in connection: " . $e->getMessage();
+                            }
+
+                            //close connection
+                            $database->close();
+                        ?>
+                        
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
-                    </ul>                
+                    </ul>
+                              
                 </div>
             </div>
         </header>
+
+        <?php  include('../clerk_funcs/view_edit_profile.php'); ?>
         
        <main>
         <div class="px-3 px-sm-5 pt-4">
