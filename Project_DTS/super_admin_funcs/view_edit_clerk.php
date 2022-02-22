@@ -7,7 +7,7 @@
       </div>
       <form action="../super_admin_funcs/edit_clerk.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
-
+          
                 <label for="office">Office:</label>
                 <select class="form-select text-dark" name="officeName" id="officeName" required>
                   <option selected value="<?php echo $row['officeName']; ?>"><?php echo $row['officeName']; ?></option>
@@ -35,17 +35,17 @@
                 <br>
 
                 <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="name" name="name" placeholder="name" value = <?php echo $row['name']; ?> required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="name" value = "<?php echo $row['name']; ?>" required>
                 <label for="name">Name:</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="username" name="username" placeholder="username" value = <?php echo $row['username']; ?> required>
-                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="username" value = "<?php echo $row['username']; ?>" required>
+                <label for="username">Email:</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" value = <?php echo $row['password']; ?> required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" value = "<?php echo $row['password']; ?>" required>
                 <label for="floatingInput">Password:</label>
                 </div>
                 

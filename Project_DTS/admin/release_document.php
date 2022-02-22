@@ -59,7 +59,7 @@ catch(PDOException $e){
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link fw-bold" href="HomePageAdmin.php">Home</a>
+                <a class="nav-link fw-bold" href="homePageAdmin.php">Home</a>
               </li> 
 
               <li class="nav-item">

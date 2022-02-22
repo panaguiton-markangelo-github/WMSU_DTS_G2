@@ -26,12 +26,13 @@
 		
 		<div class="login">
 			<div class="container">
-				<h1>LOGIN TO YOUR ACCOUNT<br> <img src="./assets/img/wmsu_logo.png" alt="logo" width="55px" height="55px"> WMSU|DTS</h1>
+				<h1>LOGIN TO YOUR ACCOUNT <br> <img src="./assets/img/wmsu_logo.png" alt="logo" width="55px" height="55px"> WMSU|DTS</h1>
+		
 				<div class="login-form">
 					<img src="./assets/img/login_logo_un1.svg" alt="logo">
 					<form action="?login" method="POST">
-						<input type="email" placeholder="E-mail Address" name="username" required>
-						<input type="password" placeholder="Password" name="password" required>
+						<input type="text" placeholder="E-mail" name="username" >
+						<input type="password" placeholder="Password" name="password">
 						<div class="remember-form">
 						<input type="checkbox">
 						<span>Remember me</span>
@@ -46,21 +47,81 @@
 		</div>
 	</div>
 
-	<?php 	
-		if(isset($_GET['invalid'])) {
-		?>
-			<script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ooppss...',
-                    text: 'Username and Password does not match our records!',
-                    showConfirmButton: true,
-                    allowOutsideClick: false
-                });
-            </script>
-		<?php
-	}
+	<?php
+	if(isset($_GET['invalid'])) {
+		if($_GET['invalid'] == "match") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Ooppss...',
+						text: 'Email or Password does not match our records!',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
 	
+		else if($_GET['invalid'] == "email") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Ooppss...',
+						text: 'Please enter a valid email!!',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
+	}
+	else if (isset($_GET['empty'])) {
+		if($_GET['empty'] == "both") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Ooppss...',
+						text: 'Empty Fields!!',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
+	
+		else if($_GET['empty'] == "email") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Ooppss...',
+						text: 'email field cannot be empty!',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
+
+		else if($_GET['empty'] == "pass") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Ooppss...',
+						text: 'password field cannot be empty!',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
+
+	}
+		
 	?>
 
 	  <script>
@@ -76,9 +137,3 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
-
-<!--ALL CORE FUNCTIONS ARE ACCOMPLISHED!!!!!! GOOD JOB MARKIE ^^ You can do it hehehe-->
-
-<!--uTILITY> make notification system^^ research about it!. GOOD LUCK-->
-
-<!--uTILITY>Do some finishing touches!!. GOOD LUCK-->

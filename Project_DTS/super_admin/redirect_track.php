@@ -69,10 +69,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <a href="sem_year.php"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li>
-                <li>
-                <a class="text-white" type="button" data-bs-toggle="modal" data-bs-target="#logout_modal"><span class="las la-sign-out-alt"></span>
-                    <span>Logout</span></a>
-                </li>
+                
             </ul>
         </div>
     </div>
@@ -87,10 +84,15 @@ if(!isset($_SESSION["sa_username"])) {
             </h2>
 
             <div class="user-wrapper">
-                <img src="../assets/img/wmsu_logo.png" width="55px" height="55px" alt="user">
-                <div>
-                    <h5><?php echo $_SESSION["sa_username"]; ?></h5>
-                    <small>Super admin</small>
+                <div class="profile" onclick="menuToggle();">
+                    <img src="../assets/img/wmsu_logo.png" alt="user">
+                </div>   
+                <div class="menu">
+                    <h3><?php echo $_SESSION["sa_username"]; ?> <span>Super admin</span></h3> 
+                    <ul>
+                        <li> <span class="las la-user-tie"></span> <a href="#">Edit Profile</a> </li>
+                        <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
+                    </ul>                
                 </div>
             </div>
         </header>
@@ -210,6 +212,13 @@ if(!isset($_SESSION["sa_username"])) {
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
     <?php include('../validation/view_logout.php'); ?>
+
+    <script>
+        function menuToggle(){
+            const toggleMenu = document.querySelector('.menu');
+            toggleMenu.classList.toggle('active')
+        }
+    </script>
     
 </body>
 </html>
