@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +83,21 @@
 					Swal.fire({
 						icon: 'success',
 						title: 'Successful!',
-						text: 'Please check your email!',
+						text: '<?php echo $_SESSION['message_mail'];?>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
+
+		else if($_GET['reset'] == "failed") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Error!',
+						text: '<?php echo $_SESSION['message_mail_fail'];?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});

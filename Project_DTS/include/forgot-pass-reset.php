@@ -1,4 +1,31 @@
 <?php
+session_start();
+
+require '../phpmailer/includes/PHPMailer.php';
+require '../phpmailer/includes/Exception.php';
+require '../phpmailer/includes/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+$mail = new PHPMailer();
+
+$mail->isSMTP();
+
+$mail->Host = "smtp.gmail.com";
+
+$mail->SMTPAuth = "true";
+
+$mail->SMTPSecure = "tls";
+
+$mail->Port = "587";
+
+$mail->Username = "wmsudts@gmail.com";
+
+$mail->Password = "wmsu12345";
+
+
 
 if (isset($_POST['reset-login'])) {
     $selector = bin2hex(random_bytes(8));
@@ -59,15 +86,28 @@ if (isset($_POST['reset-login'])) {
     $message = "<p> Hi There! The system received a request of password change. The link to reset your password is below,
         if you did not make this request, please kindly ignore it. Best regards WMSU|DTS team.</p>";
     $message .= "<p> Here is your reset password link: <br>";
-    $message .= "<a href= '".$url."'> ".$url." </a> </p>";
+    $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
 
-    $headers = "From: WMSU|DTS team <wmsudts_noreply@gmail.com>\r\n";
-    $headers .= "Reply-To: gt201900139@wmsu.edu.ph\r\n";
-    $headers .= "Content-type: text/html\r\n";
+    $message .= "From: WMSU|DTS team <wmsudts@gmail.com>\r\n";
+    $message .= "Reply-To: gt201900139@wmsu.edu.ph\r\n";
 
-    mail($to, $subject, $message, $headers);
+    $mail->Subject = $subject;
+    $mail->setFrom("wmsudts@gmail.com");
+    $mail->isHTML(true);
+    $mail->Body = $message;
+    $mail->addAddress($to);
+    if ($mail->Send()) { 
+        $_SESSION['message_mail'] = "Check your email!";
+        header("location: ../forgot_pass/forgot-pass.php?reset=success");
+    }
+    else {
+        $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
+        header("location: ../forgot_pass/forgot-pass.php?reset=failed");
+    }
 
-    header("location: ../forgot_pass/forgot-pass.php?reset=success");
+    $mail->smtpClose();
+
+   
 }
 else
 {
