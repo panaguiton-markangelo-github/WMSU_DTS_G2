@@ -101,8 +101,13 @@
                         else if (empty($row)) {
                             $_SESSION['invalid_match'] = "Email or Password does not match our records!";
                             header('Location: index.php?invalid=match');
-            
+                            exit();
                         }
+                    }
+                    else {
+                        $_SESSION['invalid_match'] = "Email or Password does not match our records!";
+                        header('Location: index.php?invalid=match');
+                        exit();
                     }
                 }
                        
