@@ -21,7 +21,7 @@ $mail->SMTPSecure = "tls";
 
 $mail->Port = "587";
 
-$mail->Username = "wmsudts@gmail.com";
+$mail->Username = "wmsudts.noreply@gmail.com";
 
 $mail->Password = "wmsu12345";
 
@@ -31,7 +31,7 @@ if (isset($_POST['reset-submit'])) {
     $selector = bin2hex(random_bytes(8));
     $token = random_bytes(32);
 
-    $url = "wmsu-dts.epizy.com/forgot-pass/create-new-pass.php?selector=" . $selector . "&validator=". bin2hex($token);
+    $url = "wmsu-dts.epizy.com/forgot_pass/create-new-pass.php?selector=" . $selector . "&validator=". bin2hex($token);
 
     $expires = date("U") + 1800;
 
@@ -83,13 +83,13 @@ if (isset($_POST['reset-submit'])) {
 
     $subject = "Reset your password for WMSU|DTS.";
 
-    $message = "<p> Hi There! The system received a request of password change. The link to reset your password is below,
+    $message = "<p> Don't reply here! Hi There! The system received a request of password change. The link to reset your password is below,
         if you did not make this request, please kindly ignore it.</p>";
     $message .= "<p> Here is your reset password link: <br>";
     $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
 
     $message .= "From: WMSU|DTS team <wmsudts@gmail.com>\r\n";
-    $message .= "Reply-To: wmsudts@gmail.com\r\n";
+    $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
     $message .= "<p>Best regards WMSU|DTS team.</p>";
 
     $mail->Subject = $subject;

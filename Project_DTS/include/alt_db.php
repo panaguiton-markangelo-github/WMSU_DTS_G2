@@ -1,6 +1,5 @@
 <?php
- session_start();
- 
+
  //Alternative Database connection.
  $host = "localhost";
  $user = "root";

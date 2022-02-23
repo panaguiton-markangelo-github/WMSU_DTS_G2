@@ -1,15 +1,5 @@
 <?php 
-//Alternative Database connection.
-$host = "localhost";
-$user = "root";
-$password = "kookies172001";
-$db = "dts_db";
-
-$data = mysqli_connect($host, $user, $password, $db);
-
-if($data === false){
-    die("connection error");
-}
+include ("../include/alt_db.php");
 ?>
 <?php
 	session_start();
@@ -18,6 +8,8 @@ if($data === false){
 	if(isset($_POST['add'])){
 			$database = new Connection();
 			$db = $database->open();
+			$password = $_POST['password'];
+			$password_hash = password_hash($password, PASSWORD_DEFAULT);
 			
 			
 			if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
@@ -47,7 +39,7 @@ if($data === false){
 						$sql->bindParam(':officeName', $_POST['officeName']);
 						$sql->bindParam(':name', $_POST['name']);
 						$sql->bindParam(':username', $_POST['username']);
-						$sql->bindParam(':password', $_POST['password']);
+						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
 		
 						//if-else statement in executing our prepared statement

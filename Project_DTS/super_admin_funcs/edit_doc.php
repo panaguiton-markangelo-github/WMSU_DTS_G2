@@ -1,16 +1,5 @@
 <?php
-$host = "localhost";
-$user = "root";
-$password = "kookies172001";
-$db = "dts_db";
-
-session_start();
-
-$data = mysqli_connect($host, $user, $password, $db);
-
-if($data === false){
-	die("connection error");
-}
+include ("../include/alt_db.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$query = "SELECT `id` FROM yearsemester WHERE `schoolYear` = '".$_POST['schoolYear']."' AND `semester` = '".$_POST['semester']."';";

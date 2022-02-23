@@ -4,14 +4,7 @@ if(!isset($_SESSION["a_username"])) {
   header("location: ../index.php");
 }
 
-//Alternative Database connection.
-$host = "localhost";
-$user = "root";
-$password = "kookies172001";
-$db = "dts_db";
-
-$data = mysqli_connect($host, $user, $password, $db);
-
+include ("../include/alt_db.php");
 if($data === false){
     die("connection error");
 }

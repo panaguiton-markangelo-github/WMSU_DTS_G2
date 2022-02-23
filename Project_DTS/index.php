@@ -1,3 +1,5 @@
+<?php include('validation/process_login.php');?>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -59,12 +61,14 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Ooppss...',
-						text: 'Email or Password does not match our records!',
+						text: '<?php echo $_SESSION['invalid_match'] ?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+
+			unset($_SESSION['invalid_match']);
 		}
 	
 		else if($_GET['invalid'] == "email") {
@@ -73,12 +77,13 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Ooppss...',
-						text: 'Please enter a valid email!!',
+						text: '<?php echo $_SESSION['invalid_email'] ?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+			unset($_SESSION['invalid_email']);
 		}
 	}
 	else if (isset($_GET['empty'])) {
@@ -88,12 +93,13 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Ooppss...',
-						text: 'Empty Fields!!',
+						text: '<?php echo $_SESSION['empty_both']?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+			unset($_SESSION['empty_both']);
 		}
 	
 		else if($_GET['empty'] == "email") {
@@ -102,12 +108,13 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Ooppss...',
-						text: 'email field cannot be empty!',
+						text: '<?php echo $_SESSION['empty_email']?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+			unset($_SESSION['empty_email']);
 		}
 
 		else if($_GET['empty'] == "pass") {
@@ -116,12 +123,13 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Ooppss...',
-						text: 'password field cannot be empty!',
+						text: '<?php echo $_SESSION['empty_pass']?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+			unset($_SESSION['empty_pass']);
 		}
 
 	}
@@ -139,11 +147,30 @@
 					});
 				</script>
 			<?php
+			unset($_GET['newpwd']);
 		}
 	}
+
+	else if (isset($_GET['newpass'])) {
+		if($_GET['newpass'] == "success") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'success',
+						title: 'Successful!!',
+						text: '<?php echo $_SESSION['upd_mess'] ?>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+			unset($_SESSION['upd_mess']);
+		}
+	}
+
 		
 	?>
-	<!--Fix message when forgot password is executed.-->
+
 
 	  <script>
 		  var loader =  document.getElementById("preloader");
@@ -153,7 +180,7 @@
 	  </script>
 
 
-	  <?php include('validation/process_login.php');?>
+	  
 
 	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
