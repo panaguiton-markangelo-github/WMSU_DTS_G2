@@ -105,7 +105,7 @@
 
 			//if-else statement in executing our prepared statement
 			$_SESSION['message'] = ( $sql->execute()) ? 'Document was added successfully' : 'Something went wrong. Cannot add document.';
-
+			
 	    
 		}
 		catch(PDOException $e){

@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <title>Login WMSU|DTS</title>
 	<!-- Custom Stylesheet -->
+	<link rel="icon" type="image/png" href="assets/img/wmsu_logo.png"/>
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/loading.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<script src="assets/js/sweet_alert.js"></script>
+	<script src="assets/js/show_pass.js"></script>
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 
 <body>
@@ -31,17 +34,18 @@
 				<div class="login-form">
 					<img src="./assets/img/login_logo_un1.svg" alt="logo">
 					<form action="?login" method="POST">
-						<input type="text" placeholder="E-mail" name="username" >
-						<input type="password" placeholder="Password" name="password">
+						<input type="text" placeholder="E-mail" name="username" class="email" >
+						<input type="password" placeholder="Password" name="password" id="pass" class="pass">																
 						<div class="remember-form">
-						<input type="checkbox">
-						<span>Remember me</span>
+						<input type="checkbox" class="show" onclick="myFunction()">
+						<span>Show password</span>
 						</div>
 						<div class="forget-pass">
-						<a href="#">Forgot Password ?</a>
+							<a href="forgot_pass/forgot-pass.php">Forgot Password?</a>
 						</div>
-						<button type="submit">LOG-IN</button>
+						<button class="login_but" type="submit">LOG-IN</button>
 			  		</form>
+					
 				</div>
 			</div>
 		</div>
@@ -121,8 +125,25 @@
 		}
 
 	}
+
+	else if (isset($_GET['newpwd'])) {
+		if($_GET['newpwd'] == "updated") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'success',
+						title: 'Successful!!',
+						text: 'Pasword was updated successfully!',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+		}
+	}
 		
 	?>
+	<!--Fix message when forgot password is executed.-->
 
 	  <script>
 		  var loader =  document.getElementById("preloader");
@@ -130,6 +151,7 @@
 			  loader.style.display = "none";
 		  })
 	  </script>
+
 
 	  <?php include('validation/process_login.php');?>
 
