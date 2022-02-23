@@ -26,7 +26,7 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
-	<script src="assets/js/sweet_alert.js"></script>
+	<script src="../assets/js/sweet_alert.js"></script>
 <!--===============================================================================================-->
 </head>
 <body>
@@ -83,12 +83,14 @@
 					Swal.fire({
 						icon: 'success',
 						title: 'Successful!',
-						text: '<?php echo $_SESSION['message_mail'];?>',
+						html: '<p><?php echo $_SESSION['message_succ'] ?></p>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+
+			unset($_SESSION['message_succ']);
 		}
 
 		else if($_GET['reset'] == "failed") {
@@ -97,12 +99,14 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Error!',
-						text: '<?php echo $_SESSION['message_mail_fail'];?>',
+						html: '<p><?php echo $_SESSION['message_mail_fail'] ?></p>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
+
+			unset($_SESSION['message_mail_fail']);
 		}
 	}
 	?>

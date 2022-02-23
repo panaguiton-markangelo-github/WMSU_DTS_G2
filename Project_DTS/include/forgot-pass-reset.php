@@ -27,7 +27,7 @@ $mail->Password = "wmsu12345";
 
 
 
-if (isset($_POST['reset-login'])) {
+if (isset($_POST['reset-submit'])) {
     $selector = bin2hex(random_bytes(8));
     $token = random_bytes(32);
 
@@ -84,12 +84,13 @@ if (isset($_POST['reset-login'])) {
     $subject = "Reset your password for WMSU|DTS.";
 
     $message = "<p> Hi There! The system received a request of password change. The link to reset your password is below,
-        if you did not make this request, please kindly ignore it. Best regards WMSU|DTS team.</p>";
+        if you did not make this request, please kindly ignore it.</p>";
     $message .= "<p> Here is your reset password link: <br>";
     $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
 
     $message .= "From: WMSU|DTS team <wmsudts@gmail.com>\r\n";
-    $message .= "Reply-To: gt201900139@wmsu.edu.ph\r\n";
+    $message .= "Reply-To: wmsudts@gmail.com\r\n";
+    $message .= "<p>Best regards WMSU|DTS team.</p>";
 
     $mail->Subject = $subject;
     $mail->setFrom("wmsudts@gmail.com");
@@ -97,7 +98,7 @@ if (isset($_POST['reset-login'])) {
     $mail->Body = $message;
     $mail->addAddress($to);
     if ($mail->Send()) { 
-        $_SESSION['message_mail'] = "Check your email!";
+        $_SESSION['message_succ'] = "Instruction on how to reset your password has been sent to your email. <br> Note:Check the inbox/spam tab of your email!";
         header("location: ../forgot_pass/forgot-pass.php?reset=success");
     }
     else {
@@ -106,8 +107,6 @@ if (isset($_POST['reset-login'])) {
     }
 
     $mail->smtpClose();
-
-   
 }
 else
 {
