@@ -166,21 +166,51 @@
 			<?php
 			unset($_SESSION['upd_mess']);
 		}
+
+		else if($_GET['newpass'] == "notmatch") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Password does not match!!!',
+						text: '<?php echo $_SESSION['message_fail'] ?>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+			unset($_SESSION['message_fail']);
+		}
+
+		else if($_GET['newpass'] == "empty") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Password fields cannot be empty!!!',
+						text: '<?php echo $_SESSION['message_fail'] ?>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+			unset($_SESSION['message_fail']);
+		}
 	}
 
+	//almost done!
+	//integrate the report module to the clerk/admin users module.
+	//then done^^.
+	//afterwards, don't forget to push the changes into github^^.
+	//byefornow
 		
 	?>
-
-
 	  <script>
 		  var loader =  document.getElementById("preloader");
 		  window.addEventListener("load", function(){
 			  loader.style.display = "none";
 		  })
 	  </script>
-
-
-	  
 
 	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

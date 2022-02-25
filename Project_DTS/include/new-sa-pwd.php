@@ -8,12 +8,12 @@ if(isset($_POST['reset-submit'])) {
 
     if (empty($pass) || empty($pass_rep)){
         $_SESSION['message_fail'] = "password fields are empty!";
-        header("location: ../new_pass_sa/view_create_newp.php?newpass=empty");
+        header("location: ../index.php?newpass=empty");
         exit();
     }
     else if ($pass != $pass_rep) {
         $_SESSION['message_fail'] = "password fields are not equal!";
-        header("location: ../new_pass_sa/view_create_newp.php?newpass=notmatch");
+        header("location: ../index.php?newpass=notmatch");
         exit();
     }
 

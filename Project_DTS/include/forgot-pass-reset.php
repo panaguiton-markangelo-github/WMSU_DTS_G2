@@ -1,30 +1,7 @@
 <?php
 session_start();
 
-require '../phpmailer/includes/PHPMailer.php';
-require '../phpmailer/includes/Exception.php';
-require '../phpmailer/includes/SMTP.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-$mail = new PHPMailer();
-
-$mail->isSMTP();
-
-$mail->Host = "smtp.gmail.com";
-
-$mail->SMTPAuth = "true";
-
-$mail->SMTPSecure = "tls";
-
-$mail->Port = "587";
-
-$mail->Username = "wmsudts.noreply@gmail.com";
-
-$mail->Password = "wmsu12345";
-
+require '../phpmailer/includes/mailer_main.php';
 
 
 if (isset($_POST['reset-submit'])) {
@@ -36,77 +13,109 @@ if (isset($_POST['reset-submit'])) {
     $expires = date("U") + 1800;
 
     include ('database.php');
+    include ('alt_db.php');
 
     $userEmail = $_POST['email'];
 
-    $database = new Connection();
-	$db = $database->open();
+    $sql = "SELECT * FROM users WHERE username = ?;";
 
-    try {
-        $sql = $db->prepare("DELETE FROM pwdReset WHERE pwdResetEmail = :email;");
-    
-        //binding of values
-        $sql->bindParam(':email', $userEmail);
-        
+    $stmt = mysqli_stmt_init($data);
 
-        //sql execute
-        $sql->execute();
-    }
-    catch (PDOException $e) {
-        $_SESSION['message_fail'] = $e->getMessage();
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        $_SESSION['message_fail'] = "Unexpected error occured!";
+        header("location: ../forgot_pass/forgot-pass.php?error=true");
         exit();
-
-    }
-
-    try {
-        $sql = $db->prepare("INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (:email, :selector, :token, :expires);");
-        
-        $hasked_token = password_hash($token, PASSWORD_DEFAULT);
-
-        //binding of values
-        $sql->bindParam(':email', $userEmail);
-        $sql->bindParam(':selector', $selector);
-        $sql->bindParam(':token', $hasked_token);
-        $sql->bindParam(':expires', $expires);
-        
-        //sql execute
-        $sql->execute();
-    }
-    catch (PDOException $e) {
-        $_SESSION['message_fail'] = $e->getMessage();
-        exit();
-    }
-
-    $database->close();
-
-    $to = $userEmail;
-
-    $subject = "Reset your password for WMSU|DTS.";
-
-    $message = "<p> Don't reply here! Hi There! The system received a request of password change. The link to reset your password is below,
-        if you did not make this request, please kindly ignore it.</p>";
-    $message .= "<p> Here is your reset password link: <br>";
-    $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
-
-    $message .= "From: WMSU|DTS team <wmsudts@gmail.com>\r\n";
-    $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
-    $message .= "<p>Best regards WMSU|DTS team.</p>";
-
-    $mail->Subject = $subject;
-    $mail->setFrom("wmsudts@gmail.com");
-    $mail->isHTML(true);
-    $mail->Body = $message;
-    $mail->addAddress($to);
-    if ($mail->Send()) { 
-        $_SESSION['message_succ'] = "Instruction on how to reset your password has been sent to your email. <br> Note:Check the inbox/spam tab of your email!";
-        header("location: ../forgot_pass/forgot-pass.php?reset=success");
     }
     else {
-        $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
-        header("location: ../forgot_pass/forgot-pass.php?reset=failed");
+
+        mysqli_stmt_bind_param($stmt, "s", $userEmail);
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (!$row = mysqli_fetch_assoc($result)) {
+            $_SESSION['message_fail'] = "User does not exist!";
+            header("location: ../forgot_pass/forgot-pass.php?user=notexist");
+            exit();
+        }
+
+        else
+        {
+            $database = new Connection();
+            $db = $database->open();
+
+
+            try {
+                $sql = $db->prepare("DELETE FROM pwdReset WHERE pwdResetEmail = :email;");
+            
+                //binding of values
+                $sql->bindParam(':email', $userEmail);
+                
+
+                //sql execute
+                $sql->execute();
+            }
+            catch (PDOException $e) {
+                $_SESSION['message_fail'] = $e->getMessage();
+                exit();
+
+            }
+
+            try {
+                $sql = $db->prepare("INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpire) VALUES (:email, :selector, :token, :expires);");
+                
+                $hasked_token = password_hash($token, PASSWORD_DEFAULT);
+
+                //binding of values
+                $sql->bindParam(':email', $userEmail);
+                $sql->bindParam(':selector', $selector);
+                $sql->bindParam(':token', $hasked_token);
+                $sql->bindParam(':expires', $expires);
+                
+                //sql execute
+                $sql->execute();
+            }
+            catch (PDOException $e) {
+                $_SESSION['message_fail'] = $e->getMessage();
+                exit();
+            }
+
+            $database->close();
+
+            $to = $userEmail;
+
+            $subject = "Reset your password for WMSU|DTS.";
+
+            $message = "<p> Don't reply here! Hi There! The system received a request of password change. The link to reset your password is below,
+                if you did not make this request, please kindly ignore it.</p>";
+            $message .= "<p> Here is your reset password link: <br>";
+            $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
+
+            $message .= "From: WMSU|DTS team <wmsudts@gmail.com>\r\n";
+            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+            $message .= "<p>Best regards WMSU|DTS team.</p>";
+
+
+            $mail->Subject = $subject;
+            $mail->setFrom("wmsudts@gmail.com");
+            $mail->isHTML(true);
+            $mail->Body = $message;
+            $mail->addAddress($to);
+           
+            if ($mail->Send()) { 
+                $_SESSION['message_succ'] = "Instruction on how to reset your password has been sent to your email. <br> Note:Check the inbox/spam tab of your email!";
+                header("location: ../forgot_pass/forgot-pass.php?reset=success");
+            }
+            else {
+                $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
+                header("location: ../forgot_pass/forgot-pass.php?reset=failed");
+            }
+
+            $mail->smtpClose();
+        }
     }
 
-    $mail->smtpClose();
+    
 }
 else
 {

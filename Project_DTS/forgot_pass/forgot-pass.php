@@ -109,6 +109,74 @@
 			unset($_SESSION['message_mail_fail']);
 		}
 	}
+
+	elseif(isset($_GET['newpass'])) {
+		if($_GET['newpass'] == "empty") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Failed!',
+						html: '<p><?php echo $_SESSION['message_fail'] ?></p>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+
+			unset($_SESSION['message_fail']);
+		}
+
+		else if($_GET['newpass'] == "notequal") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Failed!',
+						html: '<p><?php echo $_SESSION['message_fail'] ?></p>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+
+			unset($_SESSION['message_fail']);
+		}
+	}
+	elseif(isset($_GET['user'])) {
+		if($_GET['user'] == "notexist") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Failed!',
+						html: '<p><?php echo $_SESSION['message_fail'] ?></p>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+
+			unset($_SESSION['message_fail']);
+		}
+	}
+	elseif(isset($_GET['error'])) {
+		if($_GET['error'] == "true") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Failed!',
+						html: '<p><?php echo $_SESSION['message_fail'] ?></p>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+
+			unset($_SESSION['message_fail']);
+		}
+	}
 	?>
 	
 <!--===============================================================================================-->

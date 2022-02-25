@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +44,15 @@
                     <img src="../assets/img/wmsu_logo.png" width="60px" height="60px" alt="logo">
                 </span>
 
-                <input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
+				<?php
+					if(isset($_GET['id'])) {
+						?>
+						<input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
+						<?php
+					}			
+				?>
+
+                
 
                 <div class="wrap-input100 validate-input" data-validate = "Password">
                     <input class="input100" type="password" name="pwd">

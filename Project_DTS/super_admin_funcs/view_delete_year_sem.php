@@ -8,6 +8,11 @@
       <form action="../super_admin_funcs/delete_year_sem.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
             <p>Are you sure to delete this School Year and Semester? : <?php echo $row['schoolYear']; ?>, <?php  echo $row['semester']; ?></p>
+            <br>
+            <p style="text-align: center;color:red;">Note: Deleting this year/sem means all affliated documents will be also deleted, 
+              this will indicate that those documents are not necessary anymore. However, those documents can still be tracked.
+              <br> Max documents: 9999
+            </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>

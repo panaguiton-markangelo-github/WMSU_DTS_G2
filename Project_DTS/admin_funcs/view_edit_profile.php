@@ -17,6 +17,11 @@
                 <label for="password">New password:</label>
                 </div>
 
+                <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password-rep" placeholder="Confirm new password" required>
+                <label for="password-rep">Confirm new password:</label>
+                </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>

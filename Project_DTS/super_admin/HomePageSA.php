@@ -104,7 +104,25 @@ catch(PDOException $e) {
             unset($_SESSION['message']);
         }
     ?>
-    
+
+    <?php 
+        if(isset($_SESSION['message_fail'])){
+            ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed!!',
+                    html: '<h4><?php echo $_SESSION['message_fail']?></h4>',
+                    showConfirmButton: true,
+                    allowOutsideClick: false,
+                    confirmButtonText: 'OKAY!'
+                });
+            </script>
+            <?php
+
+            unset($_SESSION['message_fail']);
+        }
+    ?>
     <div class="main-content">
         <header>
             <h2>
@@ -144,7 +162,7 @@ catch(PDOException $e) {
                             //close connection
                             $database->close();
                         ?>
-                        
+                        <li> <span class="las la-file-export"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#generate_modal">Generate Report</a> </li>
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                                
@@ -153,6 +171,7 @@ catch(PDOException $e) {
         </header>
         
         <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
+        <?php  include('../super_admin_funcs/view_generate.php'); ?> 
 
         <main>
         <?php 

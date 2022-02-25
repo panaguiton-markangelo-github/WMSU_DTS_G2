@@ -24,12 +24,40 @@ try {
     }
     else if (!empty($row))
     {       
-            $last_tracking_id = $row['trackingID'];
-            $no_chars = count_characters($last_tracking_id);
-            $trackID = substr($last_tracking_id, $no_chars - 1);
-            $trackID = intval($trackID);
-            $trackID = date("Y")."-000".$trackID + 1;
-            $_SESSION["trackID"] = $trackID;
+        $last_tracking_id = $row['trackingID'];
+        $no_chars = count_characters($last_tracking_id);
+
+        //below 10 docs
+        $trackID_1 = substr($last_tracking_id, $no_chars - 1);
+        $trackID_1 = intval($trackID_1); 
+        if($trackID_1 < 10 && $trackID_1 >= 1){
+            $trackID_1 = date("Y")."-000".$trackID_1 + 1;
+            $_SESSION["trackID"] = $trackID_1;             
+        }
+
+        //above 10 docs
+        $trackID_2 = substr($last_tracking_id, $no_chars - 2);
+        $trackID_2 = intval($trackID_2); 
+        if($trackID_2 >= 10){
+            $trackID_2 = date("Y")."-000".$trackID_2 + 1;
+            $_SESSION["trackID"] = $trackID_2;
+        }
+
+        //above 100 docs
+        $trackID_3 = substr($last_tracking_id, $no_chars - 3);
+        $trackID_3 = intval($trackID_3); 
+        if($trackID_3 >= 100){
+            $trackID_3 = date("Y")."-000".$trackID_3 + 1;
+            $_SESSION["trackID"] = $trackID_3;
+        }
+
+        //above 1000 docs
+        $trackID_4 = substr($last_tracking_id, $no_chars - 4);
+        $trackID_4 = intval($trackID_4); 
+        if($trackID_4 >= 1000){
+            $trackID_4 = date("Y")."-000".$trackID_4 + 1;
+            $_SESSION["trackID"] = $trackID_4;
+        }
 
     }
 
@@ -178,6 +206,24 @@ catch(PDOException $e) {
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
 
         <main>
+        <?php 
+            if(isset($_SESSION['message_fail'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed!!',
+                        html: '<h4><?php echo $_SESSION['message_fail']?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['message_fail']);
+            }
+        ?>
         <?php 
           if(empty($row1)){
               ?>

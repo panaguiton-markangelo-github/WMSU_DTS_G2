@@ -57,7 +57,8 @@ if (isset($_POST['reset-submit'])) {
                 $stmt = mysqli_stmt_init($data);
 
                 if(!mysqli_stmt_prepare($stmt, $sql)){
-                    echo "there was an error!";
+                    $_SESSION['message_fail'] = "Unexpected error occured!";
+                    header("location: ../forgot_pass/forgot-pass.php?error=true");
                     exit();
                 }
                 else {
@@ -68,7 +69,8 @@ if (isset($_POST['reset-submit'])) {
                     $result = mysqli_stmt_get_result($stmt);
 
                     if (!$row = mysqli_fetch_assoc($result)) {
-                        echo "There was an unexpected error!";
+                        $_SESSION['message_fail'] = "User does not exist!";
+                        header("location: ../forgot_pass/forgot-pass.php?user=notexist");
                         exit();
                     }
                     else {

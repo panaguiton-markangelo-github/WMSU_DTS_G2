@@ -18,7 +18,11 @@
 	    
 		}
 		catch(PDOException $e){
-			$_SESSION['message'] = $e->getMessage();
+			//close connection
+			$database->close();
+			$_SESSION['message_fail'] = "user cannot be deleted, since there is/are an affliated document with this user.";		
+			header('location: ../super_admin/admin_users.php?failed=deleted?admin');
+			exit();
 		}
 
 		//close connection
