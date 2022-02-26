@@ -195,7 +195,7 @@ catch(PDOException $e) {
                             //close connection
                             $database->close();
                         ?>
-                        
+                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                               
@@ -204,7 +204,7 @@ catch(PDOException $e) {
         </header>
 
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
-
+        
         <main>
         <?php 
             if(isset($_SESSION['message_fail'])){

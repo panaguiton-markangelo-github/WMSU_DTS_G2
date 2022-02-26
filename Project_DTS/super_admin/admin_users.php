@@ -112,7 +112,7 @@ if(!isset($_SESSION["sa_username"])) {
                             //close connection
                             $database->close();
                         ?>
-                        <li> <span class="las la-file-export"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#generate_modal">Generate Report</a> </li>
+                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                                
@@ -121,7 +121,6 @@ if(!isset($_SESSION["sa_username"])) {
         </header>
 
         <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
-        <?php  include('../super_admin_funcs/view_generate.php'); ?>
         
        <main>
 

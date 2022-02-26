@@ -6,7 +6,7 @@
 <?php
     include ("include/alt_db.php");
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST["username"];
+        $username = $_POST["email"];
         $password = $_POST["password"];
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
     
@@ -30,7 +30,7 @@
 
         else
         {
-            if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
                 $_SESSION['invalid_email'] = "Please enter a valid email!!";
                 header('location: index.php?invalid=email');
             }
@@ -70,6 +70,7 @@
 
                             if ($row["userType"] == "superadmin") {
                                 $_SESSION["sa_username"] = $username;
+                                $_SESSION["sa_type"] = $row['userType'];
                                 $_SESSION["yearSemID_t"] = $row1['id'];
                                 $_SESSION["welcome"] = "Welcome $username. You are now logged in!";
                                 header('Location: super_admin/HomePageSA.php?user=superadmin');
@@ -78,6 +79,7 @@
                             
                             elseif ($row["userType"] == "admin") {
                                 $_SESSION["a_username"] = $username;
+                                $_SESSION["a_type"] = $row['userType'];
                                 $_SESSION["userID"] = $row['id'];
                                 $_SESSION["yearSemID_t"] = $row1['id'];
                                 $_SESSION["a_officeName"] = $row['officeName'];
@@ -87,6 +89,7 @@
                             }
                             elseif ($row["userType"] == "clerk") {
                                 $_SESSION["c_username"] = $username;
+                                $_SESSION["c_type"] = $row['userType'];
                                 $_SESSION["userID"] = $row['id'];
                                 $_SESSION["yearSemID_t"] = $row1['id'];
                                 $_SESSION["c_officeName"] = $row['officeName'];

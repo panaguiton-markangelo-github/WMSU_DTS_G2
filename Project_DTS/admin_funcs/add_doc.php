@@ -120,6 +120,6 @@
 		$_SESSION['message'] = 'Fill up add form first';
 	}
 
-	header('location: ../admin/HomePageAdmin.php?successful=added?doc');
+	header('location: ../admin/homePageAdmin.php?successful=added?doc');
 	
 ?>

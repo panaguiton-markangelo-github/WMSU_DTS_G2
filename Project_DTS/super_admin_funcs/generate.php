@@ -2,14 +2,15 @@
 session_start();
 include ("../include/alt_db.php");
 
-
 if(isset($_POST['generate'])){
+
     $cur_user = $_SESSION['sa_username'];
+    
     $office = $_POST['officeName'];
 
     if($office == ""){
         $_SESSION['message_fail'] = "PLease select an office!";
-        header("location: ../super_admin/HomePageSA.php?office=empty");
+        header("location: ../include/error.php?office=empty");
         exit();
     }
 
@@ -18,7 +19,7 @@ if(isset($_POST['generate'])){
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
         $_SESSION['message_fail'] = "Unexpected error occured!";
-        header("location: ../super_admin/HomePageSA.php?error=true");
+        header("location: ../include/error.php?error=true");
         exit();
     }
     else {
@@ -30,7 +31,7 @@ if(isset($_POST['generate'])){
 
         if ($no_rows_docs <= 0) {
             $_SESSION['message_fail'] = "Generation failed! <br> There are no documents/users in this office or there are only users but no documents and vice versa.";
-            header("location: ../super_admin/HomePageSA.php?docs=empty");
+            header("location: ../include/error.php?docs=empty");
             exit();
         }
 
@@ -69,7 +70,6 @@ if(isset($_POST['generate'])){
                     0, false, 'R', 0, '', 0, false, 'T', 'M');
                     
                 }
-
             }
 
             // create new PDF document
@@ -276,7 +276,6 @@ if(isset($_POST['generate'])){
             }
 
 
-
             // Close and output PDF document
             // This method has several options, check the source code documentation for more information.
             $pdf->Output('system_generated_report.pdf', 'I');
@@ -285,7 +284,9 @@ if(isset($_POST['generate'])){
 
 }
 else { 
-    header("location: ../super_admin/HomePageSA.php");
+    
+    $_SESSION['message_fail'] = "Unexpected error occured!";
+    header("location: ../include/error.php?error=true");
     exit();
 }
 

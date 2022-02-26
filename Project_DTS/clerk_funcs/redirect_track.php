@@ -117,13 +117,14 @@ if(!isset($_SESSION["c_username"])) {
                             //close connection
                             $database->close();
                         ?>
-                        
+                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                               
                 </div>
             </div>
         </header>
+        
 
         <?php  include('../clerk_funcs/view_edit_profile.php'); ?>
         
