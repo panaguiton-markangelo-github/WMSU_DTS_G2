@@ -66,10 +66,7 @@ if(!isset($_SESSION["c_username"])) {
                     <a class="active"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
+             
               
             </ul>
         </div>
@@ -174,10 +171,6 @@ if(!isset($_SESSION["c_username"])) {
                                     Status
                                 </th>
 
-                                <th>
-                                    Released At
-                                </th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -188,9 +181,9 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.remarks, documents.status, logs.released_at 
+                                    $sql = "SELECT DISTINCT documents.*
                                     FROM documents 
-                                    INNER JOIN logs ON logs.trackingID = documents.trackingID INNER JOIN users ON users.id = logs.user_id 
+                                    INNER JOIN logs ON logs.trackingID = documents.trackingID
                                     WHERE logs.released_at != 'none' AND logs.office = '".$_SESSION["c_officeName"]."' ;";
 
                                     $no=0;
@@ -223,27 +216,19 @@ if(!isset($_SESSION["c_username"])) {
                                 </td>
 
                                 <td>
+                                <?php
+                                    if ($row['status'] == "pending"){
+                                    ?>
+                                        <span style="color: red;"><?php echo $row['status']; ?></span>
+                                <?php
+                                    }
+                                    else {
+                                    ?>
+                                        <span style="color: green;"><?php echo $row['status']; ?></span>
                                     <?php
-                                        if ($row['status'] == "available"){
-                                        ?>
-                                            <span class="avail data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else if ($row['status'] == "terminal") {
-                                        ?>
-                                            <span class="term data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else {
-                                        ?>
-                                            <span class="pending data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                    ?> 
-                                </td>
-
-                                <td>
-                                    <?php echo $row['released_at']?>
+                                    }
+                                ?>
+                                  
                                 </td>
                                 
 

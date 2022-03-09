@@ -47,7 +47,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="clerk_users.php"><span class="las la-users"></span>
+                    <a href="clerk_users.php"><span class="las la-search-location"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
@@ -55,7 +55,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Track Documents</span></a>
                 </li>
                 <li>
-                    <a href="office_docs.php"><span class="las la-file-alt"></span>
+                    <a href="office_docs.php" ><span class="las la-file-alt"></span>
                     <span>Office Documents</span></a>
                 </li>
                 <li>
@@ -70,11 +70,8 @@ if(!isset($_SESSION["a_username"])) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
-               
+            
+                
             </ul>
         </div>
     </div>
@@ -127,6 +124,7 @@ if(!isset($_SESSION["a_username"])) {
         </header>
 
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
+    
 
         <main>
         <?php 
@@ -169,16 +167,21 @@ if(!isset($_SESSION["a_username"])) {
                                 <th>
                                     Reason
                                 </th>
+
                                 <th>
-                                    Remarks
+                                    Status
                                 </th>
 
                                 <th>
-                                    Semester
+                                    Remarks
                                 </th>
                               
                                 <th>
                                     Year
+                                </th>
+
+                                <th>
+                                    Release
                                 </th>
 
 
@@ -192,7 +195,7 @@ if(!isset($_SESSION["a_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT documents.*, yearsemester.schoolYear, yearsemester.semester
+                                    $sql = "SELECT documents.*, yearsemester.schoolYear
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID INNER JOIN users ON users.id = documents.user_id
                                     WHERE users.officeName = '".$_SESSION['a_officeName']."' AND documents.status = 'pending';";
                                     $no=0;
@@ -221,15 +224,35 @@ if(!isset($_SESSION["a_username"])) {
                                 </td>
 
                                 <td>
+                                <?php
+                                    if ($row['status'] == "pending"){
+                                    ?>
+                                        <span style="color: red;"><?php echo $row['status']; ?></span>
+                                <?php
+                                    }
+                                    else {
+                                    ?>
+                                        <span style="color: green;"><?php echo $row['status']; ?></span>
+                                    <?php
+                                    }
+                                ?>
+                                </td>
+
+                                <td>
                                     <?php echo $row['remarks']; ?>
                                 </td>                  
                                       
                                 <td>
-                                    <?php echo $row['semester']; ?>
+                                    <?php echo $row['schoolYear']; ?>
                                 </td>
 
-                                <td>
-                                    <?php echo $row['schoolYear']; ?>
+                                <td align="center">
+                                    <form action="release_document.php" method="POST">
+                                    <input type="text" name="userID" value="<?php echo $_SESSION['userID'] ?>" hidden>
+                                    <input type="text" name="trackingID" value="<?php echo $row['trackingID'] ?>" hidden>
+                                    <button type="submit" name="release_but" class="btn btn-success btn-sm p-2"><span class = "las la-share"></span></button> <!--continue here-->
+                                    </form>
+
                                 </td>
 
                             </tr>
@@ -275,12 +298,13 @@ if(!isset($_SESSION["a_username"])) {
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
-    
+
     <script>
         function menuToggle(){
             const toggleMenu = document.querySelector('.menu');
             toggleMenu.classList.toggle('active')
         }
     </script>
+    
 </body>
 </html>

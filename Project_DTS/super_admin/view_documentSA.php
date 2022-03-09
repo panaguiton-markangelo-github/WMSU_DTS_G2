@@ -108,9 +108,20 @@ if(!isset($_SESSION["sa_username"])) {
                         <th class="fs-5 text-center">
                             Status:
                         </th>
-        
                         <td class="fs-5 text-center">
-                            <?php echo $_POST['status'];?>
+                            
+                        <?php
+                            if ($_POST['status'] == "pending"){
+                            ?>
+                                <span style="color: red;"><?php echo $_POST['status']; ?></span>
+                        <?php
+                            }
+                            else {
+                            ?>
+                                <span style="color: green;"><?php echo $_POST['status']; ?></span>
+                            <?php
+                            }
+                        ?>
                         </td>
                     </tr>
 
@@ -121,17 +132,6 @@ if(!isset($_SESSION["sa_username"])) {
                         
                         <td class="fs-5 text-center">
                             <?php echo $_POST['schoolYear'];?>
-                        </td>
-        
-                    </tr>
-
-                    <tr>
-                        <th class="fs-5 text-center">
-                            Semester
-                        </th>
-                        
-                        <td class="fs-5 text-center">
-                            <?php echo $_POST['semester'];?>
                         </td>
         
                     </tr>

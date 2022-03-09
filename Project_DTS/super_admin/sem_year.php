@@ -3,7 +3,31 @@ session_start();
 if(!isset($_SESSION["sa_username"])) {
   header("location: ../index.php");
 }
+include ("../include/alt_db.php");
 ?>
+
+<?php
+try {
+
+    $query1 = "SELECT * FROM yearsemester WHERE activated= 'yes'";
+    $result1 = mysqli_query($data, $query1);
+    $row1 = mysqli_fetch_array($result1);
+}
+catch(PDOException $e) {
+    $_SESSION['message'] = $e->getMessage();
+}
+
+try {
+
+    $query2 = "SELECT * FROM dateRange ORDER BY id DESC LIMIT 1;";
+    $result2 = mysqli_query($data, $query2);
+    $row2 = mysqli_fetch_array($result2);
+}
+catch(PDOException $e) {
+    $_SESSION['message'] = $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +79,10 @@ if(!isset($_SESSION["sa_username"])) {
                 <li>
                     <a href="all_docs.php"><span class="las la-file-alt"></span>
                     <span>All Documents</span></a>
+                </li>
+                <li>
+                    <a href="offices.php"><span class="las la-building"></span>
+                    <span>Offices</span></a>
                 </li>
                 <li>
                     <a href="clerk_users.php"><span class="las la-users"></span>
@@ -165,7 +193,12 @@ if(!isset($_SESSION["sa_username"])) {
         
            <div class="container">
             <div class="table-responsive">
-            <a class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#add_year_sem">Add New Year/Sem</a>
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#add_year_sem">Add New School Year</a>               
+                    </div>
+                </div>
+            
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -175,9 +208,19 @@ if(!isset($_SESSION["sa_username"])) {
                                 <th>
                                     School Year
                                 </th>
+
                                 <th>
-                                    Semester
+                                    Status
                                 </th>
+
+                                <th>
+                                    Activated
+                                </th>
+                                
+                                <th>
+                                    
+                                </th>
+
                                 <th>
                                     
                                 </th>
@@ -207,15 +250,52 @@ if(!isset($_SESSION["sa_username"])) {
                                 </td>
 
                                 <td>
-                                    <?php echo $row['semester']; ?>
+                                    <?php echo $row['stat']; ?>
                                 </td>
 
-                                <td style="display:flex;justify-content:center;">
-                                    <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_year_sem<?php echo $row['id']; ?>">Edit</a>
+                                <td>
+
+                                <?php
+                                    if ($row['activated'] == "yes"){
+                                    ?>
+                                    <p style="color: green;"> Yes</p>
+                                <?php
+                                    }
+                                    else if ($row['activated'] == "no") {
+                                    ?>
+                                        <p style="color: red;"> No</p>
+                                <?php
+                                    }
+                                                                    
+                                ?> 
+                                     
+                                </td>
+                               
+
+                                <td align="center">
+
+                                    <?php
+                                        if ($row['activated'] == "yes"){
+                                        ?>
+                                            <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#dact_year<?php echo $row['id']; ?>">Deactivate</a>
+                                    <?php
+                                        }
+                                        else if ($row['activated'] == "no") {
+                                        ?>
+                                            <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#act_year<?php echo $row['id']; ?>">Activate</a>
+                                    <?php
+                                        }
+                                                                        
+                                    ?> 
+                                     
+                                </td>
+
+                                <td align="center">
                                     <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_year_sem<?php echo $row['id']; ?>">Delete</a>
                                 </td>
+                                <?php include('../super_admin_funcs/view_act_year.php'); ?>
                                 <?php include('../super_admin_funcs/view_delete_year_sem.php'); ?>
-                                <?php include('../super_admin_funcs/view_edit_year_sem.php'); ?>
+                                
                             </tr>
 
                             <?php 
@@ -231,6 +311,19 @@ if(!isset($_SESSION["sa_username"])) {
                                         
                         </tbody>
                     </table>
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-2">
+                            <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
+                        </div>
+
+                        <div class="col-2">
+                            <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
+                        </div>
+
+                        <div class="col-2">
+                            <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
+                        </div>
+                    </div>
                 </div>
            </div>
        </main>
@@ -255,6 +348,9 @@ if(!isset($_SESSION["sa_username"])) {
     </script>
 
     <?php include('../super_admin_funcs/view_add_year_sem.php'); ?>
+    <?php include('../super_admin_funcs/view_1st_sem_date_range.php'); ?>
+    <?php include('../super_admin_funcs/view_2nd_sem_date_range.php'); ?>
+    <?php include('../super_admin_funcs/view_summer_date_range.php'); ?>
     <?php include('../validation/view_logout.php'); ?>
     
     <footer>

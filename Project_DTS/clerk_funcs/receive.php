@@ -40,29 +40,22 @@ catch(PDOException $e){
 		$db = $database->open();
         $receive_mes = "received in the office.";
 		try{
-			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare ("UPDATE documents SET status = :status WHERE trackingID = :trackingID;");
-            //bind 
-			$sql->bindParam(':trackingID', $_POST['rec_trackingID']);
-			$sql->bindParam(':status', $_POST['status']);
-
+			
             $_SESSION['trackingID'] = $_POST['rec_trackingID'];
             $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 
-            $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, received_at, remarks, action, status, origin_office) VALUES(:trackingID, :user_id, :office, :received_at, :remarks, :action, :status, :origin_office);");
+            $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, received_at, remarks, status, origin_office) VALUES(:trackingID, :user_id, :office, :received_at, :remarks, :status, :origin_office);");
             $sql_logs->bindParam(':trackingID', $_POST['rec_trackingID']);
             $sql_logs->bindParam(':user_id', $_POST['userID']);
             $sql_logs->bindParam(':office', $row['officeName']);
             $sql_logs->bindParam(':received_at', $date->format('M/d/Y, H:i:s'));
-            $sql_logs->bindParam(':action', $_POST['action']);
 			$sql_logs->bindParam(':status', $_POST['status']);
             $sql_logs->bindParam(':remarks', $receive_mes);
 			$sql_logs->bindParam(':origin_office', $row1['origin_office']);
 
-            $sql_logs->execute();
 
 			//if-else statement in executing our prepared statement
-			$_SESSION['message_receive'] = ( $sql->execute()) ? 'Document was received successfully.': 'Something went wrong. Cannot receive the document.';	
+			$_SESSION['message_receive'] = ( $sql_logs->execute()) ? 'Document was received successfully.': 'Something went wrong. Cannot receive the document.';	
 		}
 		catch(PDOException $e){
 			$_SESSION['message_receive'] = $e->getMessage();

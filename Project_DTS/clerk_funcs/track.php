@@ -29,27 +29,20 @@
         </td>
 
         <td>
-            <?php echo $row['action']; ?>
-        </td>
 
-        <td>
         <?php
-            if ($row['status'] == "available"){
+            if ($row['status'] == "pending"){
             ?>
-                <span class="avail data"> <?php echo $row['status']; ?> </span>
-        <?php
-            }
-            else if ($row['status'] == "terminal") {
-            ?>
-                <span class="term data"> <?php echo $row['status']; ?> </span>
+                <span style="color: red;"><?php echo $row['status']; ?></span>
         <?php
             }
             else {
             ?>
-                <span class="pending data"> <?php echo $row['status']; ?> </span>
-        <?php
+                <span style="color: green;"><?php echo $row['status']; ?></span>
+            <?php
             }
-        ?> 
+        ?>
+        
         </td>
         
         <td>
@@ -64,10 +57,7 @@
             <?php echo $row['released_at']; ?>
         </td>
 
-        <td>
-            <?php echo $row['terminal_at']; ?>
-        </td>
-
+       
         <td>
             <?php echo $row['remarks']; ?>
         </td>

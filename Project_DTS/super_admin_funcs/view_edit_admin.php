@@ -9,26 +9,26 @@
         <div class="modal-body">
         <label for="office">Office:</label>
                   <select class="form-select text-dark" name="officeName" id="officeName" required>
-                  <option selected value="<?php echo $row['officeName']; ?>"><?php echo $row['officeName']; ?></option>
-                  <option value="ICS">Institute of Computer Studies</option>
-                  <option value="COG">College of Agriculture</option>
-                  <option value="COA">College of Architecture</option>
-                  <option value="CAIS">College of Asian and Islamic Studies</option>
-                  <option value="CCJE">College of Criminal Justice Education</option>
-                  <option value="COE">College of Engineering</option>
-                  <option value="CFES">College of Forestry and Environmental Studies</option> 
-                  <option value="CHE">College of Home Economics</option> 
-                  <option value="COL">College of Law</option>     
-                  <option value="CLA">College of Liberal Arts</option>
-                  <option value="CON">College of Nursing</option>
-                  <option value="CPADS">College of Public Administration and Development Studies</option>
-                  <option value="CSSP">College of Sports Science and Physical Education</option>
-                  <option value="CSM ">College of Science and Mathematics</option>
-                  <option value="CSWD">College of Social Work and Community Development</option>   
-                  <option value="CTE">College of Teacher Education</option>   
-                  <option value="Lib">WMSU Library</option>   
-                  <option value="CLA">College of Liberal Arts</option>
-                  <option value="GRRC">Gender Research and Resource Center</option>
+                    <option selected value="<?php echo $row['officeName']; ?>"><?php echo $row['officeName']; ?> (current)</option>
+                  <?php
+                      $database = new Connection();
+                      $db = $database->open();
+                      try{	
+                          $sql = 'SELECT * FROM office;'; 
+                          foreach ($db->query($sql) as $row1) {
+                    ?>
+                      <option value="<?php echo $row1['officeName']; ?>"> <?php echo $row1['description'];?> </option>
+                      <?php
+                      }
+
+                    }
+                    catch(PDOException $e){
+                        echo "There is some problem in connection: " . $e->getMessage();
+                    }
+
+                    //close connection
+                    $database->close();
+                  ?>
                 </select>
 
                 <br>

@@ -4,6 +4,7 @@ if(!isset($_SESSION["sa_username"])) {
   header("location: ../index.php");
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +56,10 @@ if(!isset($_SESSION["sa_username"])) {
                 <li>
                     <a href="all_docs.php"><span class="las la-file-alt"></span>
                     <span>All Documents</span></a>
+                </li>
+                <li>
+                    <a href="offices.php"><span class="las la-building"></span>
+                    <span>Offices</span></a>
                 </li>
                 <li>
                     <a href="clerk_users.php"><span class="las la-users"></span>

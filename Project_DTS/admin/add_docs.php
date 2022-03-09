@@ -5,17 +5,13 @@ if(!isset($_SESSION["a_username"])) {
 }
 
 include ("../include/alt_db.php");
-if($data === false){
-    die("connection error");
-}
-
 
 ?>
 
 <?php
 try {
 
-    $query = "SELECT * FROM yearsemester";
+    $query = "SELECT * FROM yearsemester WHERE activated = 'yes'";
     $result = mysqli_query($data, $query);
     $row = mysqli_fetch_array($result);
 
@@ -107,9 +103,9 @@ catch(PDOException $e) {
           <br>
 
           <div class="row">
-            <div class="col md-4">
-              <select class="form-select text-dark" name="reason" aria-label="Default select example" required>
-              <option selected>Reason</option>
+            <div class="col">
+              <select class="form-select text-dark" name="reason" onchange="checkvalue1(this.value)" aria-label="Default select example" required>
+              <option value="" selected>Reason</option>
               <option value="Appropriate Action">Appropriate Action</option>
               <option value="Coding/Deposit/Preparation of Receipt">Coding/Deposit/Preparation of Receipt</option>
               <option value="Comment/Reaction/Response">Comment/Reaction/Response</option>
@@ -124,13 +120,16 @@ catch(PDOException $e) {
               <option value="Study and Report to">Study and Report to</option>
               <option value="Translation">Translation</option>
               <option value="Your Information">Your Information</option>
+              <option value="other">Other</option>
               </select>
+              
+              <input type="text" name="oreason" id="checkR" placeholder="Please enter here the reason:" style='display:none'/>
               <p class="text-center text-muted fw-bold">The reason for the document.</p>
             </div>
 
-            <div class="col md-4">
-              <select class="form-select text-dark" name="type" aria-label="Default select example" required>
-              <option selected>Select Document Type</option>
+            <div class="col">
+              <select class="form-select text-dark" name="type" onchange="checkvalue(this.value)" aria-label="Default select example" required>
+              <option value="" selected>Select Document Type</option>
               <option value="Certificate of Service">Certificate of Service</option>
               <option value="Disbursement of Service">Disbursement of Service</option>
               <option value="Inventory and Inspection Report">Inventory and Inspection Report</option>
@@ -147,7 +146,10 @@ catch(PDOException $e) {
               <option value="Request for Obligation of Allotments">Request for Obligation of Allotments</option>
               <option value="Requisition and Issue Voucher">Requisition and Issue Voucher</option>
               <option value="Unclassified">Unclassified</option>
+              <option value="other">Other</option>
               </select>
+
+              <input type="text" name="otype" id="checkT" placeholder="Please enter here the type:" style='display:none'>
               <p class="text-center text-muted fw-bold">The type of the document.</p>
             </div>
           </div>
@@ -158,64 +160,31 @@ catch(PDOException $e) {
 
           <div class="row">
             <div class="col md-4">
-              <select class="form-select text-dark" name="yearSemID" id="yearSemID">
-                <?php 
-                  if(empty($row)) {
-                    ?>
-                    <option selected>No Year and Semester!</option>
-                    <?php
-                  }
-                  else {
-                    ?>
-                      <option selected>Select Year/Semester:</option>
-                    <?php
-                  }
-                ?>
-                <?php
-                  //include our connection
-                  include_once('../include/database.php');
-
-                  $database = new Connection();
-                  $db = $database->open();
-                  try{	
-                      $sql = 'SELECT DISTINCT id, semester, schoolYear FROM yearsemester;'; 
-                      foreach ($db->query($sql) as $row) {
-                ?>
-                  <option value="<?php echo $row['id']; ?>"> <?php echo $row['schoolYear']."-".$row['semester']; ?></option>
-                  <?php
-                  }
-
-                }
-                catch(PDOException $e){
-                    echo "There is some problem in connection: " . $e->getMessage();
-                }
-
-                //close connection
-                $database->close();
-                  ?>
-                </select>
-                <p class="text-center text-muted fw-bold">Select the Year and Semester.</p>
+              <input type="file" name="file">
+              <p class="text-center text-muted fw-bold"> File upload(optional and only pdf is allowed)</p>
             </div>
-
             <div class="col md-4">
               <div class="input-group">
               <span class="input-group-text">Remarks</span>
               <textarea class="form-control" name="remarks" aria-label="Remarks" maxlength="100"></textarea>
               </div>
-              <p class="text-center text-muted fw-bold"> Max Length: <mark>100</mark>characters.</p>
+              <p class="text-center text-muted fw-bold"> Max Length(optional): <mark>100</mark>characters.</p>
             </div>      
           </div>
 
           <input name="user_id" type="number" value="<?php echo $_SESSION['userID'];?>" hidden>
           <input name="office" type="text" value="<?php echo $row1['officeName'] ?>" hidden>
-          <input name="status" type="text" value="available" hidden>       
+          <input name="schoolYear_id" type="text" value="<?php echo $row['id'] ?>" hidden>
+          <input name="status_draft" type="text" value="pending" hidden>    
+          <input name="status_rel" type="text" value="released" hidden>  
 
           <br>
           <br>
           <div class="d-flex justify-content-center">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#resetModal">Reset</button>
-              <button type="submit" name="add" class="btn btn-success">Add Document</button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#resetModal">Reset</button>
+              <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#draftModal">Save as draft</button>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#releaseModal">Save and Release Document</button>
             </div>
           </div>
         </form>
@@ -252,6 +221,57 @@ catch(PDOException $e) {
        </div>
       </div>
 
+      <!-- Modal for draft button-->
+      <div class="modal fade" id="draftModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="resetModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="resetModalLabel">Save as Draft</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              <p style="text-align: center;">The document will be saved as draft and will need to be released in this office in order to be processed by other office/s.
+                <br> <b>Note:This document can be released later at the pending for release tab at the home page.</b>
+              </p>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" for>Close</button>
+              <button type="submit" name="draft" class="btn btn-success" data-bs-dismiss="modal" form="mainForm">Save changes</button>
+              
+           </div>
+         </div>
+       </div>
+      </div>
+
+      <!-- Modal for release document-->
+      <div class="modal fade" id="releaseModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="releaseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="resetModalLabel">Save and Release Document</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+              <p class="text-center"> Are you sure to create and release the document now? The status of document would be the default which is "released",
+                this can be modify in the office documents tab of the home page.
+                <br>
+                <b> Note: other offices will now be able to process this document if it was received by them. </b> </p>
+            
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" for>No</button>
+              <button type="submit" class="btn btn-success" name="add" data-bs-dismiss="modal" form="mainForm">Yes</button>
+              
+           </div>
+         </div>
+       </div>
+      </div>
+
       <script>
         var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
         var alertTrigger = document.getElementById('liveAlertBtn')
@@ -269,6 +289,34 @@ catch(PDOException $e) {
           })
         }
 
+      </script>
+
+      <script>
+        function checkvalue(val)
+          {
+              if(val==="other")
+              {
+                document.getElementById('checkT').style.display='block';
+                document.getElementById('checkT').style.marginTop='12px';
+              }
+              else{
+                document.getElementById('checkT').style.display='none'; 
+              }
+                
+          }
+
+        function checkvalue1(val)
+        {
+            if(val==="other")
+            {
+              document.getElementById('checkR').style.display='block';
+              document.getElementById('checkR').style.marginTop='12px';
+            }
+            else{
+              document.getElementById('checkR').style.display='none'; 
+            }
+              
+        }
       </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 

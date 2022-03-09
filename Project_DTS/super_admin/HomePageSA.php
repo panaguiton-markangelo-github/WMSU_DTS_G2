@@ -69,6 +69,10 @@ catch(PDOException $e) {
                     <span>All Documents</span></a>
                 </li>
                 <li>
+                    <a href="offices.php"><span class="las la-building"></span>
+                    <span>Offices</span></a>
+                </li>
+                <li>
                     <a href="clerk_users.php"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
@@ -427,7 +431,7 @@ catch(PDOException $e) {
                                         $database = new Connection();
                                         $db = $database->open();
                                         try{	
-                                            $sql = 'SELECT yearsemester.schoolYear, yearsemester.semester, documents.trackingID, 
+                                            $sql = 'SELECT yearsemester.schoolYear, yearsemester.stat, documents.trackingID, 
                                             documents.title, documents.type, documents.reason, documents.remarks, documents.status
                                             FROM yearsemester INNER JOIN documents ON yearsemester.id = documents.yearSemID LIMIT 5;';
                                             $no = 0;
@@ -446,19 +450,14 @@ catch(PDOException $e) {
                                             </td>
                                             <td>
                                                 <?php
-                                                    if ($row['status'] == "available"){
+                                                    if ($row['status'] == "pending"){
                                                     ?>
-                                                        <span class="avail data"> <?php echo $row['status']; ?> </span>
-                                                <?php
-                                                    }
-                                                    else if ($row['status'] == "terminal") {
-                                                    ?>
-                                                        <span class="term data"> <?php echo $row['status']; ?> </span>
+                                                        <span style="color: red;"> <?php echo $row['status']; ?> </span>
                                                 <?php
                                                     }
                                                     else {
                                                     ?>
-                                                        <span class="pending data"> <?php echo $row['status']; ?> </span>
+                                                        <span style="color: green;"> <?php echo $row['status']; ?> </span>
                                                 <?php
                                                     }
                                                 ?> 
@@ -472,7 +471,7 @@ catch(PDOException $e) {
                                                     <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
                                                     <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
                                                     <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                                    <input type="text" name="semester" id="semester" value= "<?php echo $row['semester'];?>" hidden>
+                                                    
                                                     <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                                 </form>
                                             </td>
@@ -640,7 +639,7 @@ catch(PDOException $e) {
                                         <tr>
                                             <td>No.</td>
                                             <td> Year </td>
-                                            <td> Semester </td>
+                                            <td> Status </td>
                                         </tr>
                                     </thead>
     
@@ -661,7 +660,7 @@ catch(PDOException $e) {
                                         <tr>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $row['schoolYear']; ?></td>
-                                            <td><?php echo $row['semester'];?></td>
+                                            <td><?php echo $row['stat'];?></td>
                                         </tr>
 
                                     <?php 

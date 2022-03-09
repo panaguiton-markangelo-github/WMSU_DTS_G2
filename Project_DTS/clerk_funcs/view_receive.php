@@ -12,7 +12,7 @@ include_once('../include/database.php');
 $database = new Connection();
 $db = $database->open();
 try{	
-    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, logs.remarks, logs.action, logs.status, logs.office, logs.origin_office FROM documents 
+    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, logs.office, logs.origin_office FROM documents 
     INNER JOIN logs ON documents.trackingID = logs.trackingID 
     WHERE documents.trackingID = '".$_POST['rec_trackingID']."' ORDER BY logs.id DESC LIMIT 1;";
     foreach ($db->query($sql) as $row) {
@@ -93,20 +93,6 @@ catch(PDOException $e){
           $_SESSION['e_id'] = $_POST['rec_trackingID'];
             header("Location: ../clerk/HomePageC.php?error=incorrect?id");
             die();
-        }
-        else {
-          if($row['status'] == "pending"){
-            $_SESSION['e_message'] = "The Document is already in process, please wait for the document to be available again!";
-            $_SESSION['e_id'] = $_POST['rec_trackingID'];
-            header("Location: ../clerk/HomePageC.php?error=pending");
-            die();
-          }
-          else if($row['status'] == "terminal"){
-            $_SESSION['e_message'] = "The Document is already tagged as terminal, further process for this document is no longer possible.";
-            $_SESSION['e_id'] = $_POST['rec_trackingID'];
-            header("Location: ../clerk/HomePageC.php?error=terminal");
-            die();
-          }
         }
          ?>             
       </div>
@@ -202,23 +188,18 @@ catch(PDOException $e){
                       </th>
 
                       <td class="fs-5 text-center">
-                          <?php
-                              if ($row['status'] == "available"){
-                              ?>
-                                  <span class="status avail"> <?php echo $row['status']; ?> </span>
-                          <?php
-                              }
-                              else if ($row['status'] == "terminal") {
-                              ?>
-                                  <span class="status term"> <?php echo $row['status']; ?> </span>
-                          <?php
-                              }
-                              else {
-                              ?>
-                                  <span class="status pending"> <?php echo $row['status']; ?> </span>
-                          <?php
-                              }
-                          ?> 
+                      <?php
+                            if ($row['status'] == "pending"){
+                            ?>
+                                <span style="color: red;"><?php echo $row['status']; ?></span>
+                        <?php
+                            }
+                            else {
+                            ?>
+                                <span style="color: green;"><?php echo $row['status']; ?></span>
+                            <?php
+                            }
+                        ?>
                       </td>
                   </tr>
                 </tbody>
@@ -231,9 +212,8 @@ catch(PDOException $e){
               <br>
               <!--fix this issue here.-->
               <input type="text" name="rec_trackingID"  value="<?php echo $_POST["rec_trackingID"];?>" hidden>
+              <input type="text" name="status"  value="<?php echo $row["status"];?>" hidden>
 
-              <input type="text" class="form-control" name="status" value="pending" hidden>
-              <input type="text" class="form-control" name="action" value="none" hidden>
               <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_POST["userID"];?>" hidden>
               <br>
               <br>
@@ -241,7 +221,7 @@ catch(PDOException $e){
             <div class="d-flex justify-content-center">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                   <a href="../clerk/HomePageC.php" type="button" class="btn btn-danger">No</a>
-                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiveModal">Yes</button>
+                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiveModal">Okay</button>
                 </div>
               </div>
           </div>

@@ -71,10 +71,6 @@ if(!isset($_SESSION["a_username"])) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
                 
             </ul>
         </div>

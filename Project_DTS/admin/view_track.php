@@ -50,7 +50,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="clerk_users.php"><span class="las la-users"></span>
+                    <a href="clerk_users.php"><span class="las la-search-location"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
@@ -73,11 +73,8 @@ if(!isset($_SESSION["a_username"])) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
-                
+
+               
             </ul>
         </div>
     </div>
@@ -167,12 +164,11 @@ if(!isset($_SESSION["a_username"])) {
                                     
                                     <th >Originating Office</th>
                                     <th >Current Office</th>
-                                    <th >Action</th> 
                                     <th >Status</th>                                 
-                                    <th >created at</th>
-                                    <th >accepted at</th>
-                                    <th >released at</th>
-                                    <th >terminal at</th>
+                                    <th >Added at</th>
+                                    <th >Received at</th>
+                                    <th >Released at</th>
+                                    
                                     <th >Remarks</th>
                                 </tr>
                             </thead>
@@ -247,7 +243,7 @@ if(!isset($_SESSION["a_username"])) {
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
-    
+
     <script>
         function menuToggle(){
             const toggleMenu = document.querySelector('.menu');

@@ -56,6 +56,10 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>All Documents</span></a>
                 </li>
                 <li>
+                    <a href="offices.php"><span class="las la-building"></span>
+                    <span>Offices</span></a>
+                </li>
+                <li>
                     <a href="clerk_users.php"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
@@ -179,24 +183,13 @@ if(!isset($_SESSION["sa_username"])) {
                                 </th>
 
                                 <th>
-                                    Semester
-                                </th>
-
-                                <th>
-                                    Year
+                                    School Year
                                 </th>
 
                                 <th>
                                     View
                                 </th>
 
-                                <th>
-                                  
-                                </th>
-
-                                <th>
-
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,7 +200,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.semester, users.officeName FROM documents 
+                                    $sql = 'SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
                                     INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
                                     ORDER BY documents.id ASC;';
@@ -245,27 +238,20 @@ if(!isset($_SESSION["sa_username"])) {
                                 </td>
 
                                 <td>
+                                  
+                                <?php
+                                 if ($row['status'] == "pending"){
+                                    ?>
+                                        <span style="color: red;"><?php echo $row['status']; ?></span>
+                                <?php
+                                    }
+                                else {
+                                    ?>
+                                        <span style="color: green;"><?php echo $row['status']; ?></span>
                                     <?php
-                                        if ($row['status'] == "available"){
-                                        ?>
-                                            <span class="avail data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else if ($row['status'] == "terminal") {
-                                        ?>
-                                            <span class="term data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else {
-                                        ?>
-                                            <span class="pending data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                    ?> 
-                                </td>
-                                
-                                <td>
-                                    <?php echo $row['semester']; ?>
+                                    }
+                                ?>
+                                   
                                 </td>
 
                                 <td>
@@ -281,19 +267,9 @@ if(!isset($_SESSION["sa_username"])) {
                                         <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
                                         <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
                                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                        <input type="text" name="semester" id="semester" value= "<?php echo $row['semester'];?>" hidden>
                                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                     </form>
                                 </td>
-
-                                <td>
-                                    <a class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#edit_docs<?php echo $row['id']; ?>">Edit</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete_docs<?php echo $row['id']; ?>">Delete</a>
-                                </td>
-                                <?php include('../super_admin_funcs/view_delete_doc.php'); ?>
-                                <?php include('../super_admin_funcs/view_edit_doc.php'); ?>
                             </tr>
                             
                             <?php 

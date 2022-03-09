@@ -66,10 +66,7 @@ if(!isset($_SESSION["c_username"])) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
+             
                
             </ul>
         </div>
@@ -176,7 +173,7 @@ if(!isset($_SESSION["c_username"])) {
                                 </th>
 
                                 <th>
-                                    Received At
+                                    View
                                 </th>
                                 
                             </tr>
@@ -189,9 +186,9 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.remarks, documents.status, logs.received_at 
+                                    $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                         FROM documents 
-                                        INNER JOIN logs ON logs.trackingID = documents.trackingID INNER JOIN users ON users.id = logs.user_id 
+                                        INNER JOIN logs ON logs.trackingID = documents.trackingID INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID
                                         WHERE logs.received_at != 'none' AND logs.office = '".$_SESSION['c_officeName']."';";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
@@ -221,29 +218,34 @@ if(!isset($_SESSION["c_username"])) {
                                 <td>
                                     <?php echo $row['remarks']; ?>
                                 </td>
-
                                 <td>
                                     <?php
-                                        if ($row['status'] == "available"){
+                                        if ($row['status'] == "pending"){
                                         ?>
-                                            <span class="avail data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else if ($row['status'] == "terminal") {
-                                        ?>
-                                            <span class="term data"> <?php echo $row['status']; ?> </span>
+                                            <span style="color: red;"><?php echo $row['status']; ?></span>
                                     <?php
                                         }
                                         else {
                                         ?>
-                                            <span class="pending data"> <?php echo $row['status']; ?> </span>
-                                    <?php
+                                            <span style="color: green;"><?php echo $row['status']; ?></span>
+                                        <?php
                                         }
-                                    ?> 
+                                    ?>
+                                    
                                 </td>
                                 
+
                                 <td>
-                                    <?php echo $row['received_at']; ?>
+                                    <form id="viewForm" action="view_documentC.php" method="POST">
+                                        <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                        <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
+                                        <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
+                                        <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
+                                        <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
+                                        <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                        <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
+                                        <button id="submit" type="submit"><span class = "las la-info"></span></button>
+                                    </form>
                                 </td>
 
                             </tr>

@@ -12,9 +12,8 @@ include_once('../include/database.php');
 $database = new Connection();
 $db = $database->open();
 try{	
-    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.remarks, logs.status, logs.action FROM documents 
-    INNER JOIN logs ON documents.trackingID = logs.trackingID 
-    WHERE documents.trackingID = '".$_POST['trackingID']."' ORDER BY logs.id DESC LIMIT 1;";
+    $sql = "SELECT * FROM documents 
+    WHERE documents.trackingID = '".$_POST['trackingID']."';";
     foreach ($db->query($sql) as $row) {
       }
     }
@@ -106,20 +105,6 @@ catch(PDOException $e){
             header("Location: ../clerk/HomePageC.php?error=incorrect?id");
             die();
         }
-        else {
-          if($row['status'] == "available"){
-            $_SESSION['e_message'] = "The Document is still available, please receive it first if this office is the desired location for the document.!";
-            $_SESSION['e_id'] = $_POST['trackingID'];
-            header("Location: ../clerk/HomePageC.php?error=pending");
-            die();
-          }
-          else if($row['status'] == "terminal"){
-            $_SESSION['e_message'] = "The Document is already tagged as terminal, further process for this document is no longer possible.";
-            $_SESSION['e_id'] = $_POST['trackingID'];
-            header("Location: ../clerk/HomePageC.php?error=terminal");
-            die();
-          }
-        }
         ?>
       </div>
 
@@ -189,23 +174,18 @@ catch(PDOException $e){
                   </th>
 
                   <td class="fs-5 text-center">
-                      <?php
-                          if ($row['status'] == "available"){
-                          ?>
-                              <span class="status avail"> <?php echo $row['status']; ?> </span>
-                      <?php
-                          }
-                          else if ($row['status'] == "terminal") {
-                          ?>
-                              <span class="status term"> <?php echo $row['status']; ?> </span>
-                      <?php
-                          }
-                          else {
-                          ?>
-                              <span class="status pending"> <?php echo $row['status']; ?> </span>
-                      <?php
-                          }
-                      ?> 
+                    <?php
+                        if ($row['status'] == "pending"){
+                        ?>
+                            <span style="color: red;"><?php echo $row['status']; ?></span>
+                    <?php
+                        }
+                        else {
+                        ?>
+                            <span style="color: green;"><?php echo $row['status']; ?></span>
+                        <?php
+                        }
+                    ?>
                   </td>
               </tr>
             </tbody>
@@ -216,7 +196,6 @@ catch(PDOException $e){
         <form action="../clerk_funcs/release_doc_func.php"  id="mainSec" method="POST">
           <br>
           <br>
-          <input type="text" class="form-control" name="status" value="available" hidden>
           <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_POST["userID"];?>" hidden>
 
           <div class="row">
@@ -230,16 +209,18 @@ catch(PDOException $e){
 
             <div class="col md-4">
               <div class="input-group mb-3">
-              <select class="form-select text-dark" name="action" id = "action">
-                <option selected>Please select the action.</option>
+              <select class="form-select text-dark" name="action" id = "action" onchange="checkvalue(this.value)" required>
+                <option value="" selected>Please select the action.</option>
                 <option value="Endorse">Endorse</option>
                 <option value="Approved">Approved</option>
                 <option value="Disapproved">Disapproved</option>
                 <option value="No action">No action</option>
                 <option value="Received">Received</option>
                 <option value="Return to sender">Return to sender</option>
+                <option value="other">Other</option>
               </select> 
               </div>
+              <input type="text" name="oaction" id="checkA" placeholder="Please enter here the action:" style='display:none'>
               <p class="text-center text-muted fw-bold"> Enter the appropriate action that was made in this office.</p>
             </div>
 
@@ -247,36 +228,12 @@ catch(PDOException $e){
 
           <br>
           <br>
-
-          <div class="row">
-            <div class="col md-4">
-              <div class="input-group mb-3">
-                <div class="input-group-text">
-                  <input class="form-check-input mt-0" type="checkbox" value="">
-                </div>
-                <input type="text" placeholder="Notify me when someone process this document." class="form-control" disabled>
-              </div>
-              <p class="text-center text-muted fw-bold">Notification is optional.</p>
-            </div>
-
-            <div class="col md-4">
-              <div class="input-group">
-              <span class="input-group-text">Remarks</span>
-              <textarea class="form-control" name="remarks" aria-label="Remarks" maxlength="100"></textarea>
-              </div>
-              <p class="text-center text-muted fw-bold"> Max Length: <mark>100</mark>characters.</p>
-            </div>
-          </div>
-
-          <br>
-          <br>
-          <br>
           <br>
         </form>
         <div class="d-flex justify-content-center">
             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
               <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#resetModal">Reset</button>
-              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sendModal">Release Document</button>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#sendModal">Save changes</button>
             </div>
           </div>
       </div>
@@ -311,14 +268,36 @@ catch(PDOException $e){
       <div class="modal fade" id="sendModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="sendModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
+          <?php if(isset($_POST['release_mod'])){
+            ?>
             <div class="modal-header">
-              <h5 class="modal-title" id="finalModalLabel">Release Document</h5>
+              <h5 class="modal-title" id="finalModalLabel">Update Status</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+             
+              <div class="modal-body">
+                <p style="text-align: center;color:green;">This will update the status of the document, based in the chosen action. Make the changes??</p>
+              </div>
+              <?php
+            }
+            else{
+              ?>
+              <div class="modal-header">
+                <h5 class="modal-title" id="finalModalLabel">Release Document</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
 
-            <div class="modal-body">
-              <p>Do you wish to release the document from this office?</p>
-            </div>
+              <div class="modal-body">
+                <p style="text-align: center;color:green;">Do you wish to release this document from this office? Other offices will now be able to process this document, if they receive it.
+                  <br>
+                  <br>
+                  Note: The status of the document will be changed based in the chosen action.
+                </p>
+              </div>
+              <?php
+            }
+              ?>
+
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal" for>No</button>
@@ -327,6 +306,21 @@ catch(PDOException $e){
          </div>
        </div>
       </div>
+
+      <script>
+        function checkvalue(val)
+          {
+              if(val==="other")
+              {
+                document.getElementById('checkA').style.display='block';
+                document.getElementById('checkA').style.marginTop='10px';
+              }
+              else{
+                document.getElementById('checkA').style.display='none'; 
+              }
+                
+          }
+        </script>
 
 
 

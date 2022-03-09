@@ -31,31 +31,35 @@ try {
         $trackID_1 = substr($last_tracking_id, $no_chars - 1);
         $trackID_1 = intval($trackID_1); 
         if($trackID_1 < 10 && $trackID_1 >= 1){
-            $trackID_1 = date("Y")."-000".$trackID_1 + 1;
+            $trackID_1 = $trackID_1 + 1;
+            $trackID_1 = date("Y")."-000".$trackID_1;
             $_SESSION["trackID"] = $trackID_1;             
         }
 
         //above 10 docs
         $trackID_2 = substr($last_tracking_id, $no_chars - 2);
         $trackID_2 = intval($trackID_2); 
-        if($trackID_2 >= 10){
-            $trackID_2 = date("Y")."-000".$trackID_2 + 1;
+        if($trackID_2 >= 10 && $trackID_2 < 100){
+            $trackID_2 = $trackID_2 + 1;
+            $trackID_2 = date("Y")."-00".$trackID_2;
             $_SESSION["trackID"] = $trackID_2;
         }
 
         //above 100 docs
         $trackID_3 = substr($last_tracking_id, $no_chars - 3);
         $trackID_3 = intval($trackID_3); 
-        if($trackID_3 >= 100){
-            $trackID_3 = date("Y")."-000".$trackID_3 + 1;
+        if($trackID_3 >= 100 && $trackID_3 < 1000){
+            $trackID_3 = $trackID_3 + 1;
+            $trackID_3 = date("Y")."-0".$trackID_3;
             $_SESSION["trackID"] = $trackID_3;
         }
 
         //above 1000 docs
         $trackID_4 = substr($last_tracking_id, $no_chars - 4);
         $trackID_4 = intval($trackID_4); 
-        if($trackID_4 >= 1000){
-            $trackID_4 = date("Y")."-000".$trackID_4 + 1;
+        if($trackID_4 >= 1000 && $trackID_4 < 10000){
+            $trackID_4 = $trackID_4 + 1;
+            $trackID_4 = date("Y").$trackID_4;
             $_SESSION["trackID"] = $trackID_4;
         }
 
@@ -147,10 +151,7 @@ catch(PDOException $e) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
+               
                
             </ul>
         </div>
@@ -317,6 +318,25 @@ catch(PDOException $e) {
             }
         ?>
 
+         <?php 
+            if(isset($_SESSION['d_message'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['d_message']." "."The final tracking ID is: <b>".$_SESSION['no_final_trackID']."</b>. Please do attach the correct tracking ID on the document.";?> Note: Please remember that the document is still pending to be released.</h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['d_message']);
+            }
+        ?>
+
         <?php 
             if(isset($_SESSION['message'])){
                 ?>
@@ -430,65 +450,44 @@ catch(PDOException $e) {
                     </div>
               </div>
               </div>
+
+              <br>
+              <br>
             <div class="tem-grid">
-                <div class="row">
-                    <div class="col">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
                         <form action="../admin_funcs/redirect_track.php" method="POST">
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                             <input type="text" class="form-control border border-dark" name="trackingID" placeholder="Tracking ID" required>
                             <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Track Document</button>
                             </div>
                         </form>                      
                     </div>
-
+                </div>
+         
+                            
+                <div class="row d-flex justify-content-center">
                     <div class="col">
                        <form action="add_docs.php" method="POST">
-                            <div class="input-group mb-3">
+                            <div class="input-group">
                                 <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
                                 <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
                                 <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
                             </div>
                        </form>
                     </div>
-                </div>
-
-                            
-                <div class="row d-flex justify-content-center">
-                    <div class="col-8">
-                        <form action="release_document.php" method="POST">
-                        <div class="input-group mb-3">
-                            <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                            <input type="text" name="trackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
-                            <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Release Document</button>
-                        </div>
-                        </form> 
-
-
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col">
-                        <form action="../admin_funcs/view_receive.php" method="POST">
-                            <div class="input-group mb-3">
-                            <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                            <input type="text" name="rec_trackingID" id="rec_trackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
-                            <button class="btn btn-outline-success fw-bold" type="submit" id="recBut">Receive Document</button>
-                            </div>
-                        </form>                      
-                    </div>
-
-                    <div class="col">
-                        <form action="../admin_funcs/view_terminal.php" method="POST">
-                            <div class="input-group mb-3">
-                            <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                            <input type="text" name="termTrackingID" id="termTrackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
-                            <button class="btn btn-outline-success fw-bold" type="submit" id="termBut">Tag as Terminal</button>
-                            </div>
-                        </form>    
-                                    
+                            <form action="../admin_funcs/view_receive.php" method="POST">
+                                <div class="input-group">
+                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                <input type="text" name="rec_trackingID" id="rec_trackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
+                                <button class="btn btn-outline-success fw-bold" type="submit" id="recBut">Receive Document</button>
+                                </div>
+                            </form>                      
                     </div>
                 </div>
+
+
             </div>
         </div>
 

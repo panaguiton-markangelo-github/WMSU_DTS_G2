@@ -69,10 +69,7 @@ if(!isset($_SESSION["c_username"])) {
                     <a href="../clerk/released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="../clerk/terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
+            
               
             </ul>
         </div>
@@ -164,12 +161,11 @@ if(!isset($_SESSION["c_username"])) {
                                     
                                     <th >Originating Office</th>
                                     <th >Current Office</th>
-                                    <th >Action</th> 
                                     <th >Status</th>                                 
-                                    <th >created at</th>
-                                    <th >accepted at</th>
-                                    <th >released at</th>
-                                    <th >terminal at</th>
+                                    <th >Added at</th>
+                                    <th >Received at</th>
+                                    <th >Released at</th>
+    
                                     <th >Remarks</th>
                                 </tr>
                             </thead>

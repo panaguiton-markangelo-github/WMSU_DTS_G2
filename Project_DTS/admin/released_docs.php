@@ -47,7 +47,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="clerk_users.php"><span class="las la-users"></span>
+                    <a href="clerk_users.php"><span class="las la-search-location"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
@@ -70,10 +70,7 @@ if(!isset($_SESSION["a_username"])) {
                     <a class="active"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
+             
               
             </ul>
         </div>
@@ -93,7 +90,7 @@ if(!isset($_SESSION["a_username"])) {
                     <img src="../assets/img/wmsu_logo.png" alt="user">
                 </div>   
                 <div class="menu">
-                    <h3><?php echo $_SESSION["a_username"]; ?> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
+                    <h3><?php echo $_SESSION["a_username"]; ?>  (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
                     <ul>
                         <?php
                             //include our connection
@@ -118,14 +115,15 @@ if(!isset($_SESSION["a_username"])) {
                             //close connection
                             $database->close();
                         ?>
-                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>
+
+                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>                   
                         <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                               
                 </div>
             </div>
         </header>
-
+        
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
 
         <main>
@@ -177,10 +175,6 @@ if(!isset($_SESSION["a_username"])) {
                                     Status
                                 </th>
 
-                                <th>
-                                    Released At
-                                </th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -191,9 +185,9 @@ if(!isset($_SESSION["a_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.remarks, documents.status, logs.released_at 
+                                    $sql = "SELECT DISTINCT documents.*
                                     FROM documents 
-                                    INNER JOIN logs ON logs.trackingID = documents.trackingID INNER JOIN users ON users.id = logs.user_id 
+                                    INNER JOIN logs ON logs.trackingID = documents.trackingID
                                     WHERE logs.released_at != 'none' AND logs.office = '".$_SESSION["a_officeName"]."' ;";
 
                                     $no=0;
@@ -226,27 +220,19 @@ if(!isset($_SESSION["a_username"])) {
                                 </td>
 
                                 <td>
+                                <?php
+                                    if ($row['status'] == "pending"){
+                                    ?>
+                                        <span style="color: red;"><?php echo $row['status']; ?></span>
+                                <?php
+                                    }
+                                    else {
+                                    ?>
+                                        <span style="color: green;"><?php echo $row['status']; ?></span>
                                     <?php
-                                        if ($row['status'] == "available"){
-                                        ?>
-                                            <span class="avail data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else if ($row['status'] == "terminal") {
-                                        ?>
-                                            <span class="term data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else {
-                                        ?>
-                                            <span class="pending data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                    ?> 
-                                </td>
-
-                                <td>
-                                    <?php echo $row['released_at']?>
+                                    }
+                                ?>
+                                  
                                 </td>
                                 
 
@@ -293,7 +279,7 @@ if(!isset($_SESSION["a_username"])) {
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
-    
+
     <script>
         function menuToggle(){
             const toggleMenu = document.querySelector('.menu');

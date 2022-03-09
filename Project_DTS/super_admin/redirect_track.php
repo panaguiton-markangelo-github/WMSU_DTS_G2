@@ -58,6 +58,10 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>All Documents</span></a>
                 </li>
                 <li>
+                    <a href="offices.php"><span class="las la-building"></span>
+                    <span>Offices</span></a>
+                </li>
+                <li>
                     <a href="clerk_users.php"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
@@ -160,12 +164,12 @@ if(!isset($_SESSION["sa_username"])) {
                                     
                                     <th >Originating Office</th>
                                     <th >Current Office</th>
-                                    <th >Action</th>   
+                                   
                                     <th >Status</th>                              
-                                    <th >created at</th>
-                                    <th >accepted at</th>
-                                    <th >released at</th>
-                                    <th >terminal at</th>
+                                    <th >Added at</th>
+                                    <th >Received at</th>
+                                    <th >Released at</th>
+                                
                                     <th >Remarks</th>
                                 </tr>
                             </thead>

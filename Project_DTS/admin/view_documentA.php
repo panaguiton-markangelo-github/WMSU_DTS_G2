@@ -115,17 +115,6 @@ if(!isset($_SESSION["a_username"])) {
                     </tr>
 
                     <tr>
-                        <th class="fs-5 text-center">
-                            Semester
-                        </th>
-                        
-                        <td class="fs-5 text-center">
-                            <?php echo $_POST['semester'];?>
-                        </td>
-        
-                    </tr>
-
-                    <tr>
 
                         <th class="fs-5 text-center">
                             Status
@@ -133,20 +122,15 @@ if(!isset($_SESSION["a_username"])) {
                         
                         <td class="fs-5 text-center">
                         <?php
-                            if ($_POST['status'] == "available"){
+                            if ($_POST['status'] == "pending"){
                             ?>
-                                <span class="status avail"><?php echo $_POST['status']; ?></span>
+                                <span style="color: red;"><?php echo $_POST['status']; ?></span>
                         <?php
                             }
-                            else if ($_POST['status'] == "terminal") {
+                            else {
                             ?>
-                                <span class="status term"><?php echo $_POST['status']; ?></span>
-                        <?php
-                            }
-                            else if ($_POST['status'] == "progress") {
-                            ?>
-                                <span class="status prog"> <?php echo $_POST['status']; ?> </span>
-                        <?php
+                                <span style="color: green;"><?php echo $_POST['status']; ?></span>
+                            <?php
                             }
                         ?>
                         </td>
@@ -154,6 +138,12 @@ if(!isset($_SESSION["a_username"])) {
                     </tr>
                 </tbody>
             </table>
+
+            <form action="release_document.php" method="POST">
+                <input type="text" name="trackingID" value="<?php echo $_POST['track_ID'];?>" hidden>
+                <input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" hidden>
+                <button type="submit" name="release_mod" class="btn btn-success ">Update Status</button>
+            </form>
 
             <br>
             <br>

@@ -40,26 +40,29 @@ catch(PDOException $e){
 	if(isset($_POST['submit'])){
 		$database = new Connection();
 		$db = $database->open();
-        $release_mes = "released from the office.";
+        $status = $_POST['action'];
+        if(!empty($_POST['oaction'])){
+            $status = $_POST['oaction'];
+        }
+
+        $release_mes = "Released from the office and updated the status.";
         $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 			
 		try{
 			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare ("UPDATE documents SET remarks = :remarks, status = :status WHERE trackingID = :trackingID;");
+			$sql = $db->prepare ("UPDATE documents SET status = :status WHERE trackingID = :trackingID;");
             //bind 
 			$sql->bindParam(':trackingID', $_POST['trackingID']);
-			$sql->bindParam(':remarks', $_POST['remarks']);
-			$sql->bindParam(':status', $_POST['status']);
+			$sql->bindParam(':status', $status);
 
             $_SESSION['trackingID'] = $_POST['trackingID'];
 
-            $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, released_at, remarks, action, status, origin_office) VALUES(:trackingID, :user_id, :office, :released_at, :remarks, :action, :status, :origin_office);");
+            $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, released_at, remarks, status, origin_office) VALUES(:trackingID, :user_id, :office, :released_at, :remarks, :status, :origin_office);");
             $sql_logs->bindParam(':trackingID', $_POST['trackingID']);
             $sql_logs->bindParam(':user_id', $_POST['userID']);
             $sql_logs->bindParam(':office', $row['officeName']);
             $sql_logs->bindParam(':released_at', $date->format('M/d/Y, H:i:s'));
-            $sql_logs->bindParam(':action', $_POST['action']);
-			$sql_logs->bindParam(':status', $_POST['status']);
+			$sql_logs->bindParam(':status', $status);
             $sql_logs->bindParam(':remarks', $release_mes);
 			$sql_logs->bindParam(':origin_office', $row1['origin_office']);
 
@@ -80,6 +83,6 @@ catch(PDOException $e){
 		$_SESSION['message_release'] = 'Fill up add form first';
 	}
 
-	header('location: ../admin/HomePageAdmin.php?successful=release?doc');
+	header('location: ../admin/homePageAdmin.php?successful=release?doc');
 	
 ?>

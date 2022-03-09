@@ -34,7 +34,8 @@
 					<span class="login100-form-title p-b-32">
 						<img src="assets/img/wmsu_logo.png" width="55px" height="55px">
 						WMSU|DTS Login
-					</span>
+						<img src="assets/img/login_logo_un1.svg" width="55px" height="55px">
+					</span> 
 
 					<span class="txt1 p-b-11">
 						Email
@@ -231,8 +232,13 @@
 	}
 	
 	//then finish up things with notification module!
-	//search for a plugin.
 	//bye for now
+	//later again
+	//tomorrow xD, tired today.....
+	//make all the changes first then go with the notification.!
+	//done at the clerk user, admin user next... tomorrow...
+	
+	
 		
 	?>
 	  <script>
@@ -242,7 +248,7 @@
 		  })
 	  </script>
 
-      <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+     <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/popper.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>

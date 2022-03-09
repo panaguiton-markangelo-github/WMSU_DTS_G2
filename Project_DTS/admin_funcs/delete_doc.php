@@ -18,7 +18,7 @@
 	    
 		}
 		catch(PDOException $e){
-			$_SESSION['message'] = $e->getMessage();
+			$_SESSION['e_message'] = $e->getMessage();
 		}
 
 		//close connection
@@ -26,9 +26,9 @@
 	}
 
 	else{
-		$_SESSION['message'] = 'Fill up add form first';
+		$_SESSION['e_message'] = 'Fill up add form first';
 	}
 
-	header('location: ../super_admin/all_docs.php?succesful=deleted?doc');
+	header('location: ../admin/office_docs.php?succesful=deleted');
 	
 ?>

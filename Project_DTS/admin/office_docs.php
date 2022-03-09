@@ -17,6 +17,7 @@ if(!isset($_SESSION["a_username"])) {
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/loading.css">
+    <script src="../assets/js/sweet_alert.js"></script>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body>
@@ -47,7 +48,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="clerk_users.php"><span class="las la-users"></span>
+                    <a href="clerk_users.php"><span class="las la-search-location"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
@@ -70,11 +71,7 @@ if(!isset($_SESSION["a_username"])) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-                <li>
-                    <a href="terminal_docs.php"><span class="las la-check-circle"></span>
-                    <span>Tagged As Terminal</span></a>
-                </li> 
-               
+                         
             </ul>
         </div>
     </div>
@@ -127,25 +124,44 @@ if(!isset($_SESSION["a_username"])) {
         </header>
 
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
+  
 
         <main>
         <?php 
             if(isset($_SESSION['message'])){
                 ?>
-                <div class="container">
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <button style="margin-right:10px;" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                        <div style="margin-left:10px;">
-                            <?php 
-                                echo $_SESSION['message'];
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
                 <?php
 
                 unset($_SESSION['message']);
+            }
+        ?>
+
+        <?php 
+            if(isset($_SESSION['edit_message'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['edit_message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['edit_message']);
             }
         ?>
            <div class="container">
@@ -178,14 +194,19 @@ if(!isset($_SESSION["a_username"])) {
                                 </th>
 
                                 <th>
-                                    Semester
+                                    Year
                                 </th>
 
                                 <th>
-                                    Year
+                                    
                                 </th>
-                              
+
                                 <th>
+                                    
+                                </th>
+
+                                <th>
+
                                     View
                                 </th>
 
@@ -199,7 +220,7 @@ if(!isset($_SESSION["a_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.semester
+                                    $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
                                     WHERE users.officeName = '".$_SESSION['a_officeName']."';";
@@ -233,31 +254,31 @@ if(!isset($_SESSION["a_username"])) {
                                 </td>
 
                                 <td>
-                                    <?php
-                                        if ($row['status'] == "available"){
+                                    <?php if( $row['status'] == "pending") {
                                         ?>
-                                            <span class="avail data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else if ($row['status'] == "terminal") {
+                                        <p style="color: red;"> <?php echo $row['status'];?> </p>
+                                        <?php
+                                    } else{
                                         ?>
-                                            <span class="term data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                        else {
-                                        ?>
-                                            <span class="pending data"> <?php echo $row['status']; ?> </span>
-                                    <?php
-                                        }
-                                    ?> 
+                                         <p style="color: green;"> <?php echo $row['status'];?> </p>
+                                        <?php
+                                    }
+                                    ?>
+                                  
+                                   
+                                   
                                 </td>
                                 
                                 <td>
-                                    <?php echo $row['semester']; ?>
+                                    <?php echo $row['schoolYear']; ?>
                                 </td>
 
                                 <td>
-                                    <?php echo $row['schoolYear']; ?>
+                                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                                 </td>
 
                                 <td>
@@ -269,10 +290,12 @@ if(!isset($_SESSION["a_username"])) {
                                         <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
                                         <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
                                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                        <input type="text" name="semester" id="semester" value= "<?php echo $row['semester'];?>" hidden>
                                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                     </form>
                                 </td>
+
+                                <?php include('../admin_funcs/view_edit_doc.php');?>
+                                <?php include('../admin_funcs/view_delete_doc.php');?>
 
                             </tr>
                             
@@ -293,6 +316,7 @@ if(!isset($_SESSION["a_username"])) {
            </div>
         </main>
     </div>
+
 
     <?php include('../validation/view_logout.php'); ?>
 
