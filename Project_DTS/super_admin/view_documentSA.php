@@ -145,6 +145,45 @@ if(!isset($_SESSION["sa_username"])) {
             <br>
             <br>
           </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id = "table">
+                <thead>
+                    <tr>
+                        <th class="text-center fs-4" colspan="2">FILE OF <?php echo $_POST['track_ID'];?></th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    <tr>
+                        <th class="fs-5 text-center">
+                            File
+                        </th>
+        
+                        <?php if($_POST['file'] == 'none'){
+                            ?>
+                            <td class="fs-5 text-center">
+                               <span>No File</span>
+                            </td>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                                <td class="fs-5 text-center">
+                                <a href="../uploads/<?php echo $_POST['file'];?>" target="_blank"><?php echo $_POST['file'];?></a>
+                            </td>
+                            <?php
+                        }
+                        ?>
+                    </tr>
+
+                </tbody>
+            </table>  
+            <br>
+            <br>
+        </div>
+
       </div>
 
       <br>

@@ -17,6 +17,17 @@
 			$type = $_POST['otype'];
 		}
 
+		$file = $_FILES['file'];
+		$fileName = $_FILES['file']['name'];
+		$fileTmpName = $_FILES['file']['tmp_name'];
+		$fileSize = $_FILES['file']['size'];
+		$fileError = $_FILES['file']['error'];
+		$fileType = $_FILES['file']['type'];
+
+		$fileExt = explode('.', $fileName);
+		$actualFileExt = strtolower(end($fileExt));
+		$allowed = array('pdf');
+
 		try{
 
 			if($_POST['type'] == "Memorandum") {
@@ -86,43 +97,119 @@
 				$_POST['trackingID'] = "O".$_SESSION["trackID"];
 			}
 
-			$_SESSION['orig_office'] = $_POST['office'];
-			$_SESSION['no_final_trackID'] = $_POST['trackingID'];
-			$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
-			
-			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :user_id, :yearSemID)");
-			
-			//bind
-			$sql->bindParam(':trackingID', $_POST['trackingID']);
-            $sql->bindParam(':title', $_POST['title']);
-			$sql->bindParam(':type', $type);
-            $sql->bindParam(':reason', $reason);
-			$sql->bindParam(':remarks', $_POST['remarks']);
-			$sql->bindParam(':status', $status);
-			$sql->bindParam(':user_id', $_POST['user_id']);
-			$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
+			if($fileError != 4){
+				if(in_array($actualFileExt, $allowed)){
+					if($fileError === 0){
+						if($fileSize < 50000){
+							$fileNameNew = uniqid('', true).".".$actualFileExt;
+							$fileDestination = '../uploads/'.$fileNameNew;
+							move_uploaded_file($fileTmpName, $fileDestination);
+	
+							$_SESSION['orig_office'] = $_POST['office'];
+							$_SESSION['no_final_trackID'] = $_POST['trackingID'];
+							$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
+							
+							//make use of prepared statement to prevent sql injection
+							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :user_id, :yearSemID);");
+							
+							//bind
+							$sql->bindParam(':trackingID', $_POST['trackingID']);
+							$sql->bindParam(':title', $_POST['title']);
+							$sql->bindParam(':type', $type);
+							$sql->bindParam(':reason', $reason);
+							$sql->bindParam(':remarks', $_POST['remarks']);
+							$sql->bindParam(':status', $status);
+							$sql->bindParam(':file', $fileNameNew);
+							$sql->bindParam(':user_id', $_POST['user_id']);
+							$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
+				
+							//if-else statement in executing our prepared statement
+							$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
+	
+							$remarks_log = "Released and Added the document in the office";
+							$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+							
+							//bind
+							$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
+							$sql_logs->bindParam(':remarks', $remarks_log);
+							$sql_logs->bindParam(':status', $status);
+							$sql_logs->bindParam(':user_id', $_POST['user_id']);
+							$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
+							$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
+							$sql_logs->bindParam(':office', $_POST['office']);
+							$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
+				
+							$sql_logs->execute();
+	
+							//close connection
+							$database->close();
+							header('location: ../admin/homePageAdmin.php?successful=added?doc');
+							exit();
+		
+						}
+						else{
+							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 5mb.";
+							header('location: ../admin/homePageAdmin.php?failed_size');
+							exit();
+						}
+		
+					}
+					else{
+						$_SESSION['e_message'] = "There was an error uploading the file, try again.";
+						header('location: ../admin/homePageAdmin.php?failed');
+						exit();
+					}
+		
+				}
+		
+				else {
+					$_SESSION['e_message'] = "you can only upload pdf files.";
+					header('location: ../admin/homePageAdmin.php?failed_type');
+					exit();
+				}
+			}
+			elseif($fileError == 4){
+				$_SESSION['orig_office'] = $_POST['office'];
+				$_SESSION['no_final_trackID'] = $_POST['trackingID'];
+				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
+				
+				//make use of prepared statement to prevent sql injection
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :user_id, :yearSemID);");
+				
+				//bind
+				$sql->bindParam(':trackingID', $_POST['trackingID']);
+				$sql->bindParam(':title', $_POST['title']);
+				$sql->bindParam(':type', $type);
+				$sql->bindParam(':reason', $reason);
+				$sql->bindParam(':remarks', $_POST['remarks']);
+				$sql->bindParam(':status', $status);
+				$sql->bindParam(':user_id', $_POST['user_id']);
+				$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 
+				//if-else statement in executing our prepared statement
+				$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
 
-			$remarks_log = "Released and Added the document in the office";
-			$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
-			
-			//bind
-			$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
-			$sql_logs->bindParam(':remarks', $remarks_log);
-			$sql_logs->bindParam(':status', $status);
-			$sql_logs->bindParam(':user_id', $_POST['user_id']);
-			$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
-			$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
-			$sql_logs->bindParam(':office', $_POST['office']);
-			$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
+				$remarks_log = "Released and Added the document in the office";
+				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+				
+				//bind
+				$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
+				$sql_logs->bindParam(':remarks', $remarks_log);
+				$sql_logs->bindParam(':status', $status);
+				$sql_logs->bindParam(':user_id', $_POST['user_id']);
+				$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':office', $_POST['office']);
+				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 
-			$sql_logs->execute();
+				$sql_logs->execute();
 
-			//if-else statement in executing our prepared statement
-			$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
-			
-	    
+				//close connection
+				$database->close();
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
+				exit();
+			}
+
 		}
 		catch(PDOException $e){
 			$_SESSION['message'] = $e->getMessage();
@@ -130,7 +217,6 @@
 
 		//close connection
 		$database->close();
-		header('location: ../admin/homePageAdmin.php?successful=added?doc');
 	}
 
 	elseif(isset($_POST['draft'])){
@@ -148,6 +234,17 @@
 			$type = $_POST['otype'];
 		}
 
+		$file = $_FILES['file'];
+		$fileName = $_FILES['file']['name'];
+		$fileTmpName = $_FILES['file']['tmp_name'];
+		$fileSize = $_FILES['file']['size'];
+		$fileError = $_FILES['file']['error'];
+		$fileType = $_FILES['file']['type'];
+
+		$fileExt = explode('.', $fileName);
+		$actualFileExt = strtolower(end($fileExt));
+		$allowed = array('pdf');
+
 		try{
 
 			if($_POST['type'] == "Memorandum") {
@@ -217,54 +314,136 @@
 				$_POST['trackingID'] = "O".$_SESSION["trackID"];
 			}
 
-			$_SESSION['orig_office'] = $_POST['office'];
-			$_SESSION['no_final_trackID'] = $_POST['trackingID'];
-			$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
-			
-			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :user_id, :yearSemID)");
-			
-			//bind
-			$sql->bindParam(':trackingID', $_POST['trackingID']);
-            $sql->bindParam(':title', $_POST['title']);
-			$sql->bindParam(':type', $type);
-            $sql->bindParam(':reason', $reason);
-			$sql->bindParam(':remarks', $_POST['remarks']);
-			$sql->bindParam(':status', $status);
-			$sql->bindParam(':user_id', $_POST['user_id']);
-			$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
+			if($fileError != 4){
+				if(in_array($actualFileExt, $allowed)){
+					if($fileError === 0){
+						if($fileSize < 50000){
+							$fileNameNew = uniqid('', true).".".$actualFileExt;
+							$fileDestination = '../uploads/'.$fileNameNew;
+							move_uploaded_file($fileTmpName, $fileDestination);
+	
+							$_SESSION['orig_office'] = $_POST['office'];
+							$_SESSION['no_final_trackID'] = $_POST['trackingID'];
+							$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
+							
+							//make use of prepared statement to prevent sql injection
+							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :user_id, :yearSemID);");
+							
+							//bind
+							$sql->bindParam(':trackingID', $_POST['trackingID']);
+							$sql->bindParam(':title', $_POST['title']);
+							$sql->bindParam(':type', $type);
+							$sql->bindParam(':reason', $reason);
+							$sql->bindParam(':remarks', $_POST['remarks']);
+							$sql->bindParam(':status', $status);
+							$sql->bindParam(':file', $fileNameNew);
+							$sql->bindParam(':user_id', $_POST['user_id']);
+							$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
+				
+							//if-else statement in executing our prepared statement
+							$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
+	
+							$remarks_log = "Released and Added the document in the office";
+							$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+							
+							//bind
+							$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
+							$sql_logs->bindParam(':remarks', $remarks_log);
+							$sql_logs->bindParam(':status', $status);
+							$sql_logs->bindParam(':user_id', $_POST['user_id']);
+							$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
+							$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
+							$sql_logs->bindParam(':office', $_POST['office']);
+							$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
+				
+							$sql_logs->execute();
+	
+							//close connection
+							$database->close();
+							header('location: ../admin/homePageAdmin.php?successful=added?doc');
+							exit();
+		
+						}
+						else{
+							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 5mb.";
+							header('location: ../admin/homePageAdmin.php?failed_size');
+							exit();
+						}
+		
+					}
+					else{
+						$_SESSION['e_message'] = "There was an error uploading the file, try again.";
+						header('location: ../admin/homePageAdmin.php?failed');
+						exit();
+					}
+		
+				}
+		
+				else {
+					$_SESSION['e_message'] = "you can only upload pdf files.";
+					header('location: ../admin/homePageAdmin.php?failed_type');
+					exit();
+				}
+			}
+			elseif($fileError == 4){
+				$_SESSION['orig_office'] = $_POST['office'];
+				$_SESSION['no_final_trackID'] = $_POST['trackingID'];
+				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
+				
+				//make use of prepared statement to prevent sql injection
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :user_id, :yearSemID);");
+				
+				//bind
+				$sql->bindParam(':trackingID', $_POST['trackingID']);
+				$sql->bindParam(':title', $_POST['title']);
+				$sql->bindParam(':type', $type);
+				$sql->bindParam(':reason', $reason);
+				$sql->bindParam(':remarks', $_POST['remarks']);
+				$sql->bindParam(':status', $status);
+				$sql->bindParam(':user_id', $_POST['user_id']);
+				$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 
+				//if-else statement in executing our prepared statement
+				$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
 
-			$remarks_log = "Added the document in the office";
-			$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :office, :origin_office)");
-			
-			//bind
-			$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
-			$sql_logs->bindParam(':remarks', $remarks_log);
-			$sql_logs->bindParam(':status', $status);
-			$sql_logs->bindParam(':user_id', $_POST['user_id']);
-			$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
-			$sql_logs->bindParam(':office', $_POST['office']);
-			$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
+				$remarks_log = "Released and Added the document in the office";
+				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+				
+				//bind
+				$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
+				$sql_logs->bindParam(':remarks', $remarks_log);
+				$sql_logs->bindParam(':status', $status);
+				$sql_logs->bindParam(':user_id', $_POST['user_id']);
+				$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':office', $_POST['office']);
+				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 
-			$sql_logs->execute();
+				$sql_logs->execute();
 
-			//if-else statement in executing our prepared statement
-			$_SESSION['d_message'] = ( $sql->execute()) ? 'Document was saved as draft successfully' : 'Something went wrong. Cannot add document.';
-			
-	    
+				//close connection
+				$database->close();
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
+				exit();
+			}
+			 
 		}
 		catch(PDOException $e){
 			$_SESSION['e_message'] = $e->getMessage();
+			//close connection
+			$database->close();
+			header('location: ../admin/homePageAdmin.php?failed');
+			exit();
 		}
 
-		//close connection
-		$database->close();
-		header('location: ../admin/homePageAdmin.php?successful=draft?doc');
 	}
 
 	else{
 		$_SESSION['e_message'] = 'Fill up add form first';
+		//close connection
+		$database->close();
+		header('location: ../admin/homePageAdmin.php?failed');
+		exit();
 	}
-
+	
 ?>

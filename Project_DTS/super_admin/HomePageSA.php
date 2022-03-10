@@ -432,7 +432,7 @@ catch(PDOException $e) {
                                         $db = $database->open();
                                         try{	
                                             $sql = 'SELECT yearsemester.schoolYear, yearsemester.stat, documents.trackingID, 
-                                            documents.title, documents.type, documents.reason, documents.remarks, documents.status
+                                            documents.title, documents.type, documents.reason, documents.remarks, documents.status, documents.file
                                             FROM yearsemester INNER JOIN documents ON yearsemester.id = documents.yearSemID LIMIT 5;';
                                             $no = 0;
                                             foreach ($db->query($sql) as $row) {
@@ -470,6 +470,8 @@ catch(PDOException $e) {
                                                     <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
                                                     <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
                                                     <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                                    <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
+
                                                     <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                                                     
                                                     <button id="submit" type="submit"><span class = "las la-info"></span></button>
@@ -498,6 +500,66 @@ catch(PDOException $e) {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="office">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Offices</h3>
+                            <a href="offices.php">See all <span class="las la-arrow-right"></span> </a>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive-cus">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td> Office Name </td>
+                                            <td> Description </td>
+                                          
+                                        </tr>
+                                    </thead>
+    
+                                    <tbody>
+                                    <?php
+                                        //include our connection
+                                        include_once('../include/database.php');
+                                        
+
+                                        $database = new Connection();
+                                        $db = $database->open();
+                                        try{	
+                                            $sql = 'SELECT * FROM office LIMIT 5;';
+                                            $no = 0;
+                                            foreach ($db->query($sql) as $row) {
+                                                $no++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $row['officeName']; ?></td>
+                                            <td><?php echo $row['description'];?></td>
+                                            
+                                        </tr>
+
+                                    <?php 
+                                            }
+                                        }
+                                        catch(PDOException $e){
+                                            echo "There is some problem in connection: " . $e->getMessage();
+                                        }
+
+                                        //close connection
+                                        $database->close();
+                                    ?>
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+
                 </div>
 
                 <div class="users">

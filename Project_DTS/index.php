@@ -231,15 +231,8 @@
 		}
 	}
 	
-	//then finish up things with notification module!
-	//bye for now
-	//later again
-	//tomorrow xD, tired today.....
-	//make all the changes first then go with the notification.!
-	//done at the clerk user, admin user next... tomorrow...
-	
-	
-		
+	//done all major changes.
+	//last module which is the notification.	
 	?>
 	  <script>
 		  var loader =  document.getElementById("preloader");

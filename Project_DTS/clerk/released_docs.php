@@ -78,7 +78,7 @@ if(!isset($_SESSION["c_username"])) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Documents
+                Released Documents
             </h2>
 
             <div class="user-wrapper">

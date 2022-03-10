@@ -80,7 +80,7 @@ catch(PDOException $e) {
       <br>
 
       <div class="container">
-        <form action="../admin_funcs/add_doc.php" id="mainForm" method="POST">
+        <form action="../admin_funcs/add_doc.php" id="mainForm" method="POST" enctype="multipart/form-data">
 
           <div class="row">
             <div class="col md-4">
@@ -161,7 +161,7 @@ catch(PDOException $e) {
           <div class="row">
             <div class="col md-4">
               <input type="file" name="file">
-              <p class="text-center text-muted fw-bold"> File upload(optional and only pdf is allowed)</p>
+              <p class="text-center text-muted fw-bold"> File upload(optional and only pdf is allowed with maximum size of 50mb)</p>
             </div>
             <div class="col md-4">
               <div class="input-group">
