@@ -219,10 +219,9 @@ header label span {
     font-size: 16px;
 }
 
-.user-wrapper .menu li span {
+.user-wrapper .menu li i {
     color: var(--main-color);
     font-size: 30px;
-    font-weight: 400;
     margin-right: 2px;
     opacity: 0.5;
     transition: 0.5s;
@@ -235,11 +234,10 @@ header label span {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    
 }
 
 
-.user-wrapper .menu ul li:hover span {
+.user-wrapper .menu ul li:hover i {
     opacity: 1;
 }
 .user-wrapper .menu ul li a{
