@@ -1,3 +1,15 @@
+<?php
+include ("../include/alt_db.php");
+try {
+
+  $query = "SELECT * FROM office WHERE officeName = '".$_SESSION['a_officeName']."'";
+  $result = mysqli_query($data, $query);
+  $row = mysqli_fetch_array($result);
+}
+catch(PDOException $e) {
+  $_SESSION['message_fail'] = $e->getMessage();
+}
+?>
 <div class="modal fade" id="add_clerk" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -9,7 +21,7 @@
         <div class="modal-body">
             <label for="office">Office:</label>
                 <select class="form-select text-dark" name="officeName" id="officeName" readonly>
-                  <option selected value="<?php echo $_SESSION['a_officeName']?>"><?php echo $_SESSION['a_officeName']?></option>
+                  <option selected value="<?php echo $_SESSION['a_officeName']?>"><?php echo $_SESSION['a_officeName']." - ".$row['description']?></option>
                 </select>
 
                 <br>
