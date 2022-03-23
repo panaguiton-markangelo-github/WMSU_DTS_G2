@@ -6,7 +6,8 @@
         $db = $database->open();
 
         try{	
-            $sql = "SELECT * FROM logs WHERE trackingID = '".$trackID."';";
+            $sql = "SELECT logs.*, users.name FROM logs INNER JOIN users ON logs.user_id = users.id
+             WHERE trackingID = '".$trackID."';";
             $no = 0;
             foreach ($db->query($sql) as $row) {
                 $no++;
@@ -18,6 +19,10 @@
 
         <td>
             <?php echo $row['trackingID']; ?>
+        </td>
+
+        <td>
+            <?php echo $row['name']; ?>
         </td>
 
         <td>

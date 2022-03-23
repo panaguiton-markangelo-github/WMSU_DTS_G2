@@ -43,13 +43,13 @@
                     $_SESSION['invalid_match'] = "Email or Password does not match our records!";
                     header('Location: index.php?invalid=match');
                     exit();
-                }
+                } 
 
                 else {
                     $db_pass = $row['password'];
                     $curUser = $row['id'];
 
-                    if($db_pass == "superadmin"){
+                    if($db_pass == "superadmin" || $db_pass == "test"){
                         header("location: new_pass_sa/view_create_newp.php?id=".$curUser);
                         exit();
                     }                

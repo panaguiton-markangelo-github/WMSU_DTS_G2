@@ -103,7 +103,7 @@ if(!isset($_SESSION["a_username"])) {
                     
                                 foreach ($db->query($sql) as $row) {
                                 ?>
-                                    <li> <span class="las la-user-tie"></span> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
+                                    <li> <i class="las la-user-tie"></i> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
                                 <?php
                                 
                                 }
@@ -116,8 +116,8 @@ if(!isset($_SESSION["a_username"])) {
                             $database->close();
                         ?>
 
-                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>
-                        <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
+                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
+                        <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                               
                 </div>
@@ -247,6 +247,7 @@ if(!isset($_SESSION["a_username"])) {
                                         <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
                                         <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
                                         <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                        <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
                                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                     </form>

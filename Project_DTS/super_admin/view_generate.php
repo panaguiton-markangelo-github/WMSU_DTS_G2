@@ -31,7 +31,7 @@ if(!isset($_SESSION["sa_username"]))
       <h1>Generate Report</h1>
       <select name="officeName" id="officeName" required>
         <option value="" selected>Please Select Office.</option>
-        <option value="ICS">Institute of Computer Studies</option>
+        <option value="CCS">College of Computer Studies</option>
         <option value="COG">College of Agriculture</option>
         <option value="COA">College of Architecture</option>
         <option value="CAIS">College of Asian and Islamic Studies</option>
@@ -52,7 +52,7 @@ if(!isset($_SESSION["sa_username"]))
         <option value="GRRC">Gender Research and Resource Center</option>
       </select>
       <p style="text-align:center;">Note: The system will generate a report in pdf format of the documents and users. The system will generate a report based on the chosen office.</p> 
-      <button type="submit" name="generate">Submit</button>
+      <button type="submit" name="generate">Generate</button>
     </div>
   </form>
 

@@ -110,6 +110,8 @@ catch(PDOException $e) {
                 Semester/Year
             </h2>
 
+          
+
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <img src="../assets/img/wmsu_logo.png" alt="user">
@@ -128,7 +130,7 @@ catch(PDOException $e) {
                     
                                 foreach ($db->query($sql) as $row) {
                                 ?>
-                                    <li> <span class="las la-user-tie"></span> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
+                                    <li> <i class="las la-user-tie"></i> <a data-bs-toggle="modal" data-bs-target="#edit_profile<?php echo $row['id']; ?>">Edit Profile</a> </li>
                                 <?php
                                 
                                 }
@@ -140,8 +142,8 @@ catch(PDOException $e) {
                             //close connection
                             $database->close();
                         ?>
-                        <li> <span class="las la-file-export"></span> <a type="button" href="view_generate.php">Generate Report</a> </li>
-                        <li> <span class="las la-chevron-circle-right"></span> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
+                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
+                        <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                                
                 </div>
@@ -328,6 +330,8 @@ catch(PDOException $e) {
            </div>
        </main>
     </div>
+
+   
 
     <script>
         var loader =  document.getElementById("preloader");

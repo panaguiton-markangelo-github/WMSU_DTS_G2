@@ -144,14 +144,14 @@
 							//close connection
 							$database->close();
 							header('location: ../clerk/HomePageC.php?successful=added?doc');
-
+							unset($_POST['add']);
 							exit();
 		
 						}
 						else{
 							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 5mb.";
 							header('location: ../clerk/HomePageC.php?failed_size');
-
+							unset($_POST['add']);
 							exit();
 						}
 		
@@ -159,7 +159,7 @@
 					else{
 						$_SESSION['e_message'] = "There was an error uploading the file, try again.";
 						header('location: ../clerk/HomePageC.php?failed');
-
+						unset($_POST['add']);
 						exit();
 					}
 		
@@ -168,7 +168,7 @@
 				else {
 					$_SESSION['e_message'] = "you can only upload pdf files.";
 					header('location: ../clerk/HomePageC.php?failed_type');
-
+					unset($_POST['add']);
 					exit();
 				}
 			}
@@ -211,7 +211,7 @@
 				//close connection
 				$database->close();
 				header('location: ../clerk/HomePageC.php?successful=added?doc');
-
+				unset($_POST['add']);
 				exit();
 			}
 
@@ -219,12 +219,11 @@
 		catch(PDOException $e){
 			$_SESSION['message'] = $e->getMessage();
 		}
-
 		//close connection
 		$database->close();
-	}
+		unset($_POST['add']);
 
-	elseif(isset($_POST['draft'])){
+	} elseif(isset($_POST['draft'])){
 		$database = new Connection();
 		$db = $database->open();
 		$status = $_POST['status_draft'];
@@ -348,8 +347,8 @@
 							//if-else statement in executing our prepared statement
 							$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
 	
-							$remarks_log = "Released and Added the document in the office";
-							$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+							$remarks_log = "Added the document in the office";
+							$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :office, :origin_office)");
 							
 							//bind
 							$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
@@ -357,7 +356,6 @@
 							$sql_logs->bindParam(':status', $status);
 							$sql_logs->bindParam(':user_id', $_POST['user_id']);
 							$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
-							$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
 							$sql_logs->bindParam(':office', $_POST['office']);
 							$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 				
@@ -365,15 +363,15 @@
 	
 							//close connection
 							$database->close();
-							header('location: ../clerk/HomePageC.php?successful=added?doc');
-
+							header('location: ../clerk/HomePageC.php?successful=drafted?doc');
+							unset($_POST['draft']);
 							exit();
 		
 						}
 						else{
 							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 5mb.";
 							header('location: ../clerk/HomePageC.php?failed_size');
-
+							unset($_POST['draft']);
 							exit();
 						}
 		
@@ -381,7 +379,7 @@
 					else{
 						$_SESSION['e_message'] = "There was an error uploading the file, try again.";
 						header('location: ../clerk/HomePageC.php?failed');
-
+						unset($_POST['draft']);
 						exit();
 					}
 		
@@ -390,7 +388,7 @@
 				else {
 					$_SESSION['e_message'] = "you can only upload pdf files.";
 					header('location: ../clerk/HomePageC.php?failed_type');
-
+					unset($_POST['draft']);
 					exit();
 				}
 			}
@@ -415,8 +413,8 @@
 				//if-else statement in executing our prepared statement
 				$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
 
-				$remarks_log = "Released and Added the document in the office";
-				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+				$remarks_log = "Added the document in the office";
+				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :office, :origin_office)");
 				
 				//bind
 				$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
@@ -424,7 +422,6 @@
 				$sql_logs->bindParam(':status', $status);
 				$sql_logs->bindParam(':user_id', $_POST['user_id']);
 				$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
-				$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
 				$sql_logs->bindParam(':office', $_POST['office']);
 				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 
@@ -432,8 +429,8 @@
 
 				//close connection
 				$database->close();
-				header('location: ../clerk/HomePageC.php?successful=added?doc');
-
+				header('location: ../clerk/HomePageC.php?successful=drafted?doc');
+				unset($_POST['draft']);
 				exit();
 			}
 			 
@@ -443,7 +440,7 @@
 			//close connection
 			$database->close();
 			header('location: ../clerk/HomePageC.php?failed');
-
+			unset($_POST['draft']);
 			exit();
 		}
 
@@ -454,7 +451,6 @@
 		//close connection
 		$database->close();
 		header('location: ../clerk/HomePageC.php?failed');
-
 		exit();
 	}
 	

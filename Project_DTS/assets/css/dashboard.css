@@ -139,6 +139,33 @@ header label span {
     cursor: pointer;
 }
 
+
+.notifi-wrapper{
+    position:fixed;
+    top: 18px;
+    right: 100px;
+}
+
+.notifi-wrapper i {
+    font-size: 25px;
+    color: var(--main-color);
+    opacity: 0.8;
+}
+
+.notifi-wrapper span {
+    opacity: 0.8;
+}
+
+.notifi-wrapper i:hover{
+    opacity: 1;
+    cursor: pointer;
+    
+}
+.notifi-wrapper span:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
 .user-wrapper {
     position: fixed;
     top: 9px;
@@ -655,6 +682,7 @@ footer a{
 }
 
 @media only screen and (max-width: 768px) {
+    
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -736,6 +764,7 @@ footer a{
 }
 
 @media only screen and (max-width: 560px) {
+  
     .cards {
         grid-template-columns: 100%;
     }
@@ -756,6 +785,7 @@ footer a{
 }
 
 @media only screen and (max-width: 410px) {
+   
     .user-wrapper {
         top: 14px;
         right: 18px;
@@ -763,5 +793,14 @@ footer a{
     .user-wrapper .profile {
         width: 50px;
         height: 50px;
+    }
+
+    .notifi-wrapper {
+        top: 25px;
+        right: 75px;
+    }
+
+    .notifi-wrapper i {
+        font-size: 20px;
     }
 }
