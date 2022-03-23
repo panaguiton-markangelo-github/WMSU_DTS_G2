@@ -4,6 +4,17 @@ if(!isset($_SESSION["c_username"]))
 {
   header("location: ../index.php");
 }
+
+include ("../include/alt_db.php");
+try {
+
+  $query = "SELECT * FROM office WHERE officeName = '".$_SESSION['c_officeName']."'";
+  $result = mysqli_query($data, $query);
+  $row = mysqli_fetch_array($result);
+}
+catch(PDOException $e) {
+  $_SESSION['message_fail'] = $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,28 +41,10 @@ if(!isset($_SESSION["c_username"]))
 
       <h1>Generate Report</h1>
       <select name="officeName" id="officeName" required>
-        <option value="" selected>Please Select Office.</option>
-        <option value="CCS">College of Computer Studies</option>
-        <option value="COG">College of Agriculture</option>
-        <option value="COA">College of Architecture</option>
-        <option value="CAIS">College of Asian and Islamic Studies</option>
-        <option value="CCJE">College of Criminal Justice Education</option>
-        <option value="COE">College of Engineering</option>
-        <option value="CFES">College of Forestry and Environmental Studies</option> 
-        <option value="CHE">College of Home Economics</option> 
-        <option value="COL">College of Law</option>     
-        <option value="CLA">College of Liberal Arts</option>
-        <option value="CON">College of Nursing</option>
-        <option value="CPADS">College of Public Administration and Development Studies</option>
-        <option value="CSSP">College of Sports Science and Physical Education</option>
-        <option value="CSM ">College of Science and Mathematics</option>
-        <option value="CSWD">College of Social Work and Community Development</option>   
-        <option value="CTE">College of Teacher Education</option>   
-        <option value="Lib">WMSU Library</option>   
-        <option value="CLA">College of Liberal Arts</option>
-        <option value="GRRC">Gender Research and Resource Center</option>
+        <option value=""> Available office: </option>
+        <option value="<?php echo $_SESSION['c_officeName']?>" selected> <?php echo $_SESSION['c_officeName']." - ".$row['description']?> </option>
       </select>
-      <p style="text-align:center;">Note: The system will generate a report in pdf format of the documents and users. The system will generate a report based on the chosen office.</p> 
+      <p style="text-align:center;">Note: The system will generate a report in pdf format of the documents and users. The system will generate a report based on this office.</p> 
       <button type="submit" name="generate">Generate</button>
     </div>
   </form>
