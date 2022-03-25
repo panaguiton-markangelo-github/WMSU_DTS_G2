@@ -1,3 +1,10 @@
+<?php 
+if(empty($row1)){
+$_SESSION['year_m'] = "No school year. Please add it first as soon as possible.";
+}
+
+?>
+
 <div class="modal fade" id="add_year_sem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -7,29 +14,26 @@
       </div>
       <form action="../super_admin_funcs/add_year_sem.php" method="post">
         <div class="modal-body">
-       
-          <div class="row d-flex justify-content-center align-content-center">
-            <div class="col">
-              <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="startYear" name="startYear" min="2020" max="2030" required>
-                <label for="startYear">Year:</label>
-              </div>     
-            </div>
-
-            <div class="col-1">
-                <span>TO</span>
-            </div>
-
-            <div class="col">
-              <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="endYear" name="endYear" min="2020" max="2030" required>
-                <label for="endYear">Year:</label>
-              </div>
-            </div>
-          </div>
-           
-
             <?php
+            if(empty($row2)){
+              ?>
+                <div class="container">
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div style="margin-left:10px;text-align:center;">
+                            <?php 
+                                echo "<h5>No date range set for semesters and summer. Please edit it as soon as possible.<h5>";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+              <?php
+            }
+            else {
+
                 $first_sem = strtotime($row2['first_sem_date']);
                 $end_first_sem = strtotime($row2['end_first_sem_date']);
                 $second_sem = strtotime($row2['sec_sem_date']);
@@ -57,48 +61,66 @@
                 else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
                     $status = "summer";
               }
-
               ?>
-            
-            <input type="text" class="form-control" id="status" name="status" value="<?php echo $status?>" hidden>
-              
+                <div class="row d-flex justify-content-center align-content-center">
+                  <div class="col">
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="startYear" name="startYear" min="2020" max="2030" required>
+                      <label for="startYear">Year:</label>
+                    </div>     
+                  </div>
 
-            <?php 
-              if(empty($row1)){
-                ?>  
-                <select class="form-select text-dark" name="activate" id="officeName" required>
-                  <option value="" selected>Activate: click to select yes/no</option>
-                  <option value="yes">Activate: yes</option>
-                  <option value="no">Activate: no</option>
-                </select>
-                <?php
-              }
-              elseif(!empty($row1)){
+                  <div class="col-1">
+                      <span>TO</span>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="endYear" name="endYear" min="2020" max="2030" required>
+                      <label for="endYear">Year:</label>
+                    </div>
+                  </div>
+                </div>
+
+                <input type="text" class="form-control" id="status" name="status" value="<?php echo $status?>" hidden>
+
+              <?php
+
+                if(empty($row1)){
+                  ?>  
+                  <select class="form-select text-dark" name="activate" id="officeName" required>
+                    <option value="" selected>Activate: click to select yes/no</option>
+                    <option value="yes">Activate: yes</option>
+                    <option value="no">Activate: no</option>
+                  </select>
+                  <?php
+                }
+                elseif(!empty($row1)){
+                  ?>
+                  <select class="form-select text-dark" name="activate" id="officeName" required>
+                    <option value="no" selected>Activate: no</option>
+                  </select>
+
+                  <br>
+                  <p style="text-align:center;color:red;">Note: There is already an active school year. you can still add school years,
+                  however it is not possible to have more than 1 active school year at the same time.
+                  </p>
+                  <?php
+                }
                 ?>
-                <select class="form-select text-dark" name="activate" id="officeName" required>
-                  <option value="no" selected>Activate: no</option>
-                </select>
-
                 <br>
-                <p style="text-align:center;color:red;">Note: There is already an active school year. you can still add school years,
-                however it is not possible to have more than 1 active school year at the same time.
+                <p style="text-align:center;color:green;">Note: The semester/summer is automatically set base on the date range set by the system.
+                  If you want to change the date range, please click the "edit date range" button to change
+                  the date range of semester/summer.
                 </p>
-                <?php
-              }
 
-            ?>
-
-            <br>
-            <p style="text-align:center;color:green;">Note: The semester/summer is automatically set base on the date range set by the system.
-              If you want to change the date range, please click the "edit date range" button to change
-              the date range of semester/summer.
-            </p>
-            
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-          <button type="submit" name="add" class="btn btn-success">Save changes</button>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" name="add" class="btn btn-success">Save changes</button>
+                </div>
+              <?php
+            }
+              ?>                  
         </div>
       </form>
     </div>

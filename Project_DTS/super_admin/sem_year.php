@@ -194,6 +194,37 @@ catch(PDOException $e) {
 
         
            <div class="container">
+            <?php
+             if(empty($row2)){
+                ?>
+                  <div class="container">
+                      <div class="alert alert-danger d-flex align-items-center" role="alert">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                          <div style="margin-left:10px;text-align:center;">
+                              <?php 
+                                  echo "<h5>No date range set for semesters and summer. Please click initialize default date range first.<h5>";
+                              ?>
+                          </div>
+                      </div>
+                  </div>
+                <?php
+  
+              }
+              else{
+                ?>
+                <div class="container" style="display: none;">
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div style="margin-left:10px;text-align:center;">
+                            <?php 
+                                echo "<h5>No date range set for semesters and summer. Please click initialize default date range first.<h5>";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+              <?php
+              }
+            ?>
             <div class="table-responsive">
                 <div class="row">
                     <div class="col">
@@ -314,17 +345,43 @@ catch(PDOException $e) {
                         </tbody>
                     </table>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-2">
-                            <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
-                        </div>
+                        <?php
+                            if(empty($row2)){
+                                ?>
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#default_modal">Initialize Default Date Range</a>
+                                </div>
 
-                        <div class="col-2">
-                            <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
-                        </div>
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
+                                </div>
 
-                        <div class="col-2">
-                            <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
-                        </div>
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
+                                </div>
+
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
+                                </div>
+                                <?php
+                            }
+                            else{
+                                ?>
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
+                                </div>
+
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
+                                </div>
+
+                                <div class="col-2">
+                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
+                                </div>
+                                <?php
+                            }
+                        ?>
+                       
                     </div>
                 </div>
            </div>
@@ -353,6 +410,7 @@ catch(PDOException $e) {
 
     <?php include('../super_admin_funcs/view_add_year_sem.php'); ?>
     <?php include('../super_admin_funcs/view_1st_sem_date_range.php'); ?>
+    <?php include('../super_admin_funcs/view_add_default.php'); ?>
     <?php include('../super_admin_funcs/view_2nd_sem_date_range.php'); ?>
     <?php include('../super_admin_funcs/view_summer_date_range.php'); ?>
     <?php include('../validation/view_logout.php'); ?>
