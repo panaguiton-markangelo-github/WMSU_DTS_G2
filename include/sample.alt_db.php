@@ -1,5 +1,4 @@
 <?php
-
  //Alternative Database connection.
  $host = "localhost";
  $user = "root";

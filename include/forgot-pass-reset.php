@@ -22,7 +22,7 @@ if (isset($_POST['reset-submit'])) {
     $stmt = mysqli_stmt_init($data);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        $_SESSION['message_fail'] = "Unexpected error occured!";
+        $_SESSION['message_fail'] = "Unexpected error occured1!";
         header("location: ../forgot_pass/forgot-pass.php?error=true");
         exit();
     }
@@ -107,7 +107,7 @@ if (isset($_POST['reset-submit'])) {
                 header("location: ../forgot_pass/forgot-pass.php?reset=success");
             }
             else {
-                $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
+                $_SESSION['message_mail_fail'] = "Unexpected error occured2.!";
                 header("location: ../forgot_pass/forgot-pass.php?reset=failed");
             }
 
