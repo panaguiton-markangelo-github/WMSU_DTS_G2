@@ -12,13 +12,10 @@ $mail = new PHPMailer();
 
 $mail->isSMTP();
 
-$mail->Host = "smtp.gmail.com";
-
-$mail->SMTPAuth = true;
-
-$mail->SMTPSecure = "tls";
-
-$mail->Port = 465;
+$mail->Host = "localhost";
+$mail->SMTPAuth = false;
+$mail->SMTPAuthTLS = false;
+$mail->Port = 25;
 
 $mail->Username = "wmsudts.noreply@gmail.com";
 
