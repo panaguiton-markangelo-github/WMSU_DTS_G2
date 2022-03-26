@@ -8,7 +8,7 @@ if (isset($_POST['reset-submit'])) {
     $selector = bin2hex(random_bytes(8));
     $token = random_bytes(32);
 
-    $url = "wmsu-dts.epizy.com/forgot_pass/create-new-pass.php?selector=" . $selector . "&validator=". bin2hex($token);
+    $url = "tracking.wmsuics.tech/forgot_pass/create-new-pass.php?selector=" . $selector . "&validator=". bin2hex($token);
 
     $expires = date("U") + 1800;
 
