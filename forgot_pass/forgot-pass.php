@@ -53,7 +53,7 @@
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button type="submit" name="reset-submit" class="login100-form-btn">
-								Send recovery instruction
+								Send recovery instructionss
 							</button>
 						</div>
 					</div>
