@@ -18,11 +18,7 @@ $mail->SMTPAuth = true;
 
 $mail->SMTPSecure = "tls";
 
-<<<<<<< Updated upstream
-$mail->Port = 587;
-=======
 $mail->Port = "465";
->>>>>>> Stashed changes
 
 $mail->Username = "support@tracking.wmsuics.tech";
 
