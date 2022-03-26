@@ -92,7 +92,7 @@ if (isset($_POST['reset-submit'])) {
             $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
 
             $message .= "From: WMSU|DTS team <tracking@wmsuics.tech>\r\n";
-            $message .= "<br>Reply-To: tracking@wmsuics.tech\r\n";
+            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
             $message .= "<p>Best regards WMSU|DTS team.</p>";
 
 
@@ -109,7 +109,7 @@ if (isset($_POST['reset-submit'])) {
             }
             else {
                 $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
-                header("location: ../forgot_pass/forgot-pass.php?reset=failed1".$mail->ErrorInfo);
+                header("location: ../forgot_pass/forgot-pass.php?reset=failed".$mail->ErrorInfo);
                 exit();
             }
 
@@ -117,7 +117,6 @@ if (isset($_POST['reset-submit'])) {
         }
     }
 
-    
 }
 else
 {
