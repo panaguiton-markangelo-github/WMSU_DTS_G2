@@ -12,16 +12,20 @@ $mail = new PHPMailer();
 
 $mail->isSMTP();
 
-$mail->Host = "smtp.gmail.com";
+$mail->Host = "smtp.hostinger.com";
 
 $mail->SMTPAuth = true;
 
 $mail->SMTPSecure = "tls";
 
+<<<<<<< Updated upstream
 $mail->Port = 587;
+=======
+$mail->Port = "465";
+>>>>>>> Stashed changes
 
-$mail->Username = "wmsudts.noreply@gmail.com";
+$mail->Username = "support@tracking.wmsuics.tech";
 
-$mail->Password = "wmsu12345";
+$mail->Password = "tracking_MARK01";
 
 ?>
