@@ -4,7 +4,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login WMSU|DTS</title>
+  <title>Login WMSU | DTS</title>
 	<!-- Custom Stylesheet -->
 	<link rel="icon" type="image/png" href="assets/img/wmsu_logo.png"/>
 	<link rel="stylesheet" href="assets/css/style_new.css">
