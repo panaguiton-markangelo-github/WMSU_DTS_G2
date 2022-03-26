@@ -105,10 +105,12 @@ if (isset($_POST['reset-submit'])) {
             if ($mail->Send()) { 
                 $_SESSION['message_succ'] = "Instruction on how to reset your password has been sent to your email. <br> Note:Check the inbox/spam tab of your email!";
                 header("location: ../forgot_pass/forgot-pass.php?reset=success");
+                exit();
             }
             else {
                 $_SESSION['message_mail_fail'] = "Unexpected error occured.!".$mail->ErrorInfo;
-                header("location: ../forgot_pass/forgot-pass.php?reset=failed");
+                header("location: ../forgot_pass/forgot-pass.php?reset=failed1");
+                exit();
             }
 
             $mail->smtpClose();
