@@ -22,7 +22,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                         <div style="margin-left:10px;text-align:center;">
                             <?php 
-                                echo "<h5>No date range set for semesters and summer. Please edit it as soon as possible.<h5>";
+                                echo "<h5>No date range set for semesters and summer. Please add it as soon as possible by initializing default date range first.<h5>";
                             ?>
                         </div>
                     </div>
