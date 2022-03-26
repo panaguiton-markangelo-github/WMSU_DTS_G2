@@ -33,7 +33,7 @@
 				<form class="login100-form validate-form flex-sb flex-w" action="?login" method="POST">
 					<span class="login100-form-title p-b-32">
 						<img src="assets/img/wmsu_logo.png" width="55px" height="55px">
-						WMSU | DTS Login
+						WMSU|DTS Login
 						<img src="assets/img/login_logo_un1.svg" width="55px" height="55px">
 					</span> 
 
