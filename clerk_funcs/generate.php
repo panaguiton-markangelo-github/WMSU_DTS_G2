@@ -52,7 +52,7 @@ if(isset($_POST['generate'])){
                     $this->Cell(189, 5, 'Western Mindanao State University', 0,1, 'C');  
                     $this->Cell(189, 5, 'Institute of Computer Studies', 0,1, 'C'); 
                     $this->Cell(189, 3, 'Normal Road, Baliwasan, Z.C.', 0,1, 'C');
-                    $this->Cell(189, 3, 'wmsudts@gmail.com', 0,1, 'C');                   
+                    $this->Cell(189, 3, 'tracking@wmsuics.tech', 0,1, 'C');                   
                 }
 
                 public function Footer() {

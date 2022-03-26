@@ -91,13 +91,13 @@ if (isset($_POST['reset-submit'])) {
             $message .= "<p> Here is your reset password link: <br>";
             $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
 
-            $message .= "From: WMSU|DTS team <wmsudts@gmail.com>\r\n";
-            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+            $message .= "From: WMSU|DTS team <tracking@wmsuics.tech>\r\n";
+            $message .= "<br>Reply-To: tracking@wmsuics.tech\r\n";
             $message .= "<p>Best regards WMSU|DTS team.</p>";
 
 
             $mail->Subject = $subject;
-            $mail->setFrom("wmsudts@gmail.com");
+            $mail->setFrom("tracking@wmsuics.tech");
             $mail->isHTML(true);
             $mail->Body = $message;
             $mail->addAddress($to);
