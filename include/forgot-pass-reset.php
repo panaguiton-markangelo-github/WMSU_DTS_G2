@@ -108,8 +108,8 @@ if (isset($_POST['reset-submit'])) {
                 exit();
             }
             else {
-                $_SESSION['message_mail_fail'] = "Unexpected error occured.!".$mail->ErrorInfo;
-                header("location: ../forgot_pass/forgot-pass.php?reset=failed1");
+                $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
+                header("location: ../forgot_pass/forgot-pass.php?reset=failed1".$mail->ErrorInfo);
                 exit();
             }
 
