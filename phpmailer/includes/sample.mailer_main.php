@@ -20,8 +20,8 @@ $mail->SMTPSecure = "tls";
 
 $mail->Port = "587";
 
-$mail->Username = "tracking@wmsuics.tech";
+$mail->Username = "XXXXXXXXX";
 
-$mail->Password = "tracking_MARK01";
+$mail->Password = "XXXXXXXXX";
 
 ?>
