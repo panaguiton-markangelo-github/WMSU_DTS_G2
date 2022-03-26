@@ -65,7 +65,7 @@
 
 						<a class="txt2" href="../index.php">
 							Login
-						</a>msu-dts.epizy.com
+						</a>
 					</div>
 				</form>
 			</div>

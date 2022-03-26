@@ -14,11 +14,11 @@ $mail->isSMTP();
 
 $mail->Host = "smtp.gmail.com";
 
-$mail->SMTPAuth = "true";
+$mail->SMTPAuth = true;
 
 $mail->SMTPSecure = "tls";
 
-$mail->Port = "587";
+$mail->Port = 587;
 
 $mail->Username = "wmsudts.noreply@gmail.com";
 
