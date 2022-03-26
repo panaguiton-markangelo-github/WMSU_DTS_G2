@@ -19,6 +19,7 @@ $mail->SMTPAuth = true;
 $mail->SMTPSecure = "tls";
 
 $mail->Port = "587";
+$mail->Port = 587;
 
 $mail->Username = "tracking@wmsuics.tech";
 
