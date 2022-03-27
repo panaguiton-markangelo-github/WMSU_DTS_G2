@@ -12,13 +12,13 @@ $mail = new PHPMailer();
 
 $mail->isSMTP();
 
-$mail->Host = "smtp.hostinger.com";
+$mail->Host = "smtp.hostinger.ph";
 
 $mail->SMTPAuth = true;
 
 $mail->SMTPSecure = "tls";
 
-$mail->Port = "587";
+$mail->Port = 587;
 
 $mail->Username = "XXXXXXXXX";
 
