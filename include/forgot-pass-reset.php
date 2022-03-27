@@ -96,7 +96,7 @@ if (isset($_POST['reset-submit'])) {
             $message .= "<p>Best regards WMSU|DTS team.</p>";
 
             $mail->Subject = $subject;
-            $mail->setFrom("tracking@wmsuics.tech");
+            $mail->setFrom("info@wmsuics.tech");
             $mail->isHTML(true);
             $mail->Body = $message;
             $mail->addAddress($to);
