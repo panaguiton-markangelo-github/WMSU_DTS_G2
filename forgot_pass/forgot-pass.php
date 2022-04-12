@@ -26,10 +26,13 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../assets/css/util.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/loading.css">
 	<script src="../assets/js/sweet_alert.js"></script>
 <!--===============================================================================================-->
 </head>
 <body>
+	<div id="preloader">
+    </div>
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -178,6 +181,13 @@
 		}
 	}
 	?>
+
+	<script>
+        var loader =  document.getElementById("preloader");
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+	</script>
 	
 <!--===============================================================================================-->
 	<script src="../assets/vendor/jquery/jquery-3.2.1.min.js"></script>
