@@ -2,7 +2,6 @@
 (function ($) {
     "use strict";
 
-
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
@@ -19,7 +18,6 @@
 
         return check;
     });
-
 
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){

@@ -7,7 +7,6 @@
   <title>Login WMSU | DTS</title>
 	<!-- Custom Stylesheet -->
 	<link rel="icon" type="image/png" href="assets/img/wmsu_logo.png"/>
-	<link rel="stylesheet" href="assets/css/style_new.css">
 	<link rel="stylesheet" href="assets/css/loading.css">
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
