@@ -66,7 +66,7 @@
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" name="submit">
-							Let me in!
+							LOGIN
 						</button>
 					</div>
 
