@@ -371,7 +371,7 @@
 		
 						}
 						else{
-							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 50mb.";
+							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 20mb.";
 							header('location: ../admin/homePageAdmin.php?failed_size');
 							unset($_POST['draft']);
 							exit();
