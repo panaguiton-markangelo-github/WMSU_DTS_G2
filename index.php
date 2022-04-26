@@ -65,7 +65,7 @@
 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" type="submit" name="submit">
-							LOGI
+							Let me in
 						</button>
 					</div>
 
