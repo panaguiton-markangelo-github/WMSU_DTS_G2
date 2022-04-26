@@ -100,7 +100,7 @@
 			if($fileError != 4){
 				if(in_array($actualFileExt, $allowed)){
 					if($fileError === 0){
-						if($fileSize < 50000){
+						if($fileSize < 20000000){
 							$fileNameNew = uniqid('', true).".".$actualFileExt;
 							$fileDestination = '../uploads/'.$fileNameNew;
 							move_uploaded_file($fileTmpName, $fileDestination);
@@ -149,7 +149,7 @@
 		
 						}
 						else{
-							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 5mb.";
+							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 20mb.";
 							header('location: ../admin/homePageAdmin.php?failed_size');
 							unset($_POST['add']);
 							exit();
@@ -323,7 +323,7 @@
 			if($fileError != 4){
 				if(in_array($actualFileExt, $allowed)){
 					if($fileError === 0){
-						if($fileSize < 50000){
+						if($fileSize < 20000000){
 							$fileNameNew = uniqid('', true).".".$actualFileExt;
 							$fileDestination = '../uploads/'.$fileNameNew;
 							move_uploaded_file($fileTmpName, $fileDestination);
@@ -371,7 +371,7 @@
 		
 						}
 						else{
-							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 5mb.";
+							$_SESSION['e_message'] = "You can only upload pdf file which has a size of less than 50mb.";
 							header('location: ../admin/homePageAdmin.php?failed_size');
 							unset($_POST['draft']);
 							exit();
