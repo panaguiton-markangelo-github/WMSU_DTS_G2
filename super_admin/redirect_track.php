@@ -73,6 +73,10 @@ if(!isset($_SESSION["sa_username"])) {
                     <a href="sem_year.php"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li>
+                <li>
+                    <a href="#"><span class="las la-cog"></span>
+                    <span>Settings</span></a>
+                </li>
                 
             </ul>
         </div>
