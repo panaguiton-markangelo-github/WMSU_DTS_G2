@@ -208,6 +208,139 @@ catch(PDOException $e) {
         
         <main>
         <?php 
+          if(empty($row1)){
+              ?>
+              <div class="container">
+                  <div class="alert alert-danger d-flex align-items-center" role="alert">
+                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                      <div style="margin-left:10px;" class="text-center">
+                        <?php 
+                            echo "<h5>There is still no semester or year! please ask the super administrator to add it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
+                        ?>
+                      </div>
+                  </div>
+              </div>
+              <?php
+          }
+        ?>
+
+        <div class="container">
+          <div class="cards">
+                <div class="card-single">
+                    <div>
+                        <?php 
+                          $docs_query = "SELECT * FROM documents INNER JOIN users ON documents.user_id = users.id WHERE users.officeName = '".$_SESSION['a_officeName']."';";
+                          $docs_query_run = mysqli_query($data, $docs_query);
+
+                          if($docs_total = mysqli_num_rows($docs_query_run))
+                          {
+                            echo '<h1> '.$docs_total.' </h1>' ;
+                            if($docs_total <= 1) {
+                                echo '<span>Office Document</span>';
+                            }
+                            else
+                            {
+                                echo '<span>Office Documents</span>';
+                            }
+                          }
+                          else
+                          {
+                            echo '<span>No Office Documents</span>';
+                          }
+                        ?>    
+                    </div>
+                    <div>
+                        <span class="las la-file-alt"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <?php 
+                          $clerks_query = "SELECT * FROM users WHERE userType = 'clerk' AND officeName = '".$_SESSION['a_officeName']."';";
+                          $clerks_query_run = mysqli_query($data, $clerks_query);
+
+                          if($clerks_total = mysqli_num_rows($clerks_query_run))
+                          {
+                            echo '<h1> '.$clerks_total.' </h1>' ;
+                            if($clerks_total <= 1) {
+                                echo '<span>Office Clerk User</span>';
+                            }
+                            else
+                            {
+                                echo '<span>Office Clerk Users</span>';
+                            }
+                          }
+                          else
+                          {
+                            echo '<span>No Office Clerk User</span>';
+                          }
+                        ?>
+                      </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+              </div>
+              </div>
+
+              <br>
+              <br>
+            <div class="tem-grid">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <form action="../admin_funcs/redirect_track.php" method="POST">
+                            <div class="input-group">
+                            <input type="text" class="form-control border border-dark" name="trackingID" placeholder="Tracking ID" required>
+                            <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Track Document</button>
+                            </div>
+                        </form>                      
+                    </div>
+                </div>
+         
+                            
+                <div class="row d-flex justify-content-center">
+                    <div class="col">
+                       <form action="add_docs.php" method="POST">
+                            <div class="input-group">
+                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
+                                <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
+                            </div>
+                       </form>
+                    </div>
+                    <div class="col">
+                            <form action="../admin_funcs/view_receive.php" method="POST">
+                                <div class="input-group">
+                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                <input type="text" name="rec_trackingID" id="rec_trackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
+                                <button class="btn btn-outline-success fw-bold" type="submit" id="recBut">Receive Document</button>
+                                </div>
+                            </form>                      
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        </main>
+    </div>
+   
+    <footer>
+        <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
+    </footer>
+
+    <?php include('../validation/view_logout.php'); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <script>
+        var loader =  document.getElementById("preloader");
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+	</script>
+
+     <?php 
             if(isset($_SESSION['message_fail'])){
                 ?>
                 <script>
@@ -224,22 +357,6 @@ catch(PDOException $e) {
 
                 unset($_SESSION['message_fail']);
             }
-        ?>
-        <?php 
-          if(empty($row1)){
-              ?>
-              <div class="container">
-                  <div class="alert alert-danger d-flex align-items-center" role="alert">
-                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                      <div style="margin-left:10px;" class="text-center">
-                        <?php 
-                            echo "<h5>There is still no semester or year! please ask the super administrator to add it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
-                        ?>
-                      </div>
-                  </div>
-              </div>
-              <?php
-          }
         ?>
 
         <?php   
@@ -374,122 +491,6 @@ catch(PDOException $e) {
                 unset($_SESSION['message_profile']);
             }
         ?>
-
-        <div class="container">
-          <div class="cards">
-                <div class="card-single">
-                    <div>
-                        <?php 
-                          $docs_query = "SELECT * FROM documents INNER JOIN users ON documents.user_id = users.id WHERE users.officeName = '".$_SESSION['a_officeName']."';";
-                          $docs_query_run = mysqli_query($data, $docs_query);
-
-                          if($docs_total = mysqli_num_rows($docs_query_run))
-                          {
-                            echo '<h1> '.$docs_total.' </h1>' ;
-                            if($docs_total <= 1) {
-                                echo '<span>Office Document</span>';
-                            }
-                            else
-                            {
-                                echo '<span>Office Documents</span>';
-                            }
-                          }
-                          else
-                          {
-                            echo '<span>No Office Documents</span>';
-                          }
-                        ?>    
-                    </div>
-                    <div>
-                        <span class="las la-file-alt"></span>
-                    </div>
-                </div>
-                <div class="card-single">
-                    <div>
-                        <?php 
-                          $clerks_query = "SELECT * FROM users WHERE userType = 'clerk' AND officeName = '".$_SESSION['a_officeName']."';";
-                          $clerks_query_run = mysqli_query($data, $clerks_query);
-
-                          if($clerks_total = mysqli_num_rows($clerks_query_run))
-                          {
-                            echo '<h1> '.$clerks_total.' </h1>' ;
-                            if($clerks_total <= 1) {
-                                echo '<span>Office Clerk User</span>';
-                            }
-                            else
-                            {
-                                echo '<span>Office Clerk Users</span>';
-                            }
-                          }
-                          else
-                          {
-                            echo '<span>No Office Clerk User</span>';
-                          }
-                        ?>
-                      </div>
-                    <div>
-                        <span class="las la-users"></span>
-                    </div>
-              </div>
-              </div>
-
-              <br>
-              <br>
-            <div class="tem-grid">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-11">
-                        <form action="../admin_funcs/redirect_track.php" method="POST">
-                            <div class="input-group">
-                            <input type="text" class="form-control border border-dark" name="trackingID" placeholder="Tracking ID" required>
-                            <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Track Document</button>
-                            </div>
-                        </form>                      
-                    </div>
-                </div>
-         
-                            
-                <div class="row d-flex justify-content-center">
-                    <div class="col">
-                       <form action="add_docs.php" method="POST">
-                            <div class="input-group">
-                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                                <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
-                                <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
-                            </div>
-                       </form>
-                    </div>
-                    <div class="col">
-                            <form action="../admin_funcs/view_receive.php" method="POST">
-                                <div class="input-group">
-                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                                <input type="text" name="rec_trackingID" id="rec_trackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
-                                <button class="btn btn-outline-success fw-bold" type="submit" id="recBut">Receive Document</button>
-                                </div>
-                            </form>                      
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-
-        </main>
-    </div>
-   
-    <footer>
-        <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
-    </footer>
-
-    <?php include('../validation/view_logout.php'); ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
-    <script>
-        var loader =  document.getElementById("preloader");
-        window.addEventListener("load", function(){
-            loader.style.display = "none";
-        })
-	</script>
 
         <?php 
             if(isset($_SESSION['welcome'])){

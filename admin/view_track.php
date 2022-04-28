@@ -186,6 +186,13 @@ if(!isset($_SESSION["a_username"])) {
     <script src="../assets/js/sweet_alert.js"></script>
 
     <script>
+        var loader =  document.getElementById("preloader");
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+	</script>
+
+    <script>
         $(document).ready(function() {
             $("#btnSearch").click(function(e) {
                 e.preventDefault();
@@ -229,14 +236,7 @@ if(!isset($_SESSION["a_username"])) {
             });
         });
     </script>
-
-    <script>
-        var loader =  document.getElementById("preloader");
-        window.addEventListener("load", function(){
-            loader.style.display = "none";
-        })
-	</script>
-    
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     

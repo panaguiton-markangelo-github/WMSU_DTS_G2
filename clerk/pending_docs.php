@@ -123,25 +123,6 @@ if(!isset($_SESSION["c_username"])) {
     
 
         <main>
-        <?php 
-            if(isset($_SESSION['message'])){
-                ?>
-                <div class="container">
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <button style="margin-right:10px;" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                        <div style="margin-left:10px;">
-                            <?php 
-                                echo $_SESSION['message'];
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <?php
-
-                unset($_SESSION['message']);
-            }
-        ?>
            <div class="container">
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
@@ -279,6 +260,26 @@ if(!isset($_SESSION["c_username"])) {
             loader.style.display = "none";
         })
 	</script>
+
+     <?php 
+            if(isset($_SESSION['message'])){
+                ?>
+                <div class="container">
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <button style="margin-right:10px;" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                        <div style="margin-left:10px;">
+                            <?php 
+                                echo $_SESSION['message'];
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
+
+                unset($_SESSION['message']);
+            }
+        ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
