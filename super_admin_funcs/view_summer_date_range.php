@@ -122,10 +122,10 @@
 
           
 
-            <p style="text-align:center;color:yellow;">Current Date Range: <?php echo $row2['summer_date']." to ".$row2['end_summer_date'];?>
+            <p style="text-align:center;color:orange;">Current Date Range: <?php echo $row2['summer_date']." to ".$row2['end_summer_date'];?>
             </p>
            
-            <p style="text-align:center;color:yellow;">Note: This will change the date range of the Summer class.
+            <p style="text-align:center;color:orange;">Note: This will change the date range of the Summer class.
             </p>
             
 
