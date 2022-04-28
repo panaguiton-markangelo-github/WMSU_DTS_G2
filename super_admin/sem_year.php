@@ -96,6 +96,10 @@ catch(PDOException $e) {
                     <a class="active"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li>
+                <li>
+                    <a class="active"><span class="las la-school"></span>
+                    <span>Settings</span></a>
+                </li>
                 
             </ul>
         </div>

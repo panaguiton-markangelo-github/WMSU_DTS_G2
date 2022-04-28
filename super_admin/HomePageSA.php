@@ -86,7 +86,7 @@ catch(PDOException $e) {
                     <a href="sem_year.php"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li>   
-                <hr>
+        
             </ul>
             
         </div>
