@@ -370,24 +370,6 @@ catch(PDOException $e) {
             }
         ?>
 
-        <?php 
-            if(isset($_SESSION['welcome'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Greetings!',
-                        html: '<h4><?php echo $_SESSION['welcome'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-                unset($_SESSION['welcome']);
-            }
-        ?>
-
         <div class="container">
         <div class="cards">
             <div class="card-single">
@@ -473,6 +455,24 @@ catch(PDOException $e) {
             loader.style.display = "none";
         })
 	</script>
+
+        <?php 
+            if(isset($_SESSION['welcome'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Greetings!',
+                        html: '<h4><?php echo $_SESSION['welcome'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+                unset($_SESSION['welcome']);
+            }
+        ?>
 
     <script>
         function menuToggle(){
