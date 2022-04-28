@@ -14,14 +14,14 @@
             $sql->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
 
 			//if-else statement in executing our prepared statement
-			$_SESSION['message'] = ( $sql->execute()) ? 'School year and semester was deleted successfully': 'Something went wrong. Cannot delete this school year and semester.';	
+			$_SESSION['message'] = ( $sql->execute()) ? 'School year was deleted successfully': 'Something went wrong. Cannot delete this school year ';	
 	    
 		}
 		catch(PDOException $e){
 			$error_m1 = $e->getCode();
 
 			if ($error_m1 == 23000) {
-				$_SESSION['e_message'] = "OOps. Cannot delete this school year and semester. Because there is/are still documents within this year/semester.";
+				$_SESSION['e_message'] = "OOps. Cannot delete this school year Because there is/are still documents within this school year";
 				header("Location: ../super_admin/sem_year.php?error=exist");
 				die();
 			}
