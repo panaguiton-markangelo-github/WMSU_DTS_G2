@@ -9,7 +9,7 @@
         <div class="modal-body">
             <p>Are you sure to delete this School Year: <?php echo $row['schoolYear']; ?>, <?php  echo $row['stat']; ?></p>
             <br>
-            <p style="text-align: center;color:red;">Note: Deleting this year means all affliated documents will be also deleted, 
+            <p style="text-align: center;color:orange;">Note: Deleting this year means all affliated documents will be also deleted, 
               this will indicate that those documents are not necessary anymore. However, those documents can still be tracked.
               <br> Max documents: 9999
             </p>

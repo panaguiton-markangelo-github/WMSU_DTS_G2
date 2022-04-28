@@ -13,7 +13,7 @@ if($row['activated'] == 'yes'){
                     <input type="text" name="active" value="no" hidden>
                     <p>Are you sure to deactivate this school year?: <?php echo $row['schoolYear']; ?>, <?php  echo $row['stat']; ?></p>
                     <br>
-                    <p style="text-align: center;color:red;">Note: Deactivating this school year, means it will no longer be possible
+                    <p style="text-align: center;color:orange;">Note: Deactivating this school year, means it will no longer be possible
                         to attached this school year to documents and it is now possible to have another school year to be activated.
                     </p>
                 </div>
