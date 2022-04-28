@@ -97,7 +97,7 @@ catch(PDOException $e) {
                     <span>School Year/Sem</span></a>
                 </li>
                 <li>
-                    <a href="#"><span class="las la-cog"></span>
+                    <a class="active"><span class="las la-cog"></span>
                     <span>Settings</span></a>
                 </li>
                 
@@ -174,6 +174,7 @@ catch(PDOException $e) {
                       </div>
                   </div>
                 <?php
+  
               }
               ?>
             <div class="table-responsive">
