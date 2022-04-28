@@ -34,7 +34,7 @@ catch(PDOException $e) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Year and Sem</title>
+    <title>Settings</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
@@ -194,7 +194,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
-                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 1st semester.</p>
+                                <p style="color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 1st semester.</p>
                             </div>
                         <?php
                         }
@@ -207,7 +207,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
-                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 2nd semester.</p>
+                                <p style="color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 2nd semester.</p>
                             </div>
                             <?php
                         }
@@ -220,7 +220,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
-                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the summer.</p>
+                                <p style="color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the summer.</p>
                             </div>
                             <?php
                         }

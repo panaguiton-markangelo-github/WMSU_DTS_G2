@@ -39,6 +39,6 @@
 		$_SESSION['e_message'] = 'Fill up add form first';
 	}
 
-	header('location: ../super_admin/sem_year.php?succesful=initialize');
+	header('location: ../super_admin/settings.php?succesful=initialize');
 	
 ?>
