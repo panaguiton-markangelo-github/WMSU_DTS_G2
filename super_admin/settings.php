@@ -180,7 +180,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#default_modal">Initialize Default Date Range</a>
-                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Initialize the date range for all semesters and summer. Note: This will be disappeared after succesfull initialization of date range.</p>
+                                <p style="text-align:center;color:orange;"> <span class="las la-info-circle"></span> Initialize the date range for all semesters and summer. Note: This will be disappeared after succesfull initialization of date range.</p>
                             </div>
                             <?php
                         }
