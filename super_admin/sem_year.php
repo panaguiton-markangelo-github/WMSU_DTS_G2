@@ -295,33 +295,6 @@ catch(PDOException $e) {
                                         
                         </tbody>
                     </table>
-                    <div class="row d-flex justify-content-center">
-                        <?php
-                            if(empty($row2)){
-                                ?>
-                                <div class="col-2">
-                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#default_modal">Initialize Default Date Range</a>
-                                </div>
-                                <?php
-                            }
-                            else{
-                                ?>
-                                <div class="col-2">
-                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
-                                </div>
-
-                                <div class="col-2">
-                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
-                                </div>
-
-                                <div class="col-2">
-                                    <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
-                                </div>
-                                <?php
-                            }
-                        ?>
-                       
-                    </div>
                 </div>
            </div>
        </main>
@@ -384,10 +357,6 @@ catch(PDOException $e) {
     </script>
 
     <?php include('../super_admin_funcs/view_add_year_sem.php'); ?>
-    <?php include('../super_admin_funcs/view_1st_sem_date_range.php'); ?>
-    <?php include('../super_admin_funcs/view_add_default.php'); ?>
-    <?php include('../super_admin_funcs/view_2nd_sem_date_range.php'); ?>
-    <?php include('../super_admin_funcs/view_summer_date_range.php'); ?>
     <?php include('../validation/view_logout.php'); ?>
     
     <footer>
