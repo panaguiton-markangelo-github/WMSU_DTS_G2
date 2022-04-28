@@ -102,14 +102,14 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   </select>
 
                   <br>
-                  <p style="text-align:center;color:red;">Note: There is already an active school year. you can still add school years,
+                  <p style="text-align:center;color:yellow;">Note: There is already an active school year. you can still add school years,
                   however it is not possible to have more than 1 active school year at the same time.
                   </p>
                   <?php
                 }
                 ?>
                 <br>
-                <p style="text-align:center;color:green;">Note: The semester/summer is automatically set base on the date range set by the system.
+                <p style="text-align:center;color:yellow;">Note: The semester/summer is automatically set base on the date range set by the system.
                   If you want to change the date range, please click the "edit date range" button to change
                   the date range of semester/summer.
                 </p>
