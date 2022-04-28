@@ -44,7 +44,7 @@ elseif($row['activated'] == 'no'){
                         <input type="text" name="active" value="yes" hidden>
                         <p>Are you sure to activate this school year?: <?php echo $row['schoolYear']; ?>, <?php  echo $row['stat']; ?></p>
                         <br>
-                        <p style="text-align: center;color:red;">Note: activating this school year, means this school year will be
+                        <p style="text-align: center;color:orange;">Note: activating this school year, means this school year will be
                             attached to documents and only one active school year is possible.
                         </p>
                     </div>
@@ -57,7 +57,7 @@ elseif($row['activated'] == 'no'){
             }elseif(!empty($row1)){
                 ?>
                     <div class="modal-body">
-                        <p style="text-align:center;color:red;">Note: There is already an active school year. It is not possible to have more than 1 active school year at the same time.
+                        <p style="text-align:center;color:orange;">Note: There is already an active school year. It is not possible to have more than 1 active school year at the same time.
                         Please deactivate an existing active school year and try again!.
                         </p>
                     </div>
