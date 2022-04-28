@@ -326,83 +326,6 @@ catch(PDOException $e) {
                 </div>
             </div>
 
-            <?php 
-            if(isset($_SESSION['welcome'])){
-                if ($sem_year_total > 0 && $clerks_total > 0 && $admins_total > 0) {
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Greetings!',
-                        html: '<h4><?php echo $_SESSION['welcome'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-                }
-                else if ($sem_year_total <= 0) {
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Greetings!(almost there)',
-                        html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please do note that there is still no year/sem!.</h4>',                        
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-                }
-                else if ($clerks_total <= 0) {
-                    ?>
-                    <script>
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Greetings!(almost there)',
-                            html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please do note that there is still no clerk user!.</h4>',                        
-                            showConfirmButton: true,
-                            allowOutsideClick: false,
-                            confirmButtonText: 'OKAY!'
-                        });
-                    </script>
-                    <?php
-                    }
-
-                    else if (!$admins_total) {
-                        ?>
-                        <script>
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Greetings!(almost there)',
-                                html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please do note that there is still no admin user!.</h4>',                        
-                                showConfirmButton: true,
-                                allowOutsideClick: false,
-                                confirmButtonText: 'OKAY!'
-                            });
-                        </script>
-                        <?php
-                        }
-                    else {
-                        ?>
-                        <script>
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Greetings!(almost there)',
-                                html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please add a year/sem, clerk, and admin to officialy start the system.</h4>',                        
-                                showConfirmButton: true,
-                                allowOutsideClick: false,
-                                confirmButtonText: 'OKAY!'
-                            });
-                        </script>
-                        <?php
-                        }
-            unset($_SESSION['welcome']);
-            }
-        ?>
-
             <div class="tem-grid">
                 <div class="documents">
                     <div class="card">
@@ -774,6 +697,84 @@ catch(PDOException $e) {
             loader.style.display = "none";
         })
 	</script>
+
+        <?php 
+            if(isset($_SESSION['welcome'])){
+                if ($sem_year_total > 0 && $clerks_total > 0 && $admins_total > 0) {
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Greetings!',
+                        html: '<h4><?php echo $_SESSION['welcome'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+                }
+                else if ($sem_year_total <= 0) {
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Greetings!(almost there)',
+                        html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please do note that there is still no year/sem!.</h4>',                        
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+                }
+                else if ($clerks_total <= 0) {
+                    ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Greetings!(almost there)',
+                            html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please do note that there is still no clerk user!.</h4>',                        
+                            showConfirmButton: true,
+                            allowOutsideClick: false,
+                            confirmButtonText: 'OKAY!'
+                        });
+                    </script>
+                    <?php
+                    }
+
+                    else if (!$admins_total) {
+                        ?>
+                        <script>
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Greetings!(almost there)',
+                                html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please do note that there is still no admin user!.</h4>',                        
+                                showConfirmButton: true,
+                                allowOutsideClick: false,
+                                confirmButtonText: 'OKAY!'
+                            });
+                        </script>
+                        <?php
+                        }
+                    else {
+                        ?>
+                        <script>
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Greetings!(almost there)',
+                                html: '<h4><?php echo $_SESSION['welcome'];?> <br><br> Note: Please add a year/sem, clerk, and admin to officialy start the system.</h4>',                        
+                                showConfirmButton: true,
+                                allowOutsideClick: false,
+                                confirmButtonText: 'OKAY!'
+                            });
+                        </script>
+                        <?php
+                        }
+            unset($_SESSION['welcome']);
+            }
+        ?>
+
 
     <script>
         function menuToggle(){
