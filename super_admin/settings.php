@@ -180,7 +180,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#default_modal">Initialize Default Date Range</a>
-                                <p style="text-align:center;color:orange;"> <span class="las la-info-circle"></span> Initialize the date range for all semesters and summer. Note: This will be disappeared after succesfull initialization of date range.</p>
+                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Initialize the date range for all semesters and summer. Note: This will be disappeared after succesfull initialization of date range.</p>
                             </div>
                             <?php
                         }
@@ -194,7 +194,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
-                                <p style="text-align:center;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 1st semester.</p>
+                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 1st semester.</p>
                             </div>
                         <?php
                         }
@@ -207,7 +207,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
-                                <p style="text-align:center;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 2nd semester.</p>
+                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the 2nd semester.</p>
                             </div>
                             <?php
                         }
@@ -220,7 +220,7 @@ catch(PDOException $e) {
                             ?>
                             <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
-                                <p style="text-align:center;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the summer.</p>
+                                <p style="text-align:start;color:orange;"> <span class="las la-info-circle"></span> Edit the date range for the summer.</p>
                             </div>
                             <?php
                         }
