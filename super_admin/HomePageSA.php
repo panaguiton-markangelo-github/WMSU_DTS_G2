@@ -87,7 +87,7 @@ catch(PDOException $e) {
                     <span>School Year/Sem</span></a>
                 </li> 
                 <li>
-                    <a href="#"><span class="las la-cog"></span>
+                    <a href="settings.php"><span class="las la-cog"></span>
                     <span>Settings</span></a>
                 </li>  
             </ul>
