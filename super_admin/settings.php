@@ -155,55 +155,73 @@ catch(PDOException $e) {
 
 
         <main>
-        
            <div class="container">
-            <?php
-             if(empty($row2)){
-                ?>
-                  <div class="container">
-                      <div class="alert alert-danger d-flex align-items-center" role="alert">
-                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                          <div style="margin-left:10px;text-align:center;">
-                              <?php 
-                                  echo "<h5>No date range set for semesters and summer. Please click initialize default date range first.<h5>";
-                              ?>
-                          </div>
-                      </div>
-                  </div>
                 <?php
-  
-              }
-              ?>
-               
-                <div class="row d-flex justify-content-center">
+                    if(empty($row2)){
+                        ?>
+                        <div class="container">
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                <div style="margin-left:10px;text-align:center;">
+                                    <?php 
+                                        echo "<h5>No date range set for semesters and summer. Please click initialize default date range first.<h5>";
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+        
+                    }
+                ?> 
+           </div>
+           <div class="row d-flex justify-content-center">
                     <?php
                         if(empty($row2)){
                             ?>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#default_modal">Initialize Default Date Range</a>
-                            </div>
-                            <?php
-                        }
-                        else{
-                            ?>
-                            <div class="col-2">
-                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
-                            </div>
-
-                            <div class="col-2">
-                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
-                            </div>
-
-                            <div class="col-2">
-                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
                             </div>
                             <?php
                         }
                     ?>
                     
                 </div>
-                
-           </div>
+
+                <div class="row d-flex justify-content-center">
+                    <?php
+                        if(!empty($row2)){
+                            ?>
+                            <div class="col-3">
+                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#fsem_modal<?php echo $row2['id']; ?>">Edit Date Range 1st sem</a>
+                            </div>
+                        <?php
+                        }
+                    ?>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <?php
+                        if(!empty($row2)){
+                            ?>
+                            <div class="col-3">
+                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <?php
+                        if(!empty($row2)){
+                            ?>
+                            <div class="col-3">
+                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                </div>
        </main>
     </div>
 
