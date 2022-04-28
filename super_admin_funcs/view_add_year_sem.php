@@ -111,7 +111,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 <br>
                 <p style="text-align:center;color:orange;">Note: The semester/summer is automatically set base on the date range set by the system.
                   If you want to change the date range, please click the "edit date range" button to change
-                  the date range of semester/summer.
+                  the date range of semester/summer located at the settings page.
                 </p>
 
                 <div class="modal-footer">
