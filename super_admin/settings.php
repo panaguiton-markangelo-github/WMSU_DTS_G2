@@ -109,7 +109,7 @@ catch(PDOException $e) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Semester/Year
+                Settings
             </h2>
 
         
@@ -174,7 +174,7 @@ catch(PDOException $e) {
                     }
                 ?> 
            </div>
-           <div class="row d-flex justify-content-center">
+           <div class="row d-flex justify-content-start">
                     <?php
                         if(empty($row2)){
                             ?>
@@ -187,7 +187,7 @@ catch(PDOException $e) {
                     
                 </div>
 
-                <div class="row d-flex justify-content-center">
+                <div class="row d-flex justify-content-start">
                     <?php
                         if(!empty($row2)){
                             ?>
@@ -199,19 +199,19 @@ catch(PDOException $e) {
                     ?>
                 </div>
 
-                <div class="row d-flex justify-content-center">
+                <div class="row d-flex justify-content-start">
                     <?php
                         if(!empty($row2)){
                             ?>
                             <div class="col-3">
-                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#sm_modal<?php echo $row2['id']; ?>">Edit Date Range summer</a>
+                                <a class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#ssem_modal<?php echo $row2['id']; ?>">Edit Date Range 2nd sem</a>
                             </div>
                             <?php
                         }
                     ?>
                 </div>
 
-                <div class="row d-flex justify-content-center">
+                <div class="row d-flex justify-content-start">
                     <?php
                         if(!empty($row2)){
                             ?>
