@@ -18,7 +18,7 @@
               <label for="description">Description(Full Office Name):</label>
             </div>
 
-            <p style="text-align: center;color:yellow;">
+            <p style="text-align: center;color:orange;">
                 Note: Only maximum of 3 characters are allowed for the office name field, please enter only the abbreviation of the office. 
                 <b>For example: CCS for College of Computer Studies.</b>
                 You can put the full name of the office in the description field, max length of 150 characters.     

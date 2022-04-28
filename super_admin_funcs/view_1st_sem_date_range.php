@@ -120,11 +120,11 @@
 
             <br>
 
-            <p style="text-align:center;color:yellow;">Current Date Range: <?php echo $row2['first_sem_date']." to ".$row2['end_first_sem_date'];?>
+            <p style="text-align:center;color:orange;">Current Date Range: <?php echo $row2['first_sem_date']." to ".$row2['end_first_sem_date'];?>
             </p>
 
            
-            <p style="text-align:center;color:yellow;">Note: This will change the date range of the 1st semester.
+            <p style="text-align:center;color:orange;">Note: This will change the date range of the 1st semester.
             </p>
             
 
