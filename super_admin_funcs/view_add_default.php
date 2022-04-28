@@ -79,7 +79,7 @@
                 <option value="01" selected>01</option>
             </select>
            
-            <p style="text-align:center;color:green;">Note: This will change the date range of the semesters and summer.
+            <p style="text-align:center;color:orange;">Note: This will change the date range of the semesters and summer.
             </p>
             
 

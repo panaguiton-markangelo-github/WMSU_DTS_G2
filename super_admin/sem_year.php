@@ -97,7 +97,7 @@ catch(PDOException $e) {
                     <span>School Year/Sem</span></a>
                 </li>
                 <li>
-                    <a href="#"><span class="las la-cog"></span>
+                    <a href="settings.php"><span class="las la-cog"></span>
                     <span>Settings</span></a>
                 </li>
                 
@@ -168,7 +168,7 @@ catch(PDOException $e) {
                           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                           <div style="margin-left:10px;text-align:center;">
                               <?php 
-                                  echo "<h5>No date range set for semesters and summer. Please click initialize default date range first.<h5>";
+                                  echo "<h5>No date range set for semesters and summer. Please go to the settings page and click initialize default date range first.<h5>";
                               ?>
                           </div>
                       </div>
