@@ -154,44 +154,6 @@ catch(PDOException $e) {
 
 
         <main>
-       <?php 
-            if(isset($_SESSION['message'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful!!',
-                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-
-                unset($_SESSION['message']);
-            }
-        ?>
-
-        <?php 
-            if(isset($_SESSION['e_message'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        html: '<h4><?php echo $_SESSION['e_message'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-
-                unset($_SESSION['e_message']);
-            }
-        ?>
-
         
            <div class="container">
             <?php
@@ -376,14 +338,50 @@ catch(PDOException $e) {
        </main>
     </div>
 
-   
-
     <script>
         var loader =  document.getElementById("preloader");
         window.addEventListener("load", function(){
             loader.style.display = "none";
         })
 	</script>
+
+    <?php 
+            if(isset($_SESSION['message'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['message']);
+            }
+        ?>
+
+        <?php 
+            if(isset($_SESSION['e_message'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        html: '<h4><?php echo $_SESSION['e_message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['e_message']);
+            }
+        ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

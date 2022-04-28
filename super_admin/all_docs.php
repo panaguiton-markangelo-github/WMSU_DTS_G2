@@ -128,25 +128,6 @@ if(!isset($_SESSION["sa_username"])) {
         <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
 
         <main>
-        <?php 
-            if(isset($_SESSION['message'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful!!',
-                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-
-                unset($_SESSION['message']);
-            }
-        ?>
-
            <div class="container">
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
@@ -303,6 +284,25 @@ if(!isset($_SESSION["sa_username"])) {
             loader.style.display = "none";
         })
 	</script>
+
+        <?php 
+            if(isset($_SESSION['message'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['message']);
+            }
+        ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

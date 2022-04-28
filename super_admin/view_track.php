@@ -183,6 +183,13 @@ if(!isset($_SESSION["sa_username"])) {
 
 
     <script src="../assets/js/sweet_alert.js"></script>
+    
+    <script>
+        var loader =  document.getElementById("preloader");
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+	</script>
 
     <script>
         $(document).ready(function() {
@@ -231,14 +238,7 @@ if(!isset($_SESSION["sa_username"])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <script>
-        var loader =  document.getElementById("preloader");
-        window.addEventListener("load", function(){
-            loader.style.display = "none";
-        })
-	</script>
-      
+    
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
