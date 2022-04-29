@@ -759,9 +759,17 @@ footer a{
         margin-left: 0rem !important;
     }
 
+    .user-wrapper .menu {
+        width: 300px;
+    }
+
 }
 
 @media only screen and (max-width: 560px) {
+
+    .user-wrapper .menu {
+        width: 300px;
+    }
   
     .cards {
         grid-template-columns: 100%;
@@ -783,6 +791,10 @@ footer a{
 }
 
 @media only screen and (max-width: 410px) {
+
+    .user-wrapper .menu {
+        width: 300px;
+    }
    
     .user-wrapper {
         top: 14px;
