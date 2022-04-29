@@ -201,8 +201,8 @@ header label span {
 .user-wrapper .menu h3 {
     width: 100%;
     text-align: center;
-    font-size: 18px;
-    padding: 20px 0;
+    font-size: 15px;
+    padding: 15px 0;
     font-weight: 500;
     line-height: 1.2em;
    
@@ -211,7 +211,7 @@ header label span {
 
 .user-wrapper .menu h3 span {
     color: var(--text-grey);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
 }
 
