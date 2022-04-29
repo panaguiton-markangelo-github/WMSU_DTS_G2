@@ -7,7 +7,7 @@
       </div>
       <form action="../super_admin_funcs/delete_admin.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
-            <p>Are you sure to delete admin user? : <?php echo $row['username']; ?></p>
+            <p style="color:orange;">Are you sure to delete admin user? : <?php echo $row['username']; ?></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>

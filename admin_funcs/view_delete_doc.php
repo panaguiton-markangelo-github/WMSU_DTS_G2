@@ -7,7 +7,7 @@
       </div>
       <form action="../admin_funcs/delete_doc.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
-          <p class="text-center">Are you sure to delete document? : <?php echo $row['title']."."; ?> 
+          <p class="text-center" style="color:orange;">Are you sure to delete document? : <?php echo $row['title']."."; ?> 
           <br>
             <b> The document would still be visible when tracked.</b>
           </p>

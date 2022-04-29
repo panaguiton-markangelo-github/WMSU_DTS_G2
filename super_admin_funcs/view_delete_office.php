@@ -7,7 +7,7 @@
       </div>
       <form action="../super_admin_funcs/delete_office.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
-            <p style="text-align: center;color:red;">
+            <p style="text-align: center;color:orange;">
 
                 Do you wish to delete this office? <?php echo $row['officeName'];?>
             </p>

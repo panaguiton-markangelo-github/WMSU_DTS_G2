@@ -41,7 +41,7 @@
                   <option value="Your Information">Your Information</option>
                 </datalist>
 
-                <p style="text-align:center;color:green;">
+                <p style="text-align:center;color:orange;">
                   Note: Please enter the appropriate details and make the changes.
                   When changing the reason you can just select in the list of reasons provided or you can enter the reason if it is not available in the given list.  
                 </p>

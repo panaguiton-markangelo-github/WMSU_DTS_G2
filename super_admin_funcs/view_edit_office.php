@@ -18,7 +18,7 @@
               <label for="description">Description:</label>
             </div>
 
-            <p style="text-align: center;color:green;">
+            <p style="text-align: center;color:orange;">
                 Note: Only maximum of 3 characters are allowed for the office name field, please enter only the abbreviation of the office. 
                 <b>For example: ICS for Institute of Computer Studies.</b>
                 You can put the full name of the office in the description field, max length of 150 characters.     
