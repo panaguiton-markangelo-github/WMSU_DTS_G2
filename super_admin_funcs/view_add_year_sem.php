@@ -76,9 +76,8 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                       $start_year_con = strtotime($start_year_sub);
                       $start_year = date("Y", $start_year_con);
 
-                      $next_year_sub = substr($row1['schoolYear'],5, 4);
-                      $next_year_con = strtotime($next_year_sub);
-                      $next_year_final = date("Y", $next_year_con);
+                      $next_year = strtotime("+ 1 year", $start_year_con);
+                      $next_year_final = date("Y", $next_year);
 
                   }
                   else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
