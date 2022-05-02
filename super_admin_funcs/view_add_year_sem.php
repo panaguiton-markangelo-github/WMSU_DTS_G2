@@ -52,10 +52,31 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 $e_summer_date = date("m-d", $end_summer);
 
                 if(empty($row1['id'])){
-                  $start_year = date("Y");
-                  $start_year_con = strtotime($start_year);
-                  $next_year = strtotime("+ 1 year", $start_year_con);
-                  $next_year_final = date("Y", $next_year);
+                  if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
+                    $status = "1st semester";
+                    $start_year_sub = substr($row1['schoolYear'],5, 4);
+                    $start_year_con = strtotime($start_year_sub);
+                    $start_year = date("Y", $start_year_con);
+
+                    $next_year = strtotime("+ 1 year", $start_year_con);
+                    $next_year_final = date("Y", $next_year);
+
+                  }
+                  else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
+                      $status = "2nd semester";
+
+                      $start_year_con = date("Y");
+                      $start_year_sub = strtotime("- 1 year", $start_year_con);
+                      $start_year = date("Y", $start_year_sub);
+
+                      $next_year_sub = substr($row1['schoolYear'],0, 4);
+                      $next_year_con = strtotime($next_year_sub);
+                      $next_year_final = date("Y", $next_year_con);
+
+                  }
+                  else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
+                      $status = "summer";
+                  }
                 }
 
                 elseif(!empty($row1['id'])){
@@ -72,12 +93,13 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
                       $status = "2nd semester";
 
-                      $start_year_sub = substr($row1['schoolYear'],0, 4);
-                      $start_year_con = strtotime($start_year_sub);
-                      $start_year = date("Y", $start_year_con);
+                      $start_year_con = date("Y");
+                      $start_year_sub = strtotime("- 1 year", $start_year_con);
+                      $start_year = date("Y", $start_year_sub);
 
-                      $next_year = strtotime("+ 1 year", $start_year_con);
-                      $next_year_final = date("Y", $next_year);
+                      $next_year_sub = substr($row1['schoolYear'],0, 4);
+                      $next_year_con = strtotime($next_year_sub);
+                      $next_year_final = date("Y", $next_year_con);
 
                   }
                   else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
