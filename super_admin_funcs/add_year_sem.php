@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
+	include ("../include/alt_db.php");
 
 	if(isset($_POST['add'])){
 		$database = new Connection();
@@ -18,13 +19,13 @@
 
 			//bind
 			$sql->bindParam(':schoolYear', $year);
-            $sql->bindParam(':stat', $_POST['status']);
+			$sql->bindParam(':stat', $_POST['status']);
 			$sql->bindParam(':activated', $_POST['activate']);
 
 			//if-else statement in executing our prepared statement
 			$_SESSION['message'] = ( $sql->execute()) ? 'School Year was added successfully' : 'Something went wrong. Cannot add school year';
 
-	    
+		
 		}
 		catch(PDOException $e){
 			$_SESSION['e_message'] = "This school year is already existing!";
@@ -35,6 +36,8 @@
 		//close connection
 		$database->close();
 		header('location:../super_admin/sem_year.php?succesful=added');
+		
+		
 	}
 
 	elseif(isset($_POST['update'])){
@@ -47,28 +50,46 @@
 			exit();
 		}
 
-		try{
-			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear WHERE activated = :activated");
+		try {
 
-			//bind
-			$sql->bindParam(':schoolYear', $year);
-			$sql->bindParam(':activated', $_POST['activate']);
-
-			//if-else statement in executing our prepared statement
-			$_SESSION['message'] = ( $sql->execute()) ? 'School Year was updated successfully' : 'Something went wrong. Cannot update year';
-
-	    
+			$query = "SELECT id FROM yearsemester WHERE schoolYear = '".$year."' AND stat = '".$_POST['status']."'";
+			$result = mysqli_query($data, $query);
+			$row = mysqli_fetch_array($result);
 		}
-		catch(PDOException $e){
+		catch(PDOException $e) {
+			$_SESSION['message_fail'] = $e->getMessage();
+		}
+
+		if(!empty($row)){
 			$_SESSION['e_message'] = "This school year is already existing!";
-			header('location:../super_admin/sem_year.php?failed=updated');
+			header('location:../super_admin/sem_year.php?failed=added');
 			exit();
 		}
-
-		//close connection
-		$database->close();
-		header('location:../super_admin/sem_year.php?succesful=updated');
+		
+		elseif(empty($row)) {
+			try{
+				//make use of prepared statement to prevent sql injection
+				$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear WHERE activated = :activated");
+	
+				//bind
+				$sql->bindParam(':schoolYear', $year);
+				$sql->bindParam(':activated', $_POST['activate']);
+	
+				//if-else statement in executing our prepared statement
+				$_SESSION['message'] = ( $sql->execute()) ? 'School Year was updated successfully' : 'Something went wrong. Cannot update year';
+	
+			
+			}
+			catch(PDOException $e){
+				$_SESSION['e_message'] = "This school year is already existing!";
+				header('location:../super_admin/sem_year.php?failed=updated');
+				exit();
+			}
+	
+			//close connection
+			$database->close();
+			header('location:../super_admin/sem_year.php?succesful=updated');
+		}
 	}
 
 	else{
