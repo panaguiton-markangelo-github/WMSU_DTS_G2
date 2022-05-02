@@ -177,11 +177,27 @@ catch(PDOException $e) {
               }
               ?>
             <div class="table-responsive">
-                <div class="row">
-                    <div class="col">
-                        <a class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#add_year_sem">Add New School Year</a>               
+                <?php if(empty($row1['id'])){
+                    ?>
+                     <div class="row">
+                        <div class="col">
+                            <a class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#add_year_sem">Initialize New School Year</a>               
+                        </div>
                     </div>
-                </div>
+                    <?php
+                }
+                elseif(!empty($row1['id'])){
+                    ?>
+                    <div class="row">
+                       <div class="col">
+                           <a class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#add_year_sem">Update School Year</a>               
+                       </div>
+                   </div>
+                   <?php
+                }
+                
+                ?>
+               
             
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
