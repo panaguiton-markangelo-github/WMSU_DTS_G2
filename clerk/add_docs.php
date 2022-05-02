@@ -65,7 +65,6 @@ catch(PDOException $e) {
       <br>
       <br>
 
-      
       <div class="container text-center">
         <h4>ADD DOCUMENT</h4> 
       </div>

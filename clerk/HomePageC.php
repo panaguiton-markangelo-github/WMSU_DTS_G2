@@ -74,7 +74,7 @@ catch(PDOException $e) {
 
 <?php
 try {
-    $query1 = "SELECT * FROM yearsemester";
+    $query1 = "SELECT * FROM yearsemester WHERE activated = 'yes'";
     $result1 = mysqli_query($data, $query1);
     $row1 = mysqli_fetch_array($result1);
    
@@ -249,11 +249,26 @@ catch(PDOException $e) {
                 <div class="row d-flex justify-content-center">
                     <div class="col">
                        <form action="add_docs.php" method="POST">
-                            <div class="input-group">
-                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                                <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
-                                <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
-                            </div>
+                           <?php if(!empty($row1['id'])){
+                               ?>
+                                    <div class="input-group">
+                                        <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
+                                        <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
+                                    </div>
+                               <?php
+                                }
+                                elseif(empty($row1['id'])){
+                                    ?>
+                                     <div class="input-group">
+                                        <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
+                                        <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2" disabled>Add Document</button>
+                                    </div>
+                                    <?php
+                               }
+                               ?>
+                            
                        </form>
                     </div>
                     <div class="col">
@@ -314,7 +329,7 @@ catch(PDOException $e) {
                       <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                       <div style="margin-left:10px;" class="text-center">
                         <?php 
-                            echo "<h5>There is still no semester or year! please ask the super administrator to add it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
+                            echo "<h5>There is still no school year or there is a school year but not yet activiated! please ask the super administrator to add or activate it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
                         ?>
                       </div>
                   </div>
