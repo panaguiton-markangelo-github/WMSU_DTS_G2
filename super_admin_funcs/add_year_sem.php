@@ -69,10 +69,11 @@
 		elseif(empty($row)) {
 			try{
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear WHERE activated = :activated");
+				$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear, stat = :stat WHERE activated = :activated");
 	
 				//bind
 				$sql->bindParam(':schoolYear', $year);
+				$sql->bindParam(':stat', $_POST['status']);
 				$sql->bindParam(':activated', $_POST['activate']);
 	
 				//if-else statement in executing our prepared statement
