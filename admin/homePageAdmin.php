@@ -74,7 +74,7 @@ catch(PDOException $e) {
 
 <?php
 try {
-    $query1 = "SELECT * FROM yearsemester";
+    $query1 = "SELECT * FROM yearsemester WHERE activated = 'yes'";
     $result1 = mysqli_query($data, $query1);
     $row1 = mysqli_fetch_array($result1);
         
