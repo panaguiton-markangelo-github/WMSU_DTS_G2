@@ -211,7 +211,7 @@ catch(PDOException $e) {
                         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                         <div style="margin-left:10px;" class="text-center">
                             <?php 
-                                echo "<h5>There is still no school year or there is a school year but not yet activiated! please ask the super administrator to add or activate it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
+                                echo "<h5>There is still no school year or there is a school year but not yet activiated! please ask the super administrator to add or activate it as soon as possible.<br> Note: For this reason, adding a document is not permitted.<h5>";
                             ?>
                         </div>
                     </div>
