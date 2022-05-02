@@ -23,12 +23,12 @@
 			$sql->bindParam(':activated', $_POST['activate']);
 
 			//if-else statement in executing our prepared statement
-			$_SESSION['message'] = ( $sql->execute()) ? 'School Year was added successfully' : 'Something went wrong. Cannot add school year';
+			$_SESSION['message'] = ( $sql->execute()) ? 'School Year was initialized successfully' : 'Something went wrong. Cannot initialize school year';
 
 		
 		}
 		catch(PDOException $e){
-			$_SESSION['e_message'] = "This school year is already existing!";
+			$_SESSION['e_message'] = "This school year is already existing! Note: You have deactivated this school year, please activate it or delete if it's unnecessary anymore.";
 			header('location:../super_admin/sem_year.php?failed=added');
 			exit();
 		}
@@ -69,11 +69,10 @@
 		elseif(empty($row)) {
 			try{
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear, stat = :stat WHERE activated = :activated");
+				$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear WHERE activated = :activated");
 	
 				//bind
 				$sql->bindParam(':schoolYear', $year);
-				$sql->bindParam(':stat', $_POST['status']);
 				$sql->bindParam(':activated', $_POST['activate']);
 	
 				//if-else statement in executing our prepared statement
