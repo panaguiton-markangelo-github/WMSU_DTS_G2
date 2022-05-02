@@ -171,8 +171,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   </select>
 
                   <br>
-                  <p style="text-align:center;color:orange;">Note: There is already an active school year. you can still add school years,
-                  however it is not possible to have more than 1 active school year at the same time.
+                  <p style="text-align:center;color:orange;">Note: There is already an active school year.,
                   </p>
                   <?php
                 }
