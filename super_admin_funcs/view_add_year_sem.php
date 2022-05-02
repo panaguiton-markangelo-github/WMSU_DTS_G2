@@ -33,7 +33,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
               <?php
             }
             else {
-
+ 
                 $first_sem = strtotime($row2['first_sem_date']);
                 $end_first_sem = strtotime($row2['end_first_sem_date']);
                 $second_sem = strtotime($row2['sec_sem_date']);
@@ -51,21 +51,44 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 $summer_date = date("m-d", $summer);
                 $e_summer_date = date("m-d", $end_summer);
 
+                if(empty($row1['id'])){
+                  $start_year = date("Y");
+                  $start_year_con = strtotime($start_year);
+                  $next_year = strtotime("+ 1 year", $start_year_con);
+                  $next_year_final = date("Y", $next_year);
+                }
+
+                elseif(!empty($row1['id'])){
+                  if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
+                    $status = "1st semester";
+                                        
+                  }
+                  else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
+                      $status = "2nd semester";
+
+                  }
+                  else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
+                      $status = "summer";
+                  }
+                }
+
 
                 if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
                     $status = "1st semester";
+                    
                 }
                 else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
                     $status = "2nd semester";
+
                 }
                 else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
                     $status = "summer";
-              }
+                }
               ?>
                 <div class="row d-flex justify-content-center align-content-center">
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="startYear" name="startYear" min="2020" max="2030" required>
+                      <input type="text" class="form-control" id="startYear" name="startYear" value="<?php echo $start_year;?>" readonly required>
                       <label for="startYear">Year:</label>
                     </div>     
                   </div>
@@ -76,7 +99,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="endYear" name="endYear" min="2020" max="2030" required>
+                      <input type="text" class="form-control" id="endYear" name="endYear" value="<?php echo $next_year_final;?>" readonly required>
                       <label for="endYear">Year:</label>
                     </div>
                   </div>

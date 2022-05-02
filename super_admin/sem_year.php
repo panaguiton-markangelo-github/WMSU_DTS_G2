@@ -9,7 +9,7 @@ include ("../include/alt_db.php");
 <?php
 try {
 
-    $query1 = "SELECT * FROM yearsemester WHERE activated= 'yes'";
+    $query1 = "SELECT * FROM yearsemester WHERE activated = 'yes'";
     $result1 = mysqli_query($data, $query1);
     $row1 = mysqli_fetch_array($result1);
 }
