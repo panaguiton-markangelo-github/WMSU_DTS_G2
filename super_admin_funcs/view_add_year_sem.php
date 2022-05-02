@@ -202,12 +202,6 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 <?php
                 }
                 ?>
-                
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" name="add" class="btn btn-success">Save changes</button>
-                </div>
-
               <?php
             }
               ?>                  
