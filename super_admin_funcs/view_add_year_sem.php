@@ -9,7 +9,20 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add School Year</h5>
+      <?php 
+                if(empty($row1['id'])){
+                  ?>
+                   <h5 class="modal-title">Initialize New School Year</h5>
+                  <?php
+                }
+
+                elseif(!empty($row1['id'])){
+                  ?>
+                   <h5 class="modal-title">Update School Year</h5>
+                <?php
+                }
+                ?>
+       
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="../super_admin_funcs/add_year_sem.php" method="post">
@@ -66,17 +79,16 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $start_year = date("Y", $start_year_con2);
 
                     $next_year_final = date("Y");
-                }
+                  }
 
-                else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
-                  $start_year_s = date("Y");
-                  $start_year_con = strtotime($start_year_s);
-                  $start_year_con2 = strtotime("- 1 year", $start_year_con);
-                  $start_year = date("Y", $start_year_con2);
+                  else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
+                    $start_year_s = date("Y");
+                    $start_year_con = strtotime($start_year_s);
+                    $start_year_con2 = strtotime("- 1 year", $start_year_con);
+                    $start_year = date("Y", $start_year_con2);
 
-                  $next_year_final = date("Y");
-                }
-
+                    $next_year_final = date("Y");
+                  }
                 }
 
                 elseif(!empty($row1['id'])){
@@ -106,7 +118,6 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $next_year_final = date("Y");
                   }
                 }
-
 
                 if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
                     $status = "1st semester";
@@ -172,10 +183,31 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   the date range of semester/summer located at the settings page.
                 </p>
 
+                <?php 
+                if(empty($row1['id'])){
+                  ?>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" name="add" class="btn btn-success">Save changes</button>
+                    </div>
+                  <?php
+                }
+
+                elseif(!empty($row1['id'])){
+                  ?>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" name="update" class="btn btn-success">Save changes</button>
+                  </div>
+                <?php
+                }
+                ?>
+                
                 <div class="modal-footer">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                   <button type="submit" name="add" class="btn btn-success">Save changes</button>
                 </div>
+
               <?php
             }
               ?>                  
