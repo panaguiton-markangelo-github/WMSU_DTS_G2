@@ -61,7 +61,7 @@
 		}
 
 		if(!empty($row)){
-			$_SESSION['e_message'] = "This school year is already existing!";
+			$_SESSION['e_message'] = "This school year is already existing and the status is still the same!!";
 			header('location:../super_admin/sem_year.php?failed=added');
 			exit();
 		}
