@@ -10,7 +10,7 @@ include ("../include/alt_db.php");
 <?php
 try {
 
-    $query1 = "SELECT * FROM yearsemester";
+    $query1 = "SELECT * FROM yearsemester WHERE activated = 'yes'";
     $result1 = mysqli_query($data, $query1);
     $row1 = mysqli_fetch_array($result1);
 }
@@ -18,7 +18,6 @@ catch(PDOException $e) {
     $_SESSION['message'] = $e->getMessage();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,44 +94,6 @@ catch(PDOException $e) {
         </div>
     </div>
 
-    <?php 
-        if(isset($_SESSION['message'])){
-            ?>
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Successful!!',
-                    html: '<h4><?php echo $_SESSION['message']?></h4>',
-                    showConfirmButton: true,
-                    allowOutsideClick: false,
-                    confirmButtonText: 'OKAY!'
-                });
-            </script>
-            <?php
-
-            unset($_SESSION['message']);
-        }
-    ?>
-
-    <?php 
-        if(isset($_SESSION['message_fail'])){
-            ?>
-            <script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Failed!!',
-                    html: '<h4><?php echo $_SESSION['message_fail']?></h4>',
-                    showConfirmButton: true,
-                    allowOutsideClick: false,
-                    confirmButtonText: 'OKAY!'
-                });
-            </script>
-            <?php
-
-            unset($_SESSION['message_fail']);
-        }
-    ?>
-
     <div class="main-content">
         <header>
             <h2>
@@ -186,7 +147,7 @@ catch(PDOException $e) {
 
         <main>
         <?php 
-          if(!empty($row1)){
+          if(!empty($row1['id'])){
             ?>
             <div class="container" style="display:none;">
                 <div class="alert alert-success d-flex align-items-center" role="alert">
@@ -201,7 +162,7 @@ catch(PDOException $e) {
             </div>
             <?php 
           }
-              else{
+            elseif(empty($row1['id'])){
                   ?>
                     <div class="container">
                         <div class="alert alert-danger d-flex align-items-center" role="alert">
@@ -214,8 +175,8 @@ catch(PDOException $e) {
                         </div>
                     </div>
                   <?php
-              }
-              ?>
+            }
+            ?>
     
         <div class="container">
             <div class="cards">
