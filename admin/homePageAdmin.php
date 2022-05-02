@@ -207,22 +207,22 @@ catch(PDOException $e) {
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
         
         <main>
-        <?php 
-          if(empty($row1)){
-              ?>
-              <div class="container">
-                  <div class="alert alert-danger d-flex align-items-center" role="alert">
-                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                      <div style="margin-left:10px;" class="text-center">
-                        <?php 
-                            echo "<h5>There is still no semester or year! please ask the super administrator to add it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
-                        ?>
-                      </div>
-                  </div>
-              </div>
-              <?php
-          }
-        ?>
+            <?php 
+            if(empty($row1)){
+                ?>
+                <div class="container">
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div style="margin-left:10px;" class="text-center">
+                            <?php 
+                                echo "<h5>There is still no school year or there is a school year but not yet activiated! please ask the super administrator to add or activate it as soon as possible. <br> <br> Note: For this reason, adding a document is not permitted.<h5>";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
 
         <div class="container">
           <div class="cards">
@@ -300,11 +300,25 @@ catch(PDOException $e) {
                 <div class="row d-flex justify-content-center">
                     <div class="col">
                        <form action="add_docs.php" method="POST">
-                            <div class="input-group">
-                                <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
-                                <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
-                                <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
-                            </div>
+                            <?php if(!empty($row1['id'])){
+                               ?>
+                                    <div class="input-group">
+                                        <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
+                                        <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2">Add Document</button>
+                                    </div>
+                               <?php
+                                }
+                                elseif(empty($row1['id'])){
+                                    ?>
+                                     <div class="input-group">
+                                        <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="text" name="trackingID" class="form-control border border-dark" value="<?php echo $_SESSION["trackID"];?>" aria-label="Tracking ID" aria-describedby="button-addon2" readonly>
+                                        <button class="btn btn-outline-success fw-bold" type="submit" id="button-addon2" disabled>Add Document</button>
+                                    </div>
+                                    <?php
+                               }
+                            ?>
                        </form>
                     </div>
                     <div class="col">
