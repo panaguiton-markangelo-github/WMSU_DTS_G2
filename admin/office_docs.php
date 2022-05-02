@@ -90,7 +90,7 @@ if(!isset($_SESSION["a_username"])) {
                     <img src="../assets/img/wmsu_logo.png" alt="user">
                 </div>   
                 <div class="menu">
-                    <h3><?php echo $_SESSION["a_username"]; ?> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
+                    <h3><?php echo $_SESSION["a_username"]; ?> <br> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
                     <ul>
                         <?php
                             //include our connection

@@ -118,7 +118,7 @@ catch(PDOException $e) {
                     <img src="../assets/img/wmsu_logo.png" alt="user">
                 </div>   
                 <div class="menu">
-                    <h3><?php echo $_SESSION["sa_username"]; ?> <span>Super admin</span></h3> 
+                    <h3><?php echo $_SESSION["sa_username"]; ?> <br> <span>Super admin</span></h3> 
                     <ul>
                         <?php
                             //include our connection
