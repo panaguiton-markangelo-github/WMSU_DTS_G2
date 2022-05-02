@@ -153,23 +153,6 @@ catch(PDOException $e) {
     </div>
     
     <div class="main-content">
-    <?php 
-        if(empty($row1)){
-              ?>
-              <div class="container">
-                  <div class="alert alert-danger d-flex align-items-center" role="alert">
-                      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                      <div style="margin-left:10px;" class="text-center">
-                        <?php 
-                            echo "<h5>There is still no school year or there is a school year but not yet activiated! please ask the super administrator to add or activate it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
-                        ?>
-                      </div>
-                  </div>
-              </div>
-              <?php
-          }
-        ?>
-        
         <header>
             <h2>
                 <label for="nav-toggle">
@@ -220,6 +203,22 @@ catch(PDOException $e) {
 
         <main>
         <div class="container">
+            <?php 
+            if(empty($row1)){
+                ?>
+                <div class="container">
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                        <div style="margin-left:10px;" class="text-center">
+                            <?php 
+                                echo "<h5>There is still no school year or there is a school year but not yet activiated! please ask the super administrator to add or activate it as soon as possible. <br> Note: This may cause unwanted error in the system!<h5>";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
         <div class="cards">
             <div class="card-single">
                 <div>
