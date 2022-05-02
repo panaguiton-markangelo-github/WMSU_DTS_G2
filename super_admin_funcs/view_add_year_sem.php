@@ -67,6 +67,16 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                     $next_year_final = date("Y");
                 }
+
+                else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
+                  $start_year_s = date("Y");
+                  $start_year_con = strtotime($start_year_s);
+                  $start_year_con2 = strtotime("- 1 year", $start_year_con);
+                  $start_year = date("Y", $start_year_con2);
+
+                  $next_year_final = date("Y");
+                }
+
                 }
 
                 elseif(!empty($row1['id'])){
@@ -80,23 +90,20 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $next_year_final = date("Y", $next_year);
                   }
                   else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
-                    /*$start_year_s = date("Y");
+                    $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
                     $start_year = date("Y", $start_year_con2);
 
-                    $next_year_final = date("Y"); */
-                    
-                    $start_year_sub = substr($row1['schoolYear'],5, 4);
-                    $start_year_con = strtotime($start_year_sub);
-                    $start_year = date("Y", $start_year_con);
-
-                    $next_year = strtotime("+ 1 year", $start_year_con);
-                    $next_year_final = date("Y", $next_year);
-
+                    $next_year_final = date("Y");
                   }
                   else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
-                      $status = "summer";
+                    $start_year_s = date("Y");
+                    $start_year_con = strtotime($start_year_s);
+                    $start_year_con2 = strtotime("- 1 year", $start_year_con);
+                    $start_year = date("Y", $start_year_con2);
+
+                    $next_year_final = date("Y");
                   }
                 }
 
