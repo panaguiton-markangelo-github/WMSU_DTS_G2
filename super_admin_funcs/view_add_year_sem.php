@@ -166,10 +166,6 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 }
                 elseif(!empty($row1)){
                   ?>
-                  <select class="form-select text-dark" name="activate" id="officeName" required>
-                    <option value="no" selected>Activate: no</option>
-                  </select>
-
                   <br>
                   <p style="text-align:center;color:orange;">Note: There is already an active school year.,
                   </p>
