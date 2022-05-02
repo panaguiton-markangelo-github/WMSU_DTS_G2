@@ -70,7 +70,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                     $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
-                    $start_year_con2 = strtotime("- 1 year", $start_year_s);
+                    $start_year_con2 = strtotime("- 1 year", $start_year_con);
                     $start_year = date("Y", $start_year_con2);
 
                     $next_year_final = date("Y");
