@@ -133,6 +133,29 @@ if(!isset($_SESSION["sa_username"])) {
 
         <main>
            <div class="container">
+               <div class="row">
+                   <div class="col-4">
+                        <select id="s_type" class="form-select">
+                            <option value=""></option>
+                        </select>
+                   </div>
+                   <div class="col-md-4">
+                        <select id="s_school_year" class="form-select">
+                            <option value=""></option>
+                        </select>
+                   </div>
+               </div>
+               <div class="row">
+                   <div class="col-md-12">
+                    <div>
+                        <button id="filter" class="btn btn-sm btn-outline-info">Filter</button>
+                        <button id="reset_type" class="btn btn-sm btn-outline-info">Reset Type</button>
+                        <button id="reset_school_year" class="btn btn-sm btn-outline-info">Reset School Year</button>
+                        <button id="reset" class="btn btn-sm btn-outline-warning">Reset</button>
+                    </div>
+                   </div>
+               </div>
+               
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
@@ -357,22 +380,8 @@ if(!isset($_SESSION["sa_username"])) {
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-            var table = $('#data_table').DataTable({
-                "processing":true,
-                "bLengthChange":false,
-                "iDisplayLength":15
-            });
-
-            $("filterhead").each( function (i) {
-                var select = $('<select> <option value=""> </option> </select>')
-                .appendTo( $(this).empty() )
-                .on('change', function () {
-                    var term = $(this).val();
-                    table.column(i).search(term, false, false).draw();
-                });
-                table.column(i).data().unique().sort().each( function (d, j) {
-                    select.append('<option value="'+d+'"> '+d+' </option>')
-                });
+            $('#data_table').DataTable({
+                "processing":true
             });
         });
     </script>

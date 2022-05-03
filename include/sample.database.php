@@ -22,7 +22,103 @@ Class Connection{
 	public function close(){
    		$this->conn = null;
  	}
+
+	 // Fetch Type
+
+	 public function fetch_type()
+	 {
+		 $data = [];
  
+		 $query = "SELECT DISTINCT `type` FROM `documents` ORDER BY `type` ASC";
+		 if ($sql = $this->conn->query($query)) {
+			 while ($row = mysqli_fetch_assoc($sql)) {
+				 $data[] = $row;
+			 }
+		 }
+ 
+		 return $data;
+	 }
+ 
+	 // Fetch School Year
+ 
+	 public function fetch_school_year()
+	 {
+		 $data = [];
+ 
+		 $query = "SELECT DISTINCT `schoolYear` FROM `documents`";
+		 if ($sql = $this->conn->query($query)) {
+			 while ($row = mysqli_fetch_assoc($sql)) {
+				 $data[] = $row;
+			 }
+		 }
+ 
+		 return $data;
+	 }
+ 
+	 // Fetch Records
+ 
+	 public function fetch()
+	 {
+		 $data = [];
+ 
+		 $query = "SELECT * FROM documents";
+		 if ($sql = $this->conn->query($query)) {
+			 while ($row = mysqli_fetch_assoc($sql)) {
+				 $data[] = $row;
+			 }
+		 }
+ 
+		 return $data;
+	 }
+ 
+	 // Filter Type and School Year
+ 
+	 public function fetch_filter($type, $school_year)
+	 {
+		 $data = [];
+ 
+		 $query = "SELECT * FROM documents WHERE type = '$type' AND schoolYear = '$school_year' ";
+		 if ($sql = $this->conn->query($query)) {
+			 while ($row = mysqli_fetch_assoc($sql)) {
+				 $data[] = $row;
+			 }
+		 }
+ 
+		 return $data;
+	 }
+ 
+	 // Filter Type
+ 
+	 public function fetch_type_filter($type)
+	 {
+		 $data = [];
+ 
+		 $query = "SELECT * FROM documents WHERE type = '$type'";
+		 if ($sql = $this->conn->query($query)) {
+			 while ($row = mysqli_fetch_assoc($sql)) {
+				 $data[] = $row;
+			 }
+		 }
+ 
+		 return $data;
+	 }
+ 
+	 // Filter School Year
+ 
+	 public function fetch_school_year_filter($school_year)
+	 {
+		 $data = [];
+ 
+		 $query = "SELECT * FROM documents WHERE schoolYear = '$school_year'";
+		 if ($sql = $this->conn->query($query)) {
+			 while ($row = mysqli_fetch_assoc($sql)) {
+				 $data[] = $row;
+			 }
+		 }
+ 
+		 return $data;
+	 }
+
 }
  
 ?>
