@@ -392,6 +392,12 @@ if(!isset($_SESSION["sa_username"])) {
 
                     },
                     success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
                         $(".container").html(data);
                     }
                 });
