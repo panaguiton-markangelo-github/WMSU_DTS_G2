@@ -139,13 +139,12 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 </div>
 
                 <datalist id="s_year">
-                  <option value=""> Suggestion: </option>
-                  <option value="<?php echo $start_year;?>"> <?php echo $start_year;?> </option>
+                  <option value="<?php echo $start_year;?>"> Suggestion: <?php echo $start_year;?> </option>
                 </datalist>
 
                 <datalist id="e_year">
                   <option value=""> Suggestion: </option>
-                  <option value="<?php echo $next_year_final;?>"> <?php echo $next_year_final;?> </option>
+                  <option value="<?php echo $next_year_final;?>"> Suggestion: <?php echo $next_year_final;?> </option>
                 </datalist>
 
                 <input type="text" class="form-control" id="status" name="status" value="<?php echo $status?>" hidden>
