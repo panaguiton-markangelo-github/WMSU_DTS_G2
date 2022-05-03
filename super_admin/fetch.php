@@ -67,7 +67,7 @@ if(isset($_POST['request'])){
             ?>
         </thead>
 
-        <tbody>
+        <tbody id="data_table">
             <?php
             while($row = mysqli_fetch_assoc($result)){
                 $no++;
@@ -143,6 +143,14 @@ if(isset($_POST['request'])){
         </tbody>
 
 </table>
+
+<script>
+    $(document).ready(function() {
+        $('#data_table').DataTable({
+            "processing":true
+        });
+    });
+</script>
 
 <?php
 } 
