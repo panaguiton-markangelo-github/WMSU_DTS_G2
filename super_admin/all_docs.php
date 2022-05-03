@@ -132,7 +132,7 @@ if(!isset($_SESSION["sa_username"])) {
 
         <main>
         <div class="filters row mb-3"> 
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <span>Filter By:</span>
                 </div>    
                    <div class="col-md-2">
