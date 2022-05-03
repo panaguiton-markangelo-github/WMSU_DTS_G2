@@ -391,7 +391,7 @@ if(!isset($_SESSION["sa_username"])) {
             $("#s_type").on('change', function(){
                 var value = $(this).val();
                 $.ajax({
-                    url:"fetch_docs.php",
+                    url:"../super_admin_funcs/fetch_docs.php",
                     type:"POST",
                     data:'request_arc=' + value,
                     beforeSend:function(){
@@ -418,7 +418,7 @@ if(!isset($_SESSION["sa_username"])) {
             $("#s_school_year").on('change', function(){
                 var value = $(this).val();
                 $.ajax({
-                    url:"fetch.php",
+                    url:"../super_admin_funcs/fetch_docs.php",
                     type:"POST",
                     data:'request_arc_year=' + value,
                     beforeSend:function(){
