@@ -3,7 +3,10 @@ include '../include/alt_db.php';
 
 if(isset($_POST['request'])){
     $request = $_POST['request'];
-    $query = "SELECT * FROM documents WHERE type = '$request';";
+    $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
+    INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+    INNER JOIN users ON users.id = documents.user_id WHERE documents.type = '$request'
+    ORDER BY documents.id DESC;";
     $result = mysqli_query($data, $query);
     $count = mysqli_num_rows($result);
 
