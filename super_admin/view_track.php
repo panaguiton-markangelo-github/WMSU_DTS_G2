@@ -207,7 +207,7 @@ if(!isset($_SESSION["sa_username"])) {
                     beforeSend: function() {
                         Swal.fire({
                             icon: 'info',
-                            html: "<h1> <img src='../assets/img/loading_sweet.gif' width='50px' height='50px' ></img> &nbsp;Please wait ...</h1>",
+                            html: "<h1> &nbsp;Please wait ...</h1>",
                             showConfirmButton: false,
                             allowOutsideClick: false
                         });

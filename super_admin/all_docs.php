@@ -376,8 +376,6 @@ if(!isset($_SESSION["sa_username"])) {
         $(document).ready(function (){
             $("#s_type").on('change', function(){
                 var value = $(this).val();
-                //alert(value);
-
                 $.ajax({
                     url:"fetch.php",
                     type:"POST",
@@ -385,7 +383,34 @@ if(!isset($_SESSION["sa_username"])) {
                     beforeSend:function(){
                         Swal.fire({
                             icon: 'info',
-                            html: "<h1> <img src='../assets/img/loading_sweet.gif' width='50px' height='50px' ></img> &nbsp;Please wait ...</h1>",
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+
+            $("#s_school_year").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"fetch.php",
+                    type:"POST",
+                    data:'request_year=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
                             showConfirmButton: false,
                             allowOutsideClick: false
                         });
