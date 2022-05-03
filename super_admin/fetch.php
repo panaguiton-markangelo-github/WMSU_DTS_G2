@@ -13,7 +13,7 @@ if(isset($_POST['request'])){
 
 ?>
 
-<table>
+<table id="data_table_2">
     <?php 
     if($count){
     ?>
@@ -68,7 +68,7 @@ if(isset($_POST['request'])){
             ?>
         </thead>
 
-        <tbody id="data_table_2">
+        <tbody>
             <?php
             while($row = mysqli_fetch_assoc($result)){
                 $no++;
