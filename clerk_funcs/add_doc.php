@@ -110,7 +110,7 @@
 							$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 							
 							//make use of prepared statement to prevent sql injection
-							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :user_id, :yearSemID);");
+							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, schoolYear, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :schoolYear, :user_id, :yearSemID);");
 							
 							//bind
 							$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -120,6 +120,7 @@
 							$sql->bindParam(':remarks', $_POST['remarks']);
 							$sql->bindParam(':status', $status);
 							$sql->bindParam(':file', $fileNameNew);
+							$sql->bindParam(':schoolYear', $_POST['schoolYear']);
 							$sql->bindParam(':user_id', $_POST['user_id']);
 							$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 				
@@ -178,7 +179,7 @@
 				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 				
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :user_id, :yearSemID);");
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID);");
 				
 				//bind
 				$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -187,6 +188,7 @@
 				$sql->bindParam(':reason', $reason);
 				$sql->bindParam(':remarks', $_POST['remarks']);
 				$sql->bindParam(':status', $status);
+				$sql->bindParam(':schoolYear', $_POST['schoolYear']);
 				$sql->bindParam(':user_id', $_POST['user_id']);
 				$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 
@@ -331,7 +333,7 @@
 							$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 							
 							//make use of prepared statement to prevent sql injection
-							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :user_id, :yearSemID);");
+							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, schoolYear, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :schoolYear, :user_id, :yearSemID);");
 							
 							//bind
 							$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -341,6 +343,7 @@
 							$sql->bindParam(':remarks', $_POST['remarks']);
 							$sql->bindParam(':status', $status);
 							$sql->bindParam(':file', $fileNameNew);
+							$sql->bindParam(':schoolYear', $_POST['schoolYear']);
 							$sql->bindParam(':user_id', $_POST['user_id']);
 							$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 				
@@ -398,7 +401,7 @@
 				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 				
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :user_id, :yearSemID);");
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID);");
 				
 				//bind
 				$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -407,6 +410,7 @@
 				$sql->bindParam(':reason', $reason);
 				$sql->bindParam(':remarks', $_POST['remarks']);
 				$sql->bindParam(':status', $status);
+				$sql->bindParam(':schoolYear', $_POST['schoolYear']);
 				$sql->bindParam(':user_id', $_POST['user_id']);
 				$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 

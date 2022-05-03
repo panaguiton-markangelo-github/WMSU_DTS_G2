@@ -174,6 +174,7 @@ catch(PDOException $e) {
 
           <input name="user_id" type="number" value="<?php echo $_SESSION['userID'];?>" hidden>
           <input name="office" type="text" value="<?php echo $row1['officeName'] ?>" hidden>
+          <input name="schoolYear" type="text" value="<?php echo $row['schoolYear'] ?>" hidden>
           <input name="schoolYear_id" type="text" value="<?php echo $row['id'] ?>" hidden>
           <input name="status_draft" type="text" value="pending" hidden>    
           <input name="status_rel" type="text" value="released" hidden>  
