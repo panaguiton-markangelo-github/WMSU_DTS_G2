@@ -90,7 +90,7 @@ if(!isset($_SESSION["a_username"])) {
 
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
-                    <img src="../assets/img/wmsu_logo.png" alt="user">
+                    <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
                 </div>   
                 <div class="menu">
                     <h3><?php echo $_SESSION["a_username"]; ?> <br> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
