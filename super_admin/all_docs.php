@@ -135,7 +135,7 @@ if(!isset($_SESSION["sa_username"])) {
             <span>Filter By:</span>
                    <div class="col-2">
                         <select id="s_type" class="form-select">
-                            <option value="" disabled="" selected> filter type: </option>
+                            <option value="" disabled="" selected> Type: </option>
                             <option value="none" ></option>
                             <?php
                                 //include our connection
@@ -164,7 +164,7 @@ if(!isset($_SESSION["sa_username"])) {
                    </div>
                    <div class="col-3">
                         <select id="s_school_year" class="form-select">
-                            <option value="" disabled="" selected> filter school year: </option>
+                            <option value="" disabled="" selected> School year: </option>
                             <option value="none" ></option>
                             <?php
                                 //include our connection
@@ -379,7 +379,7 @@ if(!isset($_SESSION["sa_username"])) {
             $("#s_type").on('change', function(){
                 var value = $(this).val();
                 $.ajax({
-                    url:"fetch.php",
+                    url:"fetch_docs.php",
                     type:"POST",
                     data:'request=' + value,
                     beforeSend:function(){
