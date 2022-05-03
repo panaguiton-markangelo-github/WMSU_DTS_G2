@@ -74,50 +74,7 @@ if(isset($_POST['request'])){
             <?php
     }
     else{
-        ?>
-            <tr>
-                <th>
-                    No.
-                </th>
-
-                <th>
-                    Originating Office
-                </th>
-
-                <th>
-                    Tracking ID
-                </th>
-                
-                <th>
-                    Title
-                </th>
-
-                <th>
-                    Type
-                </th>
-
-                <th>
-                    Reason
-                </th>
-
-                <th>
-                    Remarks
-                </th>
-
-                <th>
-                    Status
-                </th>
-
-                <th>
-                    School Year
-                </th>
-
-                <th>
-                    View
-                </th>
-
-            </tr>
-        <?php
+        echo "Sorry! No record found!";
     }
             ?>
         </thead>
@@ -289,50 +246,7 @@ if(isset($_POST['request_year'])){
             <?php
     }
     else{
-        ?>
-            <tr>
-                <th>
-                    No.
-                </th>
-
-                <th>
-                    Originating Office
-                </th>
-
-                <th>
-                    Tracking ID
-                </th>
-                
-                <th>
-                    Title
-                </th>
-
-                <th>
-                    Type
-                </th>
-
-                <th>
-                    Reason
-                </th>
-
-                <th>
-                    Remarks
-                </th>
-
-                <th>
-                    Status
-                </th>
-
-                <th>
-                    School Year
-                </th>
-
-                <th>
-                    View
-                </th>
-
-            </tr>
-        <?php
+        echo "Sorry! No record found!";
     }
             ?>
         </thead>
@@ -504,50 +418,7 @@ if(isset($_POST['request_arc'])){
             <?php
     }
     else{
-        ?>
-            <tr>
-                <th>
-                    No.
-                </th>
-
-                <th>
-                    Originating Office
-                </th>
-
-                <th>
-                    Tracking ID
-                </th>
-                
-                <th>
-                    Title
-                </th>
-
-                <th>
-                    Type
-                </th>
-
-                <th>
-                    Reason
-                </th>
-
-                <th>
-                    Remarks
-                </th>
-
-                <th>
-                    Status
-                </th>
-
-                <th>
-                    School Year
-                </th>
-
-                <th>
-                    View
-                </th>
-
-            </tr>
-        <?php
+        echo "Sorry! No record found!";
     }
             ?>
         </thead>
@@ -719,50 +590,7 @@ if(isset($_POST['request_arc_year'])){
             <?php
     }
     else{
-        ?>
-        <tr>
-            <th>
-                No.
-            </th>
-
-            <th>
-                Originating Office
-            </th>
-
-            <th>
-                Tracking ID
-            </th>
-            
-            <th>
-                Title
-            </th>
-
-            <th>
-                Type
-            </th>
-
-            <th>
-                Reason
-            </th>
-
-            <th>
-                Remarks
-            </th>
-
-            <th>
-                Status
-            </th>
-
-            <th>
-                School Year
-            </th>
-
-            <th>
-                View
-            </th>
-
-        </tr>
-    <?php
+        echo "Sorry! No record found!";
     }
             ?>
         </thead>
