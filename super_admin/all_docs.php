@@ -132,7 +132,7 @@ if(!isset($_SESSION["sa_username"])) {
 
         <main>
         <div class="filters row mb-3"> 
-            <p>Filter By:</p>
+            <span>Filter By:</span>
                    <div class="col-2">
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> filter type: </option>
