@@ -70,6 +70,7 @@ if(isset($_POST['request'])){
         <tbody>
             <?php
             while($row = mysqli_fetch_assoc($result)){
+                $no++;
             ?>
             <tr>
                 <td>
