@@ -133,29 +133,64 @@ if(!isset($_SESSION["sa_username"])) {
 
         <main>
            <div class="container">
-               <div class="row mb-3">
+               <div class="filters row mb-3">
                    <div class="col-md-2">
                         <select id="s_type" class="form-select">
-                            <option value=""></option>
+                            <option value="" disabled=""> filter type: </option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT type FROM documents;";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['type'];?>"> <?php echo $row['type'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
                         </select>
                    </div>
                    <div class="col-md-2">
                         <select id="s_school_year" class="form-select">
-                            <option value=""></option>
+                            <option value="" disabled=""> filter school year: </option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT schoolYear FROM documents;";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['schoolYear'];?>"> <?php echo $row['schoolYear'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
                         </select>
                    </div>
                </div>
-               <div class="row mb-3">
-                   <div class="col-md-12">
-                        <div>
-                            <button id="filter" class="btn btn-sm btn-outline-success">Filter</button>
-                            <button id="reset_type" class="btn btn-sm btn-outline-warning">Reset Type</button>
-                            <button id="reset_school_year" class="btn btn-sm btn-outline-warning">Reset School Year</button>
-                            <button id="reset" class="btn btn-sm btn-outline-warning">Reset</button>
-                        </div>
-                   </div>
-               </div>
-      
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>                   
@@ -298,57 +333,6 @@ if(!isset($_SESSION["sa_username"])) {
                                         
                         </tbody>
                     </table>
-
-                    <!-- ajax table-->
-
-                    <table id="ajax_table" class="table table-striped table-hover">
-                        <thead>                   
-                            <tr>
-                                <th>
-                                    No.
-                                </th>
-
-                                <th>
-                                    Originating Office
-                                </th>
-
-                                <th>
-                                    Tracking ID
-                                </th>
-                                
-                                <th>
-                                    Title
-                                </th>
-
-                                <th>
-                                    Type
-                                </th>
-
-                                <th>
-                                    Reason
-                                </th>
-
-                                <th>
-                                    Remarks
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                                <th>
-                                    School Year
-                                </th>
-
-                                <th>
-                                    View
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>    
-                        </tbody>
-                    </table>
                 </div>
            </div>
         </main>
@@ -391,137 +375,6 @@ if(!isset($_SESSION["sa_username"])) {
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-    <script>
-        function fetch_type() {
-            $.ajax({
-                url: "fetch_type.php",
-                type: "post",
-                dataType: "json",
-                success: function(data) {
-                    var typeBody = "";
-                    for (var key in data) {
-                        typeBody += `<option value="${data[key]['type']}">${data[key]['type']}</option>`;
-                    }
-                    $("#s_type").append(typeBody);
-                }
-            });
-        }
-        fetch_type();
-
-        function fetch_school_year() {
-            $.ajax({
-                url: "fetch_school_year.php",
-                type: "post",
-                dataType: "json",
-                success: function(data) {
-                    var schoolYearBody = "";
-                    for (var key in data) {
-                        schoolYearBody += `<option value="${data[key]['schoolYear']}">${data[key]['schoolYear']}</option>`;
-                    }
-                    $("#s_school_year").append(schoolYearBody);
-                }
-            });
-        }
-        fetch_school_year();
-
-        function fetch(type, schoolYear) {
-            $.ajax({
-                url: "records.php",
-                type: "post",
-                data: {
-                    type: type,
-                    schoolYear: schoolYear
-                },
-                dataType: "json",
-                success: function(data) {
-                    var i = 1;
-                    $('#ajax_table').DataTable({
-                        "data": data,
-                        "responsive": true,
-                        "columns": [{
-                                "data": "id",
-                                "render": function(data, type, row, meta) {
-                                    return i++;         
-                                }
-                            },
-                            {
-                                "data": " origin_office",
-                                "render": function(data, type, row, meta) {
-                                return `${row.origin_office}th Originating Office`;
-                                }
-                            },
-                            {
-                                "data": "trackingID",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.trackingID}th Tracking ID`;
-                                }
-                            },
-                            {
-                                "data": "title",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.title}th Title`;
-                                }
-                            },
-                            {
-                                "data": "type",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.type}th Type`;
-                                }
-                            },
-                            {
-                                "data": "reason",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.reason}th Reason`;
-                                }
-                            },
-                            {
-                                "data": "remarks",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.remarks}th Remarks`;
-                                }
-                            },
-                            {
-                                "data": "status",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.status}th Status`;
-                                }
-                            },
-                            {
-                                "data": "schoolYear",
-                                "render": function(data, type, row, meta) {
-                                    return `${row.schoolYear}th School Year`;
-                                }
-                            }
-
-                        ]
-                    });
-                }
-            });
-        }
-        fetch();
-
-
-        $(document).on("click", "#filter", function(e) {
-            e.preventDefault();
-            var type = $("#s_type").val();
-            var school_year = $("#s_school_year").val();
-            if (type !== "" && school_year !== "") {
-                $('#ajax_table').DataTable().destroy();
-                fetch(type, school_year);
-            } else if (type !== "" && school_year == "") {
-                $('#ajax_table').DataTable().destroy();
-                fetch(type, '');
-            } else if (type == "" && school_year !== "") {
-                $('#ajax_table').DataTable().destroy();
-                fetch('', school_year);
-            } else {
-                $('#ajax_table').DataTable().destroy();
-                fetch();
-            }
-        });
-    </script>
-
 
 
     <script>
