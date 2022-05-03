@@ -136,6 +136,7 @@ if(!isset($_SESSION["sa_username"])) {
                    <div class="col-md-2">
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> filter type: </option>
+                            <option value="none" ></option>
                             <?php
                                 //include our connection
                                 include_once('../include/database.php');
@@ -164,6 +165,7 @@ if(!isset($_SESSION["sa_username"])) {
                    <div class="col-md-3">
                         <select id="s_school_year" class="form-select">
                             <option value="" disabled="" selected> filter school year: </option>
+                            <option value="none" ></option>
                             <?php
                                 //include our connection
                                 include_once('../include/database.php');
