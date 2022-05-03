@@ -399,7 +399,7 @@ if(!isset($_SESSION["sa_username"])) {
                 type: "post",
                 dataType: "json",
                 success: function(data) {
-                    var stdBody = "";
+                    var typeBody = "";
                     for (var key in data) {
                         typeBody += `<option value="${data[key]['type']}">${data[key]['type']}</option>`;
                     }
