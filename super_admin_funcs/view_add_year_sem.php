@@ -81,8 +81,8 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 elseif(!empty($row1['id'])){
                   if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
                     
-                    $start_year_sub = substr($row1['schoolYear'],5, 4);
-                    $start_year_con = strtotime($start_year_sub);
+                    $start_year_s = date("Y");
+                    $start_year_con = strtotime($start_year_s);
                     $start_year = date("Y", $start_year_con);
 
                     $next_year = strtotime("+ 1 year", $start_year_con);
@@ -121,7 +121,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 <div class="row d-flex justify-content-center align-content-center">
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="number" class="form-control" list="s_year" id="startYear" name="startYear" minlength="4" maxlength="4" required>
+                      <input type="number" class="form-control" list="s_year" id="startYear" name="startYear" minlength="4" maxlength="4" max="2030" min="2020" required>
                       <label for="startYear">Year:</label>
                     </div>     
                   </div>
@@ -132,7 +132,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="endYear" list="e_year" name="endYear" minlength="4" maxlength="4" required>
+                      <input type="number" class="form-control" id="endYear" list="e_year" name="endYear" minlength="4" maxlength="4" max="2030" min="2020" required>
                       <label for="endYear">Year:</label>
                     </div>
                   </div>
