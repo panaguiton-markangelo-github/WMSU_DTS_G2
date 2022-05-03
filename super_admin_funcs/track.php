@@ -1,4 +1,5 @@
 <?php
+        sleep(1);
         //include our connection
         include_once('../include/database.php');
         extract($_POST);
