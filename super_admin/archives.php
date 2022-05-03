@@ -52,7 +52,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Track Documents</span></a>
                 </li>
                 <li>
-                    <a href="all_docs"><span class="las la-file-alt"></span>
+                    <a href="all_docs.php"><span class="las la-file-alt"></span>
                     <span>All Documents</span></a>
                 </li>
                 <li>
