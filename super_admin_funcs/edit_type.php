@@ -7,11 +7,11 @@ include ("../include/alt_db.php");
 	if(isset($_POST['edit'])){
 			$database = new Connection();
 			$db = $database->open();
-            $officeUp = strtoupper($_POST['officeName']);
+            $type = $_POST['type'];
 		
             try {
 
-                $query = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."'";
+                $query = "SELECT id FROM types WHERE type = '".$_POST['type']."'";
                 $result = mysqli_query($data, $query);
                 $row = mysqli_fetch_array($result);
             }
@@ -22,35 +22,34 @@ include ("../include/alt_db.php");
             if(empty($row)){
                 try{
                     //make use of prepared statement to prevent sql injection
-                    $sql = $db->prepare("UPDATE office SET officeName = :officeName, description = :description WHERE id = :id");
+                    $sql = $db->prepare("UPDATE types SET type = :type WHERE id = :id");
     
                     //bind 
-                    $sql->bindParam(':officeName', $officeUp);
-                    $sql->bindParam(':description', $_POST['description']);
+                    $sql->bindParam(':type', $type);
                     $sql->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     
                     //if-else statement in executing our prepared statement
-                    $_SESSION['message'] = ( $sql->execute()) ? 'Updated successfully' : 'Something went wrong. Cannot update office.';	   
+                    $_SESSION['message'] = ( $sql->execute()) ? 'Updated successfully' : 'Something went wrong. Cannot update document type.';	   
                 
                 }
                 catch(PDOException $e){
                     $_SESSION['message_fail'] = "Something went wrong!";
                     //close connection
                     $database->close();
-                    header('location: ../super_admin/offices.php?failed=edit?');
+                    header('location: ../super_admin/types.php?failed=edit?');
                     exit();
                 }
                  //close connection
                 $database->close();
-                header('location: ../super_admin/offices.php?succesful=edited');
+                header('location: ../super_admin/types.php?succesful=edited');
                 exit();
             }
             
             elseif(!empty($row)){
-                $_SESSION['message_fail'] = "The office is already existing!";
+                $_SESSION['message_fail'] = "The document type is already existing!";
                 //close connection
                 $database->close();
-                header('location: ../super_admin/offices.php?failed=edit?');
+                header('location: ../super_admin/types.php?failed=edit?');
                 exit();
             }
 		
@@ -58,10 +57,9 @@ include ("../include/alt_db.php");
 
 		else{
 			$_SESSION['message'] = 'Fill up add form first';
-            header('location: ../super_admin/offices.php?failed=edit?');
+            header('location: ../super_admin/types.php?failed=edit?');
             exit();
 		}
 
-       
 	
 ?>
