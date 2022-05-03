@@ -23,7 +23,7 @@
 			$sql->bindParam(':activated', $_POST['activate']);
 
 			//if-else statement in executing our prepared statement
-			$_SESSION['message'] = ( $sql->execute()) ? 'School Year was initialized successfully' : 'Something went wrong. Cannot initialize school year';
+			$_SESSION['message'] = ( $sql->execute()) ? 'School Year was added successfully' : 'Something went wrong. Cannot added school year';
 
 		
 		}
@@ -39,59 +39,6 @@
 		
 		
 	}
-
-	elseif(isset($_POST['update'])){
-		$database = new Connection();
-		$db = $database->open();
-		$year = $_POST['startYear']."-".$_POST['endYear'];
-		if($_POST['endYear'] <= $_POST['startYear']){
-			$_SESSION['e_message'] = "The ending school year should not be less than or equal to the starting school year!";
-			header('location:../super_admin/sem_year.php?failed=updated');
-			exit();
-		}
-
-		try {
-
-			$query = "SELECT id FROM yearsemester WHERE schoolYear = '".$year."' AND stat = '".$_POST['status']."'";
-			$result = mysqli_query($data, $query);
-			$row = mysqli_fetch_array($result);
-		}
-		catch(PDOException $e) {
-			$_SESSION['message_fail'] = $e->getMessage();
-		}
-
-		if(!empty($row)){
-			$_SESSION['e_message'] = "This school year is already existing and the status is still the same!!";
-			header('location:../super_admin/sem_year.php?failed=added');
-			exit();
-		}
-		
-		elseif(empty($row)) {
-			try{
-				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("UPDATE yearsemester SET schoolYear = :schoolYear WHERE activated = :activated");
-	
-				//bind
-				$sql->bindParam(':schoolYear', $year);
-				$sql->bindParam(':activated', $_POST['activate']);
-	
-				//if-else statement in executing our prepared statement
-				$_SESSION['message'] = ( $sql->execute()) ? 'School Year was updated successfully' : 'Something went wrong. Cannot update year';
-	
-			
-			}
-			catch(PDOException $e){
-				$_SESSION['e_message'] = "This school year is already existing!";
-				header('location:../super_admin/sem_year.php?failed=updated');
-				exit();
-			}
-	
-			//close connection
-			$database->close();
-			header('location:../super_admin/sem_year.php?succesful=updated');
-		}
-	}
-
 	else{
 		$_SESSION['e_message'] = 'Fill up add form first';
 		header('location:../super_admin/sem_year.php?failed=empty');

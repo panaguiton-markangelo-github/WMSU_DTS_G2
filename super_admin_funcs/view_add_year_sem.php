@@ -8,21 +8,8 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 <div class="modal fade" id="add_year_sem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-      <?php 
-                if(empty($row1['id'])){
-                  ?>
-                   <h5 class="modal-title">Initialize New School Year</h5>
-                  <?php
-                }
-
-                elseif(!empty($row1['id'])){
-                  ?>
-                   <h5 class="modal-title">Update School Year</h5>
-                <?php
-                }
-                ?>
-       
+      <div class="modal-header">               
+        <h5 class="modal-title">Add New School Year</h5>                      
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="../super_admin_funcs/add_year_sem.php" method="post">
@@ -134,7 +121,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 <div class="row d-flex justify-content-center align-content-center">
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="startYear" name="startYear" value="<?php echo $start_year;?>" readonly required>
+                      <input type="number" class="form-control" id="startYear" name="startYear" minlength="4" maxlength="4" required>
                       <label for="startYear">Year:</label>
                     </div>     
                   </div>
@@ -145,11 +132,19 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="endYear" name="endYear" value="<?php echo $next_year_final;?>" readonly required>
+                      <input type="number" class="form-control" id="endYear" name="endYear" minlength="4" maxlength="4" required>
                       <label for="endYear">Year:</label>
                     </div>
                   </div>
                 </div>
+
+                <datalist id="s_year">
+                  <option value="<?php echo $start_year;?>"> <?php echo $start_year;?> </option>
+                </datalist>
+
+                <datalist id="e_year">
+                  <option value="<?php echo $next_year_final;?>"> <?php echo $next_year_final;?> </option>
+                </datalist>
 
                 <input type="text" class="form-control" id="status" name="status" value="<?php echo $status?>" hidden>
 
@@ -178,25 +173,11 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   the date range of semester/summer located at the settings page.
                 </p>
 
-                <?php 
-                if(empty($row1['id'])){
-                  ?>
-                    <div class="modal-footer">
+                <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                       <button type="submit" name="add" class="btn btn-success">Save changes</button>
-                    </div>
-                  <?php
-                }
-
-                elseif(!empty($row1['id'])){
-                  ?>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="update" class="btn btn-success">Save changes</button>
-                  </div>
-                <?php
-                }
-                ?>
+                </div>
+              
               <?php
             }
               ?>                  
