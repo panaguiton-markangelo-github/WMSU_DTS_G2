@@ -21,7 +21,7 @@
 			$error_m1 = $e->getCode();
 
 			if ($error_m1 == 23000) {
-				$_SESSION['e_message'] = "OOps. Cannot delete this school year Because there is/are still documents within this school year";
+				$_SESSION['e_message'] = "OOps. Cannot delete this school year Because there is/are document/s within this school year";
 				header("Location: ../super_admin/sem_year.php?error=exist");
 				die();
 			}
