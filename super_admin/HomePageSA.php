@@ -111,7 +111,7 @@ catch(PDOException $e) {
 
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
-                    <img src="../assets/img/wmsu_logo.png" alt="user">
+                    <span class="las la-user-alt" style="font-size: 48px;"></span>
                 </div>   
                 <div class="menu">
                     <h3><?php echo $_SESSION["sa_username"];?> <br> <span>Super admin</span></h3> 
