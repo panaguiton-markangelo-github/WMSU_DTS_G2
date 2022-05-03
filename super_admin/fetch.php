@@ -13,7 +13,7 @@ if(isset($_POST['request'])){
 
 ?>
 
-<table id="data_table_2">
+<table id="data_table_2" class="table table-striped table-hover">
     <?php 
     if($count){
     ?>
