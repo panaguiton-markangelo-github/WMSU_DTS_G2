@@ -298,6 +298,57 @@ if(!isset($_SESSION["sa_username"])) {
                                         
                         </tbody>
                     </table>
+
+                    <!-- ajax table-->
+
+                    <table id="ajax_table" class="table table-striped table-hover">
+                        <thead>                   
+                            <tr>
+                                <th>
+                                    No.
+                                </th>
+
+                                <th>
+                                    Originating Office
+                                </th>
+
+                                <th>
+                                    Tracking ID
+                                </th>
+                                
+                                <th>
+                                    Title
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Reason
+                                </th>
+
+                                <th>
+                                    Remarks
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    School Year
+                                </th>
+
+                                <th>
+                                    View
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>    
+                        </tbody>
+                    </table>
                 </div>
            </div>
         </main>
@@ -336,6 +387,140 @@ if(!isset($_SESSION["sa_username"])) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script>
+        function fetch_type() {
+            $.ajax({
+                url: "fetch_type.php",
+                type: "post",
+                dataType: "json",
+                success: function(data) {
+                    var stdBody = "";
+                    for (var key in data) {
+                        typeBody += `<option value="${data[key]['type']}">${data[key]['type']}</option>`;
+                    }
+                    $("#s_type").append(typeBody);
+                }
+            });
+        }
+        fetch_type();
+
+        function fetch_school_year() {
+            $.ajax({
+                url: "fetch_school_year.php",
+                type: "post",
+                dataType: "json",
+                success: function(data) {
+                    var schoolYearBody = "";
+                    for (var key in data) {
+                        schoolYearBody += `<option value="${data[key]['schoolYear']}">${data[key]['schoolYear']}</option>`;
+                    }
+                    $("#s_school_year").append(schoolYearBody);
+                }
+            });
+        }
+        fetch_school_year();
+
+        function fetch(type, schoolYear) {
+            $.ajax({
+                url: "records.php",
+                type: "post",
+                data: {
+                    type: type,
+                    schoolYear: schoolYear
+                },
+                dataType: "json",
+                success: function(data) {
+                    var i = 1;
+                    $('#ajax_table').DataTable({
+                        "data": data,
+                        "responsive": true,
+                        "columns": [{
+                                "data": "id",
+                                "render": function(data, type, row, meta) {
+                                    return i++;         
+                                }
+                            },
+                            {
+                                "data": " origin_office",
+                                "render": function(data, type, row, meta) {
+                                return `${row.origin_office}th Originating Office`;
+                                }
+                            },
+                            {
+                                "data": "trackingID",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.trackingID}th Tracking ID`;
+                                }
+                            },
+                            {
+                                "data": "title",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.title}th Title`;
+                                }
+                            },
+                            {
+                                "data": "type"
+                            },
+                            {
+                                "data": "reason",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.reason}th Reason`;
+                                }
+                            },
+                            {
+                                "data": "remarks",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.remarks}th Remarks`;
+                                }
+                            },
+                            {
+                                "data": "status",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.status}th Status`;
+                                }
+                            },
+                            {
+                                "data": "schoolYear",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.schoolYear}th School Year`;
+                                }
+                            }
+
+                        ]
+                    });
+                }
+            });
+        }
+        fetch();
+
+
+        $(document).on("click", "#filter", function(e) {
+            e.preventDefault();
+            var type = $("#s_type").val();
+            var school_year = $("#s_school_year").val();
+            if (type !== "" && school_year !== "") {
+                $('#ajax_table').DataTable().destroy();
+                fetch(type, school_year);
+            } else if (type !== "" && school_year == "") {
+                $('#ajax_table').DataTable().destroy();
+                fetch(type, '');
+            } else if (type == "" && school_year !== "") {
+                $('#ajax_table').DataTable().destroy();
+                fetch('', school_year);
+            } else {
+                $('#ajax_table').DataTable().destroy();
+                fetch();
+            }
+        });
+    </script>
+
+
+
     <script>
         $(document).ready(function() {
             $('#data_table').DataTable({

@@ -61,7 +61,10 @@ Class Connection{
 	 {
 		 $data = [];
  
-		 $query = "SELECT * FROM documents";
+		 $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
+		 INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+		 INNER JOIN users ON users.id = documents.user_id
+		 ORDER BY documents.id DESC;";
 		 if ($sql = $this->conn->query($query)) {
 			 while ($row = mysqli_fetch_assoc($sql)) {
 				 $data[] = $row;
