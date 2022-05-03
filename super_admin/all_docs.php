@@ -162,7 +162,7 @@ if(!isset($_SESSION["sa_username"])) {
                             ?>
                         </select>
                    </div>
-                   <div class="col-md-2">
+                   <div class="col-md-4">
                         <select id="s_school_year" class="form-select">
                             <option value="" disabled="" selected> filter school year: </option>
                             <?php
