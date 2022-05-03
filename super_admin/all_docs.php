@@ -133,13 +133,13 @@ if(!isset($_SESSION["sa_username"])) {
 
         <main>
            <div class="container">
-               <div class="row">
-                   <div class="col-4">
+               <div class="row mb-3">
+                   <div class="col-md-2">
                         <select id="s_type" class="form-select">
                             <option value=""></option>
                         </select>
                    </div>
-                   <div class="col-md-4">
+                   <div class="col-md-2">
                         <select id="s_school_year" class="form-select">
                             <option value=""></option>
                         </select>
