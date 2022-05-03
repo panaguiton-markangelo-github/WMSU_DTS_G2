@@ -5,6 +5,7 @@ if(!isset($_SESSION["c_username"])) {
 }
 
 include ("../include/alt_db.php");
+include("../include/database.php");
 
 ?>
 
@@ -115,9 +116,9 @@ catch(PDOException $e) {
                     $db = $database->open();
                     try{	
                         $sql = 'SELECT * FROM reasons ORDER BY reason ASC;'; 
-                        foreach ($db->query($sql) as $row1) {
+                        foreach ($db->query($sql) as $rows) {
                   ?>
-                    <option value="<?php echo $row1['reason']; ?>"> <?php echo $row1['reason'];?> </option>
+                    <option value="<?php echo $rows['reason']; ?>"> <?php echo $rows['reason'];?> </option>
                     <?php
                     }
 
@@ -138,27 +139,27 @@ catch(PDOException $e) {
 
             <div class="col">
               <select class="form-select text-dark" name="type" onchange="checkvalue(this.value)" aria-label="Default select example" required>
-              <option value="" selected>Select Document Type</option>
-                <?php
-                    $database = new Connection();
-                    $db = $database->open();
-                    try{	
-                        $sql = 'SELECT * FROM types ORDER BY type ASC;'; 
-                        foreach ($db->query($sql) as $row1) {
-                  ?>
-                    <option value="<?php echo $row1['type']; ?>"> <?php echo $row1['type'];?> </option>
-                    <?php
+                <option value="" selected>Select Document Type</option>
+                  <?php
+                      $database = new Connection();
+                      $db = $database->open();
+                      try{	
+                          $sql = 'SELECT * FROM types ORDER BY type ASC;'; 
+                          foreach ($db->query($sql) as $rows) {
+                    ?>
+                      <option value="<?php echo $rows['type']; ?>"> <?php echo $rows['type'];?> </option>
+                      <?php
+                      }
+
+                    }
+                    catch(PDOException $e){
+                        echo "There is some problem in connection: " . $e->getMessage();
                     }
 
-                  }
-                  catch(PDOException $e){
-                      echo "There is some problem in connection: " . $e->getMessage();
-                  }
-
-                  //close connection
-                  $database->close();
-                ?>
-              <option value="other">Other</option>
+                    //close connection
+                    $database->close();
+                  ?>
+                <option value="other">Other</option>
               </select>
 
               <input type="text" name="otype" id="checkT" placeholder="Please enter here the type:" style='display:none'>
