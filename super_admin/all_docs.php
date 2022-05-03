@@ -131,9 +131,9 @@ if(!isset($_SESSION["sa_username"])) {
         <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
 
         <main>
-        <div class="filters row mb-3">
-            <span>Filter by:</span>
+        <div class="filters row mb-3">     
                    <div class="col-md-2">
+                        <span>Filter by:</span>
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> filter type: </option>
                             <option value="none" ></option>
