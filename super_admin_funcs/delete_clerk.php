@@ -20,7 +20,7 @@
 		catch(PDOException $e){
 			//close connection
 			$database->close();
-			$_SESSION['message_fail'] = "user cannot be deleted, since there is/are an affliated document with this user.";		
+			$_SESSION['message_fail'] = "user cannot be deleted, since there is/are an affliated document/s with this user.";		
 			header('location: ../super_admin/clerk_users.php?failed=deleted?clerk');
 			exit();
 		}
