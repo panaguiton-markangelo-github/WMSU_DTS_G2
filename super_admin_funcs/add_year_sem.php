@@ -28,7 +28,7 @@
 		
 		}
 		catch(PDOException $e){
-			$_SESSION['e_message'] = "This school year is already existing! Note: You have deactivated this school year, please activate it or delete if it's unnecessary anymore.";
+			$_SESSION['e_message'] = "This school year is already existing!";
 			header('location:../super_admin/sem_year.php?failed=added');
 			exit();
 		}
