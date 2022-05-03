@@ -121,7 +121,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                 <div class="row d-flex justify-content-center align-content-center">
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="startYear" name="startYear" minlength="4" maxlength="4" required>
+                      <input type="number" class="form-control" list="s_year" id="startYear" name="startYear" minlength="4" maxlength="4" required>
                       <label for="startYear">Year:</label>
                     </div>     
                   </div>
@@ -132,7 +132,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                   <div class="col">
                     <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="endYear" name="endYear" minlength="4" maxlength="4" required>
+                      <input type="number" class="form-control" id="endYear" list="e_year" name="endYear" minlength="4" maxlength="4" required>
                       <label for="endYear">Year:</label>
                     </div>
                   </div>
