@@ -56,6 +56,10 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>All Documents</span></a>
                 </li>
                 <li>
+                    <a href="archives.php"><span class="las la-file-excel"></span>
+                    <span>Archives</span></a>
+                </li>
+                <li>
                     <a href="offices.php"><span class="las la-building"></span>
                     <span>Offices</span></a>
                 </li>
@@ -379,7 +383,7 @@ if(!isset($_SESSION["sa_username"])) {
             $("#s_type").on('change', function(){
                 var value = $(this).val();
                 $.ajax({
-                    url:"fetch_docs.php",
+                    url:"../super_admin_funcs/fetch_docs.php",
                     type:"POST",
                     data:'request=' + value,
                     beforeSend:function(){
@@ -406,7 +410,7 @@ if(!isset($_SESSION["sa_username"])) {
             $("#s_school_year").on('change', function(){
                 var value = $(this).val();
                 $.ajax({
-                    url:"fetch.php",
+                    url:"../super_admin_funcs/fetch_docs.php",
                     type:"POST",
                     data:'request_year=' + value,
                     beforeSend:function(){

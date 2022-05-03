@@ -56,6 +56,10 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>All Documents</span></a>
                 </li>
                 <li>
+                    <a href="archives.php"><span class="las la-file-excel"></span>
+                    <span>Archives</span></a>
+                </li>
+                <li>
                     <a class="active"><span class="las la-building"></span>
                     <span>Offices</span></a>
                 </li>

@@ -79,6 +79,10 @@ catch(PDOException $e) {
                     <span>All Documents</span></a>
                 </li>
                 <li>
+                    <a href="archives.php"><span class="las la-file-excel"></span>
+                    <span>Archives</span></a>
+                </li>
+                <li>
                     <a href="offices.php"><span class="las la-building"></span>
                     <span>Offices</span></a>
                 </li>

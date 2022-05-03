@@ -3,7 +3,6 @@ session_start();
 if(!isset($_SESSION["sa_username"])) {
   header("location: ../index.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +10,7 @@ if(!isset($_SESSION["sa_username"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clerk Users</title>
+    <title>Archives</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -24,7 +23,6 @@ if(!isset($_SESSION["sa_username"])) {
 <body>
     <div id="preloader">
 	</div>
-
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
@@ -36,6 +34,7 @@ if(!isset($_SESSION["sa_username"])) {
         <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
     </symbol>
     </svg>
+
     <input type="checkbox" id="nav-toggle">
     
     <div class="sidebar">
@@ -53,11 +52,11 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Track Documents</span></a>
                 </li>
                 <li>
-                    <a href="all_docs.php"><span class="las la-file-alt"></span>
+                    <a href="all_docs"><span class="las la-file-alt"></span>
                     <span>All Documents</span></a>
                 </li>
                 <li>
-                    <a href="archives.php"><span class="las la-file-excel"></span>
+                    <a class="active"><span class="las la-file-excel"></span>
                     <span>Archives</span></a>
                 </li>
                 <li>
@@ -65,7 +64,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Offices</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-users"></span>
+                    <a href="clerk_users.php"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
@@ -91,11 +90,10 @@ if(!isset($_SESSION["sa_username"])) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Clerk Users
+                Archives
             </h2>
 
-           
-
+          
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <img src="../assets/img/wmsu_logo.png" alt="user">
@@ -135,30 +133,114 @@ if(!isset($_SESSION["sa_username"])) {
         </header>
 
         <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
-        
 
         <main>
+        <div class="filters row mb-3"> 
+            <span>Filter By:</span>
+                   <div class="col-2">
+                        <select id="s_type" class="form-select">
+                            <option value="" disabled="" selected> Type: </option>
+                            <option value="none" ></option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
 
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT DISTINCT type FROM documents;";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['type'];?>"> <?php echo $row['type'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
+                        </select>
+                   </div>
+                   <div class="col-3">
+                        <select id="s_school_year" class="form-select">
+                            <option value="" disabled="" selected> School year: </option>
+                            <option value="none" ></option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT DISTINCT schoolYear FROM documents WHERE activated = 'no';";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['schoolYear'];?>"> <?php echo $row['schoolYear'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
+                        </select>
+                   </div>
+               </div>
            <div class="container">
             <div class="table-responsive">
-            <a class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#add_clerk">Add New Clerk</a>
                     <table id="data_table" class="table table-striped table-hover">
-                        <thead>
+                        <thead>                   
                             <tr>
                                 <th>
                                     No.
                                 </th>
+
                                 <th>
-                                    Office Name
+                                    Originating Office
                                 </th>
+
                                 <th>
-                                    Name
+                                    Tracking ID
                                 </th>
+                                
                                 <th>
-                                    Email
+                                    Title
                                 </th>
+
                                 <th>
+                                    Type
                                 </th>
+
+                                <th>
+                                    Reason
+                                </th>
+
+                                <th>
+                                    Remarks
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    School Year
+                                </th>
+
+                                <th>
+                                    View
+                                </th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -169,14 +251,17 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT * FROM users WHERE userType = "clerk" ORDER BY name ASC;';
-                                    $no = 0;
+                                    $sql = 'SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
+                                    INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+                                    INNER JOIN users ON users.id = documents.user_id WHERE yearsemester.activated = "no"
+                                    ORDER BY documents.id DESC;';
+                                    $no=0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
                             ?>
                             <tr>
                                 <td>
-                                    <?php echo $no; ?>
+                                    <?php echo $no ;?>
                                 </td>
 
                                 <td>
@@ -184,23 +269,65 @@ if(!isset($_SESSION["sa_username"])) {
                                 </td>
 
                                 <td>
-                                    <?php echo $row['name']; ?>
+                                    <?php echo $row['trackingID']; ?>
                                 </td>
 
                                 <td>
-                                    <?php echo $row['username']; ?>
+                                    <?php echo $row['title']; ?>
                                 </td>
 
-                                <td style="display:flex;justify-content:center;">
-                                    <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_clerk<?php echo $row['id']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_clerk<?php echo $row['id']; ?>">Delete</a>
+                                <td>
+                                    <?php echo $row['type']; ?>
                                 </td>
-                                <?php include('../super_admin_funcs/view_delete_clerk.php'); ?>
-                                <?php include('../super_admin_funcs/view_edit_clerk.php'); ?>
+
+                                <td>
+                                    <?php echo $row['reason']; ?>
+                                </td>
+
+                                <td>
+                                    <?php echo $row['remarks']; ?>
+                                </td>
+
+                                <td>
+                                  
+                                <?php
+                                 if ($row['status'] == "pending"){
+                                    ?>
+                                        <span style="color: red;"><?php echo $row['status']; ?></span>
+                                <?php
+                                    }
+                                else {
+                                    ?>
+                                        <span style="color: green;"><?php echo $row['status']; ?></span>
+                                    <?php
+                                    }
+                                ?>
+                                   
+                                </td>
+
+                                <td>
+                                    <?php echo $row['schoolYear']; ?>
+                                </td>
+
+                                <td>
+                                    <form id="viewForm" action="view_documentSA.php" method="POST">
+                                        <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                        <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
+                                        <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
+                                        <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
+                                        <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
+                                        <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                        <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
+
+                                        <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
+                                        <button id="submit" type="submit"><span class = "las la-info"></span></button>
+                                    </form>
+                                </td>
                             </tr>
-
+                            
                             <?php 
                                     }
+                                    
                                 }
                                 catch(PDOException $e){
                                     echo "There is some problem in connection: " . $e->getMessage();
@@ -226,25 +353,6 @@ if(!isset($_SESSION["sa_username"])) {
         })
 	</script>
 
-     <?php 
-            if(isset($_SESSION['message_fail'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Failed!!',
-                        html: '<h4><?php echo $_SESSION['message_fail'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-
-                unset($_SESSION['message_fail']);
-            }
-        ?>
-
         <?php 
             if(isset($_SESSION['message'])){
                 ?>
@@ -269,14 +377,75 @@ if(!isset($_SESSION["sa_username"])) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#data_table').DataTable();
-        } );
+
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#s_type").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"fetch_docs.php",
+                    type:"POST",
+                    data:'request=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+
+            $("#s_school_year").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"fetch.php",
+                    type:"POST",
+                    data:'request_year=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+        });
+
     </script>
 
-    <?php include('../super_admin_funcs/view_add_clerk.php'); ?>
-    
+
+    <script>
+        $(document).ready(function() {
+            $('#data_table').DataTable({
+                "processing":true
+            });
+        });
+    </script>
+
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
@@ -288,6 +457,6 @@ if(!isset($_SESSION["sa_username"])) {
             toggleMenu.classList.toggle('active')
         }
     </script>
-
+    
 </body>
 </html>
