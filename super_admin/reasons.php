@@ -265,7 +265,7 @@ if(!isset($_SESSION["sa_username"])) {
         } );
     </script>
 
-    <?php include('../super_admin_funcs/view_add_type.php'); ?>
+    <?php include('../super_admin_funcs/view_add_reason.php'); ?>
     
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
