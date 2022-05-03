@@ -19,6 +19,10 @@ try {
     $query1 = "SELECT officeName FROM users WHERE id = '".$_SESSION['userID']."'";
     $result1 = mysqli_query($data, $query1);
     $row1 = mysqli_fetch_array($result1);
+    
+    $query2 = "SELECT id FROM office WHERE officeName = '".$_SESSION['c_officeName']."'";
+    $result2 = mysqli_query($data, $query2);
+    $row2 = mysqli_fetch_array($result2);
 
 }
 catch(PDOException $e) {
@@ -174,6 +178,7 @@ catch(PDOException $e) {
 
           <input name="user_id" type="number" value="<?php echo $_SESSION['userID'];?>" hidden>
           <input name="office" type="text" value="<?php echo $row1['officeName'] ?>" hidden>
+          <input name="officeID" type="text" value="<?php echo $row2['id'] ?>" hidden>
           <input name="schoolYear_id" type="text" value="<?php echo $row['id'] ?>" hidden>
           <input name="schoolYear" type="text" value="<?php echo $row['schoolYear'] ?>" hidden>
           <input name="status_draft" type="text" value="pending" hidden>    
