@@ -86,6 +86,14 @@ catch(PDOException $e) {
                     <span>Admin Users</span></a>
                 </li>
                 <li>
+                    <a href="types.php"><span class="las la-passport"></span>
+                    <span>Document types</span></a>
+                </li>
+                <li>
+                    <a href="reasons.php"><span class="las la-file-invoice"></span>
+                    <span>Document reasons</span></a>
+                </li>
+                <li>
                     <a href="sem_year.php"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li> 
