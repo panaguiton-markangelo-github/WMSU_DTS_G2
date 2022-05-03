@@ -143,8 +143,8 @@ if(!isset($_SESSION["sa_username"])) {
         <?php  include('../super_admin_funcs/view_edit_profile.php'); ?> 
 
         <main>
-        <div class="filters row mb-3"> 
-            <span>Filter By:</span>
+            <div class="filters row mb-3"> 
+                <span>Filter By:</span>
                    <div class="col-2">
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> Type: </option>
@@ -442,7 +442,6 @@ if(!isset($_SESSION["sa_username"])) {
                 });
             });
         });
-
     </script>
 
 
