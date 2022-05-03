@@ -10,7 +10,7 @@ if(!isset($_SESSION["sa_username"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offices</title>
+    <title>Document Reasons</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -60,7 +60,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Archives</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-building"></span>
+                    <a href="offices.php"><span class="las la-building"></span>
                     <span>Offices</span></a>
                 </li>
                 <li>
@@ -76,7 +76,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Document types</span></a>
                 </li>
                 <li>
-                    <a href="reasons.php"><span class="las la-file-invoice"></span>
+                    <a class="active"><span class="las la-file-invoice"></span>
                     <span>Document reasons</span></a>
                 </li>
                 <li>
@@ -98,11 +98,9 @@ if(!isset($_SESSION["sa_username"])) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Offices
+                Documents Reasons
             </h2>
-
-            
-
+       
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
@@ -147,7 +145,7 @@ if(!isset($_SESSION["sa_username"])) {
         <main>
            <div class="container">
             <div class="table-responsive">
-            <a class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#add_office">Add New Office</a>
+            <a class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#add_reason">Add New Reason</a>
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -155,10 +153,7 @@ if(!isset($_SESSION["sa_username"])) {
                                     No.
                                 </th>
                                 <th>
-                                    Office Name
-                                </th>
-                                <th>
-                                    Description
+                                    Reason
                                 </th>
                                 <th>
                                 </th>
@@ -172,7 +167,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT * FROM office ORDER BY officeName ASC;';
+                                    $sql = 'SELECT * FROM reasons ORDER BY reason ASC;';
                                     $no = 0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
@@ -183,18 +178,15 @@ if(!isset($_SESSION["sa_username"])) {
                                 </td>
 
                                 <td>
-                                    <?php echo $row['officeName']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $row['description']; ?>
+                                    <?php echo $row['reason']; ?>
                                 </td>
 
                                 <td style="display:flex;justify-content:center;">
-                                    <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_office<?php echo $row['id']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_office<?php echo $row['id']; ?>">Delete</a>
+                                    <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_reason<?php echo $row['id']; ?>">Edit</a>
+                                    <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_reason<?php echo $row['id']; ?>">Delete</a>
                                 </td>
-                                <?php include('../super_admin_funcs/view_delete_office.php'); ?>
-                                <?php include('../super_admin_funcs/view_edit_office.php'); ?>
+                                <?php include('../super_admin_funcs/view_delete_reason.php'); ?>
+                                <?php include('../super_admin_funcs/view_edit_reason.php'); ?>
                             </tr>
 
                             <?php 
@@ -273,7 +265,7 @@ if(!isset($_SESSION["sa_username"])) {
         } );
     </script>
 
-    <?php include('../super_admin_funcs/view_add_office.php'); ?>
+    <?php include('../super_admin_funcs/view_add_type.php'); ?>
     
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>

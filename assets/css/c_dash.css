@@ -15,6 +15,26 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #8e0413;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #fff;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  } 
+
 .sidebar{
     width: 345px;
     position: fixed;
