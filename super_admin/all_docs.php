@@ -148,9 +148,9 @@ if(!isset($_SESSION["sa_username"])) {
                <div class="row mb-3">
                    <div class="col-md-12">
                         <div>
-                            <button id="filter" class="btn btn-sm btn-outline-info">Filter</button>
-                            <button id="reset_type" class="btn btn-sm btn-outline-info">Reset Type</button>
-                            <button id="reset_school_year" class="btn btn-sm btn-outline-info">Reset School Year</button>
+                            <button id="filter" class="btn btn-sm btn-outline-success">Filter</button>
+                            <button id="reset_type" class="btn btn-sm btn-outline-warning">Reset Type</button>
+                            <button id="reset_school_year" class="btn btn-sm btn-outline-warning">Reset School Year</button>
                             <button id="reset" class="btn btn-sm btn-outline-warning">Reset</button>
                         </div>
                    </div>
