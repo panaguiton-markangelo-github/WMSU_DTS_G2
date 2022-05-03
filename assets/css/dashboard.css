@@ -24,6 +24,7 @@
     background:var(--main-color);
     z-index: 100;
     transition: width 300ms;
+    overflow: auto;
 }
 
 .sidebar-brand{
