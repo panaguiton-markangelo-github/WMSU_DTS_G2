@@ -6,18 +6,20 @@ if(isset($_POST['request'])){
 
     $request = $_POST['request'];
     if($request == "none"){
-        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
-        INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
-        INNER JOIN users ON users.id = documents.user_id WHERE users.officeName = '".$_SESSION['c_officeName']."'
-        ORDER BY documents.id DESC;";
+        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+        FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+        INNER JOIN users ON users.id = documents.user_id
+        WHERE users.officeName = '".$_SESSION['c_officeName']."'
+        ORDER BY id DESC;";
         $result = mysqli_query($data, $query);
         $count = mysqli_num_rows($result);
     }
     else{
-        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
-        INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
-        INNER JOIN users ON users.id = documents.user_id WHERE documents.type = '$request' AND users.officeName = '".$_SESSION['c_officeName']."'
-        ORDER BY documents.id DESC;";
+        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+        FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+        INNER JOIN users ON users.id = documents.user_id
+        WHERE users.officeName = '".$_SESSION['c_officeName']."' AND documents.type = '$request'
+        ORDER BY id DESC;";
         $result = mysqli_query($data, $query);
         $count = mysqli_num_rows($result);
     }
@@ -176,18 +178,20 @@ if(isset($_POST['request_year'])){
     $request_year = $_POST['request_year'];
 
     if($request_year== "none"){
-        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
-        INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
-        INNER JOIN users ON users.id = documents.user_id WHERE users.officeName = '".$_SESSION['c_officeName']."'
-        ORDER BY documents.id DESC;";
+        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+        FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+        INNER JOIN users ON users.id = documents.user_id
+        WHERE users.officeName = '".$_SESSION['c_officeName']."'
+        ORDER BY id DESC;";
         $result = mysqli_query($data, $query);
         $count = mysqli_num_rows($result);
     }
     else{
-        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
-        INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
-        INNER JOIN users ON users.id = documents.user_id WHERE documents.schoolYear = '$request_year' AND users.officeName = '".$_SESSION['c_officeName']."'
-        ORDER BY documents.id DESC;";
+        $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+        FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+        INNER JOIN users ON users.id = documents.user_id
+        WHERE users.officeName = '".$_SESSION['c_officeName']."' AND documents.schoolYear = '$request_year'
+        ORDER BY id DESC;";
         $result = mysqli_query($data, $query);
         $count = mysqli_num_rows($result);     
     }
