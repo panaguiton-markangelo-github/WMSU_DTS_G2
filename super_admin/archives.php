@@ -185,7 +185,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN yearsemester ON documents.yearSemID = yearsemester.id WHERE yearsemester.activated = 'no';";
+                                    $sql = "SELECT DISTINCT schoolYear FROM yearsemester WHERE yearsemester.activated = 'no';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
