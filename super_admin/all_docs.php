@@ -464,7 +464,10 @@ if(!isset($_SESSION["sa_username"])) {
                                 }
                             },
                             {
-                                "data": "type"
+                                "data": "type",
+                                "render": function(data, type, row, meta) {
+                                    return `${row.type}th Type`;
+                                }
                             },
                             {
                                 "data": "reason",
