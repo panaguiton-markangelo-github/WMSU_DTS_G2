@@ -15,7 +15,7 @@
                       $database = new Connection();
                       $db = $database->open();
                       try{	
-                          $sql = 'SELECT * FROM office;'; 
+                          $sql = 'SELECT * FROM office ORDER BY officeName ASC;'; 
                           foreach ($db->query($sql) as $row1) {
                     ?>
                       <option value="<?php echo $row1['officeName']; ?>"> <?php echo $row1['description'];?> </option>
