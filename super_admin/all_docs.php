@@ -90,7 +90,6 @@ if(!isset($_SESSION["sa_username"])) {
             </h2>
 
           
-
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <img src="../assets/img/wmsu_logo.png" alt="user">
@@ -133,6 +132,7 @@ if(!isset($_SESSION["sa_username"])) {
 
         <main>
         <div class="filters row mb-3">
+            <span>Filter by:</span>
                    <div class="col-md-2">
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> filter type: </option>
