@@ -158,49 +158,7 @@ if(!isset($_SESSION["sa_username"])) {
       
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                               <th class="filterhead">
-                                    No.
-                                </th>
-
-                                <th class="filterhead">
-                                    Originating Office
-                                </th>
-
-                                <th class="filterhead">
-                                    Tracking ID
-                                </th>
-                                
-                                <th class="filterhead">
-                                    Title
-                                </th>
-
-                                <th class="filterhead">
-                                    Type
-                                </th>
-
-                                <th class="filterhead">
-                                    Reason
-                                </th>
-
-                                <th class="filterhead">
-                                    Remarks
-                                </th>
-
-                                <th class="filterhead">
-                                    Status
-                                </th>
-
-                                <th class="filterhead">
-                                    School Year
-                                </th>
-
-                                <th class="filterhead">
-                                    View
-                                </th>
-                            </tr>
-
+                        <thead>                   
                             <tr>
                                 <th>
                                     No.
