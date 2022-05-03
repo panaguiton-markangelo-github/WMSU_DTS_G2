@@ -220,7 +220,7 @@ catch(PDOException $e) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT * FROM yearsemester ORDER BY id DESC;';
+                                    $sql = 'SELECT * FROM yearsemester ORDER BY activate DESC;';
                                     $no = 0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
