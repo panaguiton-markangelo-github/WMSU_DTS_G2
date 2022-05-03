@@ -393,7 +393,7 @@ if(!isset($_SESSION["sa_username"])) {
                 $.ajax({
                     url:"fetch_docs.php",
                     type:"POST",
-                    data:'request=' + value,
+                    data:'request_arc=' + value,
                     beforeSend:function(){
                         Swal.fire({
                             icon: 'info',
@@ -420,7 +420,7 @@ if(!isset($_SESSION["sa_username"])) {
                 $.ajax({
                     url:"fetch.php",
                     type:"POST",
-                    data:'request_year=' + value,
+                    data:'request_arc_year=' + value,
                     beforeSend:function(){
                         Swal.fire({
                             icon: 'info',
