@@ -137,6 +137,48 @@ if(!isset($_SESSION["sa_username"])) {
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
                             <tr>
+                               <th class="filterhead">
+                                    No.
+                                </th>
+
+                                <th class="filterhead">
+                                    Originating Office
+                                </th>
+
+                                <th class="filterhead">
+                                    Tracking ID
+                                </th>
+                                
+                                <th class="filterhead">
+                                    Title
+                                </th>
+
+                                <th class="filterhead">
+                                    Type
+                                </th>
+
+                                <th class="filterhead">
+                                    Reason
+                                </th>
+
+                                <th class="filterhead">
+                                    Remarks
+                                </th>
+
+                                <th class="filterhead">
+                                    Status
+                                </th>
+
+                                <th class="filterhead">
+                                    School Year
+                                </th>
+
+                                <th class="filterhead">
+                                    View
+                                </th>
+                            </tr>
+
+                            <tr>
                                 <th>
                                     No.
                                 </th>
@@ -315,8 +357,24 @@ if(!isset($_SESSION["sa_username"])) {
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#data_table').DataTable();
-        } );
+            var table = $('#data_table').DataTable({
+                "processing":true,
+                "bLengthChange":false,
+                "iDisplayLength":15
+            });
+
+            $("filterhead").each( function (i) {
+                var select = $('<select> <option value=""> </option> </select>')
+                .appendTo( $(this).empty() )
+                .on('change', function () {
+                    var term = $(this).val();
+                    table.column(i).search(term, false, false).draw();
+                });
+                table.column(i).data().unique().sort().each( function (d, j) {
+                    select.append('<option value="'+d+'"> '+d+' </option>')
+                });
+            });
+        });
     </script>
 
     <footer>
