@@ -1,4 +1,5 @@
 <?php
+sleep(1);
 include '../include/alt_db.php';
 
 if(isset($_POST['request'])){
@@ -67,7 +68,7 @@ if(isset($_POST['request'])){
             ?>
         </thead>
 
-        <tbody id="data_table">
+        <tbody id="data_table_2">
             <?php
             while($row = mysqli_fetch_assoc($result)){
                 $no++;
@@ -146,7 +147,7 @@ if(isset($_POST['request'])){
 
 <script>
     $(document).ready(function() {
-        $('#data_table').DataTable({
+        $('#data_table_2').DataTable({
             "processing":true
         });
     });
