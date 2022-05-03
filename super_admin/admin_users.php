@@ -151,9 +151,6 @@ if(!isset($_SESSION["sa_username"])) {
                                     Email
                                 </th>
                                 <th>
-                                    Password
-                                </th>
-                                <th>
                                     
                                 </th>
                             </tr>
@@ -167,7 +164,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT * FROM users WHERE userType = "admin";';
+                                    $sql = 'SELECT * FROM users WHERE userType = "admin" ORDER BY name ASC;';
                                     $no = 0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
@@ -187,10 +184,6 @@ if(!isset($_SESSION["sa_username"])) {
 
                                 <td>
                                     <?php echo $row['username']; ?>
-                                </td>
-
-                                <td>
-                                    <?php echo $row['password']; ?>
                                 </td>
 
                                 <td style="display:flex;justify-content:center;">

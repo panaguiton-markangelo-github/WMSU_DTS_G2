@@ -160,7 +160,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT * FROM office;';
+                                    $sql = 'SELECT * FROM office ORDER BY officeName ASC;';
                                     $no = 0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;

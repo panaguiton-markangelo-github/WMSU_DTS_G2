@@ -190,7 +190,7 @@ if(!isset($_SESSION["sa_username"])) {
                                     $sql = 'SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
                                     INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
-                                    ORDER BY documents.id ASC;';
+                                    ORDER BY documents.id DESC;';
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
