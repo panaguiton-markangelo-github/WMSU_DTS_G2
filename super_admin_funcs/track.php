@@ -7,7 +7,7 @@
 
         try{	
             $sql = "SELECT logs.*, users.name FROM logs INNER JOIN users ON logs.user_id = users.id
-             WHERE trackingID = '".$trackID."';";
+             WHERE trackingID = '".$trackID."' ORDER BY logged_at DESC;";
             $no = 0;
             foreach ($db->query($sql) as $row) {
                 $no++;
