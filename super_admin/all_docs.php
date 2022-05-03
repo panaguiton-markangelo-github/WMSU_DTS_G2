@@ -134,7 +134,6 @@ if(!isset($_SESSION["sa_username"])) {
         <main>
            <div class="container">
                <div class="filters row mb-3">
-                   Filter: 
                    <div class="col-md-2">
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> filter type: </option>
