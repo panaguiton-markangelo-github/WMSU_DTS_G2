@@ -74,7 +74,7 @@ if(isset($_POST['request'])){
             <?php
     }
     else{
-        echo "Sorry! No record found!";
+        echo "Sorry! No record found! click <a href='.'> here </a> to reset the filter.";
     }
             ?>
         </thead>
@@ -246,7 +246,7 @@ if(isset($_POST['request_year'])){
             <?php
     }
     else{
-        echo "Sorry! No record found!";
+        echo "Sorry! No record found! click <a href='.'> here </a> to reset the filter.";
     }
             ?>
         </thead>
@@ -418,7 +418,7 @@ if(isset($_POST['request_arc'])){
             <?php
     }
     else{
-        echo "Sorry! No record found!";
+        echo "Sorry! No record found! click <a href='.'> here </a> to reset the filter.";
     }
             ?>
         </thead>
@@ -590,7 +590,7 @@ if(isset($_POST['request_arc_year'])){
             <?php
     }
     else{
-        echo "Sorry! No record found!";
+        echo "Sorry! No record found! click <a href='.'> here </a> to reset the filter.";
     }
             ?>
         </thead>
