@@ -142,6 +142,23 @@
 							$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 				
 							$sql_logs->execute();
+
+							if(!empty($_POST['oreason'])){
+								$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
+							
+								//bind
+								$sql_reason->bindParam(':reason', $reason);	
+								$sql_reason->execute();
+
+							}
+					
+							if(!empty($_POST['otype'])){
+								$sql_reason = $db->prepare("INSERT INTO types (type) VALUES (:type)");
+							
+								//bind
+								$sql_reason->bindParam(':type', $type);	
+								$sql_reason->execute();
+							}
 	
 							//close connection
 							$database->close();
@@ -211,6 +228,23 @@
 				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 
 				$sql_logs->execute();
+
+				if(!empty($_POST['oreason'])){
+					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
+				
+					//bind
+					$sql_reason->bindParam(':reason', $reason);	
+					$sql_reason->execute();
+
+				}
+		
+				if(!empty($_POST['otype'])){
+					$sql_reason = $db->prepare("INSERT INTO types (type) VALUES (:type)");
+				
+					//bind
+					$sql_reason->bindParam(':type', $type);	
+					$sql_reason->execute();
+				}
 
 				//close connection
 				$database->close();
@@ -366,6 +400,23 @@
 							$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 				
 							$sql_logs->execute();
+
+							if(!empty($_POST['oreason'])){
+								$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
+							
+								//bind
+								$sql_reason->bindParam(':reason', $reason);	
+								$sql_reason->execute();
+
+							}
+					
+							if(!empty($_POST['otype'])){
+								$sql_reason = $db->prepare("INSERT INTO types (type) VALUES (:type)");
+							
+								//bind
+								$sql_reason->bindParam(':type', $type);	
+								$sql_reason->execute();
+							}
 	
 							//close connection
 							$database->close();
@@ -434,6 +485,23 @@
 				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 
 				$sql_logs->execute();
+
+				if(!empty($_POST['oreason'])){
+					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
+				
+					//bind
+					$sql_reason->bindParam(':reason', $reason);	
+					$sql_reason->execute();
+
+				}
+		
+				if(!empty($_POST['otype'])){
+					$sql_reason = $db->prepare("INSERT INTO types (type) VALUES (:type)");
+				
+					//bind
+					$sql_reason->bindParam(':type', $type);	
+					$sql_reason->execute();
+				}
 
 				//close connection
 				$database->close();
