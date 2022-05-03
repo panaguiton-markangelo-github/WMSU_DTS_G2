@@ -156,7 +156,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT type FROM documents;";
+                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN yearsemester ON documents.yearSemID = yearsemester.id WHERE yearsemester.activated = 'yes';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
