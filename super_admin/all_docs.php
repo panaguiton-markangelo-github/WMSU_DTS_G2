@@ -376,6 +376,29 @@ if(!isset($_SESSION["sa_username"])) {
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#s_type").on('change', function(){
+                var value = $(this).val();
+                //alert(value);
+
+                $.ajax({
+                    url:"fetch.php",
+                    type:"POST",
+                    data:'request=' + value,
+                    beforeSend:function(){
+                        $(".container").html("<span> Working... </span>");
+
+                    },
+                    success:function(data){
+                        $(".container").html(data);
+                    }
+                });
+            });
+        });
+
+    </script>
+
 
     <script>
         $(document).ready(function() {
