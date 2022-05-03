@@ -137,7 +137,7 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT type FROM documents;";
+                                    $sql = "SELECT DISTINCT type FROM documents WHERE user_id = '".$_SESSION['userID']."';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
@@ -166,7 +166,7 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT schoolYear FROM documents;";
+                                    $sql = "SELECT DISTINCT schoolYear FROM documents WHERE user_id = '".$_SESSION['userID']."';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
