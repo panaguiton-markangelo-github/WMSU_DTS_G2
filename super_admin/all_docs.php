@@ -371,10 +371,6 @@ if(!isset($_SESSION["sa_username"])) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function (){
@@ -387,7 +383,12 @@ if(!isset($_SESSION["sa_username"])) {
                     type:"POST",
                     data:'request=' + value,
                     beforeSend:function(){
-                        $(".container").html("<span> Working... </span>");
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> <img src='../assets/img/loading_sweet.gif' width='50px' height='50px' ></img> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
 
                     },
                     success:function(data){
