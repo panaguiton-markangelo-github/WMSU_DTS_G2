@@ -149,9 +149,6 @@ if(!isset($_SESSION["a_username"])) {
                                     Email
                                 </th>
                                 <th>
-                                    Password
-                                </th>
-                                <th>
                                 </th>
                             </tr>
                         </thead>
@@ -183,10 +180,6 @@ if(!isset($_SESSION["a_username"])) {
 
                                 <td>
                                     <?php echo $row['username']; ?>
-                                </td>
-
-                                <td>
-                                    <?php echo $row['password']; ?>
                                 </td>
 
                                 <td style="display:flex;justify-content:center;">
