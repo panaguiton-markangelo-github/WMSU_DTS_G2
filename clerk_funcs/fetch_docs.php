@@ -159,14 +159,14 @@ if(isset($_POST['request'])){
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
                 </td>
+                <?php include('view_edit_doc.php');?>
+                <?php include('view_delete_doc.php');?>
             </tr>
               
             <?php
             }
             ?>
         </tbody>
-        <?php include('view_edit_doc.php');?>
-        <?php include('view_delete_doc.php');?>
 </table>
 
 <script>
