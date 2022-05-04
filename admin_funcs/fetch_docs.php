@@ -497,7 +497,7 @@ if(isset($_POST['request_arc'])){
 <?php
 if(isset($_POST['request_arc_year'])){
 
-    $request_arc = $_POST['request_arc_year'];
+    $request_arc_year = $_POST['request_arc_year'];
 
     if($request_arc_year == "none"){
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
