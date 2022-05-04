@@ -226,6 +226,7 @@ if(!isset($_SESSION["c_username"])) {
                                         <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
                                         <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
                                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
+                                        <input type="text" name="rec_link"  value= "rec_link" hidden>
                                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                     </form>
                                 </td>

@@ -64,10 +64,27 @@ catch(PDOException $e){
               <li class="nav-item">
                 <a class="nav-link fw-bold text-white">--></a>
               </li>
+
+              <?php
+              if($_POST['status'] == 'draft'){
+                ?>
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold" href="pending_docs.php" aria-current="page">Pending Documents</a>
+                  </li>
+                <?php
+              } 
+              elseif($_POST['status'] != 'draft')
+              {
+                ?>
+                <li class="nav-item">
+                  <a class="nav-link fw-bold" href="office_docs.php" aria-current="page">Office Documents</a>
+                </li>
+              <?php
+              }
               
-              <li class="nav-item">
-                <a class="nav-link active fw-bold" aria-current="page">Release Document</a>
-              </li>
+              ?>
+              
+             
 
               <li class="nav-item">
                 <a class="nav-link fw-bold text-white">--></a>

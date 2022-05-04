@@ -32,7 +32,27 @@ if(!isset($_SESSION["c_username"])) {
               <li class="nav-item">
                 <span class="nav-link fw-bold">--></span>
               </li>
-              
+
+              <?php if(!empty($_POST['rec_link'])){
+                  ?>
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold" href="office_docs.php">Received Documents</a>
+                </li> 
+                  <?php
+              }
+              else{
+                  ?>     
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="office_docs.php">Office Documents</a>
+                </li> 
+                  <?php
+              }
+              ?>
+
+              <li class="nav-item">
+                <span class="nav-link fw-bold">--></span>
+              </li>
+   
               <li class="nav-item">
                 <a class="nav-link active fw-bold" aria-current="page"><?php echo $_POST['track_ID'];?></a>
               </li>
