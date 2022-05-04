@@ -72,7 +72,7 @@ if(isset($_POST['request'])){
             <?php
     }
     else{
-        echo "Sorry! No record found! click <a href='../super_admin/all_docs.php'> here </a> to reset the filter.";
+        echo "Sorry! No record found! click <a href='../clerk/office_docs.php'> here </a> to reset the filter.";
     }
             ?>
         </thead>
@@ -237,7 +237,7 @@ if(isset($_POST['request_year'])){
             <?php
     }
     else{
-        echo "Sorry! No record found! click <a href='../super_admin/all_docs.php'> here </a> to reset the filter.";
+        echo "Sorry! No record found! click <a href='../clerk/office_docs.php'> here </a> to reset the filter.";
     }
             ?>
         </thead>
