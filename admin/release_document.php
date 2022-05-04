@@ -212,34 +212,62 @@ catch(PDOException $e){
           <br>
           <br>
           <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_POST["userID"];?>" hidden>
+          <?php 
+          if($_POST['status'] == 'draft'){
+            ?>
+              <div class="row">
+                <div class="col md-4">
+                  <div class="input-group mb-3">
+                  <label class="input-group-text" for="trackingID">Tracking ID</label>
+                  <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
+                  </div>
+                  <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
+                </div>
 
-          <div class="row">
-            <div class="col md-4">
-              <div class="input-group mb-3">
-              <label class="input-group-text" for="trackingID">Tracking ID</label>
-              <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
+                <div class="col md-4">
+                <p class="text-center text-muted fw-bold">After confirmation, the document will be tag as released.</p>
+                </div>
+
+                <input type="text" name="action" value="released" hidden>
+
               </div>
-              <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
+            <?php
+            
+          }
+          elseif($_POST['status'] != 'draft')
+          {
+            ?>
+             <div class="row">
+              <div class="col md-4">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="trackingID">Tracking ID</label>
+                <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
+                </div>
+                <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
+              </div>
+
+                
+              <div class="col md-4">
+                <div class="input-group mb-3">
+                <select class="form-select text-dark" name="action" id = "action" onchange="checkvalue(this.value)" required>
+                  <option value="" selected>Please select the action.</option>
+                  <option value="Endorse">Endorsed</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Disapproved">Disapproved</option>
+                  <option value="No action">No action</option>
+                  <option value="Received">Received</option>
+                  <option value="Return to sender">Return to sender</option>
+                  <option value="other">Other</option>
+                </select> 
+                </div>
+                <input type="text" name="oaction" id="checkA" placeholder="Please enter here the action:" style='display:none'>
+                <p class="text-center text-muted fw-bold"> Enter the appropriate action that was made in this office.</p>
+              </div>
             </div>
 
-            <div class="col md-4">
-              <div class="input-group mb-3">
-              <select class="form-select text-dark" name="action" id = "action" onchange="checkvalue(this.value)" required>
-                <option value="" selected>Please select the action.</option>
-                <option value="Endorsed">Endorse</option>
-                <option value="Approved">Approved</option>
-                <option value="Disapproved">Disapproved</option>
-                <option value="No action">No action</option>
-                <option value="Received">Received</option>
-                <option value="Return to sender">Return to sender</option>
-                <option value="other">Other</option>
-              </select> 
-              </div>
-              <input type="text" name="oaction" id="checkA" placeholder="Please enter here the action:" style='display:none'>
-              <p class="text-center text-muted fw-bold"> Enter the appropriate action that was made in this office.</p>
-            </div>
-
-          </div>
+            <?php
+          }
+          ?>
 
           <br>
           <br>
