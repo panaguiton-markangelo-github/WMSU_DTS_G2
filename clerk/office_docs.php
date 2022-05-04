@@ -216,7 +216,7 @@ if(!isset($_SESSION["c_username"])) {
                                 </th>
 
                                 <th>
-                                    Year
+                                    School Year
                                 </th>
 
                                 <th>
