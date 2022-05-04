@@ -90,6 +90,8 @@ if(isset($_POST['request'])){
                 $no++;
             ?>
             <tr>
+                <?php include('../clerk_funcs/view_edit_doc.php');?>
+                <?php include('../clerk_funcs/view_delete_doc.php');?>
                 <td>
                     <?php echo $no ;?>
                 </td>
@@ -160,8 +162,7 @@ if(isset($_POST['request'])){
                     </form>
                     
                 </td>
-                <?php include('../clerk_funcs/view_edit_doc.php');?>
-                <?php include('../clerk_funcs/view_delete_doc.php');?>
+                
             </tr>
             <?php
             }
@@ -275,6 +276,8 @@ if(isset($_POST['request_year'])){
                 $no++;
             ?>
             <tr>
+                <?php include('../clerk_funcs/view_edit_doc.php');?>
+                <?php include('../clerk_funcs/view_delete_doc.php');?>
                 <td>
                     <?php echo $no ;?>
                 </td>
@@ -343,8 +346,6 @@ if(isset($_POST['request_year'])){
                     </form>
                     
                 </td>
-                <?php include('../clerk_funcs/view_edit_doc.php');?>
-                <?php include('../clerk_funcs/view_delete_doc.php');?>
             </tr>
             <?php
             }
