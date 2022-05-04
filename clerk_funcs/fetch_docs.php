@@ -85,8 +85,8 @@ if(isset($_POST['request'])){
             ?>
         </thead>
 
-        <?php include('../clerk_funcs/view_edit_doc.php');?>
-        <?php include('../clerk_funcs/view_delete_doc.php');?>
+        <?php include_once('../clerk_funcs/view_edit_doc.php');?>
+        <?php include_once('../clerk_funcs/view_delete_doc.php');?>
 
         <tbody>
             <?php
