@@ -324,19 +324,23 @@ catch(PDOException $e){
               <?php
             }
             else{
-              ?>
-              <div class="modal-header">
-                <h5 class="modal-title" id="finalModalLabel">Release Document</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
+              if($_POST['status'] == 'draft'){
+                ?>
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="finalModalLabel">Release Document</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
 
-              <div class="modal-body">
-                <p style="text-align: center;color:green;">Do you wish to release this document from this office? Other offices will now be able to process this document, if they receive it.
-                  <br>
-                  <br>
-                  Note: The status of the document will be changed based in the chosen action.
-                </p>
-              </div>
+                  <div class="modal-body">
+                    <p style="text-align: center;color:green;">Do you wish to release this document now? After confirmation the document will be now tagged as release.
+                      <br>
+                      <br>
+                      Note: The status of the document will be 'release' now and it is now possible for other offices to process it.
+                    </p>
+                  </div>
+                <?php
+              }
+              ?>
               <?php
             }
               ?>
