@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION["c_username"])) {
   header("location: ../index.php");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

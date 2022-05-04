@@ -2,11 +2,15 @@
 sleep(1);
 include '../include/alt_db.php';
 
+$sql = "SELECT * FROM users WHERE username = '".$_SESSION["c_username"]."';";
+$result = mysqli_query($data, $sql);
+$row = mysqli_fetch_array($result);
+
 if(isset($_POST['request'])){
 
     $request = $_POST['request'];
     echo $request;
-    echo $_SESSION['c_officeName'];
+    echo $row['officeName'];
     if($request == "none"){
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
         FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
