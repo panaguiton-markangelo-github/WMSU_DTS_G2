@@ -156,6 +156,9 @@ if(isset($_POST['request'])){
                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
+                    
+                    <?php include('../clerk_funcs/view_edit_doc.php');?>
+                    <?php include('../clerk_funcs/view_delete_doc.php');?>
                 </td>
             </tr>
             <?php
@@ -336,6 +339,8 @@ if(isset($_POST['request_year'])){
                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
+                    <?php include('../clerk_funcs/view_edit_doc.php');?>
+                    <?php include('../clerk_funcs/view_delete_doc.php');?>
                 </td>
             </tr>
             <?php
