@@ -6,6 +6,7 @@ if(isset($_POST['request'])){
 
     $request = $_POST['request'];
     echo $request;
+    echo $_SESSION['c_officeName'];
     if($request == "none"){
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
         FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
