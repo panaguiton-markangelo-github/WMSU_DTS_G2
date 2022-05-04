@@ -26,9 +26,6 @@ if(isset($_POST['request'])){
     
 ?>
 
-<?php include('../clerk_funcs/view_edit_doc.php');?>
-<?php include('../clerk_funcs/view_delete_doc.php');?>
-
 <table id="data_table_2" class="table table-striped table-hover">
     <?php 
     if($count){
