@@ -97,10 +97,6 @@ if(isset($_POST['request'])){
                 </td>
 
                 <td>
-                    <?php echo $row['officeName']; ?>
-                </td>
-
-                <td>
                     <?php echo $row['trackingID']; ?>
                 </td>
 
