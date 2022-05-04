@@ -44,8 +44,12 @@ if(!isset($_SESSION["a_username"])) {
         <div class="sidebar-menu">
             <ul>
             <li>
-                    <a href="HomePageC.php"><span class="las la-home"></span>
+                    <a href="homePageAdmin.php"><span class="las la-home"></span>
                     <span>Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="clerk_users.php"><span class="las la-search-location"></span>
+                    <span>Clerk Users</span></a>
                 </li>
                 <li>
                     <a href="view_track.php"><span class="las la-search-location"></span>
