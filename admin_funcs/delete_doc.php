@@ -1,15 +1,10 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
-	include_once('../include/database.php');
 
 	if(isset($_POST['delete'])){
 		$database = new Connection();
 		$db = $database->open();
-
-		$query = "SELECT status FROM documents WHERE status = '".$_POST['status_rel']."'";
-		$result = mysqli_query($data, $query);
-		$row = mysqli_fetch_array($result);
 
 		if($_POST['status_rel'] != 'draft'){
 			$_SESSION['message_fail'] = "Oppss. You cannot delete a document that was already released/processed!";

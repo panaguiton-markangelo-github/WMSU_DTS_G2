@@ -7,6 +7,7 @@
       </div>
       <form action="../clerk_funcs/delete_doc.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
+        <input name="status_rel" type="text" value="<?php echo $row['status'];?>" hidden>
           <p class="text-center" style="color:orange;">Are you sure to delete document? : <b> <?php echo $row['title']."."; ?> </b>
           <br>
             <b> The document would still be visible when tracked.</b>
