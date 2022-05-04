@@ -28,7 +28,7 @@
 			
 			}
 			catch(PDOException $e){
-				$_SESSION['e_message'] = $e->getMessage();
+				$_SESSION['message_fail'] = $e->getMessage();
 			}
 	
 			//close connection

@@ -22,7 +22,7 @@
 	    
 		}
 		catch(PDOException $e){
-			$_SESSION['e_message'] = $e->getMessage();
+			$_SESSION['message_fail'] = $e->getMessage();
 		}
 
 		//close connection
@@ -30,7 +30,11 @@
 	}
 
 	else{
-		$_SESSION['e_message'] = 'Fill up add form first';
+		$_SESSION['message_fail'] = 'Fill up add form first';
+		header('location: ../clerk/office_docs.php?failed=released');
+		//close connection
+		$database->close();
+		exit();
 	}
 
 	header('location: ../clerk/office_docs.php?succesful=edited');

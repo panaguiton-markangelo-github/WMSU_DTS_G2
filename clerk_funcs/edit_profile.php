@@ -43,6 +43,10 @@
 
 	else{
 		$_SESSION['message_fail'] = 'Fill up add form first';
+		header('location: ../clerk/HomePageC.php?failed=released');
+		//close connection
+		$database->close();
+		exit();
 	}
 
 	header('location: ../clerk/HomePageC.php?succesful=edited?profile');

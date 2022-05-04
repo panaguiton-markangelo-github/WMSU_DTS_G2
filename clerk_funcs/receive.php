@@ -67,6 +67,10 @@ catch(PDOException $e){
 
 	else{
 		$_SESSION['message_receive'] = 'Fill up add form first';
+        header('location: ../clerk/HomePageC.php?failed=released');
+		//close connection
+		$database->close();
+		exit();
 	}
 
 	header('location: ../clerk/HomePageC.php?successful=receive?doc');
