@@ -190,7 +190,7 @@ catch(PDOException $e) {
           <input name="officeID" type="text" value="<?php echo $row2['id'] ?>" hidden>
           <input name="schoolYear_id" type="text" value="<?php echo $row['id'] ?>" hidden>
           <input name="schoolYear" type="text" value="<?php echo $row['schoolYear'] ?>" hidden>
-          <input name="status_draft" type="text" value="pending" hidden>    
+          <input name="status_draft" type="text" value="draft" hidden>    
           <input name="status_rel" type="text" value="released" hidden>  
 
           <br>

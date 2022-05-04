@@ -299,7 +299,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 <td>
                                   
                                 <?php
-                                 if ($row['status'] == "pending"){
+                                 if ($row['status'] == "draft"){
                                     ?>
                                         <span style="color: red;"><?php echo $row['status']; ?></span>
                                 <?php

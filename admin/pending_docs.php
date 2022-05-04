@@ -197,7 +197,7 @@ if(!isset($_SESSION["a_username"])) {
                                 try{	
                                     $sql = "SELECT documents.*, yearsemester.schoolYear
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID INNER JOIN users ON users.id = documents.user_id
-                                    WHERE users.officeName = '".$_SESSION['a_officeName']."' AND documents.status = 'pending';";
+                                    WHERE users.officeName = '".$_SESSION['a_officeName']."' AND documents.status = 'draft';";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
@@ -225,7 +225,7 @@ if(!isset($_SESSION["a_username"])) {
 
                                 <td>
                                 <?php
-                                    if ($row['status'] == "pending"){
+                                    if ($row['status'] == "draft"){
                                     ?>
                                         <span style="color: red;"><?php echo $row['status']; ?></span>
                                 <?php

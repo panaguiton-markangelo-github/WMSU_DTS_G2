@@ -175,7 +175,7 @@ catch(PDOException $e){
 
                   <td class="fs-5 text-center">
                     <?php
-                        if ($row['status'] == "pending"){
+                        if ($row['status'] == "draft"){
                         ?>
                             <span style="color: red;"><?php echo $row['status']; ?></span>
                     <?php

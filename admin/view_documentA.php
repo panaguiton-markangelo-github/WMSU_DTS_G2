@@ -122,7 +122,7 @@ if(!isset($_SESSION["a_username"])) {
                         
                         <td class="fs-5 text-center">
                         <?php
-                            if ($_POST['status'] == "pending"){
+                            if ($_POST['status'] == "draft"){
                             ?>
                                 <span style="color: red;"><?php echo $_POST['status']; ?></span>
                         <?php
