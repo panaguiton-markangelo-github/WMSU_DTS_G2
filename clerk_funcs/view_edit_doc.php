@@ -25,20 +25,25 @@
                               
                 <datalist id="reasons">
                   <option selected value="<?php echo $row['reason']; ?>"><?php echo $row['reason']; ?></option>
-                  <option value="Appropriate Action">Appropriate Action</option>
-                  <option value="Coding/Deposit/Preparation of Receipt">Coding/Deposit/Preparation of Receipt</option>
-                  <option value="Comment/Reaction/Response">Comment/Reaction/Response</option>
-                  <option value="Compliance/Implementation">Compliance/Implementation</option>
-                  <option value="Dissemination of Information">Dissemination of Information</option>
-                  <option value="Draft of Reply">Draft of Reply</option>
-                  <option value="Endorsement/Recommendation">Endorsement/Recommendation</option>
-                  <option value="Follow-up">Follow-up</option>
-                  <option value="Investigation/Verification and Report">Investigation/Verification and Report</option>
-                  <option value="Notation and Return/File">Notation and Return/File</option>
-                  <option value="Notification/Reply to Party">Notification/Reply to Party</option>
-                  <option value="Study and Report to">Study and Report to</option>
-                  <option value="Translation">Translation</option>
-                  <option value="Your Information">Your Information</option>
+                  <?php
+                      $database = new Connection();
+                      $db = $database->open();
+                      try{	
+                          $sql = 'SELECT * FROM reasons ORDER BY reason ASC;'; 
+                          foreach ($db->query($sql) as $rows) {
+                    ?>
+                      <option value="<?php echo $rows['reason']; ?>"> <?php echo $rows['reason'];?> </option>
+                      <?php
+                      }
+
+                    }
+                    catch(PDOException $e){
+                        echo "There is some problem in connection: " . $e->getMessage();
+                    }
+
+                    //close connection
+                    $database->close();
+                  ?> 
                 </datalist>
 
                 <p style="text-align:center;color:orange;">
