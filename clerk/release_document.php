@@ -84,7 +84,6 @@ catch(PDOException $e){
               
               ?>
               
-             
 
               <li class="nav-item">
                 <a class="nav-link fw-bold text-white">--></a>

@@ -27,6 +27,26 @@ if(!isset($_SESSION["a_username"])) {
               <li class="nav-item">
                 <a class="nav-link fw-bold" href="homePageAdmin.php">Home</a>
               </li> 
+              
+              <li class="nav-item">
+                <span class="nav-link fw-bold">--></span>
+              </li>
+
+              <?php if(!empty($_POST['rec_link'])){
+                  ?>
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold" href="received_docs.php">Received Documents</a>
+                </li> 
+                  <?php
+              }
+              else{
+                  ?>     
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="office_docs.php">Office Documents</a>
+                </li> 
+                  <?php
+              }
+              ?>
 
               <li class="nav-item">
                 <span class="nav-link fw-bold">--></span>
