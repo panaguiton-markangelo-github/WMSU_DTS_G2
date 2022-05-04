@@ -14,6 +14,7 @@ if(!isset($_SESSION["a_username"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body style="background-color:#fff;">
     <nav class="navbar navbar-expand-sm navbar-dark border-bottom border-dark" style="background-color:#8e0413;">
@@ -159,11 +160,26 @@ if(!isset($_SESSION["a_username"])) {
                 </tbody>
             </table>
 
-            <form action="release_document.php" method="POST">
-                <input type="text" name="trackingID" value="<?php echo $_POST['track_ID'];?>" hidden>
-                <input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" hidden>
-                <button type="submit" name="release_mod" class="btn btn-success ">Update Status</button>
-            </form>
+            <?php if($_POST['status'] != "draft") {
+                ?>
+                    <form action="release_document.php" method="POST">
+                        <input type="text" name="trackingID" value="<?php echo $_POST['track_ID'];?>" hidden>
+                        <input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" hidden>
+                        <button type="submit" name="release_mod" class="btn btn-success ">Update Status</button>
+                    </form>
+                <?php
+            } 
+            elseif($_POST['status'] == "draft") {
+                ?>
+                    <form action="release_document.php" method="POST">
+                        <input type="text" name="userID" value="<?php echo $_SESSION['userID'] ?>" hidden>
+                        <input type="text" name="trackingID" value="<?php echo $_POST['track_ID'];?>" hidden>
+                        <input type="text" name="status" value="<?php echo $_POST['status'];?>" hidden>
+                        <button type="submit" name="release_but" class="btn btn-success btn-sm p-2"><span class = "las la-share">Release</span></button>
+                    </form>
+                <?php
+            }
+            ?>
 
             <br>
             <br>
