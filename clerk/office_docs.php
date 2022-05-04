@@ -397,6 +397,7 @@ if(!isset($_SESSION["c_username"])) {
         $(document).ready(function (){
             $("#s_type").on('change', function(){
                 var value = $(this).val();
+                alert(value);
                 $.ajax({
                     url:"../clerk_funcs/fetch_docs.php",
                     type:"POST",
