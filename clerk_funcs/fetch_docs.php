@@ -5,6 +5,7 @@ include '../include/alt_db.php';
 if(isset($_POST['request'])){
 
     $request = $_POST['request'];
+    echo $request;
     if($request == "none"){
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
         FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
@@ -22,6 +23,7 @@ if(isset($_POST['request'])){
         ;";
         $result = mysqli_query($data, $query);
         $count = mysqli_num_rows($result);
+        
     }
 
 ?>
