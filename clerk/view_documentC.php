@@ -36,7 +36,7 @@ if(!isset($_SESSION["c_username"])) {
               <?php if(!empty($_POST['rec_link'])){
                   ?>
                   <li class="nav-item">
-                    <a class="nav-link fw-bold" href="office_docs.php">Received Documents</a>
+                    <a class="nav-link fw-bold" href="received_docs.php">Received Documents</a>
                 </li> 
                   <?php
               }
