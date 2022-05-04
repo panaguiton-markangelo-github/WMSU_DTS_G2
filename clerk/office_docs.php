@@ -130,7 +130,7 @@ if(!isset($_SESSION["c_username"])) {
                    <div class="col-2">
                         <select id="s_type" class="form-select">
                             <option value="" disabled="" selected> Type: </option>
-                            <option ><a href="office_docs.php"></a></option>
+                            <option value="none" ></option>
                             <?php
                                 //include our connection
                                 include_once('../include/database.php');
