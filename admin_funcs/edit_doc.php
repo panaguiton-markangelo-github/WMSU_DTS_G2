@@ -31,6 +31,10 @@
 
 	else{
 		$_SESSION['e_message'] = 'Fill up add form first';
+		header('location: ../admin/office_docs.php?failed');
+		//close connection
+		$database->close();
+		exit();
 	}
 
 	header('location: ../admin/office_docs.php?succesful=edited');

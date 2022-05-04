@@ -43,6 +43,10 @@
 
 	else{
 		$_SESSION['message_fail'] = 'Fill up add form first';
+		header('location: ../admin/homePageAdmin.php?failed');
+		//close connection
+		$database->close();
+		exit();
 	}
 
 	header('location: ../admin/homePageAdmin.php?succesful=edited?profile');

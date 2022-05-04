@@ -31,6 +31,10 @@
 
 	else{
 		$_SESSION['message'] = 'Fill up add form first';
+		header('location: ../admin/clerk_users.php?failed');
+		//close connection
+		$database->close();
+		exit();
 	}
 
 	header('location: ../admin/clerk_users.php?succesful=deleted?clerk');
