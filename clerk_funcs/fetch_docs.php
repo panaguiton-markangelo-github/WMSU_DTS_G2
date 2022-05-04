@@ -23,7 +23,11 @@ if(isset($_POST['request'])){
         $count = mysqli_num_rows($result);
     }
 
+    
 ?>
+
+<?php include('../clerk_funcs/view_edit_doc.php');?>
+<?php include('../clerk_funcs/view_delete_doc.php');?>
 
 <table id="data_table_2" class="table table-striped table-hover">
     <?php 
@@ -61,6 +65,14 @@ if(isset($_POST['request'])){
 
                 <th>
                     School Year
+                </th>
+
+                <th>
+                                    
+                </th>
+
+                <th>
+                    
                 </th>
 
                 <th>
@@ -126,7 +138,15 @@ if(isset($_POST['request'])){
                 <td>
                     <?php echo $row['schoolYear']; ?>
                 </td>
-                
+
+                <td>
+                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
+                </td>
+
                 <td>
                     <form id="viewForm" action="view_documentSA.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
