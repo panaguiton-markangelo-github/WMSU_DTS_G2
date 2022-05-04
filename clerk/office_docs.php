@@ -138,7 +138,7 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN users ON users.id = documents.user_id WHERE users.officeName = '".$_SESSION['c_officeName']."';";
+                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND users.officeName = '".$_SESSION['c_officeName']."';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
@@ -167,7 +167,7 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id WHERE users.officeName = '".$_SESSION['c_officeName']."';";
+                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND users.officeName = '".$_SESSION['c_officeName']."';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
@@ -245,7 +245,7 @@ if(!isset($_SESSION["c_username"])) {
                                     $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
-                                    WHERE users.officeName = '".$_SESSION['c_officeName']."';";
+                                    WHERE users.officeName = '".$_SESSION['c_officeName']."' AND yearsemester.activated = 'yes';";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
