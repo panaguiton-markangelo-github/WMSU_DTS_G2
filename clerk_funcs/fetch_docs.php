@@ -160,13 +160,13 @@ if(isset($_POST['request'])){
                     </form>
                 </td>
             </tr>
-                <?php include('view_edit_doc.php');?>
-                <?php include('view_delete_doc.php');?>
+              
             <?php
             }
             ?>
         </tbody>
-
+        <?php include('view_edit_doc.php');?>
+        <?php include('view_delete_doc.php');?>
 </table>
 
 <script>
