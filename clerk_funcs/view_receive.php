@@ -210,7 +210,6 @@ catch(PDOException $e){
             <form action="../clerk_funcs/receive.php"  id="mainSec" method="POST">
               <br>
               <br>
-              <!--fix this issue here.-->
               <input type="text" name="rec_trackingID"  value="<?php echo $_POST["rec_trackingID"];?>" hidden>
               <input type="text" name="status"  value="<?php echo $row["status"];?>" hidden>
 
