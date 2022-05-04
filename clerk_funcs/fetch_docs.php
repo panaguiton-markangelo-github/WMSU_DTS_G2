@@ -136,14 +136,11 @@ if(isset($_POST['request'])){
                 </td>
 
                 <td>
-                    <?php include('../clerk_funcs/view_delete_doc.php');?>
                     <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
 
                 </td>
 
                 <td>
-                    <?php include('../clerk_funcs/view_edit_doc.php');?>
-                
                     <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                 </td>
 
@@ -163,6 +160,8 @@ if(isset($_POST['request'])){
                     </form>
                     
                 </td>
+                <?php include('../clerk_funcs/view_edit_doc.php');?>
+                <?php include('../clerk_funcs/view_delete_doc.php');?>
             </tr>
             <?php
             }
@@ -322,14 +321,10 @@ if(isset($_POST['request_year'])){
                 </td>
 
                 <td>
-                
-                    <?php include('../clerk_funcs/view_delete_doc.php');?>
                     <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
                 </td>
 
                 <td>
-                    <?php include('../clerk_funcs/view_edit_doc.php');?>
-                    
                     <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                 </td>
 
@@ -348,6 +343,8 @@ if(isset($_POST['request_year'])){
                     </form>
                     
                 </td>
+                <?php include('../clerk_funcs/view_edit_doc.php');?>
+                <?php include('../clerk_funcs/view_delete_doc.php');?>
             </tr>
             <?php
             }
