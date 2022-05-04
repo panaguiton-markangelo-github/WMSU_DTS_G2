@@ -222,10 +222,6 @@ if(isset($_POST['request_year'])){
                 </th>
 
                 <th>
-                    Originating Office
-                </th>
-
-                <th>
                     Tracking ID
                 </th>
                 
@@ -252,6 +248,15 @@ if(isset($_POST['request_year'])){
                 <th>
                     School Year
                 </th>
+
+                <th>
+                
+                </th>
+
+                <th>
+                    
+                </th>
+
 
                 <th>
                     View
@@ -322,6 +327,14 @@ if(isset($_POST['request_year'])){
                 </td>
 
                 <td>
+                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
+                </td>
+
+                <td>
                     <form id="viewForm" action="view_documentSA.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                         <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
@@ -334,6 +347,8 @@ if(isset($_POST['request_year'])){
                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
+                    <?php include('view_edit_doc.php');?>
+                    <?php include('view_delete_doc.php');?>
                 </td>
             </tr>
             <?php
