@@ -2,8 +2,6 @@
 session_start();
 sleep(1);
 include '../include/alt_db.php';
-include('../clerk_funcs/view_edit_doc.php');
-include('../clerk_funcs/view_delete_doc.php');
 
 if(isset($_POST['request'])){
 
@@ -63,14 +61,6 @@ if(isset($_POST['request'])){
 
                 <th>
                     School Year
-                </th>
-
-                <th>
-                                    
-                </th>
-
-                <th>
-                    
                 </th>
 
                 <th>
@@ -136,17 +126,7 @@ if(isset($_POST['request'])){
                 <td>
                     <?php echo $row['schoolYear']; ?>
                 </td>
-
-                <td>
-                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
-
-                </td>
-
-                <td>
-                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                </td>
-
-
+                
                 <td>
                     <form id="viewForm" action="view_documentSA.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
@@ -250,14 +230,6 @@ if(isset($_POST['request_year'])){
                 </th>
 
                 <th>
-                
-                </th>
-
-                <th>
-                    
-                </th>
-
-                <th>
                     View
                 </th>
 
@@ -319,14 +291,6 @@ if(isset($_POST['request_year'])){
 
                 <td>
                     <?php echo $row['schoolYear']; ?>
-                </td>
-
-                <td>
-                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
-                </td>
-
-                <td>
-                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                 </td>
 
                 <td>
