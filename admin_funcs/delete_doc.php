@@ -11,14 +11,14 @@
 		$result = mysqli_query($data, $query);
 		$row = mysqli_fetch_array($result);
 
-		if($row['status']  == 'released' && !empty($row)){
-			$_SESSION['e_message'] = "Oppss. You cannot delete a document that was already released/processed!";
+		if($_POST['status_rel'] != 'draft'){
+			$_SESSION['message_fail'] = "Oppss. You cannot delete a document that was already released/processed!";
 			header('location: ../admin/office_docs.php?failed=released');
 			//close connection
 			$database->close();
 			exit();
 		}
-		else
+		elseif($_POST['status_rel'] == 'draft')
 		{
 			try{
 
@@ -33,7 +33,7 @@
 			
 			}
 			catch(PDOException $e){
-				$_SESSION['e_message'] = $e->getMessage();
+				$_SESSION['message_fail'] = $e->getMessage();
 			}
 	
 			//close connection
@@ -42,7 +42,7 @@
 	}
 
 	else{
-		$_SESSION['e_message'] = 'Fill up add form first';
+		$_SESSION['message_fail'] = 'Fill up add form first';
 		header('location: ../admin/office_docs.php?failed');
 		//close connection
 		$database->close();
