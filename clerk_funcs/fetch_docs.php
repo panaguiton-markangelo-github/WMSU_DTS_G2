@@ -65,14 +65,6 @@ if(isset($_POST['request'])){
                 </th>
 
                 <th>
-                                    
-                </th>
-
-                <th>
-                    
-                </th>
-
-                <th>
                     View
                 </th>
 
@@ -118,7 +110,7 @@ if(isset($_POST['request'])){
                 <td>
                     
                 <?php
-                    if ($row['status'] == "pending"){
+                    if ($row['status'] == "draft"){
                     ?>
                         <span style="color: red;"><?php echo $row['status']; ?></span>
                 <?php
@@ -137,14 +129,6 @@ if(isset($_POST['request'])){
                 </td>
 
                 <td>
-                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
-                </td>
-
-                <td>
-                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                </td>
-
-                <td>
                     <form id="viewForm" action="view_documentC.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                         <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
@@ -157,12 +141,9 @@ if(isset($_POST['request'])){
                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
-                </td>
-
-                <?php include 'view_edit_doc.php';?>
-                <?php include 'view_delete_doc.php';?>
-                
+                </td>  
             </tr>
+
             <?php
             }
             ?>
@@ -294,7 +275,7 @@ if(isset($_POST['request_year'])){
                 <td>
                     
                 <?php
-                    if ($row['status'] == "pending"){
+                    if ($row['status'] == "draft"){
                     ?>
                         <span style="color: red;"><?php echo $row['status']; ?></span>
                 <?php

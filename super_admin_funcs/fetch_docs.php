@@ -116,7 +116,7 @@ if(isset($_POST['request'])){
                 <td>
                     
                 <?php
-                    if ($row['status'] == "pending"){
+                    if ($row['status'] == "draft"){
                     ?>
                         <span style="color: red;"><?php echo $row['status']; ?></span>
                 <?php
@@ -288,7 +288,7 @@ if(isset($_POST['request_year'])){
                 <td>
                     
                 <?php
-                    if ($row['status'] == "pending"){
+                    if ($row['status'] == "draft"){
                     ?>
                         <span style="color: red;"><?php echo $row['status']; ?></span>
                 <?php
@@ -460,7 +460,7 @@ if(isset($_POST['request_arc'])){
                 <td>
                     
                 <?php
-                    if ($row['status'] == "pending"){
+                    if ($row['status'] == "draft"){
                     ?>
                         <span style="color: red;"><?php echo $row['status']; ?></span>
                 <?php
@@ -632,7 +632,7 @@ if(isset($_POST['request_arc_year'])){
                 <td>
                     
                 <?php
-                    if ($row['status'] == "pending"){
+                    if ($row['status'] == "draft"){
                     ?>
                         <span style="color: red;"><?php echo $row['status']; ?></span>
                 <?php
