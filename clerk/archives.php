@@ -247,7 +247,8 @@ if(!isset($_SESSION["c_username"])) {
                                     $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
-                                    WHERE users.officeName = '".$_SESSION['c_officeName']."' AND yearsemester.activated = 'no';";
+                                    WHERE users.officeName = '".$_SESSION['c_officeName']."' AND yearsemester.activated = 'no'
+                                    ORDER BY documents.id DESC;";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
