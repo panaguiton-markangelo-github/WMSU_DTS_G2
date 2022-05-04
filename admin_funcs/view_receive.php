@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION["a_username"])) {
   header("location: ../index.php");
 }
+
 ?>
 
 <?php
@@ -12,7 +13,7 @@ include_once('../include/database.php');
 $database = new Connection();
 $db = $database->open();
 try{	
-    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, logs.office, logs.origin_office FROM documents 
+    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, documents.file, logs.office, logs.origin_office FROM documents 
     INNER JOIN logs ON documents.trackingID = logs.trackingID 
     WHERE documents.trackingID = '".$_POST['rec_trackingID']."' ORDER BY logs.id DESC LIMIT 1;";
     foreach ($db->query($sql) as $row) {
@@ -220,7 +221,7 @@ catch(PDOException $e){
                               File:
                           </th>
 
-                          <?php if($_POST['file'] == 'none'){
+                          <?php if($row['file'] == 'none'){
                               ?>
                               <td class="fs-5 text-center">
                                 <span>No File</span>
@@ -231,7 +232,7 @@ catch(PDOException $e){
                           {
                               ?>
                                   <td class="fs-5 text-center">
-                                  <a href="../uploads/<?php echo $_POST['file'];?>" target="_blank"><?php echo $_POST['file'];?></a>
+                                  <a href="../uploads/<?php echo $row['file'];?>" target="_blank"><?php echo $row['file'];?></a>
                               </td>
                               <?php
                           }

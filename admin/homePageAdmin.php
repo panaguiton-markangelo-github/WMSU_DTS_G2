@@ -326,7 +326,7 @@ catch(PDOException $e) {
                                 <div class="input-group">
                                 <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
                                 <input type="text" name="rec_trackingID" id="rec_trackingID" class="form-control border border-dark" placeholder="Tracking ID" required>
-                                <input type="text" name="file" class="form-control border border-dark" value="<?php echo $row['file'];?>" hidden>                 
+                                          
                                 <button class="btn btn-outline-success fw-bold" type="submit" id="recBut">Receive Document</button>
                                 </div>
                             </form>                      
