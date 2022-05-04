@@ -7,11 +7,11 @@
 		$database = new Connection();
 		$db = $database->open();
 
-		$query = "SELECT id FROM documents WHERE status = '".$_POST['status_rel']."'";
+		$query = "SELECT status FROM documents WHERE status = '".$_POST['status_rel']."'";
 		$result = mysqli_query($data, $query);
 		$row = mysqli_fetch_array($result);
 
-		if(!empty($row['id'])){
+		if($row['status']  == 'released' && !empty($row)){
 			$_SESSION['e_message'] = "Oppss. You cannot delete a document that was already released/processed!";
 			header('location: ../admin/office_docs.php?failed=released');
 			//close connection
