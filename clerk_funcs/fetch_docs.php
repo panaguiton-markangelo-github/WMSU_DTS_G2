@@ -85,9 +85,6 @@ if(isset($_POST['request'])){
             ?>
         </thead>
 
-        <?php include_once('../clerk_funcs/view_edit_doc.php');?>
-        <?php include_once('../clerk_funcs/view_delete_doc.php');?>
-
         <tbody>
             <?php
             while($row = mysqli_fetch_assoc($result)){
