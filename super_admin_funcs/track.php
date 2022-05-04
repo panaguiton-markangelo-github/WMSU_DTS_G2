@@ -38,7 +38,7 @@
         <td>
         
         <?php
-            if ($row['status'] == "pending"){
+            if ($row['draft'] == "pending"){
             ?>
                 <span style="color: red;"><?php echo $row['status']; ?></span>
         <?php

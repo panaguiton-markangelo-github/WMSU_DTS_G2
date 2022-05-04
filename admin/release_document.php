@@ -211,7 +211,7 @@ catch(PDOException $e){
               <div class="input-group mb-3">
               <select class="form-select text-dark" name="action" id = "action" onchange="checkvalue(this.value)" required>
                 <option value="" selected>Please select the action.</option>
-                <option value="Endorse">Endorse</option>
+                <option value="Endorsed">Endorse</option>
                 <option value="Approved">Approved</option>
                 <option value="Disapproved">Disapproved</option>
                 <option value="No action">No action</option>

@@ -189,7 +189,7 @@ catch(PDOException $e){
 
                       <td class="fs-5 text-center">
                       <?php
-                            if ($row['status'] == "pending"){
+                            if ($row['status'] == "draft"){
                             ?>
                                 <span style="color: red;"><?php echo $row['status']; ?></span>
                         <?php
@@ -221,7 +221,7 @@ catch(PDOException $e){
             <div class="d-flex justify-content-center">
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                   <a href="../admin/homePageAdmin.php" type="button" class="btn btn-danger">No</a>
-                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiveModal">Okay</button>
+                  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#receiveModal">Receive</button>
                 </div>
               </div>
           </div>
