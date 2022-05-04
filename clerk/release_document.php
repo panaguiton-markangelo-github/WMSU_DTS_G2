@@ -197,35 +197,61 @@ catch(PDOException $e){
           <br>
           <br>
           <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_POST["userID"];?>" hidden>
+          
+          <?php 
+          if($_POST['status'] == 'draft'){
+            ?>
+              <div class="row">
+                <div class="col md-4">
+                  <div class="input-group mb-3">
+                  <label class="input-group-text" for="trackingID">Tracking ID</label>
+                  <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
+                  </div>
+                  <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
+                </div>
 
-          <div class="row">
-            <div class="col md-4">
-              <div class="input-group mb-3">
-              <label class="input-group-text" for="trackingID">Tracking ID</label>
-              <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
+                <div class="col md-4">
+                <p class="text-center text-muted fw-bold">After confirmation, the document will be tag as released.</p>
+                </div>
+
               </div>
-              <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
+            <?php
+            
+          }
+          elseif($_POST['status'] != 'draft')
+          {
+            ?>
+             <div class="row">
+              <div class="col md-4">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="trackingID">Tracking ID</label>
+                <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
+                </div>
+                <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
+              </div>
+
+                
+              <div class="col md-4">
+                <div class="input-group mb-3">
+                <select class="form-select text-dark" name="action" id = "action" onchange="checkvalue(this.value)" required>
+                  <option value="" selected>Please select the action.</option>
+                  <option value="Endorse">Endorse</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Disapproved">Disapproved</option>
+                  <option value="No action">No action</option>
+                  <option value="Received">Received</option>
+                  <option value="Return to sender">Return to sender</option>
+                  <option value="other">Other</option>
+                </select> 
+                </div>
+                <input type="text" name="oaction" id="checkA" placeholder="Please enter here the action:" style='display:none'>
+                <p class="text-center text-muted fw-bold"> Enter the appropriate action that was made in this office.</p>
+              </div>
             </div>
 
-            <div class="col md-4">
-              <div class="input-group mb-3">
-              <select class="form-select text-dark" name="action" id = "action" onchange="checkvalue(this.value)" required>
-                <option value="" selected>Please select the action.</option>
-                <option value="Endorse">Endorse</option>
-                <option value="Approved">Approved</option>
-                <option value="Disapproved">Disapproved</option>
-                <option value="No action">No action</option>
-                <option value="Received">Received</option>
-                <option value="Return to sender">Return to sender</option>
-                <option value="other">Other</option>
-              </select> 
-              </div>
-              <input type="text" name="oaction" id="checkA" placeholder="Please enter here the action:" style='display:none'>
-              <p class="text-center text-muted fw-bold"> Enter the appropriate action that was made in this office.</p>
-            </div>
-
-          </div>
-
+            <?php
+          }
+          ?>
           <br>
           <br>
           <br>
@@ -281,23 +307,26 @@ catch(PDOException $e){
               <?php
             }
             else{
-              ?>
-              <div class="modal-header">
-                <h5 class="modal-title" id="finalModalLabel">Release Document</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
+              if($_POST['status'] == 'draft'){
+                ?>
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="finalModalLabel">Release Document</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
 
-              <div class="modal-body">
-                <p style="text-align: center;color:green;">Do you wish to release this document from this office? Other offices will now be able to process this document, if they receive it.
-                  <br>
-                  <br>
-                  Note: The status of the document will be changed based in the chosen action.
-                </p>
-              </div>
+                  <div class="modal-body">
+                    <p style="text-align: center;color:green;">Do you wish to release this document now? After confirmation the document will be now tagged as release.
+                      <br>
+                      <br>
+                      Note: The status of the document will be 'release' now and it is now possible for other offices to process it.
+                    </p>
+                  </div>
+                <?php
+              }
+              ?>
               <?php
             }
               ?>
-
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal" for>No</button>

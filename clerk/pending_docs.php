@@ -227,6 +227,7 @@ if(!isset($_SESSION["c_username"])) {
                                     <form action="release_document.php" method="POST">
                                     <input type="text" name="userID" value="<?php echo $_SESSION['userID'] ?>" hidden>
                                     <input type="text" name="trackingID" value="<?php echo $row['trackingID'] ?>" hidden>
+                                    <input type="text" name="status" value="<?php echo $row['status'] ?>" hidden>
                                     <button type="submit" name="release_but" class="btn btn-success btn-sm p-2"><span class = "las la-share"></span></button> <!--continue here-->
                                     </form>
 
