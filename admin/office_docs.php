@@ -127,6 +127,67 @@ if(!isset($_SESSION["a_username"])) {
   
 
         <main>
+            <div class="filters row mb-3"> 
+                <span>Filter By:</span>
+                   <div class="col-2">
+                        <select id="s_type" class="form-select">
+                            <option value="" disabled="" selected> Type: </option>
+                            <option value="none" ></option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN users ON users.id = documents.user_id WHERE users.officeName = '".$_SESSION['a_officeName']."';";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['type'];?>"> <?php echo $row['type'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
+                        </select>
+                   </div>
+                   <div class="col-3">
+                        <select id="s_school_year" class="form-select">
+                            <option value="" disabled="" selected> School year: </option>
+                            <option value="none" ></option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id WHERE users.officeName = '".$_SESSION['a_officeName']."';";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['schoolYear'];?>"> <?php echo $row['schoolYear'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
+                        </select>
+                   </div>
+               </div>
            <div class="container">
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
@@ -353,6 +414,65 @@ if(!isset($_SESSION["a_username"])) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#s_type").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"../admin_funcs/fetch_docs.php",
+                    type:"POST",
+                    data:'request=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+
+            $("#s_school_year").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"../admin_funcs/fetch_docs.php",
+                    type:"POST",
+                    data:'request_year=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#data_table').DataTable();

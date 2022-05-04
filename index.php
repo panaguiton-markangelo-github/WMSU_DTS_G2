@@ -222,8 +222,7 @@
 		}
 	}
 	
-	//done every changes in the super admin user.
-	//proceed with clerk/admin user changes later!
+	
 	?>
 	  <script>
 		  var loader =  document.getElementById("preloader");

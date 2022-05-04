@@ -12,7 +12,7 @@ include_once('../include/database.php');
 $database = new Connection();
 $db = $database->open();
 try{	
-    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, logs.office, logs.origin_office FROM documents 
+    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, documents.file, logs.office, logs.origin_office FROM documents 
     INNER JOIN logs ON documents.trackingID = logs.trackingID 
     WHERE documents.trackingID = '".$_POST['rec_trackingID']."' ORDER BY logs.id DESC LIMIT 1;";
     foreach ($db->query($sql) as $row) {
@@ -204,6 +204,44 @@ catch(PDOException $e){
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" id = "table">
+                  <thead>
+                      <tr>
+                          <th class="text-center fs-4" colspan="2">FILE OF <?php echo $_POST['rec_trackingID'];?></th>
+                      </tr>
+                  </thead>
+      
+                  <tbody>
+                      <tr>
+                          <th class="fs-5 text-center">
+                              File:
+                          </th>
+
+                          <?php if($row['file'] == 'none'){
+                              ?>
+                              <td class="fs-5 text-center">
+                                <span>No File</span>
+                              </td>
+                              <?php
+                          }
+                          else
+                          {
+                              ?>
+                                  <td class="fs-5 text-center">
+                                  <a href="../uploads/<?php echo $row['file'];?>" target="_blank"><?php echo $row['file'];?></a>
+                              </td>
+                              <?php
+                          }
+                          ?>
+      
+                      </tr>
+                  </tbody>
+              </table>  
+              <br>
+              <br>
             </div>
 
 
