@@ -139,11 +139,15 @@ if(!isset($_SESSION["c_username"])) {
                 </tbody>
             </table>
 
-            <form action="release_document.php" method="POST">
-                <input type="text" name="trackingID" value="<?php echo $_POST['track_ID'];?>" hidden>
-                <input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" hidden>
-                <button type="submit" name="release_mod" class="btn btn-success ">Update Status</button>
-            </form>
+            <?php if($_POST['status'] != "draft") {
+                ?>
+                    <form action="release_document.php" method="POST">
+                        <input type="text" name="trackingID" value="<?php echo $_POST['track_ID'];?>" hidden>
+                        <input type="text" name="userID" value="<?php echo $_SESSION['userID'];?>" hidden>
+                        <button type="submit" name="release_mod" class="btn btn-success ">Update Status</button>
+                    </form>
+                <?php
+            } ?>
 
             <br>
             <br>
