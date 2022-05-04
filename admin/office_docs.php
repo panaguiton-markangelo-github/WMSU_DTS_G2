@@ -169,7 +169,7 @@ if(!isset($_SESSION["a_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND users.officeName = '".$_SESSION['a_officeName']."';";
+                                    $sql = "SELECT DISTINCT documents.schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND users.officeName = '".$_SESSION['a_officeName']."';";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
