@@ -143,6 +143,7 @@ if(isset($_POST['request'])){
                     <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                 </td>
 
+
                 <td>
                     <form id="viewForm" action="view_documentSA.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
@@ -157,13 +158,13 @@ if(isset($_POST['request'])){
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
                     
-                    <?php include('../clerk_funcs/view_edit_doc.php');?>
-                    <?php include('../clerk_funcs/view_delete_doc.php');?>
                 </td>
             </tr>
             <?php
             }
             ?>
+                <?php include('../clerk_funcs/view_edit_doc.php');?>
+                <?php include('../clerk_funcs/view_delete_doc.php');?>
         </tbody>
 
 </table>
@@ -339,13 +340,14 @@ if(isset($_POST['request_year'])){
                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                     </form>
-                    <?php include('../clerk_funcs/view_edit_doc.php');?>
-                    <?php include('../clerk_funcs/view_delete_doc.php');?>
+                    
                 </td>
             </tr>
             <?php
             }
             ?>
+            <?php include('../clerk_funcs/view_edit_doc.php');?>
+            <?php include('../clerk_funcs/view_delete_doc.php');?>
         </tbody>
 
 </table>
