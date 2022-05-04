@@ -5,7 +5,7 @@
         <h5 class="modal-title">Edit Document</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="../clerk_funcs/edit_doc.php?id=<?php echo $row['id']; ?>" method="post">
+      <form action="edit_doc.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
                 <?php $oldtrackid = $row['trackingID'] ?>
                 <div class="form-floating mb-3">
