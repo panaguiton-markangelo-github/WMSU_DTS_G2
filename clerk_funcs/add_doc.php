@@ -385,7 +385,7 @@
 							$sql->bindParam(':officeID', $_POST['officeID']);
 				
 							//if-else statement in executing our prepared statement
-							$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
+							$_SESSION['message'] = ( $sql->execute()) ? 'Document was saved as draft successfully' : 'Something went wrong. Cannot saved the document as draft.';
 	
 							$remarks_log = "Added the document in the office";
 							$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :office, :origin_office)");
@@ -470,7 +470,7 @@
 				$sql->bindParam(':officeID', $_POST['officeID']);
 
 				//if-else statement in executing our prepared statement
-				$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
+				$_SESSION['message'] = ( $sql->execute()) ? 'Document was saved as draft successfully' : 'Something went wrong. Cannot save the document as draft.';
 
 				$remarks_log = "Added the document in the office";
 				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :office, :origin_office)");
