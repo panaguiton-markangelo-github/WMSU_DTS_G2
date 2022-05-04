@@ -402,7 +402,7 @@ if(isset($_POST['request_arc'])){
             <?php
     }
     else{
-        echo "Sorry! No record found! click <a href='../super_admin/archives.php'> here </a> to reset the filter.";
+        echo "Sorry! No record found! click <a href='../clerk/archives.php'> here </a> to reset the filter.";
     }
             ?>
         </thead>
@@ -567,7 +567,7 @@ if(isset($_POST['request_arc_year'])){
             <?php
     }
     else{
-        echo "Sorry! No record found! click <a href='../super_admin/archives.php'> here </a> to reset the filter.";
+        echo "Sorry! No record found! click <a href='../clerk/archives.php'> here </a> to reset the filter.";
     }
             ?>
         </thead>
