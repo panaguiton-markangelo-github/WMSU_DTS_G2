@@ -405,7 +405,7 @@ catch(PDOException $e) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!!',
-                        html: '<h4><?php echo $_SESSION['e_message']." "." With the tracking ID of <b>".$_SESSION['e_id']."</b>.";?></h4>',
+                        html: '<h4><?php echo $_SESSION['e_message'];?></h4>',
                         showConfirmButton: true,
                         allowOutsideClick: false,
                         confirmButtonText: 'OKAY!'
