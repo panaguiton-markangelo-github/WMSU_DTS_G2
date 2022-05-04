@@ -39,6 +39,15 @@ catch(PDOException $e){
 		$database = new Connection();
 		$db = $database->open();
         $receive_mes = "received in the office.";
+
+        if($_POST['status'] == 'draft'){
+            $_SESSION['e_message'] = 'The document is still not yet available to be received. Note: The document was not yet finalized and released. Please try again later.';
+            header('location: ../admin/homePageAdmin.php?failed');
+            //close connection
+            $database->close();
+            exit();
+        }
+        
 		try{
 			
             $_SESSION['trackingID'] = $_POST['rec_trackingID'];
