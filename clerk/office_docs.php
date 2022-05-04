@@ -57,6 +57,10 @@ if(!isset($_SESSION["c_username"])) {
                     <span>Office Documents</span></a>
                 </li>
                 <li>
+                    <a href="archives.php"><span class="las la-file-alt"></span>
+                    <span>Archives</span></a>
+                </li>
+                <li>
                     <a href="pending_docs.php"><span class="las la-arrow-circle-up"></span>
                     <span>Pending For Release</span></a>
                 </li>
@@ -350,7 +354,7 @@ if(!isset($_SESSION["c_username"])) {
         })
 	</script>
 
-    <?php 
+        <?php 
             if(isset($_SESSION['message'])){
                 ?>
                 <script>

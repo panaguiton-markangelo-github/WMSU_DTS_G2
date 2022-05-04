@@ -10,13 +10,14 @@ if(!isset($_SESSION["c_username"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Received Documents</title>
+    <title>Archives</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/loading.css">
+    <script src="../assets/js/sweet_alert.js"></script>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body>
@@ -41,8 +42,8 @@ if(!isset($_SESSION["c_username"])) {
             <h2><span class="las la-book"></span> <span>WMSU|DTS</span></h2>
         </div>
         <div class="sidebar-menu">
-        <ul>
-                <li>
+            <ul>
+            <li>
                     <a href="HomePageC.php"><span class="las la-home"></span>
                     <span>Dashboard</span></a>
                 </li>
@@ -55,7 +56,7 @@ if(!isset($_SESSION["c_username"])) {
                     <span>Office Documents</span></a>
                 </li>
                 <li>
-                    <a href="archives.php"><span class="las la-file-alt"></span>
+                    <a class="active"><span class="las la-file-alt"></span>
                     <span>Archives</span></a>
                 </li>
                 <li>
@@ -63,15 +64,14 @@ if(!isset($_SESSION["c_username"])) {
                     <span>Pending For Release</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-arrow-circle-down"></span>
+                    <a href="received_docs.php"><span class="las la-arrow-circle-down"></span>
                     <span>Received</span></a>
                 </li>
                 <li>
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-             
-               
+                
             </ul>
         </div>
     </div>
@@ -82,15 +82,16 @@ if(!isset($_SESSION["c_username"])) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Received Documents
+                Archives
             </h2>
 
+          
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
                 </div>   
                 <div class="menu">
-                    <h3><?php echo $_SESSION["c_username"]; ?>  <br> (<?php echo $_SESSION['c_officeName']; ?>) <span>clerk</span></h3> 
+                <h3><?php echo $_SESSION["c_username"]; ?> <br> (<?php echo $_SESSION['c_officeName']; ?>) <span>clerk</span></h3> 
                     <ul>
                         <?php
                             //include our connection
@@ -115,22 +116,82 @@ if(!isset($_SESSION["c_username"])) {
                             //close connection
                             $database->close();
                         ?>
-
                         <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
-                              
+                               
                 </div>
             </div>
         </header>
 
-        <?php  include('../clerk_funcs/view_edit_profile.php'); ?>
+        <?php  include('../clerk_funcs/view_edit_profile.php'); ?> 
 
         <main>
+        <div class="filters row mb-3"> 
+                <span>Filter By:</span>
+                   <div class="col-2">
+                        <select id="s_type" class="form-select">
+                            <option value="" disabled="" selected> Type: </option>
+                            <option value="none" ></option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'no' AND users.officeName = '".$_SESSION['c_officeName']."';";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['type'];?>"> <?php echo $row['type'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
+                        </select>
+                   </div>
+                   <div class="col-3">
+                        <select id="s_school_year" class="form-select">
+                            <option value="" disabled="" selected> School year: </option>
+                            <option value="none" ></option>
+                            <?php
+                                //include our connection
+                                include_once('../include/database.php');
+
+                                $database = new Connection();
+                                $db = $database->open();
+                                try{	
+                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'no' AND users.officeName = '".$_SESSION['c_officeName']."';";
+                        
+                                    foreach ($db->query($sql) as $row) {
+                                    ?>
+                                        <option value="<?php echo $row['schoolYear'];?>"> <?php echo $row['schoolYear'];?> </option>
+                                    <?php
+                                    
+                                    }
+                                }
+                                catch(PDOException $e){
+                                    echo "There is some problem in connection: " . $e->getMessage();
+                                }
+
+                                //close connection
+                                $database->close();
+                            ?>
+                        </select>
+                   </div>
+               </div>
            <div class="container">
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
-                        <thead>
+                        <thead>                   
                             <tr>
                                 <th>
                                     No.
@@ -148,7 +209,6 @@ if(!isset($_SESSION["c_username"])) {
                                 <th>
                                     Reason
                                 </th>
-
                                 <th>
                                     Remarks
                                 </th>
@@ -158,13 +218,26 @@ if(!isset($_SESSION["c_username"])) {
                                 </th>
 
                                 <th>
+                                    School Year
+                                </th>
+
+                                <th>
+                                    
+                                </th>
+
+                                <th>
+                                    
+                                </th>
+
+                                <th>
+
                                     View
                                 </th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+                             <?php
                                 //include our connection
                                 include_once('../include/database.php');
 
@@ -172,9 +245,9 @@ if(!isset($_SESSION["c_username"])) {
                                 $db = $database->open();
                                 try{	
                                     $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
-                                        FROM documents 
-                                        INNER JOIN logs ON logs.trackingID = documents.trackingID INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID
-                                        WHERE logs.received_at != 'none' AND logs.office = '".$_SESSION['c_officeName']."';";
+                                    FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+                                    INNER JOIN users ON users.id = documents.user_id
+                                    WHERE users.officeName = '".$_SESSION['c_officeName']."' AND yearsemester.activated = 'no';";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
@@ -203,22 +276,34 @@ if(!isset($_SESSION["c_username"])) {
                                 <td>
                                     <?php echo $row['remarks']; ?>
                                 </td>
+
                                 <td>
-                                    <?php
-                                        if ($row['status'] == "draft"){
+                                    <?php if( $row['status'] == "draft") {
                                         ?>
-                                            <span style="color: red;"><?php echo $row['status']; ?></span>
-                                    <?php
-                                        }
-                                        else {
-                                        ?>
-                                            <span style="color: green;"><?php echo $row['status']; ?></span>
+                                        <p style="color: red;"> <?php echo $row['status'];?> </p>
                                         <?php
-                                        }
+                                    } else{
+                                        ?>
+                                         <p style="color: green;"> <?php echo $row['status'];?> </p>
+                                        <?php
+                                    }
                                     ?>
-                                    
+                                  
+                                   
+                                   
                                 </td>
                                 
+                                <td>
+                                    <?php echo $row['schoolYear']; ?>
+                                </td>
+
+                                <td>
+                                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
+                                </td>
 
                                 <td>
                                     <form id="viewForm" action="view_documentC.php" method="POST">
@@ -230,10 +315,12 @@ if(!isset($_SESSION["c_username"])) {
                                         <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
                                         <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
                                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                        <input type="text" name="rec_link"  value= "rec_link" hidden>
                                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                     </form>
                                 </td>
+
+                                <?php include('../clerk_funcs/view_edit_doc.php');?>
+                                <?php include('../clerk_funcs/view_delete_doc.php');?>
 
                             </tr>
                             
@@ -255,7 +342,7 @@ if(!isset($_SESSION["c_username"])) {
         </main>
     </div>
 
-    <?php include('../validation/view_logout.php'); ?>
+    
 
     <script>
         var loader =  document.getElementById("preloader");
@@ -264,23 +351,60 @@ if(!isset($_SESSION["c_username"])) {
         })
 	</script>
 
-    <?php 
+        <?php 
             if(isset($_SESSION['message'])){
                 ?>
-                <div class="container">
-                    <div class="alert alert-success d-flex align-items-center" role="alert">
-                        <button style="margin-right:10px;" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                        <div style="margin-left:10px;">
-                            <?php 
-                                echo $_SESSION['message'];
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
                 <?php
 
                 unset($_SESSION['message']);
+            }
+        ?>
+
+          <?php 
+            if(isset($_SESSION['edit_message'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful!!',
+                        html: '<h4><?php echo $_SESSION['edit_message'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['edit_message']);
+            }
+        ?>
+
+        <?php 
+            if(isset($_SESSION['message_fail'])){
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed!!',
+                        html: '<h4><?php echo $_SESSION['message_fail'];?></h4>',
+                        showConfirmButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: 'OKAY!'
+                    });
+                </script>
+                <?php
+
+                unset($_SESSION['message_fail']);
             }
         ?>
 
@@ -289,16 +413,80 @@ if(!isset($_SESSION["c_username"])) {
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $("#s_type").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"../clerk_funcs/fetch_docs.php",
+                    type:"POST",
+                    data:'request_arc=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+
+            $("#s_school_year").on('change', function(){
+                var value = $(this).val();
+                $.ajax({
+                    url:"../clerk_funcs/fetch_docs.php",
+                    type:"POST",
+                    data:'request_arc_year=' + value,
+                    beforeSend:function(){
+                        Swal.fire({
+                            icon: 'info',
+                            html: "<h1> &nbsp;Please wait ...</h1>",
+                            showConfirmButton: false,
+                            allowOutsideClick: false
+                        });
+
+                    },
+                    success:function(data){
+                        Swal.fire({
+                                icon: 'success',
+                                html: "<h1>Success!</h1>",
+                                showConfirmButton: true,
+                                allowOutsideClick: false
+                        });
+                        $(".container").html(data);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
     <script>
         $(document).ready(function() {
-            $('#data_table').DataTable();
-        } );
+            $('#data_table').DataTable({
+                "processing":true
+            });
+        });
     </script>
 
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
-    
+    <?php include('../validation/view_logout.php'); ?>
+
     <script>
         function menuToggle(){
             const toggleMenu = document.querySelector('.menu');
