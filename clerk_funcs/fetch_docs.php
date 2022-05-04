@@ -181,7 +181,7 @@ if(isset($_POST['request'])){
 } 
 ?>
 
-<!--other-->
+<!--filter school year-->
 
 <?php
 if(isset($_POST['request_year'])){
@@ -279,10 +279,6 @@ if(isset($_POST['request_year'])){
             <tr>
                 <td>
                     <?php echo $no ;?>
-                </td>
-
-                <td>
-                    <?php echo $row['officeName']; ?>
                 </td>
 
                 <td>
