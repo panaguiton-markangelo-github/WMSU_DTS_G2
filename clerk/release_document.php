@@ -214,6 +214,8 @@ catch(PDOException $e){
                 <p class="text-center text-muted fw-bold">After confirmation, the document will be tag as released.</p>
                 </div>
 
+                <input type="text" name="action" value="released" hidden>
+
               </div>
             <?php
             
@@ -226,7 +228,6 @@ catch(PDOException $e){
                 <div class="input-group mb-3">
                 <label class="input-group-text" for="trackingID">Tracking ID</label>
                 <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
-                <input type="text" name="action" value="released" hidden>
                 </div>
                 <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
               </div>
