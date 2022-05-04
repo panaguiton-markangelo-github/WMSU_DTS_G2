@@ -146,7 +146,7 @@ if(isset($_POST['request'])){
                 </td>
 
                 <td>
-                    <form id="viewForm" action="view_documentSA.php" method="POST">
+                    <form id="viewForm" action="view_documentC.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                         <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
                         <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
@@ -331,7 +331,7 @@ if(isset($_POST['request_year'])){
                 </td>
 
                 <td>
-                    <form id="viewForm" action="view_documentSA.php" method="POST">
+                    <form id="viewForm" action="view_documentC.php" method="POST">
                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                         <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
                         <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
