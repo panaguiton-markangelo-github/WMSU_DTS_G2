@@ -250,7 +250,7 @@ catch(PDOException $e){
               <br>
               <br>
               <input type="text" name="rec_trackingID"  value="<?php echo $_POST["rec_trackingID"];?>" hidden>
-              <input type="text" name="status"  value="<?php echo $row["status"];?>" hidden>
+              <input type="text" name="status"  value="received" hidden>
 
               <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_POST["userID"];?>" hidden>
               <br>
