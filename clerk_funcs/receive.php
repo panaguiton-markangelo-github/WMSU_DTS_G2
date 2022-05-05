@@ -55,8 +55,6 @@ catch(PDOException $e){
             $sql_rec->bindParam(':status', $_POST['status']);
             $sql_rec->execute();
 
-
-			
             $_SESSION['trackingID'] = $_POST['rec_trackingID'];
             $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 
