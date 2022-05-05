@@ -49,6 +49,13 @@ catch(PDOException $e){
         }
 
 		try{
+
+            $sql_rec = $db->prepare ("UPDATE documents SET status = :status WHERE trackingID = :trackingID;");
+            $sql_rec->bindParam(':trackingID', $_POST['rec_trackingID']);
+            $sql_rec->bindParam(':status', $_POST['status']);
+            $sql_rec->execute();
+
+
 			
             $_SESSION['trackingID'] = $_POST['rec_trackingID'];
             $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
