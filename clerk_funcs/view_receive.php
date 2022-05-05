@@ -25,7 +25,6 @@ catch(PDOException $e){
     //close connection
     $database->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,6 +91,12 @@ catch(PDOException $e){
           $_SESSION['e_message'] = "The tracking ID is incorrect! Please double check it and try again!";
           $_SESSION['e_id'] = $_POST['rec_trackingID'];
             header("Location: ../clerk/HomePageC.php?error=incorrect?id");
+            die();
+        }
+        elseif($row['status'] == 'received' || $row['status'] == 'Received'){
+          $_SESSION['e_message'] = "The document was already received by an office.! Please wait for that office to update the status.";
+          $_SESSION['e_id'] = $_POST['rec_trackingID'];
+            header("Location: ../clerk/HomePageC.php?error=already?id");
             die();
         }
          ?>             
