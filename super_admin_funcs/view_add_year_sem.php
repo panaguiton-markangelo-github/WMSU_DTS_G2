@@ -90,14 +90,12 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
                   <?php
                   }
-                
-              ?>
-                <div class="row d-flex justify-content-center align-content-center">
+                  else
+                  {
+                    ?>
+                    <div class="row d-flex justify-content-center align-content-center">
                   <div class="col">
                     <div class="form-floating mb-3">
                       <input type="number" class="form-control" list="s_year" id="startYear" name="startYear" minlength="4" maxlength="4"  required>
@@ -156,6 +154,10 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   the date range of semester/summer located at the settings page.
                 </p>
 
+                    <?php
+                  }
+                
+              ?>
                 <?php
                   if(empty($status)){
                     ?>
