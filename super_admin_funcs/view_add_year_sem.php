@@ -53,6 +53,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                 if(empty($row1['id'])){
                   if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
+                    $status = "1st semester";
                     $start_year = date("Y");
                     $start_year_con = strtotime($start_year);
                     $next_year = strtotime("+ 1 year", $start_year_con);
@@ -60,6 +61,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                   }
                   else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
+                    $status = "2nd semester";
                     $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
@@ -69,6 +71,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   }
 
                   else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
+                    $status = "summer";
                     $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
@@ -80,6 +83,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                 elseif(!empty($row1['id'])){
                   if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
+                    $status = "1st semester";
                     
                     $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
@@ -89,6 +93,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $next_year_final = date("Y", $next_year);
                   }
                   else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
+                    $status = "2nd semester";
                     $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
@@ -97,6 +102,7 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $next_year_final = date("Y");
                   }
                   else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
+                    $status = "summer";
                     $start_year_s = date("Y");
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
@@ -104,18 +110,6 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
 
                     $next_year_final = date("Y");
                   }
-                }
-
-                if($first_sem_date <= date("m-d") && date("m-d") <= $e_first_sem_date){
-                    $status = "1st semester";
-                    
-                }
-                else if($second_sem_date <= date("m-d") && date("m-d") <=  $e_second_sem_date) {
-                    $status = "2nd semester";
-
-                }
-                else if($summer_date <= date("m-d") && date("m-d") <=  $e_summer_date){
-                    $status = "summer";
                 }
               ?>
                 <div class="row d-flex justify-content-center align-content-center">
