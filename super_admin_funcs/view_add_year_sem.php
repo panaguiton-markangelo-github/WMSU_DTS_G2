@@ -66,7 +66,6 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
                     $start_year = date("Y", $start_year_con2);
-
                     $next_year_final = date("Y");
                   }
 
@@ -76,8 +75,25 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                     $start_year_con = strtotime($start_year_s);
                     $start_year_con2 = strtotime("- 1 year", $start_year_con);
                     $start_year = date("Y", $start_year_con2);
-
                     $next_year_final = date("Y");
+                  }
+
+                  if(empty($status)){
+                    ?>
+                    <div class="container">
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                            <div style="margin-left:10px;text-align:center;">
+                                <?php 
+                                    echo "<h5>Adding a school year is not possible now, please check the date range that was set at the settings.<h5>";
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  <?php
                   }
                 
               ?>
@@ -140,11 +156,23 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   the date range of semester/summer located at the settings page.
                 </p>
 
-                <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" name="add" class="btn btn-success">Save changes</button>
-                </div>
-              
+                <?php
+                  if(empty($status)){
+                    ?>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    <?php
+                  }
+                  else{
+                    ?>
+                      <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" name="add" class="btn btn-success">Save changes</button>
+                      </div>
+                    <?php
+                  }
+                ?>              
               <?php
             }
               ?>                  
