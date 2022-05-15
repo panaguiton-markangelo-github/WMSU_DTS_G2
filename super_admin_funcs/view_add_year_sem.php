@@ -96,35 +96,35 @@ $_SESSION['year_m'] = "No school year. Please add it first as soon as possible."
                   {
                     ?>
                     <div class="row d-flex justify-content-center align-content-center">
-                  <div class="col">
-                    <div class="form-floating mb-3">
-                      <input type="number" class="form-control" list="s_year" id="startYear" name="startYear" minlength="4" maxlength="4"  required>
-                      <label for="startYear">Year:</label>
-                    </div>     
-                  </div>
+                      <div class="col">
+                        <div class="form-floating mb-3">
+                          <input type="number" class="form-control" list="s_year" id="startYear" name="startYear" minlength="4" maxlength="4"  required>
+                          <label for="startYear">Year:</label>
+                        </div>     
+                    </div>
 
                   <div class="col-1">
                       <span>TO</span>
                   </div>
 
-                  <div class="col">
-                    <div class="form-floating mb-3">
-                      <input type="number" class="form-control" id="endYear" list="e_year" name="endYear" minlength="4" maxlength="4" required>
-                      <label for="endYear">Year:</label>
+                    <div class="col">
+                      <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="endYear" list="e_year" name="endYear" minlength="4" maxlength="4" required>
+                        <label for="endYear">Year:</label>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <datalist id="s_year">
-                  <option value="<?php echo $start_year;?>"> Suggestion: <?php echo $start_year;?> </option>
-                </datalist>
+                  <datalist id="s_year">
+                    <option value="<?php echo $start_year;?>"> Suggestion: <?php echo $start_year;?> </option>
+                  </datalist>
 
-                <datalist id="e_year">
-                  <option value=""> Suggestion: </option>
-                  <option value="<?php echo $next_year_final;?>"> Suggestion: <?php echo $next_year_final;?> </option>
-                </datalist>
+                  <datalist id="e_year">
+                    <option value=""> Suggestion: </option>
+                    <option value="<?php echo $next_year_final;?>"> Suggestion: <?php echo $next_year_final;?> </option>
+                  </datalist>
 
-                <input type="text" class="form-control" id="status" name="status" value="<?php echo $status?>" hidden>
+                  <input type="text" class="form-control" id="status" name="status" value="<?php echo $status?>" hidden>
 
               <?php
 
