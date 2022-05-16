@@ -151,8 +151,10 @@ if(!isset($_SESSION["a_username"])) {
                                 <th>
                                     Activated
                                 </th>
+
                                 <th>
                                 </th>
+
                                 <th>
                                 </th>
                             </tr>
@@ -187,6 +189,7 @@ if(!isset($_SESSION["a_username"])) {
                                     <?php echo $row['username']; ?>
                                 </td>
 
+                                <td>
                                 <?php
                                         if ($row['activated'] == "yes"){
                                         ?>
