@@ -9,6 +9,8 @@ include ("../include/alt_db.php");
 		$db = $database->open();
 		$password = $_POST['password'];
 		$password_hash = password_hash($password, PASSWORD_DEFAULT);
+		$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
+		$remarks = "edited by the office admin.";
 
 		if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 			$_SESSION['message_fail'] = "Please enter a valid email!";
@@ -29,6 +31,17 @@ include ("../include/alt_db.php");
 			}
 				
 			try{
+				$sql_logs = $db->prepare("INSERT INTO userslog (edited_by, office, edited_at, email, remarks) VALUES (:edited_by, :office, :edited_at, :email, :remark)");
+				
+				//bind
+				$sql_logs->bindParam(':edited_by', $_POST['edited_by']);
+				$sql_logs->bindParam(':office', $_POST['office']);
+				$sql_logs->bindParam(':edited_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':email',$_POST['username']);
+				$sql_logs->bindParam(':remark',$remarks);
+
+				$sql_logs->execute();
+
 				//make use of prepared statement to prevent sql injection
 				$sql = $db->prepare("UPDATE users SET officeName = :officeName, name = :name, username = :username, password = :password WHERE id = :id");
 	

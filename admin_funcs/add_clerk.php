@@ -11,6 +11,8 @@ include ("../include/alt_db.php");
 		$password = $_POST['password'];
 		$password_hash = password_hash($password, PASSWORD_DEFAULT);
 		$active = 'yes';
+		$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
+		$remarks = "added by the office admin.";
 
 		if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 			$_SESSION['message_fail'] = "Please enter a valid email!";
@@ -31,6 +33,17 @@ include ("../include/alt_db.php");
 	
 			if (empty($row)){
 				try{
+					$sql_logs = $db->prepare("INSERT INTO userslog (added_by, office, added_at, email, remarks) VALUES (:added_by, :office, :added_at, :email, :remark)");
+				
+					//bind
+					$sql_logs->bindParam(':added_by', $_POST['added_by']);
+					$sql_logs->bindParam(':office', $_POST['office']);
+					$sql_logs->bindParam(':added_at',$date->format('M/d/Y, H:i:s'));
+					$sql_logs->bindParam(':email',$_POST['username']);
+					$sql_logs->bindParam(':remark',$remarks);
+
+					$sql_logs->execute();
+
 					//make use of prepared statement to prevent sql injection
 					$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
 		

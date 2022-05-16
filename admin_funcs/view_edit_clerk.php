@@ -6,6 +6,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="../admin_funcs/edit_clerk.php?id=<?php echo $row['id']; ?>" method="post">
+        <input name="edited_by" type="text" value="<?php echo $_SESSION['a_name'];?>" hidden>
+        <input name="office" type="text" value="<?php echo $_SESSION['a_officeName'];?>" hidden>
         <div class="modal-body">
 
                 <label for="office">Office:</label>

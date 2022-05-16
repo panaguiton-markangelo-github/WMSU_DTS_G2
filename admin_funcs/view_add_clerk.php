@@ -18,6 +18,8 @@ catch(PDOException $e) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="../admin_funcs/add_clerk.php" method="post">
+        <input name="added_by" type="text" value="<?php echo $_SESSION['a_name'];?>" hidden>
+        <input name="office" type="text" value="<?php echo $_SESSION['a_officeName'];?>" hidden>
         <div class="modal-body">
             <label for="office">Office:</label>
                 <select class="form-select text-dark" name="officeName" id="officeName" readonly>
