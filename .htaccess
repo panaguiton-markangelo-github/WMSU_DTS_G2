@@ -7,7 +7,4 @@ Deny from all
 # directory browsing
 Options All -Indexes
 
-<Files ~ "\.php$">
-  Order allow,deny
-  Deny from all
-</Files>
+
