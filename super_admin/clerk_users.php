@@ -166,6 +166,9 @@ if(!isset($_SESSION["sa_username"])) {
                                     Email
                                 </th>
                                 <th>
+                                    Activated
+                                </th>
+                                <th>
                                 </th>
                                 <th>
                                 </th>
@@ -199,6 +202,10 @@ if(!isset($_SESSION["sa_username"])) {
 
                                 <td>
                                     <?php echo $row['username']; ?>
+                                </td>
+
+                                <td>
+                                <?php echo $row['activated']; ?>
                                 </td>
 
                                 <td style="display:flex;justify-content:center;">
