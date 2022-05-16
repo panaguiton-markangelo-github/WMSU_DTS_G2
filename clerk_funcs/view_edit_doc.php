@@ -6,6 +6,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="../clerk_funcs/edit_doc.php?id=<?php echo $row['id']; ?>" method="post">
+        <input name="edited_by" type="text" value="<?php echo $_SESSION['c_name'];?>" hidden>
+        <input name="trackingID" type="text" value="<?php echo $row['trackingID'];?>" hidden>
+        <input name="office" type="text" value="<?php echo $_SESSION['c_officeName'];?>" hidden>
         <div class="modal-body">
                 <?php $oldtrackid = $row['trackingID'] ?>
                 <div class="form-floating mb-3">
