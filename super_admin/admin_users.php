@@ -47,7 +47,7 @@ if(!isset($_SESSION["sa_username"])) {
         <div class="sidebar-menu">
         <ul>
                 <li>
-                    <a href="/super_admin/HomePageSA/><span class="las la-home"></span>
+                    <a href="/super_admin/HomePageSA/"><span class="las la-home"></span>
                     <span>Dashboard</span></a>
                 </li>
                 <li>
