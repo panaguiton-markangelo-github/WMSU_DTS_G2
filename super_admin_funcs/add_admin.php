@@ -10,7 +10,7 @@ include ("../include/alt_db.php");
 			$db = $database->open();
 			$password = $_POST['password'];
 			$password_hash = password_hash($password, PASSWORD_DEFAULT);
-			
+			$active = 'yes';
 			
 			if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
@@ -33,7 +33,7 @@ include ("../include/alt_db.php");
 				if(empty($row)){
 					try{
 						//make use of prepared statement to prevent sql injection
-						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType) VALUES (:officeName, :name, :username, :password, :userType)");
+						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
 		
 						//bind
 						$sql->bindParam(':officeName', $_POST['officeName']);
@@ -41,6 +41,7 @@ include ("../include/alt_db.php");
 						$sql->bindParam(':username', $_POST['username']);
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
+						$sql->bindParam(':activated', $active);
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';

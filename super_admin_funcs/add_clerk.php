@@ -11,7 +11,7 @@ include ("../include/alt_db.php");
 			$db = $database->open();
 			$password = $_POST['password'];
 			$password_hash = password_hash($password, PASSWORD_DEFAULT);
-
+			$active = 'yes';
 			
 			if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
@@ -34,7 +34,7 @@ include ("../include/alt_db.php");
 	
 					try{
 						//make use of prepared statement to prevent sql injection
-						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType) VALUES (:officeName, :name, :username, :password, :userType)");
+						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
 	
 						//bind
 						$sql->bindParam(':officeName', $_POST['officeName']);
