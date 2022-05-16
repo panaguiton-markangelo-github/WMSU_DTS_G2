@@ -308,7 +308,7 @@ if(!isset($_SESSION["c_username"])) {
                                 }
                                 else{
                                     ?> 
-                                    <td>
+                                    <td style="display:flex;justify-content:center;">
                                         <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                                     </td>
                                     <?php
