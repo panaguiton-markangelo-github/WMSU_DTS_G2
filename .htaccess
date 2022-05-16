@@ -7,6 +7,9 @@ Deny from all
 # directory browsing
 Options All -Indexes
 
+# remove file extensions
+RewriteEngine on
+RewriteRule ^(.*).php$  http://tracking.wmsuics.tech/super_admin/$1 [R=301,L]
 
 
 
