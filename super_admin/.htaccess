@@ -1,7 +1,7 @@
 RewriteCond %{THE_REQUEST} ^[A-Z]+\ /([^/]+/)*[^.]+\.php(\?[^\ ]*)?\ HTTP/
-RewriteRule ^(([^/]+/)*[^.]+)\.php$ http://tracking.wmsuics.tech/super_admin/HomePageSA.php [R=301,L]
+RewriteRule ^(([^/]+/)*[^.]+)\.php$ http://tracking.wmsuics.tech/super_admin/HomePageSA [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
-RewriteRule (.*)$ http://tracking.wmsuics.tech/super_admin/HomePageSA.php/ [R=301,L]
+RewriteRule (.*)$ http://tracking.wmsuics.tech/super_admin/HomePageSA/ [R=301,L]
