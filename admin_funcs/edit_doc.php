@@ -20,6 +20,8 @@
 			$sql_logs->bindParam(':userType',$user);
 			$sql_logs->bindParam(':remark',$remarks);
 
+			$sql_logs->execute();
+
 			//make use of prepared statement to prevent sql injection
 			$sql = $db->prepare ("UPDATE documents SET title = :title, reason = :reason, remarks = :remarks WHERE id = :id;");
             //bind 
