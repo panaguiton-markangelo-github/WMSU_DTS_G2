@@ -9,6 +9,9 @@ if($row['activated'] == 'yes'){
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="../admin_funcs/act_clerk.php?id=<?php echo $row['id']; ?>" method="post">
+                <input name="name" type="text" value="<?php echo $_SESSION['a_name'];?>" hidden>
+                <input name="office" type="text" value="<?php echo $_SESSION['a_officeName'];?>" hidden>
+                <input name="email" type="text" value="<?php echo $row['username'];?>" hidden>
                 <div class="modal-body">
                     <input type="text" name="active" value="no" hidden>
                     <p>Are you sure to deactivate this clerk user?: <?php echo $row['name']; ?></p>
@@ -40,6 +43,9 @@ elseif($row['activated'] == 'no'){
             if($row['activated'] == 'no'){
                 ?>
                 <form action="../admin_funcs/act_clerk.php?id=<?php echo $row['id']; ?>" method="post">
+                    <input name="name" type="text" value="<?php echo $_SESSION['a_name'];?>" hidden>
+                    <input name="office" type="text" value="<?php echo $_SESSION['a_officeName'];?>" hidden>
+                    <input name="email" type="text" value="<?php echo $row['username'];?>" hidden>
                     <div class="modal-body">
                         <input type="text" name="active" value="yes" hidden>
                         <p>Are you sure to activate this clerk user?: <?php echo $row['name']; ?></p>
