@@ -26,7 +26,7 @@ if(!isset($_SESSION["sa_username"])) {
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link fw-bold" href="HomePageSA.php">Home</a>
+                <a class="nav-link fw-bold" href="/super_admin/HomePageSA/">Home</a>
               </li> 
 
               <li class="nav-item">

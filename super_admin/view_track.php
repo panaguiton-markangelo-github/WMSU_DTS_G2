@@ -134,7 +134,7 @@ if(!isset($_SESSION["sa_username"])) {
                             //close connection
                             $database->close();
                         ?>
-                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
+                        <li> <i class="las la-file-export"></i> <a type="button" href="/super_admin/view_generate/">Generate Report</a> </li>
                         <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
                                

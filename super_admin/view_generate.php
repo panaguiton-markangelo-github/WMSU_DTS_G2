@@ -27,7 +27,7 @@ if(!isset($_SESSION["sa_username"]))
     <div class="circle"></div>
     <div class="form-inner">
 
-    <h5><a href="HomePageSA.php">GO BACK HOME</a></h5>
+    <h5><a href="/super_admin/HomePageSA/">GO BACK HOME</a></h5>
 
       <h1>Generate Report</h1>
       <select name="officeName" id="officeName" required>
