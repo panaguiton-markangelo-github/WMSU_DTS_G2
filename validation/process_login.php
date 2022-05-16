@@ -36,7 +36,16 @@
             }
     
             else {
-                $sql = "SELECT * FROM users WHERE username = '".$username."';";
+                $sql = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes' ;";
+                $result = mysqli_query($data, $sql);
+                $row = mysqli_fetch_array($result);
+                if(empty($row)){
+                    $_SESSION['invalid_match'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
+                    header('Location: index.php?invalid=deactivated');
+                    exit();
+                } 
+
+                $sql = "SELECT * FROM users WHERE username = '".$username."' ;";
                 $result = mysqli_query($data, $sql);
                 $row = mysqli_fetch_array($result);
                 if(empty($row)){
