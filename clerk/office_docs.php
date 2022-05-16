@@ -299,8 +299,8 @@ if(!isset($_SESSION["c_username"])) {
                                 <?php 
                                 if($row['status'] == 'draft'){
                                     ?>
-                                    <td style="display:flex;justify-content:center;align-content:center;">
-                                        <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a> 
+                                    <td align="center">
+                                        <a style ="margin-bottom:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a> 
                           
                                         <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                                     </td>
@@ -308,7 +308,7 @@ if(!isset($_SESSION["c_username"])) {
                                 }
                                 else{
                                     ?> 
-                                    <td style="display:flex;justify-content:center;align-content:center;">
+                                    <td style="display:flex;justify-content:center;">
                                         <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
                                     </td>
                                     <?php
