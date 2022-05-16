@@ -14,7 +14,7 @@
         $result = mysqli_query($data, $sql);
         $row = mysqli_fetch_array($result);
         if(empty($row)){
-            $_SESSION['invalid_match'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
+            $_SESSION['invalid_deac'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
             header('Location: index.php?invalid=deactivated');
             die();
         } 
