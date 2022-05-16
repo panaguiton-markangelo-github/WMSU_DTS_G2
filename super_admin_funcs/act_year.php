@@ -41,6 +41,6 @@
 		$_SESSION['message'] = 'Fill up add form first';
 	}
 
-	header('location: ../super_admin/sem_year.php?succesful=activated?');
+	header('location: ../super_admin/sem_year.php?succesful?');
 	
 ?>

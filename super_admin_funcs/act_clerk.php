@@ -41,6 +41,6 @@
 		$_SESSION['message'] = 'Fill up add form first';
 	}
 
-	header('location: ../super_admin/clerk_users.php?succesful=activated?');
+	header('location: ../super_admin/clerk_users.php?succesful?');
 	
 ?>
