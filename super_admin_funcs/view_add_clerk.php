@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="username" name="username" placeholder="Username" data-validate= "Email required @.c" required>
+              <input type="email" class="form-control" id="username" name="username" placeholder="Username" required>
               <label for="username">Email:</label>
             </div>
 
