@@ -205,7 +205,19 @@ if(!isset($_SESSION["sa_username"])) {
                                 </td>
 
                                 <td>
-                                <?php echo $row['activated']; ?>
+                                <?php
+                                        if ($row['activated'] == "yes"){
+                                        ?>
+                                        <p style="color: green;"> Yes</p>
+                                    <?php
+                                        }
+                                        else if ($row['activated'] == "no") {
+                                        ?>
+                                            <p style="color: red;"> No</p>
+                                    <?php
+                                        }
+                                                                        
+                                    ?> 
                                 </td>
 
                                 <td style="display:flex;justify-content:center;">
