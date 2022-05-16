@@ -42,6 +42,7 @@ include ("../include/alt_db.php");
 						$sql->bindParam(':username', $_POST['username']);
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
+						$sql->bindParam(':activated', $active);
 	
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Clerk user was added successfully' : 'Something went wrong. Cannot add clerk user.';
