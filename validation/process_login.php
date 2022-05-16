@@ -10,15 +10,6 @@
         $password = $_POST["password"];
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes' ;";
-        $result = mysqli_query($data, $sql);
-        $row = mysqli_fetch_array($result);
-        if(empty($row)){
-            $_SESSION['invalid_deac'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
-            header('Location: index.php?invalid=deactivated');
-            die();
-        } 
-
         if(empty($username) && empty($password)) {
             $_SESSION['empty_both'] = "Empty Fields!!";
             header('location: index.php?empty=both');
@@ -45,6 +36,15 @@
            
             else {
                
+                $sql = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes' ;";
+                $result = mysqli_query($data, $sql);
+                $row = mysqli_fetch_array($result);
+                if(empty($row)){
+                    $_SESSION['invalid_deac'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
+                    header('Location: index.php?invalid=deac');
+                    die();
+                } 
+
                 $sql = "SELECT * FROM users WHERE username = '".$username."' ;";
                 $result = mysqli_query($data, $sql);
                 $row = mysqli_fetch_array($result);

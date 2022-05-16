@@ -110,7 +110,7 @@
 			unset($_SESSION['invalid_email']);
 		}
 
-		else if($_GET['invalid'] == "deactivated") {
+		else if($_GET['invalid'] == "deac") {
 			?>
 				<script>
 					Swal.fire({
