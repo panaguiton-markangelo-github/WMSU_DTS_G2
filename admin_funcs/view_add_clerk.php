@@ -32,7 +32,7 @@ catch(PDOException $e) {
             </div>
 
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+              <input type="email" class="form-control" id="username" name="username" placeholder="Username" required>
               <label for="username">Email:</label>
             </div>
 
