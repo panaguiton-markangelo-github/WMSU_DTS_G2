@@ -1,3 +1,8 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)/$ $1.php
+
 RewriteCond %{THE_REQUEST} ^[A-Z]+\ /([^/]+/)*[^.]+\.php(\?[^\ ]*)?\ HTTP/
 RewriteRule ^(([^/]+/)*[^.]+)\.php$ http://tracking.wmsuics.tech/super_admin/HomePageSA [R=301,L]
 
