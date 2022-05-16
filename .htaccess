@@ -9,7 +9,7 @@ Options All -Indexes
 
 # remove file extensions
 RewriteEngine on
-RewriteRule ^(.*).php$  http://tracking.wmsuics.tech/super_admin/$1 [R=301,L]
+RewriteRule ^(.*).php$  http://tracking.wmsuics.tech/$1 [R=301,L]
 
 
 
