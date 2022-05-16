@@ -97,6 +97,7 @@
                             }
                             elseif ($row["userType"] == "clerk") {
                                 $_SESSION["c_username"] = $username;
+                                $_SESSION["c_name"] = $row['name'];
                                 $_SESSION["c_type"] = $row['userType'];
                                 $_SESSION["userID"] = $row['id'];
                                 $_SESSION["yearSemID_t"] = $row1['id'];
