@@ -35,16 +35,25 @@
             }
            
             else {
-                $sql = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes';";
+                $sql = "SELECT * FROM users WHERE username = '".$username."';";
                 $result = mysqli_query($data, $sql);
                 $row = mysqli_fetch_array($result);
                 if(empty($row)){
-                    $_SESSION['invalid_match'] = "The user was deactivated.";
+                    $_SESSION['invalid_match'] = "Email or Password does not match our records!";
                     header('Location: index.php?invalid=match');
                     exit();
                 } 
 
                 else {
+                    $sql3 = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes';";
+                    $result3 = mysqli_query($data, $sql3);
+                    $row3 = mysqli_fetch_array($result3);
+                    if(empty($row3)){
+                        $_SESSION['invalid_match'] = "The user was deactivated!";
+                        header('Location: index.php?invalid=match');
+                        exit();
+                    } 
+
                     $db_pass = $row['password'];
                     $curUser = $row['id'];
 
