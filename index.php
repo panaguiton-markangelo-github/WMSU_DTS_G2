@@ -109,6 +109,21 @@
 			<?php
 			unset($_SESSION['invalid_email']);
 		}
+
+		else if($_GET['invalid'] == "deactivated") {
+			?>
+				<script>
+					Swal.fire({
+						icon: 'error',
+						title: 'Ooppss...',
+						text: '<?php echo $_SESSION['invalid_match'] ?>',
+						showConfirmButton: true,
+						allowOutsideClick: false
+					});
+				</script>
+			<?php
+			unset($_SESSION['invalid_match']);
+		}
 	}
 	else if (isset($_GET['empty'])) {
 		if($_GET['empty'] == "both") {
