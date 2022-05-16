@@ -1,10 +1,15 @@
+RewriteEngine On
 
+# Unless directory, remove trailing slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/$ http://tracking.wmsuics.tech/$1 [R=301,L]
 
-<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteEngine</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> </span><span class="kw2" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">on</span></span>
-<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteCond</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> %{REQUEST_FILENAME} !-d</span></span>
-<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteCond</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> %{REQUEST_FILENAME}.php -f</span></span>
-<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteRule</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> .* $0.php</span></span>
+# Redirect external .php requests to extensionless URL
+RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
+RewriteRule ^(.+)\.php$ http://tracking.wmsuics.tech/$1 [R=301,L]
 
+# Resolve .php file for extensionless PHP URLs
+RewriteRule ^([^/.]+)$ $1.php [L]
 
 
 # Deny access to .htaccess
