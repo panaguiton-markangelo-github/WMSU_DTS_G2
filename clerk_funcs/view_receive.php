@@ -93,12 +93,6 @@ catch(PDOException $e){
             header("Location: ../clerk/HomePageC.php?error=incorrect?id");
             die();
         }
-        elseif($row['status'] == 'received' || $row['status'] == 'Received'){
-          $_SESSION['e_message'] = "The document was already received by an office.! Please wait for that office to update the status.";
-          $_SESSION['e_id'] = $_POST['rec_trackingID'];
-            header("Location: ../clerk/HomePageC.php?error=already?id");
-            die();
-        }
          ?>             
       </div>
       <br>
