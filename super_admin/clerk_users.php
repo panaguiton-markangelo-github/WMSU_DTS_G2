@@ -222,6 +222,7 @@ if(!isset($_SESSION["sa_username"])) {
                                     ?> 
                                      
                                 </td>
+                                <?php include('../super_admin_funcs/view_act_clerk.php'); ?>
                                 <?php include('../super_admin_funcs/view_delete_clerk.php'); ?>
                                 <?php include('../super_admin_funcs/view_edit_clerk.php'); ?>
                             </tr>
