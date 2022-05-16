@@ -21,11 +21,7 @@ Options All -Indexes
   ExpiresDefault "access 2 days"
 <IfModule>
 
-# Remove file extension
-# @ https://m0n.co/06
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(([^/]+/)*([^/.]+))\.php[\ ?]
-	RewriteRule \.php$ /%1/ [R=301,NC,L]
-	RewriteRule ^(.*)/$ /$1.php [NC,L]
-</IfModule>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)/$ $1.php
