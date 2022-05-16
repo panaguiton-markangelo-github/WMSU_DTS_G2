@@ -308,7 +308,7 @@ catch(PDOException $e) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Documents</h3>
-                            <a href="all_docs.php">See all <span class="las la-arrow-right"></span></a>
+                            <a href="/super_admin/all_docs/">See all <span class="las la-arrow-right"></span></a>
                         </div>
 
                         <div class="card-body">
@@ -368,7 +368,7 @@ catch(PDOException $e) {
                                                 ?> 
                                             </td>
                                             <td>
-                                                <form id="viewForm" action="view_documentSA.php" method="POST">
+                                                <form id="viewForm" action="/super_admin/view_documentSA/" method="POST">
                                                     <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                                                     <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
                                                     <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
@@ -383,7 +383,7 @@ catch(PDOException $e) {
                                                 </form>
                                             </td>
                                             <td>
-                                                <form id="trackForm" action="redirect_track.php" method="POST">
+                                                <form id="trackForm" action="/super_admin/redirect_track/" method="POST">
                                                     <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                                                     <button id="submit" type="submit"> <span class = "las la-search-location"></span></button>
                                                 </form>
@@ -411,7 +411,7 @@ catch(PDOException $e) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Offices</h3>
-                            <a href="offices.php">See all <span class="las la-arrow-right"></span> </a>
+                            <a href="/super_admin/offices/">See all <span class="las la-arrow-right"></span> </a>
                         </div>
 
                         <div class="card-body">
@@ -471,7 +471,7 @@ catch(PDOException $e) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Admin Users</h3>
-                            <a href="admin_users.php">See all <span class="las la-arrow-right"></span> </a>
+                            <a href="/super_admin/admin_users/">See all <span class="las la-arrow-right"></span> </a>
                         </div>
 
                         <div class="card-body">
@@ -534,7 +534,7 @@ catch(PDOException $e) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Clerk Users</h3>
-                            <a href="clerk_users.php">See all <span class="las la-arrow-right"></span> </a>
+                            <a href="/super_admin/clerk_users/">See all <span class="las la-arrow-right"></span> </a>
                         </div>
 
                         <div class="card-body">
@@ -596,7 +596,7 @@ catch(PDOException $e) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Year and Semester</h3>
-                            <a href="sem_year.php">See all <span class="las la-arrow-right"></span> </a>
+                            <a href="/super_admin/sem_year/">See all <span class="las la-arrow-right"></span> </a>
                         </div>
 
                         <div class="card-body">
