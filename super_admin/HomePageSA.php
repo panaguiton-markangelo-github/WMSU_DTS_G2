@@ -83,7 +83,7 @@ catch(PDOException $e) {
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
-                    <a href="admin_users.php"><span class="las la-user-cog"></span>
+                    <a href="http://tracking.wmsuics.tech/super_admin/admin_users/?user=superadmin"><span class="las la-user-cog"></span>
                     <span>Admin Users</span></a>
                 </li>
                 <li>
