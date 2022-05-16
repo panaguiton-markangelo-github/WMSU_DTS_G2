@@ -149,6 +149,11 @@ if(!isset($_SESSION["a_username"])) {
                                     Email
                                 </th>
                                 <th>
+                                    Activated
+                                </th>
+                                <th>
+                                </th>
+                                <th>
                                 </th>
                             </tr>
                         </thead>
@@ -182,10 +187,43 @@ if(!isset($_SESSION["a_username"])) {
                                     <?php echo $row['username']; ?>
                                 </td>
 
+                                <?php
+                                        if ($row['activated'] == "yes"){
+                                        ?>
+                                        <p style="color: green;"> Yes</p>
+                                    <?php
+                                        }
+                                        else if ($row['activated'] == "no") {
+                                        ?>
+                                            <p style="color: red;"> No</p>
+                                    <?php
+                                        }
+                                                                        
+                                    ?> 
+                                </td>
+
                                 <td style="display:flex;justify-content:center;">
                                     <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_clerk<?php echo $row['id']; ?>">Edit</a>
                                     <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_clerk<?php echo $row['id']; ?>">Delete</a>
                                 </td>
+                                <td align="center">
+
+                                    <?php
+                                        if ($row['activated'] == "yes"){
+                                        ?>
+                                            <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#dact_clerk<?php echo $row['id']; ?>">Deactivate</a>
+                                    <?php
+                                        }
+                                        else if ($row['activated'] == "no") {
+                                        ?>
+                                            <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#act_clerk<?php echo $row['id']; ?>">Activate</a>
+                                    <?php
+                                        }
+                                                                        
+                                    ?> 
+                                     
+                                </td>
+                                <?php include('../admin_funcs/view_act_clerk.php'); ?>
                                 <?php include('../admin_funcs/view_delete_clerk.php'); ?>
                                 <?php include('../admin_funcs/view_edit_clerk.php'); ?>
                             </tr>
