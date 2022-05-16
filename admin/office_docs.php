@@ -230,10 +230,6 @@ if(!isset($_SESSION["a_username"])) {
                                 </th>
 
                                 <th>
-                                    
-                                </th>
-
-                                <th>
 
                                     View
                                 </th>
@@ -302,13 +298,24 @@ if(!isset($_SESSION["a_username"])) {
                                     <?php echo $row['schoolYear']; ?>
                                 </td>
 
-                                <td>
-                                    <a style ="margin-right:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a>
-                                </td>
-
-                                <td>
-                                    <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                                </td>
+                                <?php 
+                                if($row['status'] == 'draft'){
+                                    ?>
+                                    <td align="center">
+                                        <a style ="margin-bottom:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a> 
+                          
+                                        <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
+                                    </td>
+                                    <?php
+                                }
+                                else{
+                                    ?> 
+                                    <td style="display:flex;justify-content:center;">
+                                        <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
+                                    </td>
+                                    <?php
+                                }
+                                ?>
 
                                 <td>
                                     <form id="viewForm" action="view_documentA.php" method="POST">
