@@ -5,10 +5,10 @@
 		$database = new Connection();
 		$db = $database->open();
 		if($_POST['active'] == 'yes'){
-			$message = "School year was activated successfully!";
+			$message = "Clerk user was activated successfully!";
 		}
 		elseif($_POST['active'] == 'no'){
-			$message = "School year was deactivated successfully!";
+			$message = "Clerk user was deactivated successfully!";
 		}
 
 		try{
