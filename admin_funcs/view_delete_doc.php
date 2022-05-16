@@ -8,6 +8,9 @@
       <form action="../admin_funcs/delete_doc.php?id=<?php echo $row['id']; ?>" method="post">
         <div class="modal-body">
         <input name="status_rel" type="text" value="<?php echo $row['status'];?>" hidden>
+        <input name="deleted_by" type="text" value="<?php echo $_SESSION['a_name'];?>" hidden>
+        <input name="trackingID" type="text" value="<?php echo $row['trackingID'];?>" hidden>
+        <input name="office" type="text" value="<?php echo $_SESSION['a_officeName'];?>" hidden>
           <p class="text-center" style="color:orange;">Are you sure to delete document? : <?php echo $row['title']."."; ?> 
           <br>
             <b> The document would still be visible when tracked.</b>

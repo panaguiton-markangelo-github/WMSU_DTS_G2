@@ -88,6 +88,7 @@
                             elseif ($row["userType"] == "admin") {
                                 $_SESSION["a_username"] = $username;
                                 $_SESSION["a_type"] = $row['userType'];
+                                $_SESSION["a_name"] = $row['name'];
                                 $_SESSION["userID"] = $row['id'];
                                 $_SESSION["yearSemID_t"] = $row1['id'];
                                 $_SESSION["a_officeName"] = $row['officeName'];
