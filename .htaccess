@@ -1,7 +1,10 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule .* $0.php
+
+
+<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteEngine</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> </span><span class="kw2" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">on</span></span>
+<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteCond</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> %{REQUEST_FILENAME} !-d</span></span>
+<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteCond</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> %{REQUEST_FILENAME}.php -f</span></span>
+<span style="background-color: white; font-family: inherit;"><span class="kw1" style="border: 0px; color: #2060a0; line-height: 18.200000762939453px; margin: 0px; outline: 0px; padding: 0px; vertical-align: baseline; white-space: nowrap;">RewriteRule</span><span style="line-height: 18.200000762939453px; white-space: nowrap;"> .* $0.php</span></span>
+
 
 
 # Deny access to .htaccess
