@@ -37,7 +37,7 @@ elseif($row['activated'] == 'no'){
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <?php 
-            if(empty($row1)){
+            if(empty($row)){
                 ?>
                 <form action="../super_admin_funcs/act_clerk.php?id=<?php echo $row['id']; ?>" method="post">
                     <div class="modal-body">
@@ -53,7 +53,7 @@ elseif($row['activated'] == 'no'){
                     </div>
                 </form>
                 <?php
-            }elseif(!empty($row1)){
+            }elseif(!empty($row)){
                 ?>
                     <div class="modal-body">
                         <p style="text-align:center;color:orange;">Note: This clerk user is already activated!.
