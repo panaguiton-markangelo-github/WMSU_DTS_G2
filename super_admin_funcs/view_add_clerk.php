@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="username" name="username" placeholder="Username" pattern=".+@email\.com" required>
+              <input type="email" class="form-control" id="username" name="username" placeholder="Username" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
               <label for="username">Email:</label>
             </div>
 
