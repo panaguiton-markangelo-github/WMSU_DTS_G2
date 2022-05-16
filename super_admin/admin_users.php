@@ -8,6 +8,7 @@ if(!isset($_SESSION["sa_username"])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<base href="/" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,29 +45,29 @@ if(!isset($_SESSION["sa_username"])) {
             <h2><span class="las la-book"></span> <span>WMSU|DTS</span></h2>
         </div>
         <div class="sidebar-menu">
-            <ul>
+        <ul>
                 <li>
-                    <a href="HomePageSA.php"><span class="las la-home"></span>
+                    <a href="/super_admin/HomePageSA/><span class="las la-home"></span>
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="view_track.php"><span class="las la-search-location"></span>
+                    <a href="/super_admin/view_track/"><span class="las la-search-location"></span>
                     <span>Track Documents</span></a>
                 </li>
                 <li>
-                    <a href="all_docs.php"><span class="las la-file-alt"></span>
+                    <a href="/super_admin/all_docs/"><span class="las la-file-alt"></span>
                     <span>All Documents</span></a>
                 </li>
                 <li>
-                    <a href="archives.php"><span class="las la-file-excel"></span>
+                    <a href="/super_admin/archives/"><span class="las la-file-excel"></span>
                     <span>Archives</span></a>
                 </li>
                 <li>
-                    <a href="offices.php"><span class="las la-building"></span>
+                    <a href="/super_admin/offices/"><span class="las la-building"></span>
                     <span>Offices</span></a>
                 </li>
                 <li>
-                    <a href="clerk_users.php"><span class="las la-users"></span>
+                    <a href="/super_admin/clerk_users/"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
@@ -74,22 +75,21 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Admin Users</span></a>
                 </li>
                 <li>
-                    <a href="types.php"><span class="las la-passport"></span>
+                    <a href="/super_admin/types/"><span class="las la-passport"></span>
                     <span>Document types</span></a>
                 </li>
                 <li>
-                    <a href="reasons.php"><span class="las la-file-invoice"></span>
+                    <a href="/super_admin/reasons/"><span class="las la-file-invoice"></span>
                     <span>Document reasons</span></a>
                 </li>
                 <li>
-                    <a href="sem_year.php"><span class="las la-school"></span>
+                    <a href="/super_admin/sem_year/"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
-                </li>
+                </li> 
                 <li>
-                    <a href="settings.php"><span class="las la-cog"></span>
+                    <a href="/super_admin/settings/"><span class="las la-cog"></span>
                     <span>Settings</span></a>
-                </li>
-        
+                </li>  
             </ul>
         </div>
     </div>
