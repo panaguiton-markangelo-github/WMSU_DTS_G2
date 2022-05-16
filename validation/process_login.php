@@ -9,8 +9,15 @@
         $username = $_POST["email"];
         $password = $_POST["password"];
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    
 
+        $sql = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes' ;";
+        $result = mysqli_query($data, $sql);
+        $row = mysqli_fetch_array($result);
+        if(empty($row)){
+            $_SESSION['invalid_match'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
+            header('Location: index.php?invalid=deactivated');
+            die();
+        } 
 
         if(empty($username) && empty($password)) {
             $_SESSION['empty_both'] = "Empty Fields!!";
@@ -35,17 +42,7 @@
                 header('location: index.php?invalid=email');
                 die();
             }
-            else if(filter_var($username, FILTER_VALIDATE_EMAIL)){
-                $sql = "SELECT * FROM users WHERE username = '".$username."' AND activated = 'yes' ;";
-                $result = mysqli_query($data, $sql);
-                $row = mysqli_fetch_array($result);
-                if(empty($row)){
-                    $_SESSION['invalid_match'] = "The user account was deactivated, please ask the super admin to activate your account or your office admin if you're a clerk.";
-                    header('Location: index.php?invalid=deactivated');
-                    die();
-                } 
-            }
-    
+           
             else {
                
                 $sql = "SELECT * FROM users WHERE username = '".$username."' ;";
