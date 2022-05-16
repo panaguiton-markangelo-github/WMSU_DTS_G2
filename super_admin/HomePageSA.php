@@ -63,7 +63,7 @@ catch(PDOException $e) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="/super_admin/view_track.php"><span class="las la-search-location"></span>
+                    <a href="super_admin/view_track.php"><span class="las la-search-location"></span>
                     <span>Track Documents</span></a>
                 </li>
                 <li>
