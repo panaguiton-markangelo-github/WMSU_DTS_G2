@@ -116,13 +116,13 @@
 					Swal.fire({
 						icon: 'error',
 						title: 'Ooppss...',
-						text: '<?php echo $_SESSION['invalid_match'] ?>',
+						text: '<?php echo $_SESSION['invalid_deac'] ?>',
 						showConfirmButton: true,
 						allowOutsideClick: false
 					});
 				</script>
 			<?php
-			unset($_SESSION['invalid_match']);
+			unset($_SESSION['invalid_deac']);
 		}
 	}
 	else if (isset($_GET['empty'])) {
