@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="username" name="username" placeholder="username" value = <?php echo $row['username']; ?> required>
+                <input type="email" class="form-control" id="username" name="username" placeholder="username" value = <?php echo $row['username']; ?> required>
                 <label for="username">Email:</label>
                 </div>
 
