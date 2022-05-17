@@ -43,17 +43,14 @@ catch(PDOException $e){
         $status = $_POST['status'];
         $action = $_POST['reason'];
         $offices = implode(',', $_POST['officeName']);
+        $no = array_count_values($_POST['officeName']);
         if(!empty($_POST['oreason'])){
             $action = $_POST['oreason'];
         }
 
         $forwarded_mes = "Forwarded to the office/s with $action";
         $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
-
-        foreach($_POST['officeName'] as $selectedOffice){
-            $no++;
-        }
-			
+	
 		try{
 			//make use of prepared statement to prevent sql injection
 			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason WHERE trackingID = :trackingID;");
@@ -65,7 +62,7 @@ catch(PDOException $e){
             $_SESSION['trackingID'] = $_POST['trackingID'];
 
             foreach($_POST['officeName'] as $selectedOffice){
-
+        
                 $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, forwarded_at, remarks, status, origin_office, forwarded_to, nos) VALUES(:trackingID, :user_id, :office, :forwarded_at, :remarks, :status, :origin_office, :forwarded_to, :nos);");
                 $sql_logs->bindParam(':trackingID', $_POST['trackingID']);
                 $sql_logs->bindParam(':user_id', $_POST['userID']);
