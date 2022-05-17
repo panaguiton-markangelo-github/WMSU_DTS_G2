@@ -220,16 +220,36 @@ if(!isset($_SESSION["c_username"])) {
                                   
                                 </td>
 
-                                <td>
-                                    <form id="viewForward" action="forward_docs.php" method="POST">
-                                        <input type="text" name="trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
-                                        <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
-                                        <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
-                                        <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
-                                        <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
-                                        <button id="submit" type="submit"><span class = "las la-forward"></span></button>
-                                    </form>
-                                </td>
+                                <?php 
+                                if($row['status'] == 'forwarded'){
+                                    ?>
+                                    <td>
+                                        <form id="viewForward" action="forward_docs.php" method="POST">
+                                            <input type="text" name="trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                            <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
+                                            <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
+                                            <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
+                                            <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                            <button id="submit" type="submit" disabled><span class = "las la-forward"></span></button>
+                                        </form>
+                                    </td>
+                                    <?php
+                                }
+                                else{
+                                    ?>
+                                    <td>
+                                        <form id="viewForward" action="forward_docs.php" method="POST">
+                                            <input type="text" name="trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                            <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
+                                            <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
+                                            <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
+                                            <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                            <button id="submit" type="submit"><span class = "las la-forward"></span></button>
+                                        </form>
+                                    </td>
+                                    <?php
+                                }
+                                ?>
                                 
 
                             </tr>
