@@ -248,6 +248,7 @@ if(!isset($_SESSION["c_username"])) {
                                             <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
                                             <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
                                             <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                            <input type="text" name="rec_link"  value= "rec_link" hidden>
                                             <button id="submit" type="submit" disabled><span class = "las la-forward"></span></button>
                                         </form>
                                     </td>
@@ -262,6 +263,7 @@ if(!isset($_SESSION["c_username"])) {
                                             <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
                                             <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
                                             <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
+                                            <input type="text" name="rec_link"  value= "rec_link" hidden>
                                             <button id="submit" type="submit"><span class = "las la-forward"></span></button>
                                         </form>
                                     </td>

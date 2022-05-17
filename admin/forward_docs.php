@@ -58,7 +58,27 @@ catch(PDOException $e) {
               </li> 
 
               <li class="nav-item">
-                <a class="nav-link fw-bold">--></a>
+                <span class="nav-link fw-bold">--></span>
+              </li>
+
+              <?php if(!empty($_POST['rec_link'])){
+                  ?>
+                  <li class="nav-item">
+                    <a class="nav-link fw-bold" href="received_docs.php">Received Documents</a>
+                </li> 
+                  <?php
+              }
+              else{
+                  ?>     
+                <li class="nav-item">
+                    <a class="nav-link fw-bold" href="released_docs.php">Released Documents</a>
+                </li> 
+                  <?php
+              }
+              ?>
+
+              <li class="nav-item">
+                <span class="nav-link fw-bold">--></span>
               </li>
               
               <li class="nav-item">
