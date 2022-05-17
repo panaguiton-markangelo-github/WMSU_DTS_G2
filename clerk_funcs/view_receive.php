@@ -279,14 +279,14 @@ catch(PDOException $e){
               if($row['nos'] > 1){
                 ?>
                   <div class="modal-body">
-                    <p class="text-center">Your about to receive a forwarded document for these <?php echo $row['forwarded_to']?> offices? Please confirm if  you're from one of these offices.</p>
+                    <p class="text-center">Your about to receive a forwarded document for <?php echo $row['forwarded_to']?> offices? Please confirm if  you're from one of these offices.</p>
                   </div>
                 <?php
               }
               else{
                 ?>
                 <div class="modal-body">
-                  <p class="text-center">Your about to receive a forwarded document for this <?php echo $row['forwarded_to']?> office? Please confirm if  you're from this offices.</p>
+                  <p class="text-center">Your about to receive a forwarded document for <?php echo $row['forwarded_to']?> office? Please confirm if  you're from this offices.</p>
                 </div>
               <?php
               }
