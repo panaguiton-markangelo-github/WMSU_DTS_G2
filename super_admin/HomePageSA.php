@@ -662,7 +662,7 @@ catch(PDOException $e) {
                     <div class="card">
                         <div class="card-header">
                             <h3>Document Logs</h3>
-                            <a href="/super_admin/all_docs/">See documents <span class="las la-arrow-right"></span> </a>
+                            <a href="/super_admin/docs_logs/">See all <span class="las la-arrow-right"></span> </a>
                         </div>
 
                         <div class="card-body">
@@ -705,6 +705,86 @@ catch(PDOException $e) {
                                             <td><?php echo $row['edited_at']; ?></td>
                                             <td><?php echo $row['deleted_at']; ?></td>
                                             <td><?php echo $row['userType'];?></td>
+                                            <td><?php echo $row['remarks'];?></td>
+                                        </tr>
+
+                                    <?php 
+                                            }
+                                        }
+                                        catch(PDOException $e){
+                                            echo "There is some problem in connection: " . $e->getMessage();
+                                        }
+
+                                        //close connection
+                                        $database->close();
+                                    ?>
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+                <div class="userslogs">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>User Logs</h3>
+                            <a href="/super_admin/users_logs/">See all <span class="las la-arrow-right"></span> </a>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive-cus">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td> Office</td>
+                                            <td> Email</td>
+                                            <td> Added by </td>
+                                            <td> Edited by </td>
+                                            <td> Deleted by </td>
+                                            <td> Activated by </td>
+                                            <td> Deactivated by </td>
+                                            <td> Added at </td>
+                                            <td> Edited at </td>
+                                            <td> Deleted at </td>
+                                            <td> Activated at </td>
+                                            <td> Deactivated at </td>
+                                            <td> Remakrs </td>
+                                        </tr>
+                                    </thead>
+    
+                                    <tbody>
+                                    <?php
+                                        //include our connection
+                                        include_once('../include/database.php');
+                                        
+
+                                        $database = new Connection();
+                                        $db = $database->open();
+                                        try{	
+                                            $sql = 'SELECT * FROM userslog ORDER BY id DESC LIMIT 5;';
+                                            $no = 0;
+                                            foreach ($db->query($sql) as $row) {
+                                                $no++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $row['office']; ?></td>
+                                            <td><?php echo $row['email'];?></td>
+                                            <td><?php echo $row['added_by']; ?></td>
+                                            <td><?php echo $row['edited_by']; ?></td>
+                                            <td><?php echo $row['deleted_by']; ?></td>
+                                            <td><?php echo $row['activated_by']; ?></td>
+                                            <td><?php echo $row['deactivated_by']; ?></td>
+                                            <td><?php echo $row['added_at']; ?></td>
+                                            <td><?php echo $row['edited_at']; ?></td>
+                                            <td><?php echo $row['deleted_at']; ?></td>
+                                            <td><?php echo $row['activated_at']; ?></td>
+                                            <td><?php echo $row['deactivated_at']; ?></td>
                                             <td><?php echo $row['remarks'];?></td>
                                         </tr>
 

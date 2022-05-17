@@ -106,7 +106,7 @@ if(!isset($_SESSION["sa_username"])) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Documents Types
+                User Logs
             </h2>
        
             <div class="user-wrapper">
@@ -153,18 +153,23 @@ if(!isset($_SESSION["sa_username"])) {
         <main>
            <div class="container">
             <div class="table-responsive">
-            <a class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#add_type">Add New Type</a>
                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>
-                                    No.
-                                </th>
-                                <th>
-                                    Type
-                                </th>
-                                <th>
-                                </th>
+                                <th>No.</th>
+                                <th> Office</th>
+                                <th> Email</th>
+                                <th> Added by </th>
+                                <th> Edited by </th>
+                                <th> Deleted by </th>
+                                <th> Activated by </th>
+                                <th> Deactivated by </th>
+                                <th> Added at </th>
+                                <th> Edited at </th>
+                                <th> Deleted at </th>
+                                <th> Activated at </th>
+                                <th> Deactivated at </th>
+                                <th> Remakrs </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -175,26 +180,26 @@ if(!isset($_SESSION["sa_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = 'SELECT * FROM types ORDER BY type ASC;';
+                                    $sql = 'SELECT * FROM userslog ORDER BY id DESC;';
                                     $no = 0;
                                     foreach ($db->query($sql) as $row) {
                                         $no++;
                             ?>
                             <tr>
-                                <td>
-                                    <?php echo $no; ?>
-                                </td>
-
-                                <td>
-                                    <?php echo $row['type']; ?>
-                                </td>
-
-                                <td style="display:flex;justify-content:center;">
-                                    <a style ="margin-right:10px;" class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_type<?php echo $row['id']; ?>">Edit</a>
-                                    <a class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_type<?php echo $row['id']; ?>">Delete</a>
-                                </td>
-                                <?php include('../super_admin_funcs/view_delete_type.php'); ?>
-                                <?php include('../super_admin_funcs/view_edit_type.php'); ?>
+                                <td><?php echo $no; ?></td>
+                                <td><?php echo $row['office']; ?></td>
+                                <td><?php echo $row['email'];?></td>
+                                <td><?php echo $row['added_by']; ?></td>
+                                <td><?php echo $row['edited_by']; ?></td>
+                                <td><?php echo $row['deleted_by']; ?></td>
+                                <td><?php echo $row['activated_by']; ?></td>
+                                <td><?php echo $row['deactivated_by']; ?></td>
+                                <td><?php echo $row['added_at']; ?></td>
+                                <td><?php echo $row['edited_at']; ?></td>
+                                <td><?php echo $row['deleted_at']; ?></td>
+                                <td><?php echo $row['activated_at']; ?></td>
+                                <td><?php echo $row['deactivated_at']; ?></td>
+                                <td><?php echo $row['remarks'];?></td>
                             </tr>
 
                             <?php 
@@ -224,44 +229,6 @@ if(!isset($_SESSION["sa_username"])) {
         })
 	</script>
 
-     <?php 
-            if(isset($_SESSION['message_fail'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Failed!!',
-                        html: '<h4><?php echo $_SESSION['message_fail'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-
-                unset($_SESSION['message_fail']);
-            }
-        ?>
-
-        <?php 
-            if(isset($_SESSION['message'])){
-                ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful!!',
-                        html: '<h4><?php echo $_SESSION['message'];?></h4>',
-                        showConfirmButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: 'OKAY!'
-                    });
-                </script>
-                <?php
-
-                unset($_SESSION['message']);
-            }
-        ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -273,8 +240,6 @@ if(!isset($_SESSION["sa_username"])) {
         } );
     </script>
 
-    <?php include('../super_admin_funcs/view_add_type.php'); ?>
-    
     <footer>
         <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
     </footer>
