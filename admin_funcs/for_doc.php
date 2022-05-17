@@ -45,7 +45,6 @@ catch(PDOException $e){
         if(!empty($_POST['oreason'])){
             $action = $_POST['oreason'];
         }
-
         $forwarded_mes = "Forwarded to the office/s with $action";
         $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 			
@@ -61,7 +60,7 @@ catch(PDOException $e){
 
             foreach($_POST['officeName'] as $selectedOffice){
 
-                $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, forwarded_at, remarks, status, origin_office) VALUES(:trackingID, :user_id, :office, :forwarded_at, :remarks, :status, :origin_office);");
+                $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, forwarded_at, remarks, status, origin_office, forwarded_to) VALUES(:trackingID, :user_id, :office, :forwarded_at, :remarks, :status, :origin_office, :forwarded_to);");
                 $sql_logs->bindParam(':trackingID', $_POST['trackingID']);
                 $sql_logs->bindParam(':user_id', $_POST['userID']);
                 $sql_logs->bindParam(':office', $selectedOffice);
@@ -69,6 +68,7 @@ catch(PDOException $e){
                 $sql_logs->bindParam(':status', $status);
                 $sql_logs->bindParam(':remarks', $forwarded_mes);
                 $sql_logs->bindParam(':origin_office', $row1['origin_office']);
+                $sql_logs->bindParam(':forwarded_to', $selectedOffice.",".$selectedOffice.",".$selectedOffice);
     
                 $sql_logs->execute();
             }
