@@ -286,7 +286,7 @@ catch(PDOException $e){
               else{
                 ?>
                 <div class="modal-body">
-                  <p class="text-center">Your about to receive a forwarded document for <?php echo $row['forwarded_to']?> office? Please confirm if  you're from this offices.</p>
+                  <p class="text-center">Your about to receive a forwarded document for <?php echo $row['forwarded_to']?> office? Please confirm if  you're from this office.</p>
                 </div>
               <?php
               }
