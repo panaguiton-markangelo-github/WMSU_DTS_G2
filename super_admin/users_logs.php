@@ -85,7 +85,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Document Logs</span></a>
                 </li>
                 <li>
-                    <a href="/super_admin/users_logs/"><span class="las la-file-invoice"></span>
+                    <a class="active"><span class="las la-file-invoice"></span>
                     <span>Users Logs</span></a>
                 </li>
                 <li>

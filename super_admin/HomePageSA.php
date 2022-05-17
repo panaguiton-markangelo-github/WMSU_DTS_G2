@@ -95,6 +95,14 @@ catch(PDOException $e) {
                     <span>Document reasons</span></a>
                 </li>
                 <li>
+                    <a href="/super_admin/docs_logs/"><span class="las la-file-invoice"></span>
+                    <span>Document Logs</span></a>
+                </li>
+                <li>
+                    <a href="/super_admin/users_logs/"><span class="las la-file-invoice"></span>
+                    <span>Users Logs</span></a>
+                </li>
+                <li>
                     <a href="/super_admin/sem_year/"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li> 
@@ -683,7 +691,7 @@ catch(PDOException $e) {
                                         $database = new Connection();
                                         $db = $database->open();
                                         try{	
-                                            $sql = 'SELECT * FROM docslog ORDER BY id DESC;';
+                                            $sql = 'SELECT * FROM docslog ORDER BY id DESC LIMIT 5;';
                                             $no = 0;
                                             foreach ($db->query($sql) as $row) {
                                                 $no++;

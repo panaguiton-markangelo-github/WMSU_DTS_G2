@@ -106,6 +106,14 @@ catch(PDOException $e) {
                     <span>Document reasons</span></a>
                 </li>
                 <li>
+                    <a href="/super_admin/docs_logs/"><span class="las la-file-invoice"></span>
+                    <span>Document Logs</span></a>
+                </li>
+                <li>
+                    <a href="/super_admin/users_logs/"><span class="las la-file-invoice"></span>
+                    <span>Users Logs</span></a>
+                </li>
+                <li>
                     <a class="active"><span class="las la-school"></span>
                     <span>School Year/Sem</span></a>
                 </li> 
