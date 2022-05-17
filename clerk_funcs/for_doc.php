@@ -51,10 +51,11 @@ catch(PDOException $e){
 			
 		try{
 			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare ("UPDATE documents SET status = :status WHERE trackingID = :trackingID;");
+			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason WHERE trackingID = :trackingID;");
             //bind 
 			$sql->bindParam(':trackingID', $_POST['trackingID']);
 			$sql->bindParam(':status', $status);
+            $sql->bindParam(':reason', $action);
 
             $_SESSION['trackingID'] = $_POST['trackingID'];
 
