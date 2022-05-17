@@ -11,7 +11,7 @@ if(!isset($_SESSION["sa_username"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Types</title>
+    <title>Users Log</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -73,7 +73,7 @@ if(!isset($_SESSION["sa_username"])) {
                     <span>Admin Users</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-passport"></span>
+                    <a href="/super_admin/types/"><span class="las la-passport"></span>
                     <span>Document types</span></a>
                 </li>
                 <li>
