@@ -41,9 +41,9 @@ catch(PDOException $e){
 		$database = new Connection();
 		$db = $database->open();
         $status = $_POST['status'];
-        $action = $_POST['action'];
-        if(!empty($_POST['oaction'])){
-            $action = $_POST['oaction'];
+        $action = $_POST['reason'];
+        if(!empty($_POST['oreason'])){
+            $action = $_POST['oreason'];
         }
 
         $forwarded_mes = "Forwarded to the office/s with $action";
