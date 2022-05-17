@@ -13,7 +13,7 @@ include_once('../include/database.php');
 $database = new Connection();
 $db = $database->open();
 try{	
-    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, documents.file, logs.office, logs.origin_office FROM documents 
+    $sql = "SELECT documents.trackingID, documents.title, documents.type, documents.reason, documents.status, documents.remarks, documents.file, logs.office, logs.origin_office, logs.nos, logs.forwarded_to FROM documents 
     INNER JOIN logs ON documents.trackingID = logs.trackingID 
     WHERE documents.trackingID = '".$_POST['rec_trackingID']."' ORDER BY logs.id DESC LIMIT 1;";
     foreach ($db->query($sql) as $row) {
@@ -203,6 +203,22 @@ catch(PDOException $e){
                         ?>
                       </td>
                   </tr>
+
+                  <?php
+                  if($row['status'] == 'forwarded'){
+                    ?>
+                    <tr>
+                      <th class="fs-5 text-center">
+                          Forwarded To:
+                      </th>
+
+                      <td class="fs-5 text-center">
+                        <span> <?php echo $row['forwarded_to'];?></span>
+                      </td>
+                  </tr>
+                    <?php
+                  }
+                  ?>
                 </tbody>
               </table>
             </div>
@@ -276,9 +292,31 @@ catch(PDOException $e){
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
-              <p>Do you wish to receive this document?</p>
-            </div>
+            <?php 
+            if($row['status'] == 'forwarded'){
+              if($row['nos'] > 1){
+                ?>
+                  <div class="modal-body">
+                    <p class="text-center">Your about to receive a forwarded document for <?php echo $row['forwarded_to']?> offices? Please confirm if  you're from one of these offices.</p>
+                  </div>
+                <?php
+              }
+              else{
+                ?>
+                <div class="modal-body">
+                  <p class="text-center">Your about to receive a forwarded document for <?php echo $row['forwarded_to']?> office? Please confirm if  you're from this office.</p>
+                </div>
+              <?php
+              }
+            }
+            else{
+              ?>
+                <div class="modal-body">
+                  <p>Do you wish to receive this document?</p>
+                </div>
+              <?php
+            }
+            ?>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal" for>No</button>
