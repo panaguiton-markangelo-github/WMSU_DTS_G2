@@ -43,6 +43,7 @@ catch(PDOException $e){
         $status = $_POST['status'];
         $action = $_POST['reason'];
         $offices = implode(',', $_POST['officeName']);
+        $no = count($_POST['officeName']);
         if(!empty($_POST['oreason'])){
             $action = $_POST['oreason'];
         }
@@ -51,17 +52,18 @@ catch(PDOException $e){
 			
 		try{
 			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason WHERE trackingID = :trackingID;");
+			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason, remarks = :remarks WHERE trackingID = :trackingID;");
             //bind 
 			$sql->bindParam(':trackingID', $_POST['trackingID']);
 			$sql->bindParam(':status', $status);
             $sql->bindParam(':reason', $action);
+            $sql->bindParam(':remarks', $_POST['remarks']);
 
             $_SESSION['trackingID'] = $_POST['trackingID'];
 
             foreach($_POST['officeName'] as $selectedOffice){
 
-                $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, forwarded_at, remarks, status, origin_office, forwarded_to) VALUES(:trackingID, :user_id, :office, :forwarded_at, :remarks, :status, :origin_office, :forwarded_to);");
+                $sql_logs = $db->prepare ("INSERT INTO logs (trackingID, user_id, office, forwarded_at, remarks, status, origin_office, forwarded_to, nos) VALUES(:trackingID, :user_id, :office, :forwarded_at, :remarks, :status, :origin_office, :forwarded_to, :nos);");
                 $sql_logs->bindParam(':trackingID', $_POST['trackingID']);
                 $sql_logs->bindParam(':user_id', $_POST['userID']);
                 $sql_logs->bindParam(':office', $selectedOffice);
@@ -70,6 +72,7 @@ catch(PDOException $e){
                 $sql_logs->bindParam(':remarks', $forwarded_mes);
                 $sql_logs->bindParam(':origin_office', $row1['origin_office']);
                 $sql_logs->bindParam(':forwarded_to', $offices);
+                $sql_logs->bindParam(':nos', $no);
     
                 $sql_logs->execute();
             }

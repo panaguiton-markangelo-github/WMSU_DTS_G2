@@ -53,11 +53,12 @@ catch(PDOException $e){
 	
 		try{
 			//make use of prepared statement to prevent sql injection
-			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason WHERE trackingID = :trackingID;");
+			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason, remarks = :remarks WHERE trackingID = :trackingID;");
             //bind 
 			$sql->bindParam(':trackingID', $_POST['trackingID']);
 			$sql->bindParam(':status', $status);
             $sql->bindParam(':reason', $action);
+            $sql->bindParam(':remarks', $_POST['remarks']);
 
             $_SESSION['trackingID'] = $_POST['trackingID'];
 
@@ -80,7 +81,7 @@ catch(PDOException $e){
            
 
 			//if-else statement in executing our prepared statement
-			$_SESSION['message_release'] = ( $sql->execute()) ? 'Document was forwared successfully.': 'Something went wrong. Cannot forward the document.';	
+			$_SESSION['message_release'] = ( $sql->execute()) ? 'Document was forwarded successfully.': 'Something went wrong. Cannot forward the document.';	
 		}
 		catch(PDOException $e){
 			$_SESSION['message_release'] = $e->getMessage();
