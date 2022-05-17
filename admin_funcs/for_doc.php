@@ -42,7 +42,7 @@ catch(PDOException $e){
 		$db = $database->open();
         $status = $_POST['status'];
         $action = $_POST['reason'];
-        $offices = array_values($_POST['officeName']);
+        $offices = implode(',', $_POST['officeName']);
         if(!empty($_POST['oreason'])){
             $action = $_POST['oreason'];
         }
