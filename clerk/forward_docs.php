@@ -246,6 +246,8 @@ catch(PDOException $e) {
           </div>
     
           <input name="status" type="text" value="forwarded" hidden>  
+          <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_POST["userID"];?>" hidden> 
+          <input name="user_id" type="number" value="<?php echo $_SESSION['userID'];?>" hidden>
 
           <br>
           <br>
