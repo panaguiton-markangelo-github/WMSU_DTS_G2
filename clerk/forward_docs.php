@@ -174,7 +174,6 @@ catch(PDOException $e) {
             <div class="col">
             <label for="office">Office:</label>
             <select class="form-select text-dark" name="officeName[]" id="officeName" size="3" multiple required>
-              <option value="" selected>Please Select Office/s.</option>
                   <?php
                       $database = new Connection();
                       $db = $database->open();
