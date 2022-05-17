@@ -349,8 +349,10 @@ if(!isset($_SESSION["sa_username"])) {
                     </table>
                 </div>
            </div>
-
-                            <!--here!-->
+                
+           <br>
+           <br>
+                <h3 style="text-align:center;">Document Logs</h3>
            <div class="container">
             <div class="table-responsive">
                     <table id="data_table" class="table table-striped table-hover">
