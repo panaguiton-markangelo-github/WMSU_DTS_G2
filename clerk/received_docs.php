@@ -268,7 +268,6 @@ if(!isset($_SESSION["c_username"])) {
                                     <?php
                                 }
                                 ?>
-
                             </tr>
                             
                             <?php 
