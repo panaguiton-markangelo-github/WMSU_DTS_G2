@@ -311,7 +311,7 @@ catch(PDOException $e) {
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal" for>No</button>
-              <button type="submit" class="btn btn-success" name="add" data-bs-dismiss="modal" form="mainForm">Yes</button>
+              <button type="submit" class="btn btn-success" name="submit" data-bs-dismiss="modal" form="mainForm">Yes</button>
               
            </div>
          </div>
