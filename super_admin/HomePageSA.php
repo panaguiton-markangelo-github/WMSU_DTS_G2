@@ -650,6 +650,76 @@ catch(PDOException $e) {
 
                 </div>
 
+                <div class="docslogs">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Document Logs</h3>
+                            <a href="/super_admin/all_docs/">See documents <span class="las la-arrow-right"></span> </a>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive-cus">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>No.</td>
+                                            <td> Tracking ID </td>
+                                            <td> Office </td>
+                                            <td> Edited by </td>
+                                            <td> Deleted by </td>
+                                            <td> Edited at </td>
+                                            <td> Deleted at </td>
+                                            <td> User Type </td>
+                                            <td> Remakrs </td>
+                                        </tr>
+                                    </thead>
+    
+                                    <tbody>
+                                    <?php
+                                        //include our connection
+                                        include_once('../include/database.php');
+                                        
+
+                                        $database = new Connection();
+                                        $db = $database->open();
+                                        try{	
+                                            $sql = 'SELECT * FROM docslogs;';
+                                            $no = 0;
+                                            foreach ($db->query($sql) as $row) {
+                                                $no++;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $row['trackingID']; ?></td>
+                                            <td><?php echo $row['office'];?></td>
+                                            <td><?php echo $row['edited_by']; ?></td>
+                                            <td><?php echo $row['deleted_by']; ?></td>
+                                            <td><?php echo $row['edited_at']; ?></td>
+                                            <td><?php echo $row['deleted_at']; ?></td>
+                                            <td><?php echo $row['userType'];?></td>
+                                            <td><?php echo $row['remarks'];?></td>
+                                        </tr>
+
+                                    <?php 
+                                            }
+                                        }
+                                        catch(PDOException $e){
+                                            echo "There is some problem in connection: " . $e->getMessage();
+                                        }
+
+                                        //close connection
+                                        $database->close();
+                                    ?>
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
