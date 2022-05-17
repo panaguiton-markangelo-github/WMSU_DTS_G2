@@ -64,7 +64,7 @@ catch(PDOException $e){
                 $sql_logs->bindParam(':trackingID', $_POST['trackingID']);
                 $sql_logs->bindParam(':user_id', $_POST['userID']);
                 $sql_logs->bindParam(':office', $selectedOffice);
-                $sql_logs->bindParam(':forwared_at', $date->format('M/d/Y, H:i:s'));
+                $sql_logs->bindParam(':forwarded_at', $date->format('M/d/Y, H:i:s'));
                 $sql_logs->bindParam(':status', $status);
                 $sql_logs->bindParam(':remarks', $forwarded_mes);
                 $sql_logs->bindParam(':origin_office', $row1['origin_office']);
