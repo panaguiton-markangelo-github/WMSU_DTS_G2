@@ -43,7 +43,7 @@ catch(PDOException $e){
         $status = $_POST['status'];
         $action = $_POST['reason'];
         $offices = implode(',', $_POST['officeName']);
-        $no = array_count_values($_POST['officeName']);
+        $no = count($_POST['officeName']);
         if(!empty($_POST['oreason'])){
             $action = $_POST['oreason'];
         }
