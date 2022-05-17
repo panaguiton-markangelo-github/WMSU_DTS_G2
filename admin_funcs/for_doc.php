@@ -42,6 +42,7 @@ catch(PDOException $e){
 		$db = $database->open();
         $status = $_POST['status'];
         $action = $_POST['reason'];
+        $offices = array_values($_POST['officeName']);
         if(!empty($_POST['oreason'])){
             $action = $_POST['oreason'];
         }
@@ -68,7 +69,7 @@ catch(PDOException $e){
                 $sql_logs->bindParam(':status', $status);
                 $sql_logs->bindParam(':remarks', $forwarded_mes);
                 $sql_logs->bindParam(':origin_office', $row1['origin_office']);
-                $sql_logs->bindParam(':forwarded_to', $selectedOffice.",".$selectedOffice.",".$selectedOffice);
+                $sql_logs->bindParam(':forwarded_to', $offices);
     
                 $sql_logs->execute();
             }
