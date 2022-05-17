@@ -63,6 +63,9 @@
         <td>
             <?php echo $row['released_at']; ?>
         </td>
+        <td>
+            <?php echo $row['forwarded_at']; ?>
+        </td>
 
         <td>
             <?php echo $row['remarks']; ?>

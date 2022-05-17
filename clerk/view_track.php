@@ -168,7 +168,7 @@ if(!isset($_SESSION["c_username"])) {
                                     <th >Added at</th>
                                     <th >Received at</th>
                                     <th >Released at</th>
-                                    
+                                    <th >Forwarded at</th>
                                     <th >Remarks</th>
                                 </tr>
                             </thead>

@@ -193,6 +193,7 @@ if(!isset($_SESSION["sa_username"])) {
                                     <th >Added at</th>
                                     <th >Received at</th>
                                     <th >Released at</th>
+                                    <th >Forwarded at</th>
                                     <th >Remarks</th>
                                 </tr>
                             </thead>
