@@ -201,6 +201,23 @@ catch(PDOException $e){
                         ?>
                       </td>
                   </tr>
+
+                  <?php
+                  if($row['status'] == 'forwarded'){
+                    ?>
+                    <tr>
+                      <th class="fs-5 text-center">
+                          Forwarded To:
+                      </th>
+
+                      <td class="fs-5 text-center">
+                        <span> <?php echo $row['forwarded_to'];?></span>
+                      </td>
+                  </tr>
+                    <?php
+                  }
+                  ?>
+                  
                 </tbody>
               </table>
             </div>
