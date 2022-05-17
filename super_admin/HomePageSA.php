@@ -683,7 +683,7 @@ catch(PDOException $e) {
                                         $database = new Connection();
                                         $db = $database->open();
                                         try{	
-                                            $sql = 'SELECT * FROM docslogs;';
+                                            $sql = 'SELECT * FROM docslog;';
                                             $no = 0;
                                             foreach ($db->query($sql) as $row) {
                                                 $no++;
