@@ -100,7 +100,7 @@ catch(PDOException $e) {
                 </th>
 
                 <td class="fs-5 text-center">
-                    <?php echo $row['trackingID'];?>
+                    <?php echo $_POST['trackingID'];?>
                 </td>
               </tr>
 
@@ -110,7 +110,7 @@ catch(PDOException $e) {
                   </th>
 
                   <td class="fs-5 text-center">
-                      <?php echo $row['title'];?>
+                      <?php echo $_POST['title'];?>
                   </td>
               </tr>
 
@@ -120,7 +120,7 @@ catch(PDOException $e) {
                   </th>
 
                   <td class="fs-5 text-center">
-                      <?php echo $row['type'];?>
+                      <?php echo $_POST['type'];?>
                   </td>
               </tr>
 
@@ -130,7 +130,7 @@ catch(PDOException $e) {
                   </th>
 
                   <td class="fs-5 text-center">
-                      <?php echo $row['reason'];?>
+                      <?php echo $_POST['reason'];?>
                   </td>
               </tr>
 
@@ -141,14 +141,14 @@ catch(PDOException $e) {
 
                   <td class="fs-5 text-center">
                     <?php
-                        if ($row['status'] == "draft"){
+                        if ($_POST['status'] == "draft"){
                         ?>
-                            <span style="color: red;"><?php echo $row['status']; ?></span>
+                            <span style="color: red;"><?php echo $_POST['status']; ?></span>
                     <?php
                         }
                         else {
                         ?>
-                            <span style="color: green;"><?php echo $row['status']; ?></span>
+                            <span style="color: green;"><?php echo $_POST['status']; ?></span>
                         <?php
                         }
                     ?>
