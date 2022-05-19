@@ -326,7 +326,7 @@ if(!isset($_SESSION["sa_username"])) {
                                 </td>
 
                                 <td>
-                                    <form id="viewForm" action="view_documentSA.php" method="POST">
+                                    <form id="viewForm" action="/super_admin/view_documentSA/" method="POST">
                                         <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
                                         <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
                                         <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
