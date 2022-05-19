@@ -29,21 +29,25 @@ if(!isset($_SESSION["sa_username"])) {
                 <a class="nav-link fw-bold" href="/super_admin/HomePageSA/">Home</a>
               </li> 
 
-              <li class="nav-item">
-                <span class="nav-link fw-bold">--></span>
-              </li>
+             
 
               <?php
               if(!empty($_POST['all_link'])){
                   ?>
+                   <li class="nav-item">
+                        <span class="nav-link fw-bold">--></span>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold" href="/super_admin/all_docs/">All Documents</a>
                     </li> 
                   <?php
               } 
-              else
+              elseif(!empty($_POST['arc_link']))
               {
                 ?>
+                     <li class="nav-item">
+                        <span class="nav-link fw-bold">--></span>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link fw-bold" href="/super_admin/archives/">Archives</a>
                     </li> 
