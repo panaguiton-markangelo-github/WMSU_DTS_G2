@@ -336,6 +336,7 @@ if(!isset($_SESSION["sa_username"])) {
                                         <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
 
                                         <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
+                                        <input type="text" name="arc_link" value= "arc_docs" hidden>
                                         <button id="submit" type="submit"><span class = "las la-info"></span></button>
                                     </form>
                                 </td>
