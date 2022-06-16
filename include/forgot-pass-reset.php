@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 session_start();
 
-require ($_SERVER['DOCUMENT_ROOT'] . '/phpmailer/includes/mailer_main.php');
+include ('../phpmailer/includes/mailer_main.php');
 
 
 if (isset($_POST['reset-submit'])) {
