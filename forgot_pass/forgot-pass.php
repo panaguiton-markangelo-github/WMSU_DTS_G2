@@ -37,7 +37,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="POST" action="../include/forgot-pass-reset.php">
+				<form class="login100-form validate-form" method="POST" action="../index.php">
 					<span class="login100-form-title p-b-26">
 						Forgot Password
 					</span>
