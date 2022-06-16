@@ -92,7 +92,7 @@ if (isset($_POST['reset-submit'])) {
             $message .= "<a href= '".$url."'> ".$url." </a> </p> <br>";
 
             $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
-            $message .= "<br>Reply-To: support@dts.wmsuccs.com\r\n";
+            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
             $message .= "<p>Best regards WMSU|DTS team.</p>";
 
             $mail->Subject = $subject;
