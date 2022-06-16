@@ -1,8 +1,8 @@
 <?php
 
-require '../phpmailer/includes/PHPMailer.php';
-require '../phpmailer/includes/Exception.php';
-require '../phpmailer/includes/SMTP.php';
+require __DIR__.'/phpmailer/includes/PHPMailer.php';
+require __DIR__.'/phpmailer/includes/Exception.php';
+require __DIR__.'/phpmailer/includes/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
