@@ -121,3 +121,5 @@ else
 {
     header("location: ../forgot_pass/forgot-pass.php");
 }
+
+?>
