@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 session_start();
 
-require 'mailer_main.php';
+require 'sample.mailer_main.php';
 
 
 if (isset($_POST['reset-submit'])) {
