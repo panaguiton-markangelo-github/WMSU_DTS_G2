@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require '../phpmailer/includes/sample.mailer_main.php';
+require '../phpmailer/includes/mailer_main.php';
 
 
 if (isset($_POST['reset-submit'])) {
