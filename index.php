@@ -58,7 +58,7 @@
 					<div class="flex-sb-m w-full p-b-48">
 						<div>
 							<a href="forgot_pass/forgot-pass.php" class="txt3">
-								WTForgot Password?
+								Forgot Password?
 							</a>
 						</div>
 					</div>
