@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-$mail = new PHPMailer();
+$mail = new PHPMailer(true);
 
 $mail->isSMTP();
 
