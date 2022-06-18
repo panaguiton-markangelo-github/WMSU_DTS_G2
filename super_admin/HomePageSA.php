@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION["sa_username"])) {
-  header("location:../../index/");
+  header("location:../../index/?error=empty_fields");
   exit();
 }
 
