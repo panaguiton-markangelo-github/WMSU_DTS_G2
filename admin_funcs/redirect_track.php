@@ -246,7 +246,7 @@ if(!isset($_SESSION["a_username"])) {
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <footer>
-        <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
+        <p>&copy;Copyright 2021 by WMSU.</p>
     </footer>
 
     <script>

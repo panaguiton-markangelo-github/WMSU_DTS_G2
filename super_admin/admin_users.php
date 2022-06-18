@@ -9,6 +9,7 @@ if(!isset($_SESSION["sa_username"])) {
 <html lang="en">
 <head>
 <base href="/" />
+    <link rel="icon" type="image/png" href="assets/img/wmsu_logo.png"/>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -335,7 +336,7 @@ if(!isset($_SESSION["sa_username"])) {
     <?php include('../super_admin_funcs/view_add_admin.php'); ?>
     
     <footer>
-        <p>&copy;Copyright 2021 by <a href="#" class="text-dark">WMSU</a>.</p>
+        <p>&copy;Copyright 2021 by WMSU.</p>
     </footer>
 
     <script>
