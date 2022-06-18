@@ -127,7 +127,7 @@ catch(PDOException $e) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Dashboard
+                Dashboard12
             </h2>
 
             
