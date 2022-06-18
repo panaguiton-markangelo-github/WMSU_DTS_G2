@@ -2,6 +2,7 @@
 session_start();
 if(!isset($_SESSION["sa_username"])) {
   header("location: ../index.php");
+  exit();
 }
 
 include ("../include/alt_db.php");
