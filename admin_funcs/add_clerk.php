@@ -8,13 +8,37 @@ include ("../include/alt_db.php");
 	if(isset($_POST['add'])){
 		$database = new Connection();
 		$db = $database->open();
+		$email = $_POST['username'];
 		$password = $_POST['password'];
 		$password_hash = password_hash($password, PASSWORD_DEFAULT);
 		$active = 'yes';
 		$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 		$remarks = "added by the office admin.";
 
-		if (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
+		$api_key = "1372d36b08aa4f65b05a4d6b7d0e9fca";
+		$ch = curl_init();
+		curl_setopt_array($ch, [
+			CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1/?api_key=$api_key&email=$email",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_FOLLOWLOCATION => true
+		]);
+
+		$response = curl_exec($ch);
+		curl_close($ch);
+		$data = json_decode($response, true);
+
+
+		if ($data['deliverability'] === "UNDELIVERABLE") {
+			$_SESSION['message_fail'] = "Please enter a valid email!";
+			$database->close();
+			header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+		}
+		elseif($data['is_free_email']['value'] === false){
+			$_SESSION['message_fail'] = "Please enter a valid gmail!";
+			$database->close();
+			header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+		}
+		elseif (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 			$_SESSION['message_fail'] = "Please enter a valid email!";
 			$database->close();
 			header('location: ../admin/clerk_users.php?invalid=email?clerk');
