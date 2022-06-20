@@ -29,12 +29,12 @@ include ("../include/alt_db.php");
 			if ($data['deliverability'] === "UNDELIVERABLE") {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
 				$database->close();
-				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+				header('location: ../super_admin/admin_users.php?invalid=email?admin');
 			}
 			elseif($data['is_free_email']['value'] === false){
 				$_SESSION['message_fail'] = "Please enter a valid gmail!";
 				$database->close();
-				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+				header('location: ../super_admin/admin_users.php?invalid=email?admin');
 			}
 			elseif (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
