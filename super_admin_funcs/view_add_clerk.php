@@ -38,7 +38,7 @@
             </div>
 
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="username" name="username" placeholder="Username" required>
+              <input pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$' type="email" class="form-control" id="username" name="username" placeholder="Username" required>
               <label for="username">Email:</label>
             </div>
 
