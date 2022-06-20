@@ -30,17 +30,17 @@ include ("../include/alt_db.php");
 			if ($data['deliverability'] === "UNDELIVERABLE") {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
 				$database->close();
-				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+				header('location: ../super_admin/clerk_users.php?invalid=email_d?clerk');
 			}
 			elseif($data['is_smtp_valid']['value'] === false){
 				$_SESSION['message_fail'] = "Please enter a valid email!";
 				$database->close();
-				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+				header('location: ../super_admin/clerk_users.php?invalid=email_s?clerk');
 			}
 			elseif (!filter_var($_POST['username'], FILTER_VALIDATE_EMAIL)) {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
 				$database->close();
-				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
+				header('location: ../super_admin/clerk_users.php?invalid=email_u?clerk');
 			}
 
 			else {
