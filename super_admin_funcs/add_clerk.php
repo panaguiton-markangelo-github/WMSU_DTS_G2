@@ -33,7 +33,7 @@ include ("../include/alt_db.php");
 				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
 			}
 			elseif($data['is_free_email']['value'] === false){
-				$_SESSION['message_fail'] = "Please enter a valid email!";
+				$_SESSION['message_fail'] = "Please enter a valid gmail!";
 				$database->close();
 				header('location: ../super_admin/clerk_users.php?invalid=email?clerk');
 			}
