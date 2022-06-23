@@ -659,11 +659,11 @@ if(isset($_POST['request_arc_year'])){
 
 <!--incoming filter type-->
 <?php
-if(isset($_POST['request_inc_t'])){
+if(isset($_POST['request_inc_ty'])){
 
-    $request_inc_t = $_POST['request_inc_t'];
+    $request_inc_t = $_POST['request_inc_ty'];
 
-    if($request_inc_t== "none"){
+    if($request_inc_ty== "none"){
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
         INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
         INNER JOIN users ON users.id = documents.user_id WHERE yearsemester.activated = 'yes'  AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
@@ -674,7 +674,7 @@ if(isset($_POST['request_inc_t'])){
     else{
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
         INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
-        INNER JOIN users ON users.id = documents.user_id WHERE documents.schoolYear = '$request_inc_t' AND yearsemester.activated = 'yes'  AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
+        INNER JOIN users ON users.id = documents.user_id WHERE documents.schoolYear = '$request_inc_ty' AND yearsemester.activated = 'yes'  AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
         ORDER BY documents.id DESC;";
         $result = mysqli_query($data, $query);
         $count = mysqli_num_rows($result);     
