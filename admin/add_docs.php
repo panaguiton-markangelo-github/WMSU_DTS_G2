@@ -200,7 +200,7 @@ catch(PDOException $e) {
               <br>
               <p class="text-center text-muted fw-bold">Please select the recipient/s. Note: You can select more than one.</p>
               <div class="boxes">
-                  <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all" required>
+                  <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all">
                   <label for="select-all">All</label>
                 <?php
                       $database = new Connection();
