@@ -198,7 +198,7 @@ catch(PDOException $e) {
           <div class="row">
             <div class="col">
               <br>
-              <p class="text-center text-muted fw-bold">Please select the recipient/s. Note: You can select more than one.</p>
+              <p class="text-center text-muted fw-bold">Please select the recipient/s. Note: You can select more than one (required).</p>
               <div class="boxes">
                   <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all">
                   <label for="select-all">All</label>
