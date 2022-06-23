@@ -202,6 +202,7 @@ catch(PDOException $e) {
               </div>
 
             <div class="col">
+              <p class="text-center text-muted fw-bold">Please select the recipient/s. Note: You can select more than one.</p>
               <div class="boxes">
                   <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all">
                   <label for="select-all">All</label>
@@ -225,7 +226,6 @@ catch(PDOException $e) {
                     $database->close();
                   ?>
               </div>
-            <p class="text-center text-muted fw-bold">You can select multiple recipients.</p>
             </div>
           </div>
 
