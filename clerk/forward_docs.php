@@ -194,11 +194,11 @@ catch(PDOException $e) {
           <br>
           <div class="row">
               <div class="col md-4">
+                <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
                 <div class="input-group mb-3">
                 <label class="input-group-text" for="trackingID">Tracking ID</label>
                 <input type="text" class="form-control" name="trackingID" value="<?php echo $_POST['trackingID']?>" id = "trackingID" readonly>
                 </div>
-                <p class="text-center text-muted fw-bold">Tracking ID of the document.</p>
               </div>
 
             <div class="col">
