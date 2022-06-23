@@ -827,7 +827,7 @@ if(isset($_POST['request_inc_y'])){
 
     $request_inc_y = $_POST['request_inc_y'];
 
-    if($request_inc_t== "none"){
+    if($request_inc_y== "none"){
         $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, users.officeName FROM documents 
         INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
         INNER JOIN users ON users.id = documents.user_id WHERE yearsemester.activated = 'yes'  AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
