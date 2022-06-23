@@ -206,7 +206,7 @@ catch(PDOException $e) {
                       $database = new Connection();
                       $db = $database->open();
                       try{	
-                          $sql = 'SELECT * FROM office ORDER BY officeName ASC;'; 
+                          $sql = "SELECT * FROM office WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
                           foreach ($db->query($sql) as $row1) {
                     ?>
                       <input class="officeName" name="officeName[]" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>" required>
