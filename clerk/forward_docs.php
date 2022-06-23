@@ -53,11 +53,11 @@ catch(PDOException $e) {
       $('#select-all').click(function(event) {   
         if(this.checked) {
             // Iterate each checkbox
-            $('.officeName').each(function() {
+            $(':checkbox').each(function() {
                 this.checked = true;                        
             });
         } else {
-            $('.officeName').each(function() {
+            $(':checkbox').each(function() {
                 this.checked = false;                       
             });
         }
@@ -211,8 +211,6 @@ catch(PDOException $e) {
 
             <div class="col">
               <div class="boxes">
-                  <input name="select-all" type="checkbox" id="select-all" value="select-all">
-                  <label for="select-all">All</label>
                 <?php
                       $database = new Connection();
                       $db = $database->open();
@@ -232,7 +230,8 @@ catch(PDOException $e) {
                     //close connection
                     $database->close();
                   ?>
-                
+                  <input name="select-all" type="checkbox" id="select-all" value="select-all">
+                  <label for="select-all">All</label>
               </div>
             <p class="text-center text-muted fw-bold">You can select multiple recipients.</p>
             </div>
