@@ -53,11 +53,11 @@ catch(PDOException $e) {
       $('#select-all').click(function(event) {   
         if(this.checked) {
             // Iterate each checkbox
-            $(':officeName').each(function() {
+            $('.officeName').each(function() {
                 this.checked = true;                        
             });
         } else {
-            $(':officeName').each(function() {
+            $('.officeName').each(function() {
                 this.checked = false;                       
             });
         }
