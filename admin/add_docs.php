@@ -21,7 +21,7 @@ try {
     $result1 = mysqli_query($data, $query1);
     $row1 = mysqli_fetch_array($result1);
     
-    $query2 = "SELECT id FROM office WHERE officeName = '".$_SESSION['c_officeName']."'";
+    $query2 = "SELECT id FROM office WHERE officeName = '".$_SESSION['a_officeName']."'";
     $result2 = mysqli_query($data, $query2);
     $row2 = mysqli_fetch_array($result2);
 
