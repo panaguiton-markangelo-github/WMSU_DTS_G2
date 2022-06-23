@@ -48,7 +48,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href="clerk_users.php"><span class="las la-search-location"></span>
+                    <a href="clerk_users.php"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>

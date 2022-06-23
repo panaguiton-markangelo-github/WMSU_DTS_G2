@@ -49,7 +49,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-search-location"></span>
+                    <a class="active"><span class="las la-users"></span>
                     <span>Clerk Users</span></a>
                 </li>
                 <li>
