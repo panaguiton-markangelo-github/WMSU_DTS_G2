@@ -137,7 +137,7 @@ catch(PDOException $e) {
                     <span>Track Documents</span></a>
                 </li>
                 <li>
-                    <a href="incoming_docs.php"><span class="las la-file-alt"></span>
+                    <a href="incoming_docs.php"><span class="las la-caret-square-down"></span>
                     <span>Incoming Documents</span></a>
                 </li>
                 <li>
