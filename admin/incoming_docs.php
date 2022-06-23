@@ -231,12 +231,7 @@ if(!isset($_SESSION["a_username"])) {
                                 </th>
 
                                 <th>
-                                    
-                                </th>
-
-                                <th>
-
-                                    View
+                                    Receive
                                 </th>
 
                             </tr>
@@ -294,50 +289,15 @@ if(!isset($_SESSION["a_username"])) {
                                         <?php
                                     }
                                     ?>
-                                  
-                                   
-                                   
+                                
                                 </td>
                                 
                                 <td>
                                     <?php echo $row['schoolYear']; ?>
                                 </td>
 
-                                <?php 
-                                if($row['status'] == 'draft'){
-                                    ?>
-                                    <td align="center">
-                                        <a style ="margin-bottom:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a> 
-                          
-                                        <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                                    </td>
-                                    <?php
-                                }
-                                else{
-                                    ?> 
-                                    <td style="display:flex;justify-content:center;">
-                                        <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                                    </td>
-                                    <?php
-                                }
-                                ?>
+                               
 
-                                <td>
-                                    <form id="viewForm" action="view_documentA.php" method="POST">
-                                        <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
-                                        <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
-                                        <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
-                                        <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
-                                        <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
-                                        <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
-                                        <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
-                                        <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                        <button id="submit" type="submit"><span class = "las la-info"></span></button>
-                                    </form>
-                                </td>
-
-                                <?php include('../admin_funcs/view_edit_doc.php');?>
-                                <?php include('../admin_funcs/view_delete_doc.php');?>
 
                             </tr>
                             
