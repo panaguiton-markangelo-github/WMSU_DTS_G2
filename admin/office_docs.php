@@ -238,15 +238,8 @@ if(!isset($_SESSION["a_username"])) {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                include ("../include/alt_db.php");
-                                $query = "SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients) FROM documents;";
-                                $result = mysqli_query($data, $query);
-                                if(!$result){
-                                    echo "no data test lang!";
-                                }
-                                else{
-                                    //include our connection
+                            <?php                          
+                                //include our connection
                                 include_once('../include/database.php');
 
                                 $database = new Connection();
@@ -353,8 +346,6 @@ if(!isset($_SESSION["a_username"])) {
 
                                 //close connection
                                 $database->close();
-                                }
-                                
                             ?>
                                         
                         </tbody>
