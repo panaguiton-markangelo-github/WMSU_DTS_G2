@@ -297,16 +297,11 @@ if(!isset($_SESSION["a_username"])) {
                                 </td>
 
                                 <td>
-                                    <form id="viewForm" action="view_documentA.php" method="POST">
-                                        <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
-                                        <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
-                                        <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
-                                        <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
-                                        <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
-                                        <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
-                                        <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
-                                        <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                        <button id="submit" type="submit"><span class = "las la-info"></span></button>
+                                    <form id="receiveForm" action="../admin_funcs/view_receive.php" method="POST">
+                                    <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="text" name="rec_trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                       
+                                        <button id="submit" type="submit"><span class = "las la-arrow-circle-down"></span></button>
                                     </form>
                                 </td>
 
