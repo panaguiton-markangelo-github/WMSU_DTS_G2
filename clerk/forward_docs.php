@@ -214,7 +214,7 @@ catch(PDOException $e) {
                           foreach ($db->query($sql) as $row1) {
                     ?>
                       <input class="officeName" name="officeName[]" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
-                      <label for="<?php echo $row1['officeName'];?>"><?php echo $row1['officeName'];?></label>
+                      <label for="<?php echo $row1['officeName'];?>"><?php echo $row1['description'];?></label>
                       <?php
                       }
 
