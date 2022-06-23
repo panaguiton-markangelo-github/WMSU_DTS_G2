@@ -199,7 +199,7 @@
 				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 				
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID, officeID, :recipients) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID, :officeID, :recipients);");
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID, officeID, recipients) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID, :officeID, :recipients);");
 				
 				//bind
 				$sql->bindParam(':trackingID', $_POST['trackingID']);
