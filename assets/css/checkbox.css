@@ -6,7 +6,7 @@ html { height: 100%; }
 .boxes {
   margin: auto;
   padding: 50px;
-  background: #484848;
+  background: #fff;
 }
 
 /*Checkboxes styles*/
@@ -18,7 +18,7 @@ input[type="checkbox"] + label {
   padding-left: 35px;
   margin-bottom: 20px;
   font: 14px/20px 'Open Sans', Arial, sans-serif;
-  color: #ddd;
+  color: rgb(0, 0, 0);
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -32,7 +32,7 @@ input[type="checkbox"] + label:before {
   display: block;
   width: 20px;
   height: 20px;
-  border: 1px solid #6cc0e5;
+  border: 1px solid #8e0413;
   position: absolute;
   left: 0;
   top: 0;
