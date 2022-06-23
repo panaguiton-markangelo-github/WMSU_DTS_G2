@@ -203,10 +203,10 @@ if(!isset($_SESSION["a_username"])) {
                  include ("../include/alt_db.php");
                  $query = "SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients) FROM documents;";
                  $result = mysqli_query($data, $query);
-                 if($result === 0 || $result === null){
+                 if($result == 0 || $result == null){
                      echo "no data test lang!";
                  }
-                 else
+                 elseif($result != 0)
                  {
                     ?>
                      <table id="data_table" class="table table-striped table-hover">
