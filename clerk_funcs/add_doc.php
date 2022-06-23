@@ -26,7 +26,7 @@
 
 		$fileExt = explode('.', $fileName);
 		$actualFileExt = strtolower(end($fileExt));
-		$allowed = array('pdf');
+		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
 
 		try{
 
@@ -285,7 +285,7 @@
 
 		$fileExt = explode('.', $fileName);
 		$actualFileExt = strtolower(end($fileExt));
-		$allowed = array('pdf');
+		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
 
 		try{
 
