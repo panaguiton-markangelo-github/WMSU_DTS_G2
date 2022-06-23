@@ -247,7 +247,7 @@ if(!isset($_SESSION["a_username"])) {
                                     $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
-                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients)) AND documents.incoming = 'true'
+                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
                                     ORDER BY documents.id DESC;";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
