@@ -298,9 +298,9 @@ if(!isset($_SESSION["a_username"])) {
 
                                 <td>
                                     <form id="receiveForm" action="../admin_funcs/view_receive.php" method="POST">
-                                    <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
                                         <input type="text" name="rec_trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
-                                       
+                                        
                                         <button id="submit" type="submit"><span class = "las la-arrow-circle-down"></span></button>
                                     </form>
                                 </td>
