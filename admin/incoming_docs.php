@@ -247,7 +247,7 @@ if(!isset($_SESSION["a_username"])) {
                                     $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
-                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
+                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients)) AND documents.incoming = 'true'
                                     ORDER BY documents.id DESC;";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
@@ -300,6 +300,7 @@ if(!isset($_SESSION["a_username"])) {
                                     <form id="receiveForm" action="../admin_funcs/view_receive.php" method="POST">
                                         <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
                                         <input type="text" name="rec_trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                        <input type="text" name="incoming" id="incoming" value= "false" hidden>
                                         
                                         <button id="submit" type="submit"><span class = "las la-arrow-circle-down"></span></button>
                                     </form>
