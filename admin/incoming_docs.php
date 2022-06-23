@@ -199,7 +199,17 @@ if(!isset($_SESSION["a_username"])) {
                </div>
            <div class="container">
             <div class="table-responsive">
-                    <table id="data_table" class="table table-striped table-hover">
+                <?php
+                 include ("../include/alt_db.php");
+                 $query = "SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients) FROM documents;";
+                 $result = mysqli_query($data, $query);
+                 if(!$result){
+                     echo "no data test lang!";
+                 }
+                 else
+                 {
+                    ?>
+                     <table id="data_table" class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>
@@ -243,13 +253,6 @@ if(!isset($_SESSION["a_username"])) {
                         </thead>
                         <tbody>
                             <?php
-                                include ("../include/alt_db.php");
-                                $query = "SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients) FROM documents;";
-                                $result = mysqli_query($data, $query);
-                                if(!$result){
-                                    echo "no data test lang!";
-                                }
-                                else{
                                     //include our connection
                                 include_once('../include/database.php');
 
@@ -357,12 +360,15 @@ if(!isset($_SESSION["a_username"])) {
 
                                 //close connection
                                 $database->close();
-                                }
                                 
                             ?>
                                         
                         </tbody>
                     </table>
+                    <?php
+                 }
+                ?>
+                   
                 </div>
            </div>
         </main>
