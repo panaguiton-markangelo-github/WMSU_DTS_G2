@@ -195,12 +195,7 @@ catch(PDOException $e) {
 
             <div class="col">
               <div class="boxes">
-                <input type="checkbox" id="box-1">
-                <label for="box-1">Sustainable typewriter cronut</label>
-              </div>
-            <label for="office">Office:</label>
-            <select class="form-select text-dark" name="officeName[]" id="officeName" size="3" multiple required>
-                  <?php
+                <?php
                       $database = new Connection();
                       $db = $database->open();
                       try{	
@@ -219,8 +214,10 @@ catch(PDOException $e) {
                     //close connection
                     $database->close();
                   ?>
-            </select>
-            <p class="text-center text-muted fw-bold">You can select multiple office by holding ctrl key and clicking the office/s.</p>
+                <input type="checkbox" id="box-1">
+                <label for="box-1">Sustainable typewriter cronut</label>
+              </div>
+            <p class="text-center text-muted fw-bold">You can select multiple recipients.</p>
             </div>
           </div>
 
