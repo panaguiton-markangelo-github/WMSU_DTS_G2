@@ -3,13 +3,6 @@
 /*Page styles*/
 html { height: 100%; }
 
-body {
-  height: 100%;
-  margin: 0;
-  background: #363636;
-  display: -webkit-flex;
-}
-
 .boxes {
   margin: auto;
   padding: 50px;
