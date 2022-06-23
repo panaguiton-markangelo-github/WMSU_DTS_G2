@@ -184,7 +184,7 @@ catch(PDOException $e) {
           <div class="row">
             <div class="col md-4">
               <input type="file" name="file">
-              <p class="text-center text-muted fw-bold"> File upload(optional and only pdf is allowed with maximum size of 50mb)</p>
+              <p class="text-center text-muted fw-bold"> File upload(optional: only pdf and img are allowed with maximum size of 50mb)</p>
             </div>
             <div class="col md-4">
               <div class="input-group">
