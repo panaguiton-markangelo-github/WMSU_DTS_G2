@@ -110,7 +110,7 @@ catch(PDOException $e) {
               <input type="text" class="form-control fs-4" id="title" name="title" placeholder="Title" maxlength="200" required>
               <label for="title" class="fs-5">Title</label>
               </div>
-              <p class="text-center text-muted fw-bold"> Max Length: <mark>200</mark>characters<span style="color:red;">(required)</span>.</p>
+              <p class="text-center text-muted fw-bold"> Max Length: <mark>200</mark>characters <span style="color:red;">(required)</span>.</p>
             </div>
           </div>
 
@@ -144,7 +144,7 @@ catch(PDOException $e) {
               </select>
               
               <input type="text" name="oreason" id="checkR" placeholder="Please enter here the reason:" style='display:none'/>
-              <p class="text-center text-muted fw-bold">The reason for the document<span style="color:red;">(required)</span>.</p>
+              <p class="text-center text-muted fw-bold">The reason for the document <span style="color:red;">(required)</span>.</p>
             </div>
 
             <div class="col">
@@ -173,7 +173,7 @@ catch(PDOException $e) {
               </select>
 
               <input type="text" name="otype" id="checkT" placeholder="Please enter here the type:" style='display:none'>
-              <p class="text-center text-muted fw-bold">The type of the document<span style="color:red;">(required)</span>.</p>
+              <p class="text-center text-muted fw-bold">The type of the document <span style="color:red;">(required)</span>.</p>
             </div>
           </div>
 
