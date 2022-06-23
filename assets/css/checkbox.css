@@ -8,8 +8,6 @@ body {
   margin: 0;
   background: #363636;
   display: -webkit-flex;
-  display: flex;
-  align-items: center;
 }
 
 .boxes {
