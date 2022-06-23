@@ -220,7 +220,7 @@ catch(PDOException $e) {
                           $sql = 'SELECT * FROM office ORDER BY officeName ASC;'; 
                           foreach ($db->query($sql) as $row1) {
                     ?>
-                      <input name="officeName" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
+                      <input name="officeName[]" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
                       <label for="<?php echo $row1['officeName'];?>"><?php echo $row1['officeName'];?></label>
                       <?php
                       }
