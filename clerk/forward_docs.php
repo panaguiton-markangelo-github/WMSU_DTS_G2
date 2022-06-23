@@ -202,7 +202,8 @@ catch(PDOException $e) {
                           $sql = 'SELECT * FROM office ORDER BY officeName ASC;'; 
                           foreach ($db->query($sql) as $row1) {
                     ?>
-                      <option value="<?php echo $row1['officeName']; ?>"> <?php echo $row1['description'];?> </option>
+                      <input type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
+                      <label for="<?php echo $row1['officeName'];?>"><?php echo $row1['officeName'];?></label>
                       <?php
                       }
 
@@ -210,12 +211,10 @@ catch(PDOException $e) {
                     catch(PDOException $e){
                         echo "There is some problem in connection: " . $e->getMessage();
                     }
-
                     //close connection
                     $database->close();
                   ?>
-                <input type="checkbox" id="box-1">
-                <label for="box-1">Sustainable typewriter cronut</label>
+                
               </div>
             <p class="text-center text-muted fw-bold">You can select multiple recipients.</p>
             </div>
