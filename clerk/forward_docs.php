@@ -45,23 +45,15 @@ catch(PDOException $e) {
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="../assets/css/checkbox.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body style="background-color:#fff;">
     <script>
-      $('#select-all').click(function(event) {   
-        if(this.checked) {
-            // Iterate each checkbox
-            $(':checkbox').each(function() {
-                this.checked = true;                        
-            });
-        } else {
-            $(':checkbox').each(function() {
-                this.checked = false;                       
-            });
+      function toggle(source) {
+        checkboxes = document.getElementsByName('officeName');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
         }
-    }); 
+      }
     </script>
     <nav class="navbar navbar-expand-sm navbar-dark border-bottom border-dark" style="background-color:#8e0413;">
         <div class="container-fluid">
@@ -211,6 +203,8 @@ catch(PDOException $e) {
 
             <div class="col">
               <div class="boxes">
+                  <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all">
+                  <label for="select-all">All</label>
                 <?php
                       $database = new Connection();
                       $db = $database->open();
@@ -230,8 +224,6 @@ catch(PDOException $e) {
                     //close connection
                     $database->close();
                   ?>
-                  <input name="select-all" type="checkbox" id="select-all" value="select-all">
-                  <label for="select-all">All</label>
               </div>
             <p class="text-center text-muted fw-bold">You can select multiple recipients.</p>
             </div>
