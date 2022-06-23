@@ -45,8 +45,24 @@ catch(PDOException $e) {
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="../assets/css/checkbox.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body style="background-color:#fff;">
+    <script>
+      $('#select-all').click(function(event) {   
+        if(this.checked) {
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = true;                        
+            });
+        } else {
+            $(':checkbox').each(function() {
+                this.checked = false;                       
+            });
+        }
+    }); 
+    </script>
     <nav class="navbar navbar-expand-sm navbar-dark border-bottom border-dark" style="background-color:#8e0413;">
         <div class="container-fluid">
           <a class="navbar-brand fw-bold">WMSU|DTS</a>
@@ -195,6 +211,8 @@ catch(PDOException $e) {
 
             <div class="col">
               <div class="boxes">
+                  <input name="select-all" type="checkbox" id="select-all" value="select-all">
+                  <label for="select-all">All</label>
                 <?php
                       $database = new Connection();
                       $db = $database->open();
@@ -202,7 +220,7 @@ catch(PDOException $e) {
                           $sql = 'SELECT * FROM office ORDER BY officeName ASC;'; 
                           foreach ($db->query($sql) as $row1) {
                     ?>
-                      <input type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
+                      <input name="officeName" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
                       <label for="<?php echo $row1['officeName'];?>"><?php echo $row1['officeName'];?></label>
                       <?php
                       }
