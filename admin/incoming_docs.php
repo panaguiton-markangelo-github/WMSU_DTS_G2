@@ -468,7 +468,7 @@ if(!isset($_SESSION["a_username"])) {
                 $.ajax({
                     url:"../admin_funcs/fetch_docs.php",
                     type:"POST",
-                    data:'request_year=' + value,
+                    data:'request_inc_y=' + value,
                     beforeSend:function(){
                         Swal.fire({
                             icon: 'info',
