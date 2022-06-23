@@ -8,6 +8,7 @@
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
+		$offices = implode(',', $_POST['officeName']);
 
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];

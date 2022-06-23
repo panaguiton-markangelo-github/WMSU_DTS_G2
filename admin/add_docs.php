@@ -200,7 +200,7 @@ catch(PDOException $e) {
               <br>
               <p class="text-center text-muted fw-bold">Please select the recipient/s. Note: You can select more than one.</p>
               <div class="boxes">
-                  <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all">
+                  <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all" required>
                   <label for="select-all">All</label>
                 <?php
                       $database = new Connection();
@@ -209,7 +209,7 @@ catch(PDOException $e) {
                           $sql = 'SELECT * FROM office ORDER BY officeName ASC;'; 
                           foreach ($db->query($sql) as $row1) {
                     ?>
-                      <input class="officeName" name="officeName[]" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>">
+                      <input class="officeName" name="officeName[]" type="checkbox" id="<?php echo $row1['officeName'];?>" value="<?php echo $row1['officeName'];?>" required>
                       <label for="<?php echo $row1['officeName'];?>"><?php echo $row1['description'];?></label>
                       <?php
                       }
