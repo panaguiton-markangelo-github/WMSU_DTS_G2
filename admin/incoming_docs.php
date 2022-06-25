@@ -102,10 +102,18 @@ if(!isset($_SESSION["a_username"])) {
                 </label>
                 Incoming Documents
             </h2>
-            <span class="position-absolute top-30 end-0 translate-middle badge rounded-pill bg-danger">
-                <?php echo $nos?>
-                <span class="visually-hidden">unread notification</span>
-            </span>           
+            <?php
+            if($nos){
+                ?>             
+                <span class="position-absolute top-30 end-0 translate-middle badge rounded-pill bg-danger">
+                    <?php echo $nos?>
+                    <span class="visually-hidden">unread notification</span>
+                </span> 
+                <?php
+            }
+            ?>
+
+
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
