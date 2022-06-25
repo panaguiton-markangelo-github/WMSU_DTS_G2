@@ -111,7 +111,7 @@ if(!isset($_SESSION["a_username"])) {
                     <h3><?php echo $_SESSION["a_username"]; ?> <br> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
                     <ul>
                         <?php
-                        if($nos > 1){
+                        if($nos){
                             ?>
                                 <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document <span style="background-color:red;border-radius:20px;"><?php echo $nos?></span></a></li>
                             <?php
