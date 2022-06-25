@@ -139,7 +139,7 @@ if(!isset($_SESSION["a_username"])) {
                     <?php
                         if($nos){
                             ?>
-                            <span>Notification</span>
+                            <span class="text-center las la-bell">NOTIFICATION</span>
                             <ul>
                             <?php
                                 if($nos){
