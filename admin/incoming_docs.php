@@ -113,7 +113,6 @@ if(!isset($_SESSION["a_username"])) {
             }
             ?>
 
-
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
