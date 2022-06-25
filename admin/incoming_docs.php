@@ -3,6 +3,15 @@ session_start();
 if(!isset($_SESSION["a_username"])) {
   header("location: ../index.php");
 }
+    include_once ("../include/alt_db.php");
+    $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+    FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+    INNER JOIN users ON users.id = documents.user_id
+    INNER JOIN logs ON logs.trackingID = documents.trackingID
+    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
+    ORDER BY documents.id DESC;";
+    $result = mysqli_query($data, $query);
+    $nos = mysqli_num_rows($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +67,7 @@ if(!isset($_SESSION["a_username"])) {
                 </li>
                 <li>
                     <a class="active"><span class="las la-caret-square-down"></span>
-                    <span>Incoming Documents</span></a>
+                    <span>Incoming Documents <?php echo $nos;?></span></a>
                 </li>
                 <li>
                     <a href="office_docs.php"><span class="las la-file-alt"></span>
