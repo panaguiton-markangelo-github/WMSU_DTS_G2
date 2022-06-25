@@ -145,8 +145,8 @@ if(!isset($_SESSION["a_username"])) {
                                 if($nos){
                                     ?>
                                         <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document  
-                                                                                 
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                                        <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             <?php echo $nos?>
                                         <span class="visually-hidden">unread messages</span>
                                         </span>
