@@ -34,12 +34,12 @@ catch(PDOException $e){
 
 <?php
 	include_once('../include/database.php');
+    include_once ("../include/alt_db.php");
 
 	if(isset($_POST['submit'])){
 		$database = new Connection();
 		$db = $database->open();
-        $receive_mes = "received in the office.";
-        include ("../include/alt_db.php");
+        $receive_mes = "received in the office."; 
 
         $rec_al_office = $_SESSION['a_officeName'];
         $query = "UPDATE documents SET recipients = REPLACE(recipients, '".$rec_al_office."', '');";
