@@ -111,13 +111,6 @@ if(!isset($_SESSION["a_username"])) {
                     <h3><?php echo $_SESSION["a_username"]; ?> <br> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
                     <ul>
                         <?php
-                        if($nos){
-                            ?>
-                                <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document <span style="background-color:red;border-radius:20px;"><?php echo $nos?></span></a></li>
-                            <?php
-                        }
-                        ?>
-                        <?php
                             //include our connection
                             include_once('../include/database.php');
 
@@ -143,7 +136,23 @@ if(!isset($_SESSION["a_username"])) {
                         <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
-                              
+                    <?php
+                        if($nos){
+                            ?>
+                            <span>Notification</span>
+                            <ul>
+                            <?php
+                                if($nos){
+                                    ?>
+                                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document <span style="background-color:red;border-radius:20px;"><?php echo $nos?></span></a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>  
+                            <?php
+                        }
+                        ?>
+
                 </div>
             </div>
 
