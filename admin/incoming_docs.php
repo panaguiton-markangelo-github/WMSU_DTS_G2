@@ -106,6 +106,10 @@ if(!isset($_SESSION["a_username"])) {
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
+                    <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <?php echo $nos?>
+                        <span class="visually-hidden">unread notification</span>
+                    </span>
                 </div>   
                 <div class="menu">
                     <h3><?php echo $_SESSION["a_username"]; ?> <br> (<?php echo $_SESSION['a_officeName']; ?>) <span>admin</span></h3> 
@@ -148,7 +152,7 @@ if(!isset($_SESSION["a_username"])) {
                                         
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             <?php echo $nos?>
-                                            <span class="visually-hidden">unread messages</span>
+                                            <span class="visually-hidden">unread notification</span>
                                         </span>
 
                                         </a></li>
