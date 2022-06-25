@@ -102,10 +102,11 @@ if(!isset($_SESSION["a_username"])) {
                 </label>
                 Incoming Documents
             </h2>
+
+            <h3><?php echo $nos?> new notifaction/s</h3>
            
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
-                <h3><?php echo $nos?> new notifaction/s</h3>
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
                 </div>   
                 <div class="menu">
