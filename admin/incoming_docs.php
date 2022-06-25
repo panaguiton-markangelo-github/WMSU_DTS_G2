@@ -140,7 +140,7 @@ if(!isset($_SESSION["a_username"])) {
                         if($nos){
                             ?>
                             <h3 style="text-align:center;" class="las la-bell">NOTIFICATIONS</h3>
-                            <ul>
+                            <ul class="position-relative">
                             <?php
                                 if($nos){
                                     ?>
