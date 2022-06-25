@@ -140,11 +140,11 @@ if(!isset($_SESSION["a_username"])) {
                         if($nos){
                             ?>
                             <h3 style="text-align:center;" class="las la-bell">NOTIFICATIONS</h3>
-                            <ul>
+                            <ul class="position-relative">
                             <?php
                                 if($nos){
                                     ?>
-                                        <li class="position-relative"> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document
+                                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document
                                         
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             <?php echo $nos?>
