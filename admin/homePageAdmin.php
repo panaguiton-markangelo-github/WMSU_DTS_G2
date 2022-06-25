@@ -4,7 +4,15 @@ if(!isset($_SESSION["a_username"])) {
   header("location: ../index.php");
 }
 
-include ("../include/alt_db.php");
+include_once ("../include/alt_db.php");
+    $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+    FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+    INNER JOIN users ON users.id = documents.user_id
+    INNER JOIN logs ON logs.trackingID = documents.trackingID
+    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
+    ORDER BY documents.id DESC;";
+    $result = mysqli_query($data, $query);
+    $nos = mysqli_num_rows($result);
 ?>
 
 <?php
