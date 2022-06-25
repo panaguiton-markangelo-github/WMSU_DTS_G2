@@ -103,6 +103,8 @@ if(!isset($_SESSION["a_username"])) {
                 Incoming Documents
             </h2>
 
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span> <span class="glyphicon glyphicon-bell" style="font-size:18px;"></span></a>
+
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
@@ -139,6 +141,7 @@ if(!isset($_SESSION["a_username"])) {
                               
                 </div>
             </div>
+
         </header>
 
         <?php  include('../admin_funcs/view_edit_profile.php'); ?>
