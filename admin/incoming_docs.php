@@ -102,7 +102,7 @@ if(!isset($_SESSION["a_username"])) {
                 </label>
                 Incoming Documents
             </h2>
-            <span class="position-absolute top-30 end-0 translate-middle badge rounded-pill bg-danger">
+            <span class="position-absolute top-30 end--10 translate-middle badge rounded-pill bg-danger">
                 <?php echo $nos?>
                 <span class="visually-hidden">unread notification</span>
             </span>           
