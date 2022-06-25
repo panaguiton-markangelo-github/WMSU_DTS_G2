@@ -174,6 +174,16 @@ catch(PDOException $e) {
                 </label>
                 Dashboard
             </h2>
+            <?php
+            if($nos){
+                ?>             
+                <span class="position-absolute top-30 end-0 translate-middle badge rounded-pill bg-danger">
+                    <?php echo $nos?>
+                    <span class="visually-hidden">unread notification</span>
+                </span> 
+                <?php
+            }
+            ?>
 
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
@@ -208,6 +218,29 @@ catch(PDOException $e) {
                         <li> <i class="las la-folder-plus"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
+                    <?php
+                        if($nos){
+                            ?>
+                            <h3 style="text-align:center;" class="las la-bell">NOTIFICATIONS</h3>
+                            <ul class="position-relative">
+                            <?php
+                                if($nos){
+                                    ?>
+                                        <li> <i class="las la-caret-square-down"></i> <a type="button" href="incoming_docs.php">Incoming Document
+                                        
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <?php echo $nos?>
+                                            <span class="visually-hidden">unread notification</span>
+                                        </span>
+
+                                        </a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>  
+                            <?php
+                        }
+                        ?>
                               
                 </div>
             </div>
