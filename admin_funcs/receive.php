@@ -2,7 +2,6 @@
 session_start();
 //include our connection
 include_once('../include/database.php');
-include ("../include/alt_db.php");
 
 $database = new Connection();
 $db = $database->open();
@@ -40,9 +39,10 @@ catch(PDOException $e){
 		$database = new Connection();
 		$db = $database->open();
         $receive_mes = "received in the office.";
+        include ("../include/alt_db.php");
 
         $rec_al_office = $_SESSION['a_officeName'];
-        $query = "UPDATE documents SET recipients = REPLACE(recipients, $rec_al_office, '');";
+        $query = "UPDATE documents SET recipients = REPLACE(recipients, '".$rec_al_office."', '');";
         $result = mysqli_query($data, $query);
 
         if($_POST['status'] == 'draft'){
