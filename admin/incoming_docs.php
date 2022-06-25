@@ -139,12 +139,19 @@ if(!isset($_SESSION["a_username"])) {
                     <?php
                         if($nos){
                             ?>
-                            <span class="text-center las la-bell">NOTIFICATION</span>
+                            <span style="text-align:center;" class="las la-bell">NOTIFICATION</span>
                             <ul>
                             <?php
                                 if($nos){
                                     ?>
-                                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document <span style="background-color:red;border-radius:20px;"><?php echo $nos?></span></a></li>
+                                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document  
+                                                                                 
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <?php echo $nos?>
+                                        <span class="visually-hidden">unread messages</span>
+                                        </span>
+
+                                        </a></li>
                                     <?php
                                 }
                                 ?>
