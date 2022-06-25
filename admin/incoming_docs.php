@@ -102,9 +102,10 @@ if(!isset($_SESSION["a_username"])) {
                 </label>
                 Incoming Documents
             </h2>
-
-            <h3><?php echo $nos?> new notifaction/s</h3>
-           
+            <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger">
+                <?php echo $nos?>
+                <span class="visually-hidden">unread notification</span>
+            </span>           
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
                     <span class="las la-user-alt" style="font-size: 50px;color:#8e0413;"></span>
