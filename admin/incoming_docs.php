@@ -26,7 +26,6 @@ if(!isset($_SESSION["a_username"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
-    <link rel="stylesheet" href="../assets/css/badge.css">
     <link rel="stylesheet" href="../assets/css/loading.css">
     <script src="../assets/js/sweet_alert.js"></script>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -68,7 +67,7 @@ if(!isset($_SESSION["a_username"])) {
                 </li>
                 <li>
                     <a class="active"><span class="las la-caret-square-down"></span>
-                    <span>Incoming Documents <span class="container"><a id="badge"><?php echo $nos;?></a></span> </span></a>
+                    <span>Incoming Documents <span style="background-color:red ;"><?php echo $nos;?></span> </span>
                 </li>
                 <li>
                     <a href="office_docs.php"><span class="las la-file-alt"></span>
