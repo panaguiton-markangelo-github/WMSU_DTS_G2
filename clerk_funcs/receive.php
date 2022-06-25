@@ -34,6 +34,7 @@ catch(PDOException $e){
 
 <?php
 	include_once('../include/database.php');
+    include_once ("../include/alt_db.php");
 
 	if(isset($_POST['submit'])){
 		$database = new Connection();
