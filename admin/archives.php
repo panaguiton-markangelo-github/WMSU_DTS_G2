@@ -223,10 +223,6 @@ if(!isset($_SESSION["a_username"])) {
                                 </th>
 
                                 <th>
-                                    Status
-                                </th>
-
-                                <th>
                                     School Year
                                 </th>
 
@@ -287,21 +283,6 @@ if(!isset($_SESSION["a_username"])) {
                                     <?php echo $row['remarks']; ?>
                                 </td>
 
-                                <td>
-                                    <?php if( $row['status'] == "draft") {
-                                        ?>
-                                        <p style="color: red;"> <?php echo $row['status'];?> </p>
-                                        <?php
-                                    } else{
-                                        ?>
-                                         <p style="color: green;"> <?php echo $row['status'];?> </p>
-                                        <?php
-                                    }
-                                    ?>
-                                  
-                                   
-                                   
-                                </td>
                                 
                                 <td>
                                     <?php echo $row['schoolYear']; ?>

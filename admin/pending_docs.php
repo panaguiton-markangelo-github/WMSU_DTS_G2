@@ -179,10 +179,6 @@ if(!isset($_SESSION["a_username"])) {
                                 </th>
 
                                 <th>
-                                    Status
-                                </th>
-
-                                <th>
                                     Remarks
                                 </th>
                               
@@ -233,20 +229,7 @@ if(!isset($_SESSION["a_username"])) {
                                     <?php echo $row['reason']; ?>
                                 </td>
 
-                                <td>
-                                <?php
-                                    if ($row['status'] == "draft"){
-                                    ?>
-                                        <span style="color: red;"><?php echo $row['status']; ?></span>
-                                <?php
-                                    }
-                                    else {
-                                    ?>
-                                        <span style="color: green;"><?php echo $row['status']; ?></span>
-                                    <?php
-                                    }
-                                ?>
-                                </td>
+                               
 
                                 <td>
                                     <?php echo $row['remarks']; ?>
