@@ -67,7 +67,7 @@ if(!isset($_SESSION["a_username"])) {
                 </li>
                 <li>
                     <a class="active"><span class="las la-caret-square-down"></span>
-                    <span>Incoming Documents <?php echo $nos;?></span></a>
+                    <span>Incoming Documents <span class="badge text-bg-danger"><?php echo $nos;?></span> </span></a>
                 </li>
                 <li>
                     <a href="office_docs.php"><span class="las la-file-alt"></span>
