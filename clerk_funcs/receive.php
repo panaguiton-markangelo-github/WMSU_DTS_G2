@@ -40,6 +40,11 @@ catch(PDOException $e){
 		$db = $database->open();
         $receive_mes = "received in the office.";
 
+        $rec_al_office = $_SESSION['c_officeName'];
+        $query = "UPDATE documents SET recipients = REPLACE(recipients, '".$rec_al_office."', '') WHERE trackingID = '".$_POST['rec_trackingID']."';";
+        $result = mysqli_query($data, $query);
+
+
         if($_POST['status'] == 'draft'){
             $_SESSION['e_message'] = 'The document is still not yet available to be received. Note: The document was not yet finalized and released. Please try again later.';
             header('location: ../clerk/HomePageC.php?failed');

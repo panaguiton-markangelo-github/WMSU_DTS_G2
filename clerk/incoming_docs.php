@@ -3,7 +3,15 @@ session_start();
 if(!isset($_SESSION["c_username"])) {
   header("location: ../index.php");
 }
-
+    include_once ("../include/alt_db.php");
+    $query = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
+    FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
+    INNER JOIN users ON users.id = documents.user_id
+    INNER JOIN logs ON logs.trackingID = documents.trackingID
+    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["c_officeName"]."', recipients))
+    ORDER BY documents.id DESC;";
+    $result = mysqli_query($data, $query);
+    $nos = mysqli_num_rows($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +20,7 @@ if(!isset($_SESSION["c_username"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../assets/img/wmsu_logo.png"/>
-    <title>Office Documents</title>
+    <title>Incoming Documents</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -54,11 +62,11 @@ if(!isset($_SESSION["c_username"])) {
                     <span>Track Documents</span></a>
                 </li>
                 <li>
-                    <a href="incoming_docs.php"><span class="las la-caret-square-down"></span>
+                    <a class="active"><span class="las la-caret-square-down"></span>
                     <span>Incoming Documents</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-file-alt"></span>
+                    <a href="office_docs.php"><span class="las la-file-alt"></span>
                     <span>Office Documents</span></a>
                 </li>
                 <li>
@@ -77,8 +85,7 @@ if(!isset($_SESSION["c_username"])) {
                     <a href="released_docs.php"><span class="las la-chevron-circle-up"></span>
                     <span>Released</span></a>
                 </li>   
-              
-                
+                         
             </ul>
         </div>
     </div>
@@ -89,8 +96,18 @@ if(!isset($_SESSION["c_username"])) {
                 <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label>
-                Office Documents
+                Incoming Documents
             </h2>
+            <?php
+            if($nos){
+                ?>             
+                <span class="position-absolute top-30 end-0 translate-middle badge rounded-pill bg-danger">
+                    <?php echo $nos?>
+                    <span class="visually-hidden">unread notification</span>
+                </span> 
+                <?php
+            }
+            ?>
 
             <div class="user-wrapper">
                 <div class="profile" onclick="menuToggle();">
@@ -125,9 +142,33 @@ if(!isset($_SESSION["c_username"])) {
                         <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Generate Report</a> </li>
                         <li> <i class="las la-chevron-circle-right"></i> <a type="button" data-bs-toggle="modal" data-bs-target="#logout_modal">Logout</a> </li>
                     </ul>
-                              
+                    <?php
+                        if($nos){
+                            ?>
+                            <h3 style="text-align:center;" class="las la-bell">NOTIFICATIONS</h3>
+                            <ul class="position-relative">
+                            <?php
+                                if($nos){
+                                    ?>
+                                        <li> <i class="las la-caret-square-down"></i> <a type="button" href="incoming_docs.php">Incoming Document
+                                        
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <?php echo $nos?>
+                                            <span class="visually-hidden">unread notification</span>
+                                        </span>
+
+                                        </a></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>  
+                            <?php
+                        }
+                        ?>
+
                 </div>
             </div>
+
         </header>
 
         <?php  include('../clerk_funcs/view_edit_profile.php'); ?>
@@ -147,7 +188,7 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND users.officeName = '".$_SESSION['c_officeName']."';";
+                                    $sql = "SELECT DISTINCT type FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["c_officeName"]."', recipients));";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
@@ -176,7 +217,7 @@ if(!isset($_SESSION["c_username"])) {
                                 $database = new Connection();
                                 $db = $database->open();
                                 try{	
-                                    $sql = "SELECT DISTINCT schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND users.officeName = '".$_SESSION['c_officeName']."';";
+                                    $sql = "SELECT DISTINCT documents.schoolYear FROM documents INNER JOIN users ON users.id = documents.user_id INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["c_officeName"]."', recipients));";
                         
                                     foreach ($db->query($sql) as $row) {
                                     ?>
@@ -197,7 +238,7 @@ if(!isset($_SESSION["c_username"])) {
                </div>
            <div class="container">
             <div class="table-responsive">
-                    <table id="data_table" class="table table-striped table-hover">
+            <table id="data_table" class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>
@@ -221,27 +262,18 @@ if(!isset($_SESSION["c_username"])) {
                                 </th>
 
                                 <th>
-                                    Status
+                                    Year
                                 </th>
 
                                 <th>
-                                    School Year
-                                </th>
-
-                                <th>
-                                    
-                                </th>
-
-                                <th>
-
-                                    View
+                                    Receive
                                 </th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                //include our connection
+                                    //include our connection
                                 include_once('../include/database.php');
 
                                 $database = new Connection();
@@ -250,7 +282,8 @@ if(!isset($_SESSION["c_username"])) {
                                     $sql = "SELECT DISTINCT documents.*, yearsemester.schoolYear, yearsemester.stat
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
-                                    WHERE users.officeName = '".$_SESSION['c_officeName']."' AND yearsemester.activated = 'yes'
+                                    INNER JOIN logs ON logs.trackingID = documents.trackingID
+                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["c_officeName"]."', recipients))
                                     ORDER BY documents.id DESC;";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
@@ -281,62 +314,21 @@ if(!isset($_SESSION["c_username"])) {
                                     <?php echo $row['remarks']; ?>
                                 </td>
 
-                                <td>
-                                    <?php if( $row['status'] == "draft") {
-                                        ?>
-                                        <p style="color: red;"> <?php echo $row['status'];?> </p>
-                                        <?php
-                                    } else{
-                                        ?>
-                                         <p style="color: green;"> <?php echo $row['status'];?> </p>
-                                        <?php
-                                    }
-                                    ?>
-                                  
-                                   
-                                   
-                                </td>
+                               
                                 
                                 <td>
                                     <?php echo $row['schoolYear']; ?>
                                 </td>
 
-                                <?php 
-                                if($row['status'] == 'draft'){
-                                    ?>
-                                    <td align="center">
-                                        <a style ="margin-bottom:10px;" class="btn btn-danger btn-sm p-2" data-bs-toggle="modal" data-bs-target="#delete_doc<?php echo $row['id']; ?>">Delete</a> 
-                          
-                                        <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                                    </td>
-                                    <?php
-                                }
-                                else{
-                                    ?> 
-                                    <td style="display:flex;justify-content:center;">
-                                        <a class="btn btn-success btn-sm p-2" data-bs-toggle="modal" data-bs-target="#edit_doc<?php echo $row['id']; ?>">Edit</a>
-                                    </td>
-                                    <?php
-                                }
-                                ?>
-
-
                                 <td>
-                                    <form id="viewForm" action="view_documentC.php" method="POST">
-                                        <input type="text" name="track_ID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
-                                        <input type="text" name="title" id="title" value= "<?php echo $row['title'];?>" hidden>
-                                        <input type="text" name="type" id="type" value= "<?php echo $row['type'];?>" hidden>
-                                        <input type="text" name="reason" id="reason" value= "<?php echo $row['reason'];?>" hidden>
-                                        <input type="text" name="remarks" id="remarks" value= "<?php echo $row['remarks'];?>" hidden>
-                                        <input type="text" name="status" id="status" value= "<?php echo $row['status'];?>" hidden>
-                                        <input type="text" name="file" id="file" value= "<?php echo $row['file'];?>" hidden>
-                                        <input type="text" name="schoolYear" id="schoolYear" value= "<?php echo $row['schoolYear'];?>" hidden>
-                                        <button id="submit" type="submit"><span class = "las la-info"></span></button>
+                                    <form id="receiveForm" action="../clerk_funcs/view_receive.php" method="POST">
+                                        <input type="number" name="userID" class="form-control border border-dark" value="<?php echo $_SESSION["userID"];?>" hidden>
+                                        <input type="text" name="rec_trackingID" id="track_ID" value= "<?php echo $row['trackingID'];?>" hidden>
+                                        <input type="text" name="incoming" id="incoming" value= "false" hidden>
+                                        
+                                        <button id="submit" type="submit"><span class = "las la-arrow-circle-down"></span></button>
                                     </form>
                                 </td>
-
-                                <?php include('../clerk_funcs/view_edit_doc.php');?>
-                                <?php include('../clerk_funcs/view_delete_doc.php');?>
 
                             </tr>
                             
@@ -349,10 +341,12 @@ if(!isset($_SESSION["c_username"])) {
 
                                 //close connection
                                 $database->close();
+                                
                             ?>
                                         
                         </tbody>
                     </table>
+                   
                 </div>
            </div>
         </main>
@@ -368,7 +362,7 @@ if(!isset($_SESSION["c_username"])) {
         })
 	</script>
 
-        <?php 
+       <?php 
             if(isset($_SESSION['message'])){
                 ?>
                 <script>
@@ -438,7 +432,7 @@ if(!isset($_SESSION["c_username"])) {
                 $.ajax({
                     url:"../clerk_funcs/fetch_docs.php",
                     type:"POST",
-                    data:'request=' + value,
+                    data:'request_inc_ty=' + value,
                     beforeSend:function(){
                         Swal.fire({
                             icon: 'info',
@@ -465,7 +459,7 @@ if(!isset($_SESSION["c_username"])) {
                 $.ajax({
                     url:"../clerk_funcs/fetch_docs.php",
                     type:"POST",
-                    data:'request_year=' + value,
+                    data:'request_inc_y=' + value,
                     beforeSend:function(){
                         Swal.fire({
                             icon: 'info',
