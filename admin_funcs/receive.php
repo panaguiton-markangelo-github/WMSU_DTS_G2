@@ -42,7 +42,7 @@ catch(PDOException $e){
         $receive_mes = "received in the office."; 
 
         $rec_al_office = $_SESSION['a_officeName'];
-        $query = "UPDATE documents SET recipients = REPLACE(recipients, '".$rec_al_office."', '');";
+        $query = "UPDATE documents SET recipients = REPLACE(recipients, '".$rec_al_office."', '') WHERE trackingID = '".$_POST['rec_trackingID']."';";
         $result = mysqli_query($data, $query);
 
         if($_POST['status'] == 'draft'){
