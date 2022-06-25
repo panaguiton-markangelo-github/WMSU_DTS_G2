@@ -144,7 +144,7 @@ if(!isset($_SESSION["a_username"])) {
                             <?php
                                 if($nos){
                                     ?>
-                                        <li> <i class="las la-file-export"></i> <a type="button" href="view_generate.php">Incoming Document
+                                        <li> <i class="las la-caret-square-down"></i> <a type="button" href="incoming_docs.php">Incoming Document
                                         
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             <?php echo $nos?>
