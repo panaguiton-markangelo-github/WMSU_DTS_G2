@@ -65,7 +65,7 @@ if(!isset($_SESSION["a_username"])) {
                     <span>Office Documents</span></a>
                 </li>
                 <li>
-                    <a class="active"><span class="las la-file-alt"></span>
+                    <a class="active"><span class="las la-file-excel"></span>
                     <span>Archives</span></a>
                 </li>
                 <li>
