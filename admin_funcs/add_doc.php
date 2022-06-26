@@ -13,7 +13,7 @@
 		$offices = implode(',', $_POST['officeName']);
 
 		$_SESSION['off_add'] = array();
-		$query = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
+		$query = "SELECT username FROM users WHERE officeName IN ('$offices');";
 		$result = mysqli_query($data, $query);
 		while($row_a = mysqli_fetch_array($result)){
 			$_SESSION['off_add'][] = $row_a['username'];
