@@ -43,7 +43,7 @@
             $mail->setFrom("support@dts.wmsuccs.com");
             $mail->isHTML(true);
             $mail->Body = $message;
-			$email->AddAddress("drenegades19@gmail.com");
+			$mail->AddAddress("drenegades19@gmail.com");
 
             $mail->smtpClose();
 
