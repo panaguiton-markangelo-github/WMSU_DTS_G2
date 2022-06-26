@@ -19,7 +19,8 @@ error_reporting(E_ALL);
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
 			$result = mysqli_query($data, $query);
 			$row_a = mysqli_fetch_array($result);
-    		$_SESSION['off_add'] = array($row_a['username']);
+			$address = array($row_a['username']);
+    		$_SESSION['off_add'] = $address;
 		}
 		
 		if(!empty($_POST['oreason'])){
