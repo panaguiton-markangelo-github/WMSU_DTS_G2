@@ -47,6 +47,14 @@ catch(PDOException $e) {
     <link rel="stylesheet" href="../assets/css/checkbox.css">
 </head>
 <body style="background-color:#fff;">
+    <script>
+      function toggle(source) {
+        checkboxes = document.getElementsByClassName('officeName');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+          checkboxes[i].checked = source.checked;
+        }
+      }
+    </script>
     <nav class="navbar navbar-expand-sm navbar-dark border-bottom border-dark" style="background-color:#8e0413;">
         <div class="container-fluid">
           <a class="navbar-brand fw-bold">WMSU|DTS</a>
