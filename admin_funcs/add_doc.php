@@ -16,7 +16,8 @@ error_reporting(E_ALL);
 		$offices = implode(',', $_POST['officeName']);
 		foreach($_POST['officeName'] as $off){
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
-    		$_SESSION['off'] = array(mysqli_query($data, $query));
+			$result = mysqli_query($data, $query);
+    		$_SESSION['off'] = array($result);
 		}
 		
 		if(!empty($_POST['oreason'])){
@@ -52,7 +53,7 @@ error_reporting(E_ALL);
 		$mail->Body = $message;
 		$addr = explode(',',$_SESSION['off']);
 		foreach ($addr as $ad) {
-			$mail->AddAddress( trim($ad) );       
+			$mail->AddAddress(trim($ad));       
 		}
 		$mail->Send();
 
