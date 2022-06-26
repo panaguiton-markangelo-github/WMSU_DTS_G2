@@ -18,7 +18,6 @@ error_reporting(E_ALL);
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
     		$_SESSION['off'] = array(mysqli_query($data, $query));
 		}
-		$off = $_SESSION['off'][0];
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -51,7 +50,9 @@ error_reporting(E_ALL);
 		$mail->setFrom("support@dts.wmsuccs.com");
 		$mail->isHTML(true);
 		$mail->Body = $message;
-		$mail->AddAddress("drenegades19@gmail.com");
+		foreach ($_SESSION['off'] as $ad) {
+			$mail->AddAddress( trim($ad) );       
+		}
 		$mail->Send();
 
 		$mail->smtpClose();
@@ -279,7 +280,7 @@ error_reporting(E_ALL);
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$off);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
 				unset($_POST['add']);
 				exit();
 			}
