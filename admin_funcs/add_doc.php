@@ -45,7 +45,9 @@ error_reporting(E_ALL);
 		$mail->setFrom("support@dts.wmsuccs.com");
 		$mail->isHTML(true);
 		$mail->Body = $message;
-		$mail->AddAddress("drenegades19@gmail.com");
+		foreach ($_POST['addresses'] as $ad) {
+			$mail->AddAddress( trim($ad) );       
+		}
 		$mail->Send();
 
 		$mail->smtpClose();
