@@ -10,6 +10,7 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
+		$address = implode(',', $_POST['addresses']);
 
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -270,18 +271,19 @@
             $mail->setFrom("support@dts.wmsuccs.com");
             $mail->isHTML(true);
             $mail->Body = $message;
-            foreach ($_POST['addresses'] as $ad) {
+			$addr = explode(',',$address);
+            foreach ($addr as $ad) {
 				$email->AddAddress( trim($ad) );       
 			}
            
             if ($mail->Send()) { 
                 $_SESSION['message_succ'] = "Instruction on how to reset your password has been sent to your email. <br> Note:Check the inbox/spam tab of your email!";
-                header("location: ../forgot_pass/forgot-pass.php?reset=success");
+                header("location: ../admin/homePageAdmin.php?email=success");
                 exit();
             }
             else {
                 $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
-                header("location: ../forgot_pass/forgot-pass.php?reset=failed".$mail->ErrorInfo);
+                header("location: ../admin/homePageAdmin.php?email=fail");
                 exit();
             }
 

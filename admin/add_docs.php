@@ -232,7 +232,7 @@ catch(PDOException $e) {
                 $sql = "SELECT username FROM users WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
                 foreach ($db->query($sql) as $row4) {
           ?>
-            <input name="addresses[]" type="text"  value="<?php echo $row4['username'];?>" hidden>
+            <input name="addresses[]" type="text"  value="<?php echo $row4['username'];?>">
             <?php
             }
 
