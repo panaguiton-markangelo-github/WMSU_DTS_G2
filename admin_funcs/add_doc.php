@@ -41,7 +41,7 @@ error_reporting(E_ALL);
 
 		$subject = "Recipient for an incoming document.";
 
-		$message = "<p> $off Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 
 		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
 		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
@@ -279,7 +279,7 @@ error_reporting(E_ALL);
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc');
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$off);
 				unset($_POST['add']);
 				exit();
 			}
