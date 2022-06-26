@@ -250,7 +250,7 @@ include('validation/process_login.php');
 	<script src="assets/vendor/countdowntime/countdowntime.js"></script>
 	<script src="assets/js/main_new.js"></script>
 
-	<!--Note: Implement the incoming docs on clerk.-->
+	<!--Note: fix the offices in logs.-->
 
 </body>
 </html>
