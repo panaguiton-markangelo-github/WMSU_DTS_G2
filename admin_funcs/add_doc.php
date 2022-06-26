@@ -14,13 +14,12 @@ error_reporting(E_ALL);
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
-		$_SESSION['off_add']  = array();
 
 		foreach($_POST['officeName'] as $off){
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
 			$result = mysqli_query($data, $query);
 			$row_a = mysqli_fetch_array($result);
-    		$_SESSION['off_add'][] = $row_a['username'];
+    		$_SESSION['off_add'] = array($row_a['username']);
 		}
 		
 		if(!empty($_POST['oreason'])){
