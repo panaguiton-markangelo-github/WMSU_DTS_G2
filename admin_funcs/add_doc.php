@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
+	require '../phpmailer/includes/mailer_main.php';
 
 	if(isset($_POST['add'])){
 		$database = new Connection();
