@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 	session_start();
 	include_once('../include/database.php');
 	require '../phpmailer/includes/mailer_main.php';
@@ -15,7 +12,6 @@ error_reporting(E_ALL);
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
 
-
 		$_SESSION['off_add'] = array();
 		$query = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
 		$result = mysqli_query($data, $query);
@@ -23,7 +19,6 @@ error_reporting(E_ALL);
 			$_SESSION['off_add'][] = $row_a['username'];
 		}
 						
-		
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -288,7 +283,7 @@ error_reporting(E_ALL);
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$_SESSION['off_add'][1]);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
 				unset($_POST['add']);
 				exit();
 			}
