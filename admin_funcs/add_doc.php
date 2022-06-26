@@ -12,11 +12,11 @@
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
 
-		$_SESSION['off_add'] = array();
+		$adds = array();
 		$query = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
 		$result = mysqli_query($data, $query);
 		while($row_a = mysqli_fetch_assoc($result)){
-			$_SESSION['off_add'][] = $row_a['username'];
+			$adds[] = $row_a['username'];
 		}
 						
 		
@@ -52,7 +52,7 @@
 		$mail->isHTML(true);
 		$mail->Body = $message;
 	
-		foreach ($_SESSION['off_add'] as $ad) {
+		foreach ($adds as $ad) {
 			$mail->AddAddress(trim($ad));       
 		}
 		
