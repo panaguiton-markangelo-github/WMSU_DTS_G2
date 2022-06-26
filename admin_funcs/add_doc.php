@@ -18,6 +18,7 @@ error_reporting(E_ALL);
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
     		$_SESSION['off'] = array(mysqli_query($data, $query));
 		}
+		$off = $_SESSION['off'][0];
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -40,7 +41,7 @@ error_reporting(E_ALL);
 
 		$subject = "Recipient for an incoming document.";
 
-		$message = "<p> '".$_SESSION['off'][0]."' Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		$message = "<p> '".$off."' Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 
 		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
 		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
