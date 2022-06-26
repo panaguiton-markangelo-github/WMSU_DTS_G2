@@ -257,6 +257,36 @@
 				exit();
 			}
 
+			
+            $subject = "Recipient for an incoming document.";
+
+            $message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+
+            $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+            $message .= "<p>Best regards WMSU|DTS team.</p>";
+
+            $mail->Subject = $subject;
+            $mail->setFrom("support@dts.wmsuccs.com");
+            $mail->isHTML(true);
+            $mail->Body = $message;
+            foreach ($_POST['addresses'] as $ad) {
+				$email->AddAddress( trim($ad) );       
+			}
+           
+            if ($mail->Send()) { 
+                $_SESSION['message_succ'] = "Instruction on how to reset your password has been sent to your email. <br> Note:Check the inbox/spam tab of your email!";
+                header("location: ../forgot_pass/forgot-pass.php?reset=success");
+                exit();
+            }
+            else {
+                $_SESSION['message_mail_fail'] = "Unexpected error occured.!";
+                header("location: ../forgot_pass/forgot-pass.php?reset=failed".$mail->ErrorInfo);
+                exit();
+            }
+
+            $mail->smtpClose();
+
 		}
 		catch(PDOException $e){
 			$_SESSION['message'] = $e->getMessage();
