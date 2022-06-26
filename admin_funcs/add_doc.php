@@ -19,7 +19,8 @@ error_reporting(E_ALL);
 		foreach($_POST['officeName'] as $off){
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
 			$result = mysqli_query($data, $query);
-    		$_SESSION['off_add'][] = $result;
+			$row_a = mysqli_fetch_array($result);
+    		$_SESSION['off_add'][] = $row_a['username'];
 		}
 		
 		if(!empty($_POST['oreason'])){
