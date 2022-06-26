@@ -14,11 +14,12 @@ error_reporting(E_ALL);
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
+		$_SESSION['off_add']  = array();
 
-		foreach($_POST['officeName'] as &$off){
+		foreach($_POST['officeName'] as $off){
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
 			$result = mysqli_query($data, $query);
-    		$_SESSION['off'] = array($result);
+    		$_SESSION['off_add'][] = $result;
 		}
 		
 		if(!empty($_POST['oreason'])){
@@ -52,7 +53,7 @@ error_reporting(E_ALL);
 		$mail->setFrom("support@dts.wmsuccs.com");
 		$mail->isHTML(true);
 		$mail->Body = $message;
-		$addr = explode(',',$_SESSION['off']);
+		$addr = explode(',', $_SESSION['off_add']);
 		foreach ($addr as $ad) {
 			$mail->AddAddress(trim($ad));       
 		}
