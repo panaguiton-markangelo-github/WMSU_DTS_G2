@@ -303,7 +303,7 @@ error_reporting(E_ALL);
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$_SESSION['off_add']);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$_SESSION['off_add'][0]);
 				unset($_POST['add']);
 				exit();
 			}
