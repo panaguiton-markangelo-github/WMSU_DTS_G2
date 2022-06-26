@@ -10,12 +10,12 @@
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
-		$offices = implode(' ', $_POST['officeName']);
+		$offices = implode(',', $_POST['officeName']);
 
 		$_SESSION['off_add'] = array();
-		$query = "SELECT username FROM users WHERE officeName IN ('$offices');";
+		$query = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
 		$result = mysqli_query($data, $query);
-		while($row_a = mysqli_fetch_array($result)){
+		while($row_a = mysqli_fetch_assoc($result)){
 			$_SESSION['off_add'][] = $row_a['username'];
 		}
 						
