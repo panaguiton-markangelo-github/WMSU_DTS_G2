@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 	session_start();
 	include_once('../include/database.php');
 	require '../phpmailer/includes/mailer_main.php';
+	include_once ("../include/alt_db.php");
 
 	if(isset($_POST['add'])){
 		$database = new Connection();
@@ -13,7 +14,11 @@ error_reporting(E_ALL);
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
-
+		foreach($_POST['officeName'] as $off){
+			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
+    		$_SESSION['off'] = array(mysqli_query($data, $query));
+		}
+		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
 		}
@@ -35,7 +40,7 @@ error_reporting(E_ALL);
 
 		$subject = "Recipient for an incoming document.";
 
-		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		$message = "<p> '".$_SESSION['off']."' Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 
 		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
 		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
@@ -45,9 +50,7 @@ error_reporting(E_ALL);
 		$mail->setFrom("support@dts.wmsuccs.com");
 		$mail->isHTML(true);
 		$mail->Body = $message;
-		foreach ($_POST['addresses'] as $ad) {
-			$mail->AddAddress( trim($ad) );       
-		}
+		$mail->AddAddress("drenegades19@gmail.com");
 		$mail->Send();
 
 		$mail->smtpClose();

@@ -225,24 +225,6 @@ catch(PDOException $e) {
             </div>
           </div>
 
-          <?php
-            $database = new Connection();
-            $db = $database->open();
-            try{	
-                $sql = "SELECT username FROM users WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
-                foreach ($db->query($sql) as $row4) {
-          ?>
-            <input name="addresses[]" type="text"  value="<?php echo $row4['username'];?>">
-            <?php
-            }
-
-          }
-          catch(PDOException $e){
-              echo "There is some problem in connection: " . $e->getMessage();
-          }
-          //close connection
-          $database->close();
-        ?>
 
           <input name="user_id" type="number" value="<?php echo $_SESSION['userID'];?>" hidden>
           <input name="office" type="text" value="<?php echo $row1['officeName'] ?>" hidden>
