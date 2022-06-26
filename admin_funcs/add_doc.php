@@ -14,7 +14,8 @@ error_reporting(E_ALL);
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
-		foreach($_POST['officeName'] as $off){
+
+		foreach($_POST['officeName'] as &$off){
 			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
 			$result = mysqli_query($data, $query);
     		$_SESSION['off'] = array($result);
