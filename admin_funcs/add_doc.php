@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
-	require '../phpmailer/includes/mailer_main.php';
+	require '../phpmailer/includes/sample.mailer_main.php';
 
 	if(isset($_POST['add'])){
 		$database = new Connection();
@@ -10,7 +10,6 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
-		$address = implode(',', $_POST['addresses']);
 
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -33,19 +32,21 @@
 
 		$subject = "Recipient for an incoming document.";
 
-            $message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 
-            $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
-            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
-            $message .= "<p>Best regards WMSU|DTS team.</p>";
+		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+		$message .= "<p>Best regards WMSU|DTS team.</p>";
 
-            $mail->Subject = $subject;
-            $mail->setFrom("support@dts.wmsuccs.com");
-            $mail->isHTML(true);
-            $mail->Body = $message;
-			$mail->AddAddress("drenegades19@gmail.com");
+		$mail->Subject = $subject;
+		$mail->setFrom("support@dts.wmsuccs.com");
+		$mail->isHTML(true);
+		$mail->Body = $message;
+		$mail->AddAddress("drenegades19@gmail.com");
+		$mail->Send();
 
-            $mail->smtpClose();
+		$mail->smtpClose();
+			
 
 		try{
 
