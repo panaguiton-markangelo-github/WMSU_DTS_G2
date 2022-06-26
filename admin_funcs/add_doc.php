@@ -1,7 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 	session_start();
 	include_once('../include/database.php');
-	require '../phpmailer/includes/sample.mailer_main.php';
+	require '../phpmailer/includes/mailer_main.php';
 
 	if(isset($_POST['add'])){
 		$database = new Connection();
