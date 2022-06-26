@@ -10,7 +10,7 @@
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
-		$offices = implode(',', $_POST['officeName']);
+		$offices = implode(' ', $_POST['officeName']);
 
 		$_SESSION['off_add'] = array();
 		$query = "SELECT username FROM users WHERE officeName IN ('$offices');";
