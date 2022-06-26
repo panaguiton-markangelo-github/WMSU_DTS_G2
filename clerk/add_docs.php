@@ -187,6 +187,36 @@ catch(PDOException $e) {
             </div>      
           </div>
 
+          <div class="row">
+            <div class="col">
+              <br>
+              <p class="text-center text-muted fw-bold">Please select the recipient/s. Note: You can select more than one <span style="color:red;">(required)</span>.</p>
+              <div class="boxes">
+                  <input name="select-all" onClick="toggle(this)" type="checkbox" id="select-all" value="select-all">
+                  <label for="select-all">All</label>
+                <?php
+                      $database = new Connection();
+                      $db = $database->open();
+                      try{	
+                          $sql = "SELECT * FROM office WHERE officeName NOT IN ('".$_SESSION['c_officeName']."') ORDER BY officeName ASC;"; 
+                          foreach ($db->query($sql) as $row3) {
+                    ?>
+                      <input class="officeName" name="officeName[]" type="checkbox" id="<?php echo $row3['officeName'];?>" value="<?php echo $row3['officeName'];?>" required>
+                      <label for="<?php echo $row3['officeName'];?>"><?php echo $row3['description'];?></label>
+                      <?php
+                      }
+
+                    }
+                    catch(PDOException $e){
+                        echo "There is some problem in connection: " . $e->getMessage();
+                    }
+                    //close connection
+                    $database->close();
+                  ?>
+              </div>
+            </div>
+          </div>
+
           <input name="user_id" type="number" value="<?php echo $_SESSION['userID'];?>" hidden>
           <input name="office" type="text" value="<?php echo $row1['officeName'] ?>" hidden>
           <input name="officeID" type="text" value="<?php echo $row2['id'] ?>" hidden>

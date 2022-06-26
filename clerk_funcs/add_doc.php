@@ -8,6 +8,7 @@
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
+		$offices = implode(',', $_POST['officeName']);
 
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -110,7 +111,7 @@
 							$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 							
 							//make use of prepared statement to prevent sql injection
-							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, schoolYear, user_id, yearSemID, officeID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :schoolYear, :user_id, :yearSemID, :officeID);");
+							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, schoolYear, user_id, yearSemID, officeID, recipients) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :schoolYear, :user_id, :yearSemID, :officeID, :recipients);");
 							
 							//bind
 							$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -124,6 +125,7 @@
 							$sql->bindParam(':user_id', $_POST['user_id']);
 							$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 							$sql->bindParam(':officeID', $_POST['officeID']);
+							$sql->bindParam(':recipients', $offices);
 				
 							//if-else statement in executing our prepared statement
 							$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
@@ -197,7 +199,7 @@
 				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 				
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID, officeID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID, :officeID);");
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID, officeID, recipients) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID, :officeID, :recipients);");
 				
 				//bind
 				$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -210,6 +212,7 @@
 				$sql->bindParam(':user_id', $_POST['user_id']);
 				$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 				$sql->bindParam(':officeID', $_POST['officeID']);
+				$sql->bindParam(':recipients', $offices);
 
 				//if-else statement in executing our prepared statement
 				$_SESSION['message'] = ( $sql->execute()) ? 'Document was added and released successfully' : 'Something went wrong. Cannot add document.';
@@ -267,6 +270,7 @@
 		$status = $_POST['status_draft'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
+		$offices = implode(',', $_POST['officeName']);
 
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -369,7 +373,7 @@
 							$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 							
 							//make use of prepared statement to prevent sql injection
-							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, schoolYear, user_id, yearSemID, officeID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :schoolYear, :user_id, :yearSemID, :officeID);");
+							$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, file, schoolYear, user_id, yearSemID, officeID, recipients) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :file, :schoolYear, :user_id, :yearSemID, :officeID, :recipients);");
 							
 							//bind
 							$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -383,6 +387,7 @@
 							$sql->bindParam(':user_id', $_POST['user_id']);
 							$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 							$sql->bindParam(':officeID', $_POST['officeID']);
+							$sql->bindParam(':recipients', $offices);
 				
 							//if-else statement in executing our prepared statement
 							$_SESSION['message'] = ( $sql->execute()) ? 'Document was saved as draft successfully' : 'Something went wrong. Cannot saved the document as draft.';
@@ -455,7 +460,7 @@
 				$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 				
 				//make use of prepared statement to prevent sql injection
-				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID, officeID) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID, :officeID);");
+				$sql = $db->prepare("INSERT INTO documents (trackingID, title, type, reason, remarks, status, schoolYear, user_id, yearSemID, officeID, recipients) VALUES (:trackingID, :title, :type, :reason, :remarks, :status, :schoolYear, :user_id, :yearSemID, :officeID, :recipients);");
 				
 				//bind
 				$sql->bindParam(':trackingID', $_POST['trackingID']);
@@ -468,6 +473,7 @@
 				$sql->bindParam(':user_id', $_POST['user_id']);
 				$sql->bindParam(':yearSemID', $_POST['schoolYear_id']);
 				$sql->bindParam(':officeID', $_POST['officeID']);
+				$sql->bindParam(':recipients', $offices);
 
 				//if-else statement in executing our prepared statement
 				$_SESSION['message'] = ( $sql->execute()) ? 'Document was saved as draft successfully' : 'Something went wrong. Cannot save the document as draft.';
