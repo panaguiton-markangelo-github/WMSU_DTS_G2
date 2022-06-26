@@ -120,7 +120,7 @@ catch(PDOException $e) {
           <div class="row">
             <div class="col">
               <select class="form-select text-dark" name="reason" onchange="checkvalue1(this.value)" aria-label="Default select example" required>
-              <option value="" selected>Reason</option>
+              <option value="" disabled selected>Reason</option>
                 <?php
                     $database = new Connection();
                     $db = $database->open();
