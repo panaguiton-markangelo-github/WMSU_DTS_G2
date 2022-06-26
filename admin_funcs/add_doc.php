@@ -15,12 +15,23 @@ error_reporting(E_ALL);
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
 
-		foreach($_POST['officeName'] as $off){
-			$query = "SELECT username FROM users WHERE  officeName = '".$off."';";
+
+		if(is_array($_POST['officeName'])){
+			$_SESSION['off_add'] = array();
+			$query = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
+			$result = mysqli_query($data, $query);
+			while($row_a = mysqli_fetch_array($result)){
+				$_SESSION['off_add'][] = $row_a['username'];
+			}
+						
+		}
+		else{
+			$query = "SELECT username FROM users WHERE officeName = '".$_POST['officeName']."';";
 			$result = mysqli_query($data, $query);
 			$row_a = mysqli_fetch_array($result);
-			$address = array($row_a['username']);
-    		$_SESSION['off_add'] = $address;
+			while($row_a = mysqli_fetch_array($result)){
+				$_SESSION['off_add'] = $row_a['username'];
+			}
 		}
 		
 		if(!empty($_POST['oreason'])){
@@ -54,9 +65,17 @@ error_reporting(E_ALL);
 		$mail->setFrom("support@dts.wmsuccs.com");
 		$mail->isHTML(true);
 		$mail->Body = $message;
-		foreach ($_SESSION['off_add'] as $ad) {
-			$mail->AddAddress(trim($ad));       
+		if(is_array($_POST['officeName'])){
+			$mail->AddAddress($_SESSION['off_add']);
 		}
+		else
+		{
+			foreach ($_SESSION['off_add'] as $ad) {
+				$mail->AddAddress(trim($ad));       
+			}
+		}
+	
+
 		$mail->Send();
 
 		$mail->smtpClose();
