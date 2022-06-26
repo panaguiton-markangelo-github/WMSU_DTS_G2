@@ -11,12 +11,12 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
-		
-		$adds;
-		$query = "SELECT username FROM users WHERE officeName IN ('".implode(',', $_POST['officeName'])."');";
+
+		$adds = array();
+		$query = "SELECT username FROM users WHERE officeName IN ('".join(',', $_POST['officeName'])."');";
 		$result = mysqli_query($data, $query);
 		while($row_a = mysqli_fetch_assoc($result)){
-			$adds = array($row_a['username']);
+			$adds[] = $row_a['username'];
 		}
 						
 		
