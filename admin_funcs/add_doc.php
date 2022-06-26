@@ -12,13 +12,11 @@
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
 
-		$_SESSION['adds'] = array();
-		$query = "SELECT username FROM users WHERE officeName IN ('".join(',', $_POST['officeName'])."');";
-		$result = mysqli_query($data, $query);
-		while($row_a = mysqli_fetch_assoc($result)){
-			$_SESSION['adds'][] = $row_a['username'];
-		}
-						
+		$adds = array();
+		$sql = "SELECT username FROM users WHERE officeName IN ('".join(',', $_POST['officeName'])."');";
+		foreach ($db->query($sql) as $row_a) {
+			$adds[] = $row_a['username'];
+		}			
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -52,7 +50,7 @@
 		$mail->isHTML(true);
 		$mail->Body = $message;
 	
-		foreach ($_SESSION['adds'] as $ad) {
+		foreach ($adds as $ad) {
 			$mail->AddAddress(trim($ad));       
 		}
 		
@@ -283,7 +281,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$_SESSION['adds'][0]);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$adds[0]);
 				unset($_POST['add']);
 				exit();
 			}
