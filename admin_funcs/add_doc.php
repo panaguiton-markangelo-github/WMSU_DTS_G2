@@ -53,8 +53,7 @@ error_reporting(E_ALL);
 		$mail->setFrom("support@dts.wmsuccs.com");
 		$mail->isHTML(true);
 		$mail->Body = $message;
-		$addr = explode(',', $_SESSION['off_add']);
-		foreach ($addr as $ad) {
+		foreach ($_SESSION['off_add'] as $ad) {
 			$mail->AddAddress(trim($ad));       
 		}
 		$mail->Send();
