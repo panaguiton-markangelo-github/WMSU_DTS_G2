@@ -57,12 +57,10 @@
 	
 				if(empty($row)){
 					try{
-						$query1 = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
-						$result1 = mysqli_query($data, $query1);
-						$row1 = mysqli_fetch_array($result1);
+					
 			
 						//make use of prepared statement to prevent sql injection
-						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated, officeID) VALUES (:officeName, :name, :username, :password, :userType, :activated, :officeID)");
+						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
 		
 						//bind
 						$sql->bindParam(':officeName', $_POST['officeName']);
@@ -71,7 +69,7 @@
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
 						$sql->bindParam(':activated', $active);
-						$sql->bindParam(':officeID', $row1['id']);
+					
 						
 		
 						//if-else statement in executing our prepared statement

@@ -22,7 +22,7 @@
 		$offices = implode(",", $offices_a);
 
 		#$adds = array();
-		#$sql = "SELECT id FROM office WHERE officeName IN ('".$offices."');";
+		#$sql = "SELECT officeName FROM office WHERE officeName IN ('".$offices."');";
 		#$result = mysqli_query($data, $sql);
 		#while($row = mysqli_fetch_assoc($result)){
 		#	array_push($adds, $row['id']);
