@@ -281,7 +281,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.array_slice($adds,0)."?".$offices);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.print_r(array_slice($adds,0))."?".$offices);
 				unset($_POST['add']);
 				exit();
 			}
