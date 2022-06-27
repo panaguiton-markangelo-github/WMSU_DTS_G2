@@ -255,6 +255,38 @@
 
 				$remarks_log = "Released and Added the document in the office";
 				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+
+				$sql1 = "SELECT recipients FROM documents WHERE trackingID = '".$_POST['trackingID']."';";
+				$result1 = mysqli_query($data, $sql1);
+				$row1 = mysqli_fetch_assoc($result1);
+
+				$adds = array();
+				$sql2 = "SELECT username FROM users WHERE officeName IN ('".$row1['recipients']."');";
+				$result2 = mysqli_query($data, $sql2);
+				while($row2 = mysqli_fetch_assoc($result2)){
+					array_push($adds, $row2['username']);
+				}	
+
+				$subject = "Recipient for an incoming document.";
+
+				$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		
+				$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+				$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+				$message .= "<p>Best regards WMSU|DTS team.</p>";
+		
+				$mail->Subject = $subject;
+				$mail->setFrom("support@dts.wmsuccs.com");
+				$mail->isHTML(true);
+				$mail->Body = $message;
+			
+				foreach ($adds as $ad) {
+					$mail->AddAddress(trim($ad));       
+				}
+				
+				$mail->Send();
+		
+				$mail->smtpClose();
 				
 				//bind
 				$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
