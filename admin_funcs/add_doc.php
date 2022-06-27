@@ -276,10 +276,8 @@
 
 			
 				foreach($_POST['officeID'] as $id){
-					header('location: ../admin/homePageAdmin.php?successful=added?doc');
-					exit();
-					$sql = "SELECT officeName FROM office WHERE id = '".$id."';";
-					$result = mysqli_query($data, $sql);
+					$sql_o = "SELECT officeName FROM office WHERE id = '".$id."';";
+					$result = mysqli_query($data, $sql_o);
 					$row = mysqli_fetch_assoc($result);
 
 					$sql1 = "SELECT id FROM users WHERE officeName = '".$row['officeName']."';";
