@@ -2,7 +2,7 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
-	include_once("../include/alt_db.php");
+	include ("../include/alt_db.php");
 
 	
 	if(isset($_POST['add'])){
@@ -57,7 +57,9 @@
 	
 				if(empty($row)){
 					try{
-						
+						$query1 = "SELECT * FROM office WHERE officeName = '".$_POST['officeName']."';";
+						$result1 = mysqli_query($data, $query1);
+						$row1 = mysqli_fetch_array($result1);
 			
 						//make use of prepared statement to prevent sql injection
 						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
@@ -78,10 +80,10 @@
 					catch(PDOException $e){
 						$_SESSION['message'] = $e->getMessage();
 					}
-
+					
 					//close connection
 					$database->close();	
-					header('location:../super_admin/admin_users.php?succesful=added?admin?');
+					header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row1['id']);
 		
 						
 				}
