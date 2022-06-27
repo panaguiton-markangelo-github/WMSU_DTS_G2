@@ -17,6 +17,26 @@
 		$result = mysqli_query($data, $sql);
 		while($row = mysqli_fetch_assoc($result)){
 			array_push($adds, $row['username']);
+			$subject = "Recipient for an incoming document.";
+
+			$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+
+			$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+			$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+			$message .= "<p>Best regards WMSU|DTS team.</p>";
+
+			$mail->Subject = $subject;
+			$mail->setFrom("support@dts.wmsuccs.com");
+			$mail->isHTML(true);
+			$mail->Body = $message;
+		
+			foreach ($adds as $ad) {
+				$mail->AddAddress(trim($ad));       
+			}
+			
+			$mail->Send();
+
+			$mail->smtpClose();
 		}	
 		
 		if(!empty($_POST['oreason'])){
@@ -38,26 +58,7 @@
 		$actualFileExt = strtolower(end($fileExt));
 		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
 
-		$subject = "Recipient for an incoming document.";
-
-		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
-
-		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
-		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
-		$message .= "<p>Best regards WMSU|DTS team.</p>";
-
-		$mail->Subject = $subject;
-		$mail->setFrom("support@dts.wmsuccs.com");
-		$mail->isHTML(true);
-		$mail->Body = $message;
-	
-		foreach ($adds as $ad) {
-			$mail->AddAddress(trim($ad));       
-		}
 		
-		$mail->Send();
-
-		$mail->smtpClose();
 			
 
 		try{
