@@ -14,9 +14,12 @@
 
 		$adds = array();
 		$sql = "SELECT username FROM users WHERE officeName IN ('$offices');";
-		foreach ($db->query($sql) as $row_a) {
-			$adds[] = $row_a['username'];
-		}			
+		$result = mysqli_query($data, $sql);
+		while($row = mysqli_fetch_assoc($result)){
+			array_push($adds, $row_a['username']);
+		}
+
+			
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
