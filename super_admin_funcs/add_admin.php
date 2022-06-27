@@ -1,9 +1,8 @@
-<?php 
-include ("../include/alt_db.php");
-?>
+
 <?php
 	session_start();
 	include_once('../include/database.php');
+	include ("../include/alt_db.php");
 
 	
 	if(isset($_POST['add'])){
@@ -64,7 +63,7 @@ include ("../include/alt_db.php");
 						$_SESSION['o_id'] = $row['id'];
 			
 						//make use of prepared statement to prevent sql injection
-						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated, officeID) VALUES (:officeName, :name, :username, :password, :userType, :activated, :officeID)");
+						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
 		
 						//bind
 						$sql->bindParam(':officeName', $_POST['officeName']);
@@ -73,7 +72,7 @@ include ("../include/alt_db.php");
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
 						$sql->bindParam(':activated', $active);
-						$sql->bindParam(':officeID', $row['id']);
+						
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';
