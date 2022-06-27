@@ -13,7 +13,7 @@
 		$offices = implode(',', $_POST['officeName']);
 
 		$adds = array();
-		$sql = "SELECT username FROM users WHERE officeName IN ('".join(',', $_POST['officeName'])."');";
+		$sql = "SELECT username FROM users WHERE officeName LIKE '%".join(',', $_POST['officeName'])."';";
 		foreach ($db->query($sql) as $row_a) {
 			$adds[] = $row_a['username'];
 		}			
