@@ -13,7 +13,7 @@
 		$offices = implode(",", $_POST['officeName']);
 
 		$adds = array();
-		$sql = "SELECT username FROM users WHERE officeName IN ('.$offices.');";
+		$sql = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
 		$result = mysqli_query($data, $sql);
 		while($row = mysqli_fetch_assoc($result)){
 			array_push($adds, $row['username']);
