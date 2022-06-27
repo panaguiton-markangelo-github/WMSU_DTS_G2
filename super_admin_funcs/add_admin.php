@@ -58,9 +58,9 @@ include ("../include/alt_db.php");
 	
 				if(empty($row)){
 					try{
-						$sql_o = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
-						$result_o = mysqli_query($data, $sql_o);
-						$row_o = mysqli_fetch_array($result_o);
+						$query = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
+						$result = mysqli_query($data, $query);
+						$row = mysqli_fetch_array($result);
 			
 						//make use of prepared statement to prevent sql injection
 						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated, officeID) VALUES (:officeName, :name, :username, :password, :userType, :activated, :officeID)");
@@ -72,7 +72,7 @@ include ("../include/alt_db.php");
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
 						$sql->bindParam(':activated', $active);
-						$sql->bindParam(':officeID', $row_o['id']);
+						$sql->bindParam(':officeID', $row['id']);
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';
@@ -86,7 +86,7 @@ include ("../include/alt_db.php");
 					//close connection
 					$database->close();	
 					
-					header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row_o['id']);		
+					header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row['id']);		
 				}
 	
 				else if (!empty($row)){
