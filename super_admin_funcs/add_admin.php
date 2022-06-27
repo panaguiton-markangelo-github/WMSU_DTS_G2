@@ -24,15 +24,15 @@
 
 			$response = curl_exec($ch);
 			curl_close($ch);
-			$data = json_decode($response, true);
+			$da = json_decode($response, true);
 
 
-			if ($data['deliverability'] === "UNDELIVERABLE") {
+			if ($da['deliverability'] === "UNDELIVERABLE") {
 				$_SESSION['message_fail'] = "Please enter a valid email!";
 				$database->close();
 				header('location: ../super_admin/admin_users.php?invalid=email?admin');
 			}
-			elseif($data['is_smtp_valid']['value'] === false){
+			elseif($da['is_smtp_valid']['value'] === false){
 				$_SESSION['message_fail'] = "Please enter a valid email!";
 				$database->close();
 				header('location: ../super_admin/clerk_users.php?invalid=email_s?clerk');
@@ -57,7 +57,7 @@
 	
 				if(empty($row)){
 					try{
-						$query1 = "SELECT * FROM office WHERE officeName = '".$_POST['officeName']."';";
+						$query1 = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
 						$result1 = mysqli_query($data, $query1);
 						$row1 = mysqli_fetch_array($result1);
 			
