@@ -275,7 +275,6 @@
 				$sql_logs->execute();
 
 			
-				$user_a = array();
 				foreach($_POST['officeID'] as $id){
 					$sql = "SELECT officeName FROM office WHERE id = '".$id."';";
 					$result = mysqli_query($data, $sql);
@@ -288,14 +287,15 @@
 					$sql_r = $db->prepare("INSERT INTO recipient (userID, officeName, trackingID) VALUES (:userID, :officeName, :trackingID)");
 				
 					//bind
+					$sql_r->bindParam(':userID', $row1['id']);
 					$sql_r->bindParam(':officeName', $row['officeName']);
 					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
-					$sql_r->bindParam(':userID', $row1['id']);
+					
 		
 					$sql_r->execute();
+					header('location: ../admin/homePageAdmin.php?successful=added?doc');
 
 				}
-
 
 
 				if(!empty($_POST['oreason'])){
@@ -317,7 +317,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$users_i."?".$offices);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
 				unset($_POST['add']);
 				exit();
 			}
