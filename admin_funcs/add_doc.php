@@ -17,27 +17,8 @@
 		$result = mysqli_query($data, $sql);
 		while($row = mysqli_fetch_assoc($result)){
 			array_push($adds, $row['username']);
-		}	
+		}
 		
-		if(!empty($_POST['oreason'])){
-			$reason = $_POST['oreason'];
-		}
-
-		if(!empty($_POST['otype'])){
-			$type = $_POST['otype'];
-		}
-
-		$file = $_FILES['file'];
-		$fileName = $_FILES['file']['name'];
-		$fileTmpName = $_FILES['file']['tmp_name'];
-		$fileSize = $_FILES['file']['size'];
-		$fileError = $_FILES['file']['error'];
-		$fileType = $_FILES['file']['type'];
-
-		$fileExt = explode('.', $fileName);
-		$actualFileExt = strtolower(end($fileExt));
-		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
-
 		$subject = "Recipient for an incoming document.";
 
 		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
@@ -58,6 +39,26 @@
 		$mail->Send();
 
 		$mail->smtpClose();
+		
+		if(!empty($_POST['oreason'])){
+			$reason = $_POST['oreason'];
+		}
+
+		if(!empty($_POST['otype'])){
+			$type = $_POST['otype'];
+		}
+
+		$file = $_FILES['file'];
+		$fileName = $_FILES['file']['name'];
+		$fileTmpName = $_FILES['file']['tmp_name'];
+		$fileSize = $_FILES['file']['size'];
+		$fileError = $_FILES['file']['error'];
+		$fileType = $_FILES['file']['type'];
+
+		$fileExt = explode('.', $fileName);
+		$actualFileExt = strtolower(end($fileExt));
+		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
+
 			
 		try{
 
