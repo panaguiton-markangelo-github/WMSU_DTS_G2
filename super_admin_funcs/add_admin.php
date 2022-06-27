@@ -60,7 +60,6 @@
 						$query = "SELECT * FROM office WHERE officeName = '".$_POST['officeName']."';";
 						$result = mysqli_query($data, $query);
 						$row = mysqli_fetch_array($result);
-						$_SESSION['o_id'] = $row['id'];
 			
 						//make use of prepared statement to prevent sql injection
 						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
@@ -79,7 +78,7 @@
 						//close connection
 						$database->close();	
 						
-						header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row['id']);	
+						header('location:../super_admin/admin_users.php?succesful=added?admin?'.$_POST['officeName']);	
 					
 					}
 					catch(PDOException $e){
