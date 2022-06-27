@@ -272,6 +272,16 @@
 				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 
 				$sql_logs->execute();
+				
+				foreach($_POST['officeName'] as $rec){
+					$sql_r = $db->prepare("INSERT INTO recipients (officeName, trackingID) VALUES (:officeName, :trackingID)");
+				
+					//bind
+					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
+					$sql_r->bindParam(':officeName', $rec);
+		
+					$sql_r->execute();
+				}
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
