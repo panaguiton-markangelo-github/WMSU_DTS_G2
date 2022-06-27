@@ -16,7 +16,7 @@
 		$sql = "SELECT username FROM users WHERE officeName IN ('$offices');";
 		$result = mysqli_query($data, $sql);
 		while($row = mysqli_fetch_assoc($result)){
-			array_push($adds, $row_a['username']);
+			array_push($adds, $row['username']);
 		}
 
 			
