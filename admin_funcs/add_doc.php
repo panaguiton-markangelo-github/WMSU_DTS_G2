@@ -142,10 +142,10 @@
 							$row1 = mysqli_fetch_assoc($result1);
 
 							$adds = array();
-							$sql = "SELECT username FROM users WHERE officeName IN ('".$row1['recipients']."');";
-							$result = mysqli_query($data, $sql);
-							while($row = mysqli_fetch_assoc($result)){
-								array_push($adds, $row['username']);
+							$sql2 = "SELECT username FROM users WHERE officeName IN ('".$row1['recipients']."');";
+							$result2 = mysqli_query($data, $sql2);
+							while($row2 = mysqli_fetch_assoc($result2)){
+								array_push($adds, $row2['username']);
 							}	
 
 							$subject = "Recipient for an incoming document.";
