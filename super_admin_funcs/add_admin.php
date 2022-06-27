@@ -57,9 +57,7 @@
 	
 				if(empty($row)){
 					try{
-						$query1 = "SELECT * FROM office WHERE officeName = '".$_POST['officeName']."';";
-						$result1 = mysqli_query($data, $query1);
-						$row1 = mysqli_fetch_array($result1);
+						
 			
 						//make use of prepared statement to prevent sql injection
 						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
@@ -75,15 +73,15 @@
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';
-						//close connection
-						$database->close();	
-						
-						header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row1['id']);	
-					
+							
 					}
 					catch(PDOException $e){
 						$_SESSION['message'] = $e->getMessage();
 					}
+
+					//close connection
+					$database->close();	
+					header('location:../super_admin/admin_users.php?succesful=added?admin?');
 		
 						
 				}
