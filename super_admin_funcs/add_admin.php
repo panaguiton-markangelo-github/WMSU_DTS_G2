@@ -5,6 +5,7 @@ include ("../include/alt_db.php");
 	session_start();
 	include_once('../include/database.php');
 
+	
 	if(isset($_POST['add'])){
 			$database = new Connection();
 			$db = $database->open();
@@ -12,6 +13,10 @@ include ("../include/alt_db.php");
 			$password = $_POST['password'];
 			$password_hash = password_hash($password, PASSWORD_DEFAULT);
 			$active = 'yes';
+
+			$sql = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
+			$result = mysqli_query($data, $sql);
+			$row = mysqli_fetch_assoc($result);
 
 			$api_key = "1372d36b08aa4f65b05a4d6b7d0e9fca";
 			$ch = curl_init();
@@ -57,7 +62,7 @@ include ("../include/alt_db.php");
 				if(empty($row)){
 					try{
 						//make use of prepared statement to prevent sql injection
-						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated) VALUES (:officeName, :name, :username, :password, :userType, :activated)");
+						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated, officeID) VALUES (:officeName, :name, :username, :password, :userType, :activated, :officeID)");
 		
 						//bind
 						$sql->bindParam(':officeName', $_POST['officeName']);
@@ -66,6 +71,7 @@ include ("../include/alt_db.php");
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
 						$sql->bindParam(':activated', $active);
+						$sql->bindParam(':officeID', $row['id']);
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';
