@@ -2,7 +2,7 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
-	include ("../include/alt_db.php");
+	include_once("../include/alt_db.php");
 
 	
 	if(isset($_POST['add'])){
