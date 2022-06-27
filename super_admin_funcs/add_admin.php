@@ -13,10 +13,7 @@ include ("../include/alt_db.php");
 			$password = $_POST['password'];
 			$password_hash = password_hash($password, PASSWORD_DEFAULT);
 			$active = 'yes';
-
-			$sql_o = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
-			$result_o = mysqli_query($data, $sql_o);
-			$row_o = mysqli_fetch_assoc($result_o);
+	
 
 			$api_key = "1372d36b08aa4f65b05a4d6b7d0e9fca";
 			$ch = curl_init();
@@ -61,6 +58,10 @@ include ("../include/alt_db.php");
 	
 				if(empty($row)){
 					try{
+						$sql_o = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
+						$result_o = mysqli_query($data, $sql_o);
+						$row_o = mysqli_fetch_array($result_o);
+			
 						//make use of prepared statement to prevent sql injection
 						$sql = $db->prepare("INSERT INTO users (officeName, name, username, password, userType, activated, officeID) VALUES (:officeName, :name, :username, :password, :userType, :activated, :officeID)");
 		
