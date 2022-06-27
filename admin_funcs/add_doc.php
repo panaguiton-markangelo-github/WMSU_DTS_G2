@@ -10,16 +10,14 @@
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
-		$offices = implode(',', $_POST['officeName']);
+		$offices = implode(",", $_POST['officeName']);
 
 		$adds = array();
 		$sql = "SELECT username FROM users WHERE officeName IN ('$offices');";
 		$result = mysqli_query($data, $sql);
 		while($row = mysqli_fetch_assoc($result)){
 			array_push($adds, $row['username']);
-		}
-
-			
+		}	
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
