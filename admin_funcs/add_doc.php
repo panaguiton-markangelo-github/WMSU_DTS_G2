@@ -177,7 +177,7 @@
 							$sql_logs->execute();
 
 							foreach($_POST['officeName'] as $rec){
-								$sql_r = $db->prepare("INSERT INTO recipients (officeName, trackingID) VALUES (:officeName ,:trackingID)");
+								$sql_r = $db->prepare("INSERT INTO recipients (officeName, trackingID) VALUES (:officeName, :trackingID)");
 							
 								//bind
 								$sql_r->bindParam(':trackingID', $_POST['trackingID']);
