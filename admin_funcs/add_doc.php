@@ -255,6 +255,17 @@
 
 				$remarks_log = "Released and Added the document in the office";
 				$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+				//bind
+				$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
+				$sql_logs->bindParam(':remarks', $remarks_log);
+				$sql_logs->bindParam(':status', $status);
+				$sql_logs->bindParam(':user_id', $_POST['user_id']);
+				$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
+				$sql_logs->bindParam(':office', $_POST['office']);
+				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
+
+				$sql_logs->execute();
 
 				$sql1 = "SELECT recipients FROM documents WHERE trackingID = '".$_POST['trackingID']."';";
 				$result1 = mysqli_query($data, $sql1);
@@ -288,17 +299,7 @@
 		
 				$mail->smtpClose();
 				
-				//bind
-				$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
-				$sql_logs->bindParam(':remarks', $remarks_log);
-				$sql_logs->bindParam(':status', $status);
-				$sql_logs->bindParam(':user_id', $_POST['user_id']);
-				$sql_logs->bindParam(':created_at',$date->format('M/d/Y, H:i:s'));
-				$sql_logs->bindParam(':released_at',$date->format('M/d/Y, H:i:s'));
-				$sql_logs->bindParam(':office', $_POST['office']);
-				$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
-
-				$sql_logs->execute();
+			
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
