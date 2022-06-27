@@ -10,14 +10,25 @@
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
-		$offices = implode(",", $_POST['officeName']);
+
+		$offices_a = array();
+		foreach($_POST['officeID'] as $id){
+			$sql = "SELECT officeName FROM office WHERE id = '".$id."';";
+			$result = mysqli_query($data, $sql);
+			$row = mysqli_fetch_assoc($result);
+			array_push($offices_a, $row['officeName']);
+		}
+
+		$offices = implode(",", $offices_a);
 
 		#$adds = array();
-		#$sql = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
+		#$sql = "SELECT id FROM office WHERE officeName IN ('".$offices."');";
 		#$result = mysqli_query($data, $sql);
 		#while($row = mysqli_fetch_assoc($result)){
-		#	array_push($adds, $row['username']);
+		#	array_push($adds, $row['id']);
 		#}
+
+	
 		
 		#$subject = "Recipient for an incoming document.";
 
