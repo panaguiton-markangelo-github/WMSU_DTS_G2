@@ -78,7 +78,7 @@
 						//close connection
 						$database->close();	
 						
-						header('location:../super_admin/admin_users.php?succesful=added?admin?'.$_POST['officeName']."?".$row1['id']);	
+						header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row1['id']);	
 					
 					}
 					catch(PDOException $e){
