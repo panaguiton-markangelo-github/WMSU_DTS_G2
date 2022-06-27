@@ -58,7 +58,7 @@ include ("../include/alt_db.php");
 	
 				if(empty($row)){
 					try{
-						$query = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
+						$query = "SELECT * FROM office WHERE officeName = '".$_POST['officeName']."';";
 						$result = mysqli_query($data, $query);
 						$row = mysqli_fetch_array($result);
 						$_SESSION['o_id'] = $row['id'];
