@@ -285,20 +285,15 @@
 					$result1 = mysqli_query($data, $sql1);
 					$row1 = mysqli_fetch_assoc($result1);
 
-					$sql_r = $db->prepare("INSERT INTO recipient (officeName, trackingID) VALUES (:officeName, :trackingID)");
+					$sql_r = $db->prepare("INSERT INTO recipient (userID, officeName, trackingID) VALUES (:userID, :officeName, :trackingID)");
 				
 					//bind
-					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
 					$sql_r->bindParam(':officeName', $row['officeName']);
+					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
+					$sql_r->bindParam(':userID', $row1['id']);
 		
 					$sql_r->execute();
 
-					$sql_u = $db->prepare("UPDATE recipient SET userID = :id");
-				
-					//bind
-					$sql_u->bindParam(':id', $row1['id']);
-		
-					$sql_u->execute();
 				}
 
 
