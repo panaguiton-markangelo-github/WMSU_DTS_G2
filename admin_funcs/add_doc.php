@@ -284,7 +284,7 @@
 
 				$sql_logs->execute();
 
-				foreach($_POST['officeName'] as $rec){
+				foreach($offices_a as $rec){
 					$sql_r = $db->prepare("INSERT INTO recipient (officeName, trackingID) VALUES (:officeName, :trackingID)");
 				
 					//bind
@@ -293,6 +293,16 @@
 		
 					$sql_r->execute();
 				}
+
+				foreach($_POST['officeID'] as $id){
+					$sql_r = $db->prepare("UPDATE recipient SET officeID = :id");
+				
+					//bind
+					$sql_r->bindParam(':id', $id);
+		
+					$sql_r->execute();
+				}
+
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
