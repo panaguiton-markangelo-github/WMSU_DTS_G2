@@ -8,7 +8,7 @@ include ("../include/alt_db.php");
 		$database = new Connection();
 		$db = $database->open();
 		$password = $_POST['password'];
-		$password_hash = password_hash($password, PASSWORD_DEFAULT);
+		
 		$date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 		$remarks = "edited by the office admin.";
 
@@ -49,7 +49,7 @@ include ("../include/alt_db.php");
 				$sql->bindParam(':officeName', $_POST['officeName']);
 				$sql->bindParam(':name', $_POST['name']);
 				$sql->bindParam(':username', $_POST['username']);
-				$sql->bindParam(':password', $password_hash);
+				$sql->bindParam(':password', $password);
 				$sql->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
 	
 				//if-else statement in executing our prepared statement
