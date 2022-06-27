@@ -13,7 +13,7 @@
 		$offices = implode(',', $_POST['officeName']);
 
 		$adds = array();
-		$sql = "SELECT username FROM users WHERE officeName LIKE '%".join(',', $_POST['officeName'])."';";
+		$sql = "SELECT username FROM users WHERE officeName IN ('$offices');";
 		foreach ($db->query($sql) as $row_a) {
 			$adds[] = $row_a['username'];
 		}			
@@ -281,7 +281,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$adds[0]);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$adds[0]."?".$offices);
 				unset($_POST['add']);
 				exit();
 			}
