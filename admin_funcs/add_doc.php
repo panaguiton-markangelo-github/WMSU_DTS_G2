@@ -4,6 +4,8 @@
 	require '../phpmailer/includes/mailer_main.php';
 	include_once ("../include/alt_db.php");
 
+	
+
 	if(isset($_POST['add'])){
 		$database = new Connection();
 		$db = $database->open();
@@ -11,33 +13,6 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(",", $_POST['officeName']);
-
-		$adds = array();
-		$sql = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
-		$result = mysqli_query($data, $sql);
-		while($row = mysqli_fetch_assoc($result)){
-			array_push($adds, $row['username']);
-			$subject = "Recipient for an incoming document.";
-
-			$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
-
-			$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
-			$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
-			$message .= "<p>Best regards WMSU|DTS team.</p>";
-
-			$mail->Subject = $subject;
-			$mail->setFrom("support@dts.wmsuccs.com");
-			$mail->isHTML(true);
-			$mail->Body = $message;
-		
-			foreach ($adds as $ad) {
-				$mail->AddAddress(trim($ad));       
-			}
-			
-			$mail->Send();
-
-			$mail->smtpClose();
-		}	
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -57,9 +32,6 @@
 		$fileExt = explode('.', $fileName);
 		$actualFileExt = strtolower(end($fileExt));
 		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
-
-		
-			
 
 		try{
 
@@ -164,6 +136,38 @@
 	
 							$remarks_log = "Released and Added the document in the office";
 							$sql_logs = $db->prepare("INSERT INTO logs (trackingID, remarks, status, user_id, created_at, released_at, office, origin_office) VALUES (:trackingID, :remarks, :status, :user_id, :created_at, :released_at, :office, :origin_office)");
+							
+							$sql1 = "SELECT recipients FROM documents WHERE trackingID = '".$_POST['trackingID']."';";
+							$result1 = mysqli_query($data, $sql1);
+							$row1 = mysqli_fetch_assoc($result1);
+
+							$adds = array();
+							$sql = "SELECT username FROM users WHERE officeName IN ('".$row1['recipients']."');";
+							$result = mysqli_query($data, $sql);
+							while($row = mysqli_fetch_assoc($result)){
+								array_push($adds, $row['username']);
+							}	
+
+							$subject = "Recipient for an incoming document.";
+
+							$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+					
+							$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+							$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+							$message .= "<p>Best regards WMSU|DTS team.</p>";
+					
+							$mail->Subject = $subject;
+							$mail->setFrom("support@dts.wmsuccs.com");
+							$mail->isHTML(true);
+							$mail->Body = $message;
+						
+							foreach ($adds as $ad) {
+								$mail->AddAddress(trim($ad));       
+							}
+							
+							$mail->Send();
+					
+							$mail->smtpClose();
 							
 							//bind
 							$sql_logs->bindParam(':trackingID', $_POST['trackingID']);
