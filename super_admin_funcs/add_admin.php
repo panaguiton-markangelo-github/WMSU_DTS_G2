@@ -86,7 +86,7 @@ include ("../include/alt_db.php");
 					//close connection
 					$database->close();	
 					
-					header('location:../super_admin/admin_users.php?succesful=added?admin');		
+					header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row_o['id']);		
 				}
 	
 				else if (!empty($row)){
