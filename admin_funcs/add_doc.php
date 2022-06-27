@@ -12,33 +12,33 @@
 		$reason = $_POST['reason'];
 		$offices = implode(",", $_POST['officeName']);
 
-		$adds = array();
-		$sql = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
-		$result = mysqli_query($data, $sql);
-		while($row = mysqli_fetch_assoc($result)){
-			array_push($adds, $row['username']);
-		}
+		#$adds = array();
+		#$sql = "SELECT username FROM users WHERE officeName IN ('".$offices."');";
+		#$result = mysqli_query($data, $sql);
+		#while($row = mysqli_fetch_assoc($result)){
+		#	array_push($adds, $row['username']);
+		#}
 		
-		$subject = "Recipient for an incoming document.";
+		#$subject = "Recipient for an incoming document.";
 
-		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		#$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 
-		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
-		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
-		$message .= "<p>Best regards WMSU|DTS team.</p>";
+		#$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+		#$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+		#$message .= "<p>Best regards WMSU|DTS team.</p>";
 
-		$mail->Subject = $subject;
-		$mail->setFrom("support@dts.wmsuccs.com");
-		$mail->isHTML(true);
-		$mail->Body = $message;
+		#$mail->Subject = $subject;
+		#$mail->setFrom("support@dts.wmsuccs.com");
+		#$mail->isHTML(true);
+		#$mail->Body = $message;
 	
-		foreach ($adds as $ad) {
-			$mail->AddAddress(trim($ad));       
-		}
+		#foreach ($adds as $ad) {
+		#	$mail->AddAddress(trim($ad));       
+		#}
 		
-		$mail->Send();
+		#$mail->Send();
 
-		$mail->smtpClose();
+		#$mail->smtpClose();
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -175,6 +175,16 @@
 							$sql_logs->bindParam(':origin_office', $_SESSION['orig_office']);
 				
 							$sql_logs->execute();
+
+							foreach($_POST['officeName'] as $rec){
+								$sql_r = $db->prepare("INSERT INTO recipients (officeName, trackingID) VALUES (:officeName ,:trackingID)");
+							
+								//bind
+								$sql_r->bindParam(':trackingID', $_POST['trackingID']);
+								$sql_r->bindParam(':officeName', $rec);
+					
+								$sql_r->execute();
+							}
 
 							if(!empty($_POST['oreason'])){
 								$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
