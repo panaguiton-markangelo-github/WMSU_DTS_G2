@@ -21,6 +21,16 @@
 
 		$offices = implode(",", $offices_a);
 
+		$user_a = array();
+		foreach($offices_a as $id){
+			$sql = "SELECT id FROM users WHERE officeName = '".$id."';";
+			$result = mysqli_query($data, $sql);
+			$row = mysqli_fetch_assoc($result);
+			array_push($user_a, $row['id']);
+		}
+
+		$users_i = implode(",", $user_a);
+
 		#$adds = array();
 		#$sql = "SELECT officeName FROM office WHERE officeName IN ('".$offices."');";
 		#$result = mysqli_query($data, $sql);
@@ -294,15 +304,14 @@
 					$sql_r->execute();
 				}
 
-				foreach($_POST['officeID'] as $id){
-					$sql_r = $db->prepare("UPDATE recipient SET officeID = :id");
+				foreach($user_a as $id){
+					$sql_r = $db->prepare("UPDATE recipient SET userID = :id");
 				
 					//bind
 					$sql_r->bindParam(':id', $id);
 		
 					$sql_r->execute();
 				}
-
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
