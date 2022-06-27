@@ -14,9 +14,9 @@ include ("../include/alt_db.php");
 			$password_hash = password_hash($password, PASSWORD_DEFAULT);
 			$active = 'yes';
 
-			$sql = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
-			$result = mysqli_query($data, $sql);
-			$row = mysqli_fetch_assoc($result);
+			$sql_o = "SELECT id FROM office WHERE officeName = '".$_POST['officeName']."';";
+			$result_o = mysqli_query($data, $sql_o);
+			$row_o = mysqli_fetch_assoc($result_o);
 
 			$api_key = "1372d36b08aa4f65b05a4d6b7d0e9fca";
 			$ch = curl_init();
@@ -71,7 +71,7 @@ include ("../include/alt_db.php");
 						$sql->bindParam(':password', $password_hash);
 						$sql->bindParam(':userType', $_POST['userType']);
 						$sql->bindParam(':activated', $active);
-						$sql->bindParam(':officeID', $row['id']);
+						$sql->bindParam(':officeID', $row_o['id']);
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';
