@@ -76,17 +76,17 @@
 		
 						//if-else statement in executing our prepared statement
 						$_SESSION['message'] = ( $sql->execute()) ? 'Admin user was added successfully' : 'Something went wrong. Cannot add admin user.';
-		
+						//close connection
+						$database->close();	
+						
+						header('location:../super_admin/admin_users.php?succesful=added?admin?'.$row['id']);	
 					
 					}
 					catch(PDOException $e){
 						$_SESSION['message'] = $e->getMessage();
 					}
 		
-					//close connection
-					$database->close();	
-					
-					header('location:../super_admin/admin_users.php?succesful=added?admin?'.$_SESSION['o_id']);		
+						
 				}
 	
 				else if (!empty($row)){
