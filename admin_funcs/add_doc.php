@@ -11,26 +11,6 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 
-		$offices_a = array();
-		foreach($_POST['officeID'] as $id){
-			$sql = "SELECT officeName FROM office WHERE id = '".$id."';";
-			$result = mysqli_query($data, $sql);
-			$row = mysqli_fetch_assoc($result);
-			array_push($offices_a, $row['officeName']);
-		}
-
-		$offices = implode(",", $offices_a);
-
-		$user_a = array();
-		foreach($offices_a as $id){
-			$sql = "SELECT id FROM users WHERE officeName = '".$id."';";
-			$result = mysqli_query($data, $sql);
-			$row = mysqli_fetch_assoc($result);
-			array_push($user_a, $row['id']);
-		}
-
-		$users_i = implode(",", $user_a);
-
 		#$adds = array();
 		#$sql = "SELECT officeName FROM office WHERE officeName IN ('".$offices."');";
 		#$result = mysqli_query($data, $sql);
@@ -294,24 +274,34 @@
 
 				$sql_logs->execute();
 
-				foreach($offices_a as $rec){
+			
+				$user_a = array();
+				foreach($_POST['officeID'] as $id){
+					$sql = "SELECT officeName FROM office WHERE id = '".$id."';";
+					$result = mysqli_query($data, $sql);
+					$row = mysqli_fetch_assoc($result);
+
+					$sql1 = "SELECT id FROM users WHERE officeName = '".$row['officeName']."';";
+					$result1 = mysqli_query($data, $sql1);
+					$row1 = mysqli_fetch_assoc($result1);
+
 					$sql_r = $db->prepare("INSERT INTO recipient (officeName, trackingID) VALUES (:officeName, :trackingID)");
 				
 					//bind
 					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
-					$sql_r->bindParam(':officeName', $rec);
+					$sql_r->bindParam(':officeName', $row['officeName']);
 		
 					$sql_r->execute();
-				}
 
-				foreach($user_a as $id){
-					$sql_r = $db->prepare("UPDATE recipient SET userID = :id");
+					$sql_u = $db->prepare("UPDATE recipient SET userID = :id");
 				
 					//bind
-					$sql_r->bindParam(':id', $id);
+					$sql_u->bindParam(':id', $row1['id']);
 		
-					$sql_r->execute();
+					$sql_u->execute();
 				}
+
+
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
@@ -332,7 +322,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$adds[0]."?".$adds[1]."?".$offices);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$users_i."?".$offices);
 				unset($_POST['add']);
 				exit();
 			}
