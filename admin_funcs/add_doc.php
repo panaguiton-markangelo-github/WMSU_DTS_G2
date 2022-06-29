@@ -11,6 +11,23 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 
+		$users = array();
+		foreach($_POST['officeName'] as $office){
+			$sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
+			$result1 = mysqli_query($data, $sql1);
+			$row = mysqli_fetch_assoc($result1);
+			$users[] = $row['username'];	
+		}
+
+		foreach($users as $user){
+
+			$sql2 = "INSERT INTO recipient (username, officeName, trackingID) VALUES('".$user."', 'try', 'wew');";
+			$result2 = mysqli_query($data, $sql2);
+			$row = mysqli_fetch_assoc($result2);
+		}
+
+
+
 		#$adds = array();
 		#$sql = "SELECT officeName FROM office WHERE officeName IN ('".$offices."');";
 		#$result = mysqli_query($data, $sql);
@@ -177,15 +194,7 @@
 				
 							$sql_logs->execute();
 
-							foreach($_POST['officeName'] as $rec){
-								$sql_r = $db->prepare("INSERT INTO recipient (officeName, trackingID) VALUES (:officeName, :trackingID)");
-							
-								//bind
-								$sql_r->bindParam(':trackingID', $_POST['trackingID']);
-								$sql_r->bindParam(':officeName', $rec);
-					
-								$sql_r->execute();
-							}
+						
 
 							if(!empty($_POST['oreason'])){
 								$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
@@ -274,6 +283,7 @@
 
 				$sql_logs->execute();
 
+		
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
@@ -294,7 +304,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$_SESSION['t_off'][0]."".$_SESSION['t_off'][1]);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
 				unset($_POST['add']);
 				exit();
 			}

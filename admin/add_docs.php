@@ -205,14 +205,13 @@ catch(PDOException $e) {
                 <?php
                       $database = new Connection();
                       $db = $database->open();
-                      $_SESSION['t_off'] = array();
                       try{	
-                          $sql = "SELECT * FROM office WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
+                          $sql = "SELECT DISTINCT officeName FROM office WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
                           foreach ($db->query($sql) as $row3) {
-                            $_SESSION['t_off'][] = $row3['officeName'];
+                          
                     ?>
-                      <input class="officeName" name="officeID[]" type="checkbox" id="<?php echo $row3['id'];?>" value="<?php echo $row3['id'];?>">
-                      <label for="<?php echo $row3['id'];?>"><?php echo $row3['description'];?></label>
+                      <input class="officeName" name="officeName[]" type="checkbox" id="<?php echo $row3['officeName'];?>" value="<?php echo $row3['officeName'];?>">
+                      <label for="<?php echo $row3['officeName'];?>"><?php echo $row3['description'];?></label>
                       <?php
                       }
 
