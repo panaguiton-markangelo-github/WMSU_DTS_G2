@@ -274,29 +274,6 @@
 
 				$sql_logs->execute();
 
-			
-				foreach($_POST['officeID'] as $id){
-					$sql_o = "SELECT officeName FROM office WHERE id = '".$id."';";
-					$result = mysqli_query($data, $sql_o);
-					$row = mysqli_fetch_assoc($result);
-
-					$sql1 = "SELECT id FROM users WHERE officeName = '".$row['officeName']."';";
-					$result1 = mysqli_query($data, $sql1);
-					$row1 = mysqli_fetch_assoc($result1);
-
-					$sql_r = $db->prepare("INSERT INTO recipient (userID, officeName, trackingID) VALUES (:userID, :officeName, :trackingID)");
-				
-					//bind
-					$sql_r->bindParam(':userID', $row1['id']);
-					$sql_r->bindParam(':officeName', $row['officeName']);
-					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
-					
-		
-					$sql_r->execute();
-					
-
-				}
-
 
 				if(!empty($_POST['oreason'])){
 					$sql_reason = $db->prepare("INSERT INTO reasons (reason) VALUES (:reason)");
@@ -317,7 +294,7 @@
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc');
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$_SESSION['t_off'][0]."".$_SESSION['t_off'][1]);
 				unset($_POST['add']);
 				exit();
 			}
