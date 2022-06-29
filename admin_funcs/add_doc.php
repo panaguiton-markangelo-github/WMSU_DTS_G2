@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 	session_start();
 	include_once('../include/database.php');
 	require '../phpmailer/includes/mailer_main.php';
@@ -11,16 +14,18 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 
-		$users = array();
+		
 		foreach($_POST['officeName'] as $office){
+			global $users;
+			$users = array();
 			$sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
 			$result1 = mysqli_query($data, $sql1);
 			$row = mysqli_fetch_assoc($result1);
-			$users[] = $row['username'];	
+			$users[] = $row['username'];
 		}
 
-		foreach($users as $user){
 
+		foreach($users as $user){
 			$sql2 = "INSERT INTO recipient (username, officeName, trackingID) VALUES('".$user."', 'try', 'wew');";
 			$result2 = mysqli_query($data, $sql2);
 			$row = mysqli_fetch_assoc($result2);
