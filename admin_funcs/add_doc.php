@@ -34,7 +34,6 @@ error_reporting(E_ALL);
 		$result2 = mysqli_query($data, $sql2);
 		while($row2 = mysqli_fetch_array($result2)){
 			$users[] = $row2['username'];
-			
 		}
 
 		
@@ -54,10 +53,15 @@ error_reporting(E_ALL);
 		foreach($users as $user){
 			$mail->AddAddress(trim($user)); 
 		}
-		
-		
-		$mail->Send();
 
+		if($mail->Send()){
+			$status = 'sent';
+			$sql_u = $db->prepare("UPDATE recipient SET status = :status;");
+			//bind
+			$sql_u->bindParam(':status', $status);
+			$sql_u->execute();
+		}
+		
 		$mail->smtpClose();
 		
 		if(!empty($_POST['oreason'])){
@@ -306,7 +310,7 @@ error_reporting(E_ALL);
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$user[0]);
+				header('location: ../admin/homePageAdmin.php?successful=added?doc');
 				unset($_POST['add']);
 				exit();
 			}
