@@ -26,6 +26,9 @@ error_reporting(E_ALL);
 			
 		}
 
+		$no = 0;
+		$no1 = 0;
+
 		foreach($users as $user){
 
 			$no++;
