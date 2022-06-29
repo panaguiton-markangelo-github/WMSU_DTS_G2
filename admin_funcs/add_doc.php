@@ -29,23 +29,7 @@ error_reporting(E_ALL);
 		$no = 0;
 		$no1 = 0;
 
-		foreach($users as $user){
-
-			$no++;
-			$no1++;
-		
-			$sql_r = $db->prepare("INSERT INTO recipient (username, officeName, trackingID) VALUES (:username, :officeName, :trackingID)");
-		
-			//bind
-			$sql_r->bindParam(':username', $user);
-			$sql_r->bindParam(':officeName', $no);
-			$sql_r->bindParam(':trackingID', $no1);
-			
-
-			$sql_r->execute();
-			
-		}
-
+	
 
 
 
