@@ -21,7 +21,6 @@ error_reporting(E_ALL);
 			$result1 = mysqli_query($data, $sql1);
 			while($row = mysqli_fetch_array($result1)){		
 				$sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
-			
 				//bind
 				$sql_r->bindParam(':username', $row['username']);
 				$sql_r->bindParam(':trackingID', $_POST['trackingID']);
