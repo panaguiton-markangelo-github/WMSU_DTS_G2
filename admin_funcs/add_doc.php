@@ -32,37 +32,31 @@ error_reporting(E_ALL);
 		
 
 
-
-
-		#$adds = array();
-		#$sql = "SELECT officeName FROM office WHERE officeName IN ('".$offices."');";
-		#$result = mysqli_query($data, $sql);
-		#while($row = mysqli_fetch_assoc($result)){
-		#	array_push($adds, $row['id']);
-		#}
-
 	
 		
-		#$subject = "Recipient for an incoming document.";
+		$subject = "Recipient for an incoming document.";
 
-		#$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 
-		#$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
-		#$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
-		#$message .= "<p>Best regards WMSU|DTS team.</p>";
+		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+		$message .= "<p>Best regards WMSU|DTS team.</p>";
 
-		#$mail->Subject = $subject;
-		#$mail->setFrom("support@dts.wmsuccs.com");
-		#$mail->isHTML(true);
-		#$mail->Body = $message;
-	
-		#foreach ($adds as $ad) {
-		#	$mail->AddAddress(trim($ad));       
-		#}
+		$mail->Subject = $subject;
+		$mail->setFrom("support@dts.wmsuccs.com");
+		$mail->isHTML(true);
+		$mail->Body = $message;
+
+		$sql2 = "SELECT username FROM recipient WHERE status = 'no';";
+		$result2 = mysqli_query($data, $sql2);
+
+		while($row = mysqli_fetch_array($result2)){
+			$mail->AddAddress(trim($row['username'])); 
+		}
 		
-		#$mail->Send();
+		$mail->Send();
 
-		#$mail->smtpClose();
+		$mail->smtpClose();
 		
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
