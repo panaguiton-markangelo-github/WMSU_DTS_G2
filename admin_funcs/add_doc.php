@@ -13,6 +13,7 @@ error_reporting(E_ALL);
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
+		$offices = 'test';
 
 		
 		
