@@ -21,9 +21,9 @@ error_reporting(E_ALL);
 			$users = array();
 			$sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
 			$result1 = mysqli_query($data, $sql1);
-			$row = mysqli_fetch_assoc($result1);
-			$users[] = $row['username'];
-
+			while($row = mysqli_fetch_assoc($result1)){
+				$users[] = $row['username'];
+			}
 			
 		}
 
