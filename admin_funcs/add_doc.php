@@ -23,21 +23,22 @@ error_reporting(E_ALL);
 			$result1 = mysqli_query($data, $sql1);
 			while($row = mysqli_fetch_assoc($result1)){
 				$users[] = $row['username'];
+
+				foreach($users as $user){
+	
+					$sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
+				
+					//bind
+					$sql_r->bindParam(':username', $user);
+					$sql_r->bindParam(':trackingID', $_POST['trackingID']);
+					
+					$sql_r->execute();
+					
+				}
 			}	
 		}
 
-		foreach($users as $user){
-	
-			$sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
 		
-			//bind
-			$sql_r->bindParam(':username', $user);
-			$sql_r->bindParam(':trackingID', $_POST['trackingID']);
-			
-			$sql_r->execute();
-			
-		}
-
 
 
 
