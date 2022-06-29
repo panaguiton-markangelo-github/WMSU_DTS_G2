@@ -306,7 +306,7 @@ error_reporting(E_ALL);
 
 				//close connection
 				$database->close();
-				header('location: ../admin/homePageAdmin.php?successful=added?doc');
+				header('location: ../admin/homePageAdmin.php?successful=added?doc'.$user[0]);
 				unset($_POST['add']);
 				exit();
 			}
