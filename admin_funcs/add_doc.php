@@ -29,10 +29,14 @@ error_reporting(E_ALL);
 			}	
 		}
 
-		
+		$users = array();
+		$sql2 = "SELECT username FROM recipient WHERE status = 'no';";
+		$result2 = mysqli_query($data, $sql2);
+		while($row2 = mysqli_fetch_array($result2)){
+			$users[] = $row2['username'];
+			
+		}
 
-
-	
 		
 		$subject = "Recipient for an incoming document.";
 
@@ -47,12 +51,10 @@ error_reporting(E_ALL);
 		$mail->isHTML(true);
 		$mail->Body = $message;
 
-		$sql2 = "SELECT username FROM recipient WHERE status = 'no';";
-		$result2 = mysqli_query($data, $sql2);
-
-		while($row = mysqli_fetch_array($result2)){
-			$mail->AddAddress(trim($row['username'])); 
+		foreach($users as $user){
+			$mail->AddAddress(trim($user)); 
 		}
+		
 		
 		$mail->Send();
 
