@@ -16,8 +16,37 @@ error_reporting(E_ALL);
 		$offices = 'test';
 
 		
+		foreach($_POST['officeName'] as $office){
+			global $users;
+			$users = array();
+			$sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
+			$result1 = mysqli_query($data, $sql1);
+			$row = mysqli_fetch_assoc($result1);
+			$users[] = $row['username'];
+
+			
+		}
+
+		$no = 0;
+		$no1 = 0;
+
+		foreach($users as $user){
+
+			$no++;
+			$no1++;
 		
-	
+			$sql_r = $db->prepare("INSERT INTO recipient (username, officeName, trackingID) VALUES (:username, :officeName, :trackingID)");
+		
+			//bind
+			$sql_r->bindParam(':username', $user);
+			$sql_r->bindParam(':officeName', $no);
+			$sql_r->bindParam(':trackingID', $no1);
+			
+
+			$sql_r->execute();
+			
+		}
+
 
 
 
