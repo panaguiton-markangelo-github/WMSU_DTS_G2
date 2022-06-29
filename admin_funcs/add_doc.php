@@ -22,14 +22,26 @@ error_reporting(E_ALL);
 			$result1 = mysqli_query($data, $sql1);
 			$row = mysqli_fetch_assoc($result1);
 			$users[] = $row['username'];
+
+			
 		}
 
 
 		foreach($users as $user){
-			$sql2 = "INSERT INTO recipient (username, officeName, trackingID) VALUES('".$user."', 'try', 'wew');";
-			$result2 = mysqli_query($data, $sql2);
-			$row = mysqli_fetch_assoc($result2);
+		
+			$sql_r = $db->prepare("INSERT INTO recipient (username, officeName, trackingID) VALUES (:username, :officeName, :trackingID)");
+		
+			//bind
+			$sql_r->bindParam(':username', $user);
+			$sql_r->bindParam(':officeName', 'try');
+			$sql_r->bindParam(':trackingID', 'fv');
+			
+
+			$sql_r->execute();
+			
 		}
+
+
 
 
 
