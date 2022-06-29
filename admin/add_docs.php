@@ -206,7 +206,7 @@ catch(PDOException $e) {
                       $database = new Connection();
                       $db = $database->open();
                       try{	
-                          $sql = "SELECT officeName FROM office WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
+                          $sql = "SELECT officeName, description FROM office WHERE officeName NOT IN ('".$_SESSION['a_officeName']."') ORDER BY officeName ASC;"; 
                           foreach ($db->query($sql) as $row3) {
                           
                     ?>
