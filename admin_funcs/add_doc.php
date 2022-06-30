@@ -15,6 +15,73 @@ error_reporting(E_ALL);
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
 
+		if($_POST['type'] == "Memorandum") {
+			$_POST['trackingID'] = "M".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Certificate of Service") {
+			$_POST['trackingID'] = "COS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Disbursement of Service") {
+			$_POST['trackingID'] = "DOS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Inventory and Inspection Report") {
+			$_POST['trackingID'] = "IIR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Letter") {
+			$_POST['trackingID'] = "L".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Liquidation Report") {
+			$_POST['trackingID'] = "LR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Memorandum of Agreement") {
+			$_POST['trackingID'] = "MOA".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Memorandum Receipt") {
+			$_POST['trackingID'] = "MR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Official Cash Book") {
+			$_POST['trackingID'] = "OCB".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Personal Data Sheet") {
+			$_POST['trackingID'] = "PDS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Purchase Order") {
+			$_POST['trackingID'] = "PO".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Purchase Request") {
+			$_POST['trackingID'] = "PR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Referral Slip") {
+			$_POST['trackingID'] = "RS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Request for Obligation of Allotments") {
+			$_POST['trackingID'] = "RFOA".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Requisition and Issue Voucher") {
+			$_POST['trackingID'] = "RIV".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Unclassified") {
+			$_POST['trackingID'] = "U".$_SESSION["trackID"];
+		}
+		else {
+			$_POST['trackingID'] = "O".$_SESSION["trackID"];
+		}
+
 		
 		foreach($_POST['officeName'] as $office){
 			$sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
@@ -86,72 +153,7 @@ error_reporting(E_ALL);
 			
 		try{
 
-			if($_POST['type'] == "Memorandum") {
-				$_POST['trackingID'] = "M".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Certificate of Service") {
-				$_POST['trackingID'] = "COS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Disbursement of Service") {
-				$_POST['trackingID'] = "DOS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Inventory and Inspection Report") {
-				$_POST['trackingID'] = "IIR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Letter") {
-				$_POST['trackingID'] = "L".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Liquidation Report") {
-				$_POST['trackingID'] = "LR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Memorandum of Agreement") {
-				$_POST['trackingID'] = "MOA".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Memorandum Receipt") {
-				$_POST['trackingID'] = "MR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Official Cash Book") {
-				$_POST['trackingID'] = "OCB".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Personal Data Sheet") {
-				$_POST['trackingID'] = "PDS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Purchase Order") {
-				$_POST['trackingID'] = "PO".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Purchase Request") {
-				$_POST['trackingID'] = "PR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Referral Slip") {
-				$_POST['trackingID'] = "RS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Request for Obligation of Allotments") {
-				$_POST['trackingID'] = "RFOA".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Requisition and Issue Voucher") {
-				$_POST['trackingID'] = "RIV".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Unclassified") {
-				$_POST['trackingID'] = "U".$_SESSION["trackID"];
-			}
-			else {
-				$_POST['trackingID'] = "O".$_SESSION["trackID"];
-			}
+			
 
 			if($fileError != 4){
 				if(in_array($actualFileExt, $allowed)){
