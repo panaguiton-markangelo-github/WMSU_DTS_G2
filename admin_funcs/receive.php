@@ -1,7 +1,9 @@
 <?php
 session_start();
 //include our connection
+require '../phpmailer/includes/mailer_main.php';
 include_once('../include/database.php');
+include_once ("../include/alt_db.php");
 
 $database = new Connection();
 $db = $database->open();
@@ -33,9 +35,6 @@ catch(PDOException $e){
 ?>
 
 <?php
-	include_once('../include/database.php');
-    include_once ("../include/alt_db.php");
-
 	if(isset($_POST['submit'])){
 		$database = new Connection();
 		$db = $database->open();
@@ -84,7 +83,7 @@ catch(PDOException $e){
 		    $result2 = mysqli_query($data, $sql2);
             $row2 = mysqli_fetch_array($result2);
 
-            $mail->AddAddress(trim($row2['username'])); 
+            $mail->AddAddress($row2['username']); 
             
             if($mail->Send()){
                 $status = 'sent';
