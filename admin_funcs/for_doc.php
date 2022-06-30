@@ -51,6 +51,45 @@ catch(PDOException $e){
         $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 			
 		try{
+
+            if(!empty($_POST['reason']) || !empty($_POST['oreason'])){
+                $sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
+                //bind
+                $sql_r->bindParam(':username', $_SESSION["a_username"]);
+                $sql_r->bindParam(':trackingID',  $_POST['trackingID']);
+                
+                $sql_r->execute();
+    
+                $subject = "The document has been forwarded with the tracking ID of '".$_POST['trackingID']."'.";
+    
+                $message = "<p> Don't reply here! Hi There! A document has been forwarded from your office, please check it by tracking the document.</p>";
+    
+                $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+                $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+                $message .= "<p>Best regards WMSU|DTS team.</p>";
+    
+                $mail->Subject = $subject;
+                $mail->setFrom("support@dts.wmsuccs.com");
+                $mail->isHTML(true);
+                $mail->Body = $message;
+    
+                $sql2 = "SELECT username FROM recipient WHERE status = 'no';";
+                $result2 = mysqli_query($data, $sql2);
+                $row2 = mysqli_fetch_array($result2);
+    
+                $mail->AddAddress($row2['username']); 
+                
+                if($mail->Send()){
+                    $status = 'sent';
+                    $sql_u = $db->prepare("UPDATE recipient SET status = :status;");
+                    //bind
+                    $sql_u->bindParam(':status', $status);
+                    $sql_u->execute();
+                }
+                
+                $mail->smtpClose();
+            }
+            
 			//make use of prepared statement to prevent sql injection
 			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason, remarks = :remarks WHERE trackingID = :trackingID;");
             //bind 
