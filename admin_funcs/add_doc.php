@@ -152,9 +152,6 @@ error_reporting(E_ALL);
 
 			
 		try{
-
-			
-
 			if($fileError != 4){
 				if(in_array($actualFileExt, $allowed)){
 					if($fileError === 0){
