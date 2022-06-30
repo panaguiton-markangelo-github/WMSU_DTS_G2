@@ -1,7 +1,9 @@
 <?php
 session_start();
 //include our connection
+include_once ("../include/alt_db.php");
 include_once('../include/database.php');
+require '../phpmailer/includes/mailer_main.php';
 
 $database = new Connection();
 $db = $database->open();
@@ -35,7 +37,6 @@ catch(PDOException $e){
 
 
 <?php
-	include_once('../include/database.php');
 
 	if(isset($_POST['submit'])){
 		$database = new Connection();
@@ -89,7 +90,7 @@ catch(PDOException $e){
                 
                 $mail->smtpClose();
             }
-            
+
 			//make use of prepared statement to prevent sql injection
 			$sql = $db->prepare ("UPDATE documents SET status = :status, reason = :reason, remarks = :remarks WHERE trackingID = :trackingID;");
             //bind 
