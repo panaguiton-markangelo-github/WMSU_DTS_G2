@@ -101,7 +101,7 @@
 		}
 
 		
-		$subject = "Recipient for an incoming document.";
+		$subject = "Recipient for an incoming document with the tracking ID of '".$_POST['trackingID']."'.";
 
 		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
 

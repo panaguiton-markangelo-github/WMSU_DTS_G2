@@ -64,7 +64,7 @@ catch(PDOException $e){
             
             $sql_r->execute();
 
-            $subject = "The document has been received.";
+            $subject = "The document has been received with the tracking ID of '".$_POST['rec_trackingID']."'.";
 
             $message = "<p> Don't reply here! Hi There! A document has been received to your office, please check it at the received documents page.</p>";
 
