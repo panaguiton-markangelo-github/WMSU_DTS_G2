@@ -50,7 +50,7 @@ catch(PDOException $e){
         $date = new DateTime("now", new DateTimeZone('Asia/Manila'));
 			
 		try{
-            if(isset($_POST['action']) || isset($_POST['oaction'])){
+            if(!empty($_POST['action']) || !empty($_POST['oaction'])){
                 $sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
                 //bind
                 $sql_r->bindParam(':username', $_SESSION["a_username"]);
