@@ -1,5 +1,8 @@
 <?php
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 //include our connection
 require '../phpmailer/includes/mailer_main.php';
 include_once('../include/database.php');
@@ -36,7 +39,7 @@ catch(PDOException $e){
 
 <?php
 	if(isset($_POST['submit'])){
-		$database = new Connection();
+		$database = new onnection();
 		$db = $database->open();
         $receive_mes = "received in the office."; 
 
