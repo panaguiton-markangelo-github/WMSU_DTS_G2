@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
-		$offices = 'test';
+		$offices = implode(',', $_POST['officeName']);
 
 		
 		foreach($_POST['officeName'] as $office){
