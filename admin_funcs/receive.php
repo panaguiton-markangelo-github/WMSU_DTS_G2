@@ -45,6 +45,12 @@ catch(PDOException $e){
         $query = "UPDATE documents SET recipients = REPLACE(recipients, '".$rec_al_office."', '') WHERE trackingID = '".$_POST['rec_trackingID']."';";
         $result = mysqli_query($data, $query);
 
+        $sql1 = "SELECT username FROM users WHERE officeName = '".$_SESSION['a_officeName']."';";
+		$result1 = mysqli_query($data, $sql1);
+        $row1 = mysqli_fetch_array($result1);
+
+
+
         if($_POST['status'] == 'draft'){
             $_SESSION['e_message'] = 'The document is still not yet available to be received. Note: The document was not yet finalized and released. Please try again later.';
             header('location: ../admin/homePageAdmin.php?failed');
@@ -54,6 +60,42 @@ catch(PDOException $e){
         }
         
 		try{
+            $sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
+            //bind
+            $sql_r->bindParam(':username', $row1['username']);
+            $sql_r->bindParam(':trackingID', $_POST['rec_trackingID']);
+            
+            $sql_r->execute();
+
+            $subject = "The document has been received.";
+
+            $message = "<p> Don't reply here! Hi There! A document has been received to your office, please check it at the received documents page.</p>";
+
+            $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+            $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+            $message .= "<p>Best regards WMSU|DTS team.</p>";
+
+            $mail->Subject = $subject;
+            $mail->setFrom("support@dts.wmsuccs.com");
+            $mail->isHTML(true);
+            $mail->Body = $message;
+
+            $sql2 = "SELECT username FROM recipient WHERE status = 'no';";
+		    $result2 = mysqli_query($data, $sql2);
+            $row2 = mysqli_fetch_array($result2);
+
+            $mail->AddAddress(trim($row2['username'])); 
+            
+            if($mail->Send()){
+                $status = 'sent';
+                $sql_u = $db->prepare("UPDATE recipient SET status = :status;");
+                //bind
+                $sql_u->bindParam(':status', $status);
+                $sql_u->execute();
+            }
+            
+            $mail->smtpClose();
+
             
             $sql_rec = $db->prepare ("UPDATE documents SET status = :status WHERE trackingID = :trackingID;");
             $sql_rec->bindParam(':trackingID', $_POST['rec_trackingID']);
