@@ -39,7 +39,7 @@ catch(PDOException $e){
 
 <?php
 	if(isset($_POST['submit'])){
-		$database = new onnection();
+		$database = new Connection();
 		$db = $database->open();
         $receive_mes = "received in the office."; 
 
