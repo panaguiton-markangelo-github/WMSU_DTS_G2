@@ -55,16 +55,29 @@ catch(PDOException $e){
 
 
             if(!empty($_POST['reason']) || !empty($_POST['oreason'])){
-                $sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
-                //bind
-                $sql_r->bindParam(':username', $_SESSION["c_username"]);
-                $sql_r->bindParam(':trackingID',  $_POST['trackingID']);
-                
-                $sql_r->execute();
+                foreach($_POST['officeName'] as $office){
+                    $sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
+                    $result1 = mysqli_query($data, $sql1);
+                    while($row = mysqli_fetch_array($result1)){		
+                        $sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
+                        //bind
+                        $sql_r->bindParam(':username', $row['username']);
+                        $sql_r->bindParam(':trackingID', $_POST['trackingID']);
+                        
+                        $sql_r->execute();
+                    }	
+                }
+
+                $users = array();
+                $sql2 = "SELECT username FROM recipient WHERE status = 'no';";
+                $result2 = mysqli_query($data, $sql2);
+                while($row2 = mysqli_fetch_array($result2)){
+                    $users[] = $row2['username'];
+                }
     
                 $subject = "The document has been forwarded with the tracking ID of '".$_POST['trackingID']."'.";
     
-                $message = "<p> Don't reply here! Hi There! A document has been forwarded from your office, please check it by tracking the document.</p>";
+                $message = "<p> Don't reply here! Hi There! A document has been forwarded to your office, kindly receive the document by visiting the incoming document page or by entering the tracking ID in the receive document field found in the dashboard.</p>";
     
                 $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
                 $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
@@ -74,12 +87,10 @@ catch(PDOException $e){
                 $mail->setFrom("support@dts.wmsuccs.com");
                 $mail->isHTML(true);
                 $mail->Body = $message;
-    
-                $sql2 = "SELECT username FROM recipient WHERE status = 'no';";
-                $result2 = mysqli_query($data, $sql2);
-                $row2 = mysqli_fetch_array($result2);
-    
-                $mail->AddAddress($row2['username']); 
+            
+                foreach($users as $user){
+                    $mail->AddAddress(trim($user)); 
+                }
                 
                 if($mail->Send()){
                     $status = 'sent';

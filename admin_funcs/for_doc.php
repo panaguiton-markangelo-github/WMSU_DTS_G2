@@ -77,7 +77,7 @@ catch(PDOException $e){
     
                 $subject = "The document has been forwarded with the tracking ID of '".$_POST['trackingID']."'.";
     
-                $message = "<p> Don't reply here! Hi There! A document has been forwarded from your office, please check it by tracking the document.</p>";
+                $message = "<p> Don't reply here! Hi There! A document has been forwarded to your office, kindly receive the document by visiting the incoming document page or by entering the tracking ID in the receive document field found in the dashboard.</p>";
     
                 $message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
                 $message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
