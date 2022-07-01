@@ -8,7 +8,7 @@ include_once ("../include/alt_db.php");
     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
     INNER JOIN users ON users.id = documents.user_id
     INNER JOIN logs ON logs.trackingID = documents.trackingID
-    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["c_officeName"]."', recipients))
+    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["c_officeName"]."', recipients)) AND documents.status != 'draft'
     ORDER BY documents.id DESC;";
     $result = mysqli_query($data, $query);
     $nos = mysqli_num_rows($result);
