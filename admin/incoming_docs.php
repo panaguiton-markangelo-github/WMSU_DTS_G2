@@ -287,7 +287,7 @@ if(!isset($_SESSION["a_username"])) {
                                     FROM documents INNER JOIN yearsemester ON yearsemester.id = documents.yearSemID 
                                     INNER JOIN users ON users.id = documents.user_id
                                     INNER JOIN logs ON logs.trackingID = documents.trackingID
-                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients))
+                                    WHERE yearsemester.activated = 'yes' AND (SELECT FIND_IN_SET('".$_SESSION["a_officeName"]."', recipients)) AND documents.status != 'draft'
                                     ORDER BY documents.id DESC;";
                                     $no=0;
                                     foreach ($db->query($sql) as $row) {
