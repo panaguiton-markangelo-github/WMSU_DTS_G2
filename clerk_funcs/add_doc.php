@@ -8,7 +8,6 @@
 	if(isset($_POST['add'])){
 		$database = new Connection();
 		$db = $database->open();
-		$status = $_POST['status_rel'];
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
@@ -152,7 +151,7 @@
 		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
 
 		try{
-
+			$status = $_POST['status_rel'];
 			if($fileError != 4){
 				if(in_array($actualFileExt, $allowed)){
 					if($fileError === 0){
