@@ -1,6 +1,9 @@
 <?php
 	session_start();
 	include_once('../include/database.php');
+	require '../phpmailer/includes/mailer_main.php';
+	include_once ("../include/alt_db.php");
+
 
 	if(isset($_POST['add'])){
 		$database = new Connection();
@@ -9,6 +12,125 @@
 		$type = $_POST['type'];
 		$reason = $_POST['reason'];
 		$offices = implode(',', $_POST['officeName']);
+
+		
+		if($_POST['type'] == "Memorandum") {
+			$_POST['trackingID'] = "M".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Certificate of Service") {
+			$_POST['trackingID'] = "COS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Disbursement of Service") {
+			$_POST['trackingID'] = "DOS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Inventory and Inspection Report") {
+			$_POST['trackingID'] = "IIR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Letter") {
+			$_POST['trackingID'] = "L".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Liquidation Report") {
+			$_POST['trackingID'] = "LR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Memorandum of Agreement") {
+			$_POST['trackingID'] = "MOA".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Memorandum Receipt") {
+			$_POST['trackingID'] = "MR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Official Cash Book") {
+			$_POST['trackingID'] = "OCB".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Personal Data Sheet") {
+			$_POST['trackingID'] = "PDS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Purchase Order") {
+			$_POST['trackingID'] = "PO".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Purchase Request") {
+			$_POST['trackingID'] = "PR".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Referral Slip") {
+			$_POST['trackingID'] = "RS".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Request for Obligation of Allotments") {
+			$_POST['trackingID'] = "RFOA".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Requisition and Issue Voucher") {
+			$_POST['trackingID'] = "RIV".$_SESSION["trackID"];
+		}
+
+		else if($_POST['type'] == "Unclassified") {
+			$_POST['trackingID'] = "U".$_SESSION["trackID"];
+		}
+		else {
+			$_POST['trackingID'] = "O".$_SESSION["trackID"];
+		}
+
+
+		foreach($_POST['officeName'] as $office){
+			$sql1 = "SELECT username FROM users WHERE officeName = '".$office."';";
+			$result1 = mysqli_query($data, $sql1);
+			while($row = mysqli_fetch_array($result1)){		
+				$sql_r = $db->prepare("INSERT INTO recipient (username, trackingID) VALUES (:username, :trackingID)");
+				//bind
+				$sql_r->bindParam(':username', $row['username']);
+				$sql_r->bindParam(':trackingID', $_POST['trackingID']);
+				
+				$sql_r->execute();
+			}	
+		}
+
+		$users = array();
+		$sql2 = "SELECT username FROM recipient WHERE status = 'no';";
+		$result2 = mysqli_query($data, $sql2);
+		while($row2 = mysqli_fetch_array($result2)){
+			$users[] = $row2['username'];
+		}
+
+		
+		$subject = "Recipient for an incoming document with the tracking ID of '".$_POST['trackingID']."'.";
+
+		$message = "<p> Don't reply here! Hi There! A document has been sent to your office, please check it at the incoming documents page.</p>";
+
+		$message .= "From: WMSU|DTS team <support@dts.wmsuccs.com>\r\n";
+		$message .= "<br>Reply-To: wmsudts@gmail.com\r\n";
+		$message .= "<p>Best regards WMSU|DTS team.</p>";
+
+		$mail->Subject = $subject;
+		$mail->setFrom("support@dts.wmsuccs.com");
+		$mail->isHTML(true);
+		$mail->Body = $message;
+
+		foreach($users as $user){
+			$mail->AddAddress(trim($user)); 
+		}
+
+		if($mail->Send()){
+			$status = 'sent';
+			$sql_u = $db->prepare("UPDATE recipient SET status = :status;");
+			//bind
+			$sql_u->bindParam(':status', $status);
+			$sql_u->execute();
+		}
+		
+		$mail->smtpClose();
+
+		
 
 		if(!empty($_POST['oreason'])){
 			$reason = $_POST['oreason'];
@@ -30,73 +152,6 @@
 		$allowed = array('pdf', 'gif', 'png', 'jpeg', 'jpg');
 
 		try{
-
-			if($_POST['type'] == "Memorandum") {
-				$_POST['trackingID'] = "M".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Certificate of Service") {
-				$_POST['trackingID'] = "COS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Disbursement of Service") {
-				$_POST['trackingID'] = "DOS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Inventory and Inspection Report") {
-				$_POST['trackingID'] = "IIR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Letter") {
-				$_POST['trackingID'] = "L".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Liquidation Report") {
-				$_POST['trackingID'] = "LR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Memorandum of Agreement") {
-				$_POST['trackingID'] = "MOA".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Memorandum Receipt") {
-				$_POST['trackingID'] = "MR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Official Cash Book") {
-				$_POST['trackingID'] = "OCB".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Personal Data Sheet") {
-				$_POST['trackingID'] = "PDS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Purchase Order") {
-				$_POST['trackingID'] = "PO".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Purchase Request") {
-				$_POST['trackingID'] = "PR".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Referral Slip") {
-				$_POST['trackingID'] = "RS".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Request for Obligation of Allotments") {
-				$_POST['trackingID'] = "RFOA".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Requisition and Issue Voucher") {
-				$_POST['trackingID'] = "RIV".$_SESSION["trackID"];
-			}
-
-			else if($_POST['type'] == "Unclassified") {
-				$_POST['trackingID'] = "U".$_SESSION["trackID"];
-			}
-			else {
-				$_POST['trackingID'] = "O".$_SESSION["trackID"];
-			}
 
 			if($fileError != 4){
 				if(in_array($actualFileExt, $allowed)){
